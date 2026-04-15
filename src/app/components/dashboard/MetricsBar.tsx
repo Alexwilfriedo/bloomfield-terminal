@@ -9,7 +9,7 @@ const C = {
   dim: "#6b96b8",
   muted: "#54678d",
   border: "rgba(44, 61, 127,0.32)",
-  surface: "rgba(0, 4, 48,0.5)",
+  surface: "rgba(0, 1, 23,0.5)",
 };
 
 const metrics = [
@@ -69,7 +69,7 @@ export function MetricsBar() {
         padding: "10px 16px",
         borderBottom: `1px solid ${C.border}`,
         flexShrink: 0,
-        background: "rgba(0, 4, 48,0.5)",
+        background: "rgba(0, 1, 23,0.5)",
       }}
     >
       {metrics.map((m, i) => (

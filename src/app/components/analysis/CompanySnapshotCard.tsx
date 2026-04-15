@@ -1,8 +1,8 @@
 import { TrendingUp, CheckCircle2, Star, ExternalLink, Building2, Globe2 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   border: "rgba(44, 61, 127,0.32)",
   text: "#ddeaf8",
@@ -73,7 +73,7 @@ export function CompanySnapshotCard() {
             justifyContent: "space-between",
             minWidth: 240,
             flexShrink: 0,
-            background: "rgba(0, 4, 48,0.3)",
+            background: "rgba(0, 1, 23,0.3)",
           }}
         >
           <div>
@@ -84,7 +84,7 @@ export function CompanySnapshotCard() {
                   width: 44,
                   height: 44,
                   borderRadius: 10,
-                  background: "linear-gradient(135deg, #1a4a7a 0%, #000430 100%)",
+                  background: "linear-gradient(135deg, #1a4a7a 0%, #000117 100%)",
                   border: `1px solid rgba(214, 182, 141,0.25)`,
                   display: "flex",
                   alignItems: "center",
@@ -150,7 +150,7 @@ export function CompanySnapshotCard() {
                 key={h.label}
                 style={{
                   flex: 1,
-                  background: "rgba(0, 4, 48,0.4)",
+                  background: "rgba(0, 1, 23,0.4)",
                   border: `1px solid ${C.border}`,
                   borderRadius: 6,
                   padding: "6px 10px",
@@ -186,7 +186,7 @@ export function CompanySnapshotCard() {
             display: "flex",
             flexDirection: "column",
             gap: 10,
-            background: "rgba(0, 4, 48,0.2)",
+            background: "rgba(0, 1, 23,0.2)",
             flexShrink: 0,
           }}
         >

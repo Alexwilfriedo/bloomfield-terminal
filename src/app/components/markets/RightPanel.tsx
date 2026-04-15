@@ -14,8 +14,8 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -164,7 +164,7 @@ export function RightPanel() {
           justifyContent: "space-between",
           padding: "6px 10px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
         }}
       >
@@ -582,7 +582,7 @@ function SectionHeader({
         alignItems: "center",
         justifyContent: "space-between",
         padding: "6px 10px 5px",
-        background: "rgba(0, 4, 48,0.3)",
+        background: "rgba(0, 1, 23,0.3)",
         borderBottom: `1px solid ${C.border}`,
       }}
     >
@@ -617,7 +617,7 @@ function SectionHeader({
             style={{
               fontSize: 8,
               fontWeight: 700,
-              color: "#000430",
+              color: "#000117",
               background: C.gold,
               borderRadius: 8,
               padding: "0px 5px",

@@ -12,7 +12,7 @@ const C = {
   green: "#10c87a",
   red: "#f43860",
   purple: "#a78bfa",
-  surface: "#000430",
+  surface: "#000117",
   orange: "#fb923c",
 };
 
@@ -163,7 +163,7 @@ function RatioSection({ title, color, ratios }: { title: string; color: string; 
           alignItems: "center",
           gap: 6,
           padding: "5px 12px",
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           borderBottom: `1px solid ${C.border}`,
         }}
       >
@@ -180,7 +180,7 @@ function RatioSection({ title, color, ratios }: { title: string; color: string; 
 const RadarTooltip = ({ active, payload }: { active?: boolean; payload?: { name: string; value: number }[] }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000430", border: `1px solid ${C.border}`, borderRadius: 6, padding: "6px 10px" }}>
+    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "6px 10px" }}>
       {payload.map((p) => (
         <div key={p.name} style={{ fontSize: 9.5, color: C.text }}>
           <span style={{ color: C.dim }}>{p.name}: </span>
@@ -215,7 +215,7 @@ export function RatiosWidget() {
             borderLeft: `1px solid ${C.border}`,
             display: "flex",
             flexDirection: "column",
-            background: "rgba(0, 4, 48,0.2)",
+            background: "rgba(0, 1, 23,0.2)",
             flexShrink: 0,
           }}
         >
@@ -224,7 +224,7 @@ export function RatiosWidget() {
             style={{
               padding: "12px 14px",
               borderBottom: `1px solid ${C.border}`,
-              background: "rgba(0, 4, 48,0.3)",
+              background: "rgba(0, 1, 23,0.3)",
             }}
           >
             <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
@@ -282,7 +282,7 @@ export function RatiosWidget() {
           </div>
 
           {/* Rating summary */}
-          <div style={{ padding: "10px 14px", borderTop: `1px solid ${C.border}`, background: "rgba(0, 4, 48,0.3)" }}>
+          <div style={{ padding: "10px 14px", borderTop: `1px solid ${C.border}`, background: "rgba(0, 1, 23,0.3)" }}>
             <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
               Notation Bloomfield
             </div>

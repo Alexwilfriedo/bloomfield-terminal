@@ -387,7 +387,7 @@ function ZoomOverlay({
         position: "fixed",
         inset: 0,
         zIndex: 9999,
-        background: "rgba(0, 4, 48,0.92)",
+        background: "rgba(0, 1, 23,0.92)",
         backdropFilter: "blur(6px)",
         padding: 24,
         display: "flex",

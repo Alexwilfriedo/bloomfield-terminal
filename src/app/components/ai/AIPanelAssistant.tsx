@@ -20,9 +20,9 @@ import {
 import { useTerminal } from "../../context/TerminalContext";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
-  dark: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
+  dark: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -637,7 +637,7 @@ export function AIPanelAssistant() {
         style={{
           position: "fixed",
           inset: 0,
-          background: "rgba(0, 4, 48,0.55)",
+          background: "rgba(0, 1, 23,0.55)",
           zIndex: 200,
           backdropFilter: "blur(1px)",
         }}
@@ -676,7 +676,7 @@ export function AIPanelAssistant() {
             alignItems: "center",
             padding: "11px 16px",
             borderBottom: `1px solid ${C.border}`,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             flexShrink: 0,
             gap: 10,
           }}
@@ -1145,7 +1145,7 @@ export function AIPanelAssistant() {
           style={{
             padding: "10px 14px",
             borderTop: `1px solid ${C.border}`,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             flexShrink: 0,
           }}
         >
@@ -1153,7 +1153,7 @@ export function AIPanelAssistant() {
             style={{
               display: "flex",
               gap: 6,
-              background: "rgba(0, 4, 48,0.6)",
+              background: "rgba(0, 1, 23,0.6)",
               border: `1px solid ${C.border}`,
               borderRadius: 7,
               padding: "6px 10px",

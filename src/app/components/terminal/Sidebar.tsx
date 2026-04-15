@@ -94,7 +94,7 @@ export function Sidebar({ onNavigate, isActive }: SidebarProps) {
                   justifyContent: "center",
                   fontSize: 8,
                   fontWeight: 800,
-                  color: "#000430",
+                  color: "#000117",
                   pointerEvents: "none",
                 }}
               >

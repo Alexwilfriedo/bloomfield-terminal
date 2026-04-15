@@ -17,8 +17,8 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   border: "rgba(44, 61, 127,0.32)",
   text: "#ddeaf8",
@@ -163,7 +163,7 @@ export function ReportSummaryWidget() {
         style={{
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
         }}
       >
@@ -183,7 +183,7 @@ export function ReportSummaryWidget() {
                   width: 36,
                   height: 36,
                   borderRadius: 8,
-                  background: "linear-gradient(135deg, #1a4a7a 0%, #000430 100%)",
+                  background: "linear-gradient(135deg, #1a4a7a 0%, #000117 100%)",
                   border: "1px solid rgba(214, 182, 141,0.25)",
                   display: "flex",
                   alignItems: "center",
@@ -417,7 +417,7 @@ export function ReportSummaryWidget() {
         style={{
           padding: "8px 14px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           display: "flex",
           alignItems: "center",
           gap: 8,
@@ -440,7 +440,7 @@ export function ReportSummaryWidget() {
               padding: "4px 10px",
               borderRadius: 4,
               border: `1px solid ${btn.accent ? "rgba(244,185,66,0.4)" : C.border}`,
-              background: btn.accent ? "rgba(244,185,66,0.12)" : "rgba(0, 4, 48,0.4)",
+              background: btn.accent ? "rgba(244,185,66,0.12)" : "rgba(0, 1, 23,0.4)",
               color: btn.accent ? C.gold : C.dim,
               fontSize: 9,
               fontWeight: btn.accent ? 700 : 500,

@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   accent: "#d6b68d",
   border: "rgba(44, 61, 127,0.32)",
   text: "#ddeaf8",
@@ -94,7 +94,7 @@ function ActionBtn({
         alignItems: "center",
         gap: 4,
         padding: label ? "4px 9px" : "4px 7px",
-        background: accent ? "rgba(214, 182, 141,0.1)" : "rgba(0, 4, 48,0.5)",
+        background: accent ? "rgba(214, 182, 141,0.1)" : "rgba(0, 1, 23,0.5)",
         border: `1px solid ${accent ? "rgba(214, 182, 141,0.3)" : "rgba(44, 61, 127,0.32)"}`,
         borderRadius: 5,
         color: accent ? C.accent : C.dim,
@@ -231,7 +231,7 @@ export function MacroTopBar() {
             style={{
               width: "100%",
               height: 32,
-              background: "rgba(0, 4, 48,0.7)",
+              background: "rgba(0, 1, 23,0.7)",
               border: `1px solid ${C.border}`,
               borderRadius: 6,
               paddingLeft: 32,
@@ -287,7 +287,7 @@ export function MacroTopBar() {
             width: 32,
             height: 32,
             borderRadius: 6,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             border: `1px solid ${C.border}`,
             display: "flex",
             alignItems: "center",
@@ -307,13 +307,13 @@ export function MacroTopBar() {
               height: 14,
               borderRadius: 7,
               background: C.gold,
-              border: "1.5px solid #000430",
+              border: "1.5px solid #000117",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: 8,
               fontWeight: 700,
-              color: "#000430",
+              color: "#000117",
             }}
           >
             4
@@ -328,7 +328,7 @@ export function MacroTopBar() {
             gap: 7,
             padding: "4px 8px",
             borderRadius: 6,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             border: `1px solid ${C.border}`,
             cursor: "pointer",
             flexShrink: 0,
@@ -366,7 +366,7 @@ export function MacroTopBar() {
           alignItems: "center",
           padding: "0 16px",
           gap: 5,
-          background: "rgba(0, 4, 48,0.5)",
+          background: "rgba(0, 1, 23,0.5)",
           overflowX: "auto",
         }}
       >

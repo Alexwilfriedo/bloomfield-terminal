@@ -84,9 +84,9 @@ export function EventsCalendarWidget() {
         {/* Events list */}
         <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
           {upcomingEvents.map((ev) => (
-            <div key={ev.id} style={{ display: "flex", gap: 8, padding: "5px 8px", borderRadius: 4, background: "rgba(0, 4, 48,0.35)", border: `1px solid rgba(44, 61, 127,0.16)`, cursor: "pointer", alignItems: "flex-start" }}
+            <div key={ev.id} style={{ display: "flex", gap: 8, padding: "5px 8px", borderRadius: 4, background: "rgba(0, 1, 23,0.35)", border: `1px solid rgba(44, 61, 127,0.16)`, cursor: "pointer", alignItems: "flex-start" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "rgba(214, 182, 141,0.04)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "rgba(0, 4, 48,0.35)"; }}>
+              onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "rgba(0, 1, 23,0.35)"; }}>
               {/* Date block */}
               <div style={{ minWidth: 32, flexShrink: 0, textAlign: "center" }}>
                 <div style={{ fontSize: 13, fontWeight: 800, color: C.text, lineHeight: 1 }}>{ev.date}</div>
@@ -108,7 +108,7 @@ export function EventsCalendarWidget() {
           ))}
         </div>
 
-        <button style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 4, padding: "5px 0", borderRadius: 4, background: "rgba(0, 4, 48,0.3)", border: `1px solid ${C.border}`, color: C.dim, fontSize: 9, fontWeight: 600, cursor: "pointer" }}>
+        <button style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 4, padding: "5px 0", borderRadius: 4, background: "rgba(0, 1, 23,0.3)", border: `1px solid ${C.border}`, color: C.dim, fontSize: 9, fontWeight: 600, cursor: "pointer" }}>
           Calendrier complet <ChevronRight size={9} />
         </button>
       </div>

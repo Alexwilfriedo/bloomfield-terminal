@@ -21,7 +21,7 @@ const C = {
   green: "#10c87a",
   red: "#f43860",
   purple: "#a78bfa",
-  surface: "#000430",
+  surface: "#000117",
   orange: "#fb923c",
 };
 
@@ -116,7 +116,7 @@ const LossTooltip = ({ active, payload, label }: {
 }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000430", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
+    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
       <div style={{ fontSize: 9, color: C.muted, marginBottom: 4 }}>Percentile VaR: {label}</div>
       {payload.map((p) => (
         <div key={p.name} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 2 }}>
@@ -152,7 +152,7 @@ export function ScenarioStressWidget() {
                 <div
                   key={s.id}
                   style={{
-                    background: "rgba(0, 4, 48,0.4)",
+                    background: "rgba(0, 1, 23,0.4)",
                     border: `1px solid ${C.border}`,
                     borderRadius: 7,
                     padding: "10px 12px",
@@ -167,7 +167,7 @@ export function ScenarioStressWidget() {
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLDivElement).style.borderColor = C.border;
-                    (e.currentTarget as HTMLDivElement).style.background = "rgba(0, 4, 48,0.4)";
+                    (e.currentTarget as HTMLDivElement).style.background = "rgba(0, 1, 23,0.4)";
                   }}
                 >
                   {/* Severity accent */}
@@ -231,7 +231,7 @@ export function ScenarioStressWidget() {
             </div>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 10 }}>
               <thead>
-                <tr style={{ background: "rgba(0, 4, 48,0.5)" }}>
+                <tr style={{ background: "rgba(0, 1, 23,0.5)" }}>
                   <th style={{ padding: "5px 10px", textAlign: "left", color: C.muted, fontSize: 8.5, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", borderBottom: `1px solid ${C.border}` }}>
                     Facteur de Risque
                   </th>
@@ -246,9 +246,9 @@ export function ScenarioStressWidget() {
                 {SENSITIVITY.map((row, i) => (
                   <tr
                     key={i}
-                    style={{ background: i % 2 === 0 ? "rgba(0, 4, 48,0.2)" : "transparent", borderBottom: `1px solid ${C.border}15` }}
+                    style={{ background: i % 2 === 0 ? "rgba(0, 1, 23,0.2)" : "transparent", borderBottom: `1px solid ${C.border}15` }}
                     onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.04)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 4, 48,0.2)" : "transparent")}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 1, 23,0.2)" : "transparent")}
                   >
                     <td style={{ padding: "6px 10px", fontSize: 9.5, fontWeight: 600, color: C.text }}>{row.factor}</td>
                     <td style={{ padding: "6px 10px", textAlign: "center", fontSize: 9, color: C.muted }}>{row.base}</td>
@@ -272,7 +272,7 @@ export function ScenarioStressWidget() {
             borderLeft: `1px solid ${C.border}`,
             display: "flex",
             flexDirection: "column",
-            background: "rgba(0, 4, 48,0.2)",
+            background: "rgba(0, 1, 23,0.2)",
             flexShrink: 0,
           }}
         >
@@ -309,7 +309,7 @@ export function ScenarioStressWidget() {
           </div>
 
           {/* VaR summary */}
-          <div style={{ padding: "10px 12px", borderTop: `1px solid ${C.border}`, background: "rgba(0, 4, 48,0.3)" }}>
+          <div style={{ padding: "10px 12px", borderTop: `1px solid ${C.border}`, background: "rgba(0, 1, 23,0.3)" }}>
             <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
               Valeur à Risque (VaR 99%)
             </div>

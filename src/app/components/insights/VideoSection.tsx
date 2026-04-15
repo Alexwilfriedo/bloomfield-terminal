@@ -1,8 +1,8 @@
 import { Play, Clock, Eye, Bookmark, ChevronRight, Tv2, ExternalLink } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -12,7 +12,7 @@ const C = {
   muted: "#54678d",
   border: "rgba(44, 61, 127,0.32)",
   purple: "#a78bfa",
-  dark: "#000430",
+  dark: "#000117",
 };
 
 const ANALYST_IMG = "https://images.unsplash.com/photo-1758691736490-03d39c292d7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBhbmFseXN0JTIwcHJvZmVzc2lvbmFsJTIwcHJlc2VudGF0aW9ufGVufDF8fHx8MTc3NTY5MTA4NXww&ixlib=rb-4.1.0&q=80&w=400";
@@ -105,7 +105,7 @@ function VideoCard({ video }: { video: VideoCard }) {
   return (
     <div
       style={{
-        background: "rgba(0, 4, 48,0.5)",
+        background: "rgba(0, 1, 23,0.5)",
         border: `1px solid ${C.border}`,
         borderRadius: 7,
         overflow: "hidden",
@@ -124,7 +124,7 @@ function VideoCard({ video }: { video: VideoCard }) {
         style={{
           position: "relative",
           height: 130,
-          background: "#000430",
+          background: "#000117",
           overflow: "hidden",
         }}
       >
@@ -143,7 +143,7 @@ function VideoCard({ video }: { video: VideoCard }) {
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(180deg, transparent 30%, rgba(0, 4, 48,0.85) 100%)",
+            background: "linear-gradient(180deg, transparent 30%, rgba(0, 1, 23,0.85) 100%)",
           }}
         />
         {/* Play button */}
@@ -173,7 +173,7 @@ function VideoCard({ video }: { video: VideoCard }) {
             right: 8,
             padding: "2px 6px",
             borderRadius: 3,
-            background: "rgba(0, 4, 48,0.85)",
+            background: "rgba(0, 1, 23,0.85)",
             fontSize: 9,
             fontWeight: 700,
             color: C.text,
@@ -243,7 +243,7 @@ function VideoCard({ video }: { video: VideoCard }) {
               background: "rgba(244,185,66,0.9)",
               fontSize: 7.5,
               fontWeight: 800,
-              color: "#000430",
+              color: "#000117",
               letterSpacing: "0.06em",
             }}
           >
@@ -309,7 +309,7 @@ function VideoCard({ video }: { video: VideoCard }) {
               width: 22,
               height: 22,
               borderRadius: 4,
-              background: "rgba(0, 4, 48,0.5)",
+              background: "rgba(0, 1, 23,0.5)",
               border: `1px solid ${C.border}`,
               display: "flex",
               alignItems: "center",
@@ -345,7 +345,7 @@ export function VideoSection() {
           gap: 8,
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
         }}
       >
         <Tv2 size={13} color={C.accent} />

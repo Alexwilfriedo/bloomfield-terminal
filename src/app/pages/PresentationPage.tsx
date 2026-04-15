@@ -2,8 +2,8 @@ import { useState, Suspense, lazy, startTransition } from "react";
 import { LayoutDashboard, TrendingUp, Globe2, BarChart3, Lightbulb, LayoutGrid, ChevronLeft, ChevronRight, Lock } from "lucide-react";
 
 const C = {
-  dark: "#000430",
-  surface: "#000430",
+  dark: "#000117",
+  surface: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   text: "#ddeaf8",

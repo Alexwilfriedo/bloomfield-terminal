@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   accent: "#d6b68d",
   border: "rgba(44, 61, 127,0.32)",
   text: "#ddeaf8",
@@ -34,7 +34,7 @@ const C = {
   gold: "#f4b942",
   green: "#10c87a",
   red: "#f43860",
-  dark: "#000430",
+  dark: "#000117",
   purple: "#a78bfa",
 };
 
@@ -129,7 +129,7 @@ export function AnalysisPage() {
                       style={{
                         fontSize: 7,
                         fontWeight: 800,
-                        color: "#000430",
+                        color: "#000117",
                         background: C.gold,
                         borderRadius: 3,
                         padding: "1px 4px",
@@ -301,7 +301,7 @@ function InvestmentInterpretationPanel() {
           gap: 8,
           padding: "7px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
         }}
       >
         <span
@@ -447,7 +447,7 @@ function InvestmentInterpretationPanel() {
                   alignItems: "center",
                   gap: 5,
                   padding: "4px 7px",
-                  background: "rgba(0, 4, 48,0.4)",
+                  background: "rgba(0, 1, 23,0.4)",
                   border: `1px solid ${C.border}`,
                   borderRadius: 4,
                 }}

@@ -22,8 +22,8 @@ const C = {
   green: "#10c87a",
   red: "#f43860",
   purple: "#a78bfa",
-  surface: "#000430",
-  dark: "#000430",
+  surface: "#000117",
+  dark: "#000117",
   orange: "#fb923c",
 };
 
@@ -84,7 +84,7 @@ const CustomTooltip = ({ active, payload, label }: {
 }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000430", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
+    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
       <div style={{ fontSize: 10, fontWeight: 700, color: C.dim, marginBottom: 6 }}>{label}</div>
       {payload.map((p) => (
         <div key={p.name} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3 }}>
@@ -121,7 +121,7 @@ export function FinancialStatementsWidget() {
           alignItems: "center",
           gap: 0,
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.3)",
+          background: "rgba(0, 1, 23,0.3)",
           padding: "0 12px",
           flexShrink: 0,
         }}
@@ -162,7 +162,7 @@ export function FinancialStatementsWidget() {
             }}
           >
             <thead>
-              <tr style={{ background: "rgba(0, 4, 48,0.5)" }}>
+              <tr style={{ background: "rgba(0, 1, 23,0.5)" }}>
                 <th
                   style={{
                     padding: "8px 14px",
@@ -175,7 +175,7 @@ export function FinancialStatementsWidget() {
                     borderBottom: `1px solid ${C.border}`,
                     position: "sticky",
                     left: 0,
-                    background: "#000430",
+                    background: "#000117",
                     minWidth: 240,
                     zIndex: 2,
                   }}
@@ -224,7 +224,7 @@ export function FinancialStatementsWidget() {
                   <tr
                     key={i}
                     style={{
-                      background: row.isKey ? "rgba(214, 182, 141,0.04)" : i % 2 === 0 ? "rgba(0, 4, 48,0.2)" : "transparent",
+                      background: row.isKey ? "rgba(214, 182, 141,0.04)" : i % 2 === 0 ? "rgba(0, 1, 23,0.2)" : "transparent",
                       borderBottom: `1px solid ${C.border}20`,
                       cursor: "default",
                     }}
@@ -233,7 +233,7 @@ export function FinancialStatementsWidget() {
                       (e.currentTarget.style.background = row.isKey
                         ? "rgba(214, 182, 141,0.04)"
                         : i % 2 === 0
-                        ? "rgba(0, 4, 48,0.2)"
+                        ? "rgba(0, 1, 23,0.2)"
                         : "transparent")
                     }
                   >
@@ -313,7 +313,7 @@ export function FinancialStatementsWidget() {
             flexDirection: "column",
             gap: 6,
             flexShrink: 0,
-            background: "rgba(0, 4, 48,0.2)",
+            background: "rgba(0, 1, 23,0.2)",
           }}
         >
           <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>

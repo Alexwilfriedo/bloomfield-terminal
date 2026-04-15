@@ -90,7 +90,7 @@ export function S4_Analysis() {
               const isActive = c.id === activeCompany;
               const rc = c.rating === "ACHAT" ? C.green : c.rating === "VENDRE" ? C.red : C.gold;
               return (
-                <button key={c.id} onClick={() => setActiveCompany(c.id)} style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 9px", borderRadius: 5, border: `1px solid ${isActive ? rc + "50" : "rgba(44, 61, 127,0.22)"}`, background: isActive ? rc + "12" : "rgba(0, 4, 48,0.5)", cursor: "pointer" }}>
+                <button key={c.id} onClick={() => setActiveCompany(c.id)} style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 9px", borderRadius: 5, border: `1px solid ${isActive ? rc + "50" : "rgba(44, 61, 127,0.22)"}`, background: isActive ? rc + "12" : "rgba(0, 1, 23,0.5)", cursor: "pointer" }}>
                   <span style={{ fontSize: 9, fontWeight: isActive ? 700 : 500, color: isActive ? rc : C.muted }}>{c.name}</span>
                 </button>
               );
@@ -125,7 +125,7 @@ export function S4_Analysis() {
           <MiniWidget title="Indicateurs Financiers Clés" topRight={<DataBadge source="Rapport Annuel 2025" />}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5 }}>
               {KPI.map((k) => (
-                <div key={k.label} style={{ padding: "6px 8px", background: "rgba(0, 4, 48,0.5)", borderRadius: 4, border: `1px solid ${C.border}` }}>
+                <div key={k.label} style={{ padding: "6px 8px", background: "rgba(0, 1, 23,0.5)", borderRadius: 4, border: `1px solid ${C.border}` }}>
                   <div style={{ fontSize: 8, color: C.muted, marginBottom: 2 }}>{k.label}</div>
                   <div style={{ fontSize: 13, fontWeight: 800, color: k.color, fontVariantNumeric: "tabular-nums" }}>{k.val}</div>
                   <div style={{ fontSize: 7.5, color: k.color, opacity: 0.8 }}>{k.sub}</div>

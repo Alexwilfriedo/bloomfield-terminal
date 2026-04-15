@@ -82,7 +82,7 @@ export function QuickCompareWidget() {
             </button>
           ))}
           <div style={{ flex: 1 }} />
-          <button style={{ display: "flex", alignItems: "center", gap: 3, padding: "3px 8px", borderRadius: 4, border: `1px solid ${C.border}`, background: "rgba(0, 4, 48,0.5)", color: C.dim, fontSize: 8.5, fontWeight: 600, cursor: "pointer" }}>
+          <button style={{ display: "flex", alignItems: "center", gap: 3, padding: "3px 8px", borderRadius: 4, border: `1px solid ${C.border}`, background: "rgba(0, 1, 23,0.5)", color: C.dim, fontSize: 8.5, fontWeight: 600, cursor: "pointer" }}>
             <ChevronDown size={9} />Changer
           </button>
         </div>
@@ -115,7 +115,7 @@ export function QuickCompareWidget() {
         </div>
 
         {/* Score bar */}
-        <div style={{ display: "flex", gap: 6, padding: "5px 8px", background: "rgba(0, 4, 48,0.4)", borderRadius: 5, border: `1px solid ${C.border}`, alignItems: "center" }}>
+        <div style={{ display: "flex", gap: 6, padding: "5px 8px", background: "rgba(0, 1, 23,0.4)", borderRadius: 5, border: `1px solid ${C.border}`, alignItems: "center" }}>
           <span style={{ fontSize: 9, fontWeight: 700, color: C.accent }}>{cols[0].split(" ")[0]}</span>
           <span style={{ fontSize: 11, fontWeight: 800, color: aWins > bWins ? C.green : C.dim }}>{aWins}</span>
           <ArrowRightLeft size={9} color={C.muted} style={{ margin: "0 2px" }} />

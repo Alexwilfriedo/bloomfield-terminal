@@ -67,7 +67,7 @@ export function AlertsPanelWidget() {
             { label: "Infos", count: ALERTS.filter((a) => a.severity === "info").length, color: C.accent },
             { label: "Succès", count: ALERTS.filter((a) => a.severity === "success").length, color: C.green },
           ].map((s) => (
-            <div key={s.label} style={{ textAlign: "center", padding: "4px 6px", background: "rgba(0, 4, 48,0.4)", borderRadius: 4, border: `1px solid ${s.color}22` }}>
+            <div key={s.label} style={{ textAlign: "center", padding: "4px 6px", background: "rgba(0, 1, 23,0.4)", borderRadius: 4, border: `1px solid ${s.color}22` }}>
               <div style={{ fontSize: 14, fontWeight: 800, color: s.color }}>{s.count}</div>
               <div style={{ fontSize: 7.5, color: C.muted }}>{s.label}</div>
             </div>

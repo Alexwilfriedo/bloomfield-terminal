@@ -18,8 +18,8 @@ import { WidgetGrid } from "../components/shared/WidgetGrid";
 import { TrendingUp, TrendingDown, Target, Zap, BarChart2 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -29,7 +29,7 @@ const C = {
   dim: "#6b96b8",
   muted: "#54678d",
   border: "rgba(44, 61, 127,0.32)",
-  dark: "#000430",
+  dark: "#000117",
   purple: "#a78bfa",
 };
 
@@ -231,7 +231,7 @@ function PortfolioSignalsWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
         }}
       >
@@ -415,7 +415,7 @@ function PortfolioSignalsWidget() {
         style={{
           padding: "5px 10px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.3)",
+          background: "rgba(0, 1, 23,0.3)",
           display: "flex",
           alignItems: "center",
           gap: 6,

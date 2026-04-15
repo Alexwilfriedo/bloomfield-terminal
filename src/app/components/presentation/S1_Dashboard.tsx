@@ -80,7 +80,7 @@ export function S1_Dashboard() {
           <MiniWidget title="Indices BRVM" topRight={<DataBadge source="BRVM" time="15:47 GMT" live />}>
             <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
               {INDICES.map((idx) => (
-                <div key={idx.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 9px", background: "rgba(0, 4, 48,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+                <div key={idx.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 9px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: 9, color: C.dim }}>{idx.name}</div>
                     <div style={{ display: "flex", alignItems: "baseline", gap: 5, marginTop: 1 }}>
@@ -93,7 +93,7 @@ export function S1_Dashboard() {
               ))}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 4, marginTop: 2 }}>
                 {[["Cap. Boursière", "7 843 Mds"], ["Volume", "1,28M titres"], ["Val. éch.", "4,82 Mds XOF"]].map(([l, v]) => (
-                  <div key={l} style={{ textAlign: "center", padding: "4px 6px", background: "rgba(0, 4, 48,0.5)", borderRadius: 4, border: `1px solid ${C.border}` }}>
+                  <div key={l} style={{ textAlign: "center", padding: "4px 6px", background: "rgba(0, 1, 23,0.5)", borderRadius: 4, border: `1px solid ${C.border}` }}>
                     <div style={{ fontSize: 10, fontWeight: 700, color: C.gold }}>{v}</div>
                     <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>{l}</div>
                   </div>
@@ -106,7 +106,7 @@ export function S1_Dashboard() {
           <MiniWidget title="Principaux Mouvements" topRight={<DataBadge source="BRVM" live />}>
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {MOVERS.map((m) => (
-                <div key={m.t} style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 6px", borderRadius: 4, cursor: "pointer", background: "rgba(0, 4, 48,0.3)" }}>
+                <div key={m.t} style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 6px", borderRadius: 4, cursor: "pointer", background: "rgba(0, 1, 23,0.3)" }}>
                   <div style={{ width: 16, height: 16, borderRadius: 3, background: m.up ? "rgba(16,200,122,0.15)" : "rgba(244,56,96,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {m.up ? <TrendingUp size={8} color={C.green} /> : <TrendingDown size={8} color={C.red} />}
                   </div>
@@ -126,7 +126,7 @@ export function S1_Dashboard() {
           <MiniWidget title="Instantané Macro · UEMOA" topRight={<DataBadge source="BCEAO · FMI" time="T1 2026" />}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6 }}>
               {MACRO_KPI.map((kpi) => (
-                <div key={kpi.label} style={{ padding: "8px 10px", background: "rgba(0, 4, 48,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+                <div key={kpi.label} style={{ padding: "8px 10px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
                   <div style={{ fontSize: 8.5, color: C.muted, marginBottom: 3 }}>{kpi.label}</div>
                   <div style={{ fontSize: 18, fontWeight: 800, color: kpi.color, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>{kpi.val}</div>
                   <div style={{ fontSize: 8, color: kpi.color, marginTop: 2, opacity: 0.8 }}>{kpi.sub}</div>
@@ -160,7 +160,7 @@ export function S1_Dashboard() {
             <MiniWidget title="Taux de Change" topRight={<DataBadge source="BCT · BCEAO" live />}>
               <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                 {FX.map((f) => (
-                  <div key={f.p} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", background: "rgba(0, 4, 48,0.4)", borderRadius: 4 }}>
+                  <div key={f.p} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", background: "rgba(0, 1, 23,0.4)", borderRadius: 4 }}>
                     <span style={{ flex: 1, fontSize: 9.5, color: C.dim }}>{f.p}</span>
                     <span style={{ fontSize: 12, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{f.v}</span>
                     <span style={{ fontSize: 9, fontWeight: 600, color: f.up ? C.green : C.red }}>{f.pct}</span>
@@ -172,7 +172,7 @@ export function S1_Dashboard() {
             <MiniWidget title="Matières Premières" topRight={<DataBadge source="ICE · COMEX" live />}>
               <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                 {COMMO.map((c) => (
-                  <div key={c.name} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", background: "rgba(0, 4, 48,0.4)", borderRadius: 4 }}>
+                  <div key={c.name} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", background: "rgba(0, 1, 23,0.4)", borderRadius: 4 }}>
                     <span style={{ flex: 1, fontSize: 9, color: C.dim }}>{c.name}</span>
                     <span style={{ fontSize: 11, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{c.val}</span>
                     <span style={{ fontSize: 9, fontWeight: 600, color: c.up ? C.green : C.red }}>{c.pct}</span>

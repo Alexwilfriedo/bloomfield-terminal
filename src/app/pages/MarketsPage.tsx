@@ -32,8 +32,8 @@ const C = {
   dim: "#6b96b8",
   muted: "#54678d",
   border: "rgba(44, 61, 127,0.32)",
-  surface: "#000430",
-  dark: "#000430",
+  surface: "#000117",
+  dark: "#000117",
 };
 
 const MARKETS_STORAGE_KEY = "bloomfield.markets.layout.v1";
@@ -119,7 +119,7 @@ function MarketsActionBar() {
         alignItems: "center",
         gap: 8,
         padding: "7px 12px",
-        background: "rgba(0, 4, 48,0.6)",
+        background: "rgba(0, 1, 23,0.6)",
         borderBottom: `1px solid ${C.border}`,
         flexShrink: 0,
         overflowX: "auto",
@@ -242,7 +242,7 @@ export function MarketsPage() {
             flexDirection: "column",
             minWidth: 0,
             minHeight: 0,
-            background: "#000430",
+            background: "#000117",
           }}
         >
           {/* International markets strip — fixed above the grid */}

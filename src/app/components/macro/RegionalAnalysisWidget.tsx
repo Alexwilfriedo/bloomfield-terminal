@@ -2,8 +2,8 @@ import { useState } from "react";
 import { TrendingUp, TrendingDown, Minus, MapPin, BarChart3 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -215,7 +215,7 @@ function UEMOAMap({
         style={{ display: "block" }}
       >
         {/* Background ocean */}
-        <rect width="308" height="180" fill="rgba(0, 4, 48,0.8)" rx="6" />
+        <rect width="308" height="180" fill="rgba(0, 1, 23,0.8)" rx="6" />
         {/* Grid */}
         {[0, 1, 2, 3].map((i) => (
           <line
@@ -376,7 +376,7 @@ export function RegionalAnalysisWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
         }}
       >
@@ -423,7 +423,7 @@ export function RegionalAnalysisWidget() {
               display: "grid",
               gridTemplateColumns: "140px 70px 64px 64px 72px 70px 90px 80px",
               padding: "5px 12px",
-              background: "rgba(0, 4, 48,0.5)",
+              background: "rgba(0, 1, 23,0.5)",
               position: "sticky",
               top: 0,
               zIndex: 2,
@@ -484,7 +484,7 @@ export function RegionalAnalysisWidget() {
                   background: isSelected
                     ? "rgba(214, 182, 141,0.07)"
                     : i % 2 === 0
-                    ? "rgba(0, 4, 48,0.1)"
+                    ? "rgba(0, 1, 23,0.1)"
                     : "transparent",
                   borderBottom: `1px solid ${C.border}10`,
                   borderLeft: isSelected ? `2px solid ${C.accent}` : "2px solid transparent",
@@ -498,7 +498,7 @@ export function RegionalAnalysisWidget() {
                 onMouseLeave={(e) =>
                   !isSelected &&
                   (e.currentTarget.style.background =
-                    i % 2 === 0 ? "rgba(0, 4, 48,0.1)" : "transparent")
+                    i % 2 === 0 ? "rgba(0, 1, 23,0.1)" : "transparent")
                 }
               >
                 {/* Country */}

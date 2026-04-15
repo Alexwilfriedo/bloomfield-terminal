@@ -89,7 +89,7 @@ export function S2_Markets() {
           <MiniWidget title="Indices BRVM · Intrajournalier" topRight={<DataBadge source="BRVM" time="15:47 GMT" live />}>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {INDICES.map((idx) => (
-                <div key={idx.id} style={{ padding: "7px 9px", background: "rgba(0, 4, 48,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+                <div key={idx.id} style={{ padding: "7px 9px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 5 }}>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: 9, color: C.muted }}>{idx.name}</div>
@@ -236,7 +236,7 @@ export function S2_Markets() {
           </div>
 
           {/* Alertes marché */}
-          <div style={{ padding: "8px 10px", background: "rgba(0, 4, 48,0.5)", borderTop: `1px solid ${C.border}` }}>
+          <div style={{ padding: "8px 10px", background: "rgba(0, 1, 23,0.5)", borderTop: `1px solid ${C.border}` }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 5 }}>
               <Bell size={9} color={C.red} />
               <span style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Alertes Marché</span>

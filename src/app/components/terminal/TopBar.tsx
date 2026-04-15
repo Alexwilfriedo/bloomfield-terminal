@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Search,
   Bell,
@@ -9,12 +10,14 @@ import {
   Plus,
   Star,
   SlidersHorizontal,
+  LogOut,
 } from "lucide-react";
 import logoUrl from "../../../assets/logo-bloomfield-terminal.png";
+import { useAuth } from "../../auth/AuthContext";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   border: "rgba(44, 61, 127,0.32)",
   text: "#ddeaf8",
@@ -25,6 +28,37 @@ const C = {
 
 export function TopBar() {
   const [searchValue, setSearchValue] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  // Close the user menu on outside click
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("mousedown", onClick);
+    return () => window.removeEventListener("mousedown", onClick);
+  }, [menuOpen]);
+
+  const handleLogout = () => {
+    setMenuOpen(false);
+    logout();
+    navigate("/login", { replace: true });
+  };
+
+  const displayName = user?.name ?? "Adjoua Koné";
+  const displayRole = user?.role ?? "Analyste Senior";
+  const initials = displayName
+    .split(/\s+/)
+    .map((s) => s[0] ?? "")
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <div
@@ -87,7 +121,7 @@ export function TopBar() {
           style={{
             width: "100%",
             height: 32,
-            background: "rgba(0, 4, 48,0.7)",
+            background: "rgba(0, 1, 23,0.7)",
             border: `1px solid ${C.border}`,
             borderRadius: 6,
             paddingLeft: 32,
@@ -188,7 +222,7 @@ export function TopBar() {
           width: 32,
           height: 32,
           borderRadius: 6,
-          background: "rgba(0, 4, 48,0.5)",
+          background: "rgba(0, 1, 23,0.5)",
           border: `1px solid ${C.border}`,
           display: "flex",
           alignItems: "center",
@@ -207,7 +241,7 @@ export function TopBar() {
             height: 7,
             borderRadius: "50%",
             background: C.gold,
-            border: "1.5px solid #000430",
+            border: "1.5px solid #000117",
           }}
         />
       </button>
@@ -218,7 +252,7 @@ export function TopBar() {
           width: 32,
           height: 32,
           borderRadius: 6,
-          background: "rgba(0, 4, 48,0.5)",
+          background: "rgba(0, 1, 23,0.5)",
           border: `1px solid ${C.border}`,
           display: "flex",
           alignItems: "center",
@@ -231,43 +265,108 @@ export function TopBar() {
       </button>
 
       {/* User profile */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          padding: "4px 8px",
-          borderRadius: 6,
-          background: "rgba(0, 4, 48,0.5)",
-          border: `1px solid ${C.border}`,
-          cursor: "pointer",
-        }}
-      >
-        <div
+      <div ref={menuRef} style={{ position: "relative" }}>
+        <button
+          type="button"
+          onClick={() => setMenuOpen((v) => !v)}
           style={{
-            width: 24,
-            height: 24,
-            borderRadius: "50%",
-            background: "linear-gradient(135deg, #d6b68d 0%, #d6b68d 100%)",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            fontSize: 9,
-            fontWeight: 700,
-            color: "#fff",
+            gap: 8,
+            padding: "4px 8px",
+            borderRadius: 6,
+            background: menuOpen ? "rgba(214, 182, 141, 0.08)" : "rgba(0, 1, 23,0.5)",
+            border: `1px solid ${menuOpen ? "rgba(214, 182, 141, 0.35)" : C.border}`,
+            cursor: "pointer",
+            transition: "background 0.15s, border-color 0.15s",
           }}
         >
-          AK
-        </div>
-        <div>
-          <div style={{ fontSize: 11, color: C.text, fontWeight: 600, lineHeight: 1 }}>
-            Adjoua Koné
+          <div
+            style={{
+              width: 24,
+              height: 24,
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #d6b68d 0%, #b6966f 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 9,
+              fontWeight: 700,
+              color: "#000117",
+            }}
+          >
+            {initials}
           </div>
-          <div style={{ fontSize: 9, color: C.dim, lineHeight: 1, marginTop: 2 }}>
-            Analyste Senior
+          <div style={{ textAlign: "left" }}>
+            <div style={{ fontSize: 11, color: C.text, fontWeight: 600, lineHeight: 1 }}>
+              {displayName}
+            </div>
+            <div style={{ fontSize: 9, color: C.dim, lineHeight: 1, marginTop: 2 }}>
+              {displayRole}
+            </div>
           </div>
-        </div>
-        <ChevronDown size={11} color={C.muted} />
+          <ChevronDown
+            size={11}
+            color={C.muted}
+            style={{
+              transform: menuOpen ? "rotate(180deg)" : "rotate(0)",
+              transition: "transform 0.15s",
+            }}
+          />
+        </button>
+
+        {menuOpen && (
+          <div
+            role="menu"
+            style={{
+              position: "absolute",
+              top: "calc(100% + 6px)",
+              right: 0,
+              minWidth: 200,
+              background: "rgba(0, 1, 23, 0.98)",
+              border: `1px solid ${C.border}`,
+              borderRadius: 6,
+              boxShadow: "0 12px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(214, 182, 141, 0.06)",
+              zIndex: 100,
+              overflow: "hidden",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <div style={{ padding: "10px 12px", borderBottom: `1px solid ${C.border}` }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>
+                {displayName}
+              </div>
+              <div style={{ fontSize: 9, color: C.dim, marginTop: 2 }}>
+                {displayRole}
+                {user?.username ? ` · @${user.username}` : ""}
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={handleLogout}
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "9px 12px",
+                background: "transparent",
+                border: "none",
+                color: "#f43860",
+                fontSize: 11,
+                fontWeight: 600,
+                cursor: "pointer",
+                letterSpacing: "0.02em",
+                textAlign: "left",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(244, 56, 96, 0.08)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+            >
+              <LogOut size={13} />
+              Se déconnecter
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -289,7 +388,7 @@ function TopAction({
         alignItems: "center",
         gap: 4,
         padding: "4px 9px",
-        background: accent ? "rgba(214, 182, 141,0.1)" : "rgba(0, 4, 48,0.5)",
+        background: accent ? "rgba(214, 182, 141,0.1)" : "rgba(0, 1, 23,0.5)",
         border: `1px solid ${accent ? "rgba(214, 182, 141,0.3)" : "rgba(44, 61, 127,0.32)"}`,
         borderRadius: 6,
         color: accent ? "#d6b68d" : "#6b96b8",

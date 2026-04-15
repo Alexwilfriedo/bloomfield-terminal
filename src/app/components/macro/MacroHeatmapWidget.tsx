@@ -2,8 +2,8 @@ import { useState } from "react";
 import { BarChart3, ArrowUpDown } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -110,7 +110,7 @@ export function MacroHeatmapWidget() {
           justifyContent: "space-between",
           padding: "6px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
         }}
       >
@@ -151,7 +151,7 @@ export function MacroHeatmapWidget() {
             display: "grid",
             gridTemplateColumns: "130px repeat(7, 1fr) 60px",
             padding: "5px 10px",
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             position: "sticky",
             top: 0,
             zIndex: 2,
@@ -199,7 +199,7 @@ export function MacroHeatmapWidget() {
                 background: isComparison
                   ? "rgba(167,139,250,0.04)"
                   : i % 2 === 0
-                  ? "rgba(0, 4, 48,0.08)"
+                  ? "rgba(0, 1, 23,0.08)"
                   : "transparent",
                 borderBottom: `1px solid ${C.border}10`,
                 borderLeft: isUemoa ? `2px solid rgba(244,185,66,0.25)` : isComparison ? `2px solid rgba(167,139,250,0.25)` : "2px solid transparent",
@@ -300,7 +300,7 @@ export function MacroHeatmapWidget() {
         style={{
           padding: "4px 12px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.3)",
+          background: "rgba(0, 1, 23,0.3)",
           display: "flex",
           gap: 12,
           flexShrink: 0,

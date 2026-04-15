@@ -11,8 +11,8 @@ import {
 import { Calendar, TrendingUp, TrendingDown } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -78,7 +78,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return (
     <div
       style={{
-        background: "#000430",
+        background: "#000117",
         border: `1px solid ${C.border}`,
         borderRadius: 5,
         padding: "6px 10px",
@@ -119,7 +119,7 @@ export function PublicFinanceWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
         }}
       >

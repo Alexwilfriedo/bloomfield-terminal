@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FileText, ArrowUpRight, Bookmark, Share2, ChevronRight, TrendingUp, TrendingDown, Minus, Star, Lock } from "lucide-react";
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -195,7 +195,7 @@ export function ResearchNotesSection() {
           gap: 8,
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
         }}
       >
         <FileText size={13} color={C.gold} />
@@ -412,7 +412,7 @@ export function ResearchNotesSection() {
                       width: 22,
                       height: 22,
                       borderRadius: 4,
-                      background: "rgba(0, 4, 48,0.5)",
+                      background: "rgba(0, 1, 23,0.5)",
                       border: `1px solid ${C.border}`,
                       display: "flex",
                       alignItems: "center",
@@ -429,7 +429,7 @@ export function ResearchNotesSection() {
                       width: 22,
                       height: 22,
                       borderRadius: 4,
-                      background: "rgba(0, 4, 48,0.5)",
+                      background: "rgba(0, 1, 23,0.5)",
                       border: `1px solid ${C.border}`,
                       display: "flex",
                       alignItems: "center",

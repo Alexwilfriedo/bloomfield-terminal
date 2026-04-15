@@ -75,7 +75,7 @@ export function SovereignDebtWidget() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
             {ISSUANCES.map((iss) => (
-              <div key={`${iss.date}-${iss.country}`} style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 8px", background: "rgba(0, 4, 48,0.4)", borderRadius: 4, border: `1px solid rgba(44, 61, 127,0.18)` }}>
+              <div key={`${iss.date}-${iss.country}`} style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 8px", background: "rgba(0, 1, 23,0.4)", borderRadius: 4, border: `1px solid rgba(44, 61, 127,0.18)` }}>
                 <span style={{ fontSize: 8.5, fontWeight: 700, color: iss.color, minWidth: 40 }}>{iss.date}</span>
                 <span style={{ fontSize: 9, color: C.text, flex: 1 }}>{iss.country}</span>
                 <span style={{ fontSize: 8.5, color: C.dim }}>{iss.type}</span>

@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   accent: "#d6b68d",
   border: "rgba(44, 61, 127,0.32)",
   text: "#ddeaf8",
@@ -82,7 +82,7 @@ function ActionBtn({
   accent?: boolean;
   danger?: boolean;
 }) {
-  const bg = accent ? "rgba(214, 182, 141,0.1)" : danger ? "rgba(244,56,96,0.1)" : "rgba(0, 4, 48,0.5)";
+  const bg = accent ? "rgba(214, 182, 141,0.1)" : danger ? "rgba(244,56,96,0.1)" : "rgba(0, 1, 23,0.5)";
   const border = accent ? "rgba(214, 182, 141,0.3)" : danger ? "rgba(244,56,96,0.3)" : "rgba(44, 61, 127,0.32)";
   const color = accent ? C.accent : danger ? C.red : C.dim;
   return (
@@ -210,7 +210,7 @@ export function AnalysisTopBar() {
               width: 18,
               height: 18,
               borderRadius: 4,
-              background: "linear-gradient(135deg, #1a4a7a 0%, #000430 100%)",
+              background: "linear-gradient(135deg, #1a4a7a 0%, #000117 100%)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -239,7 +239,7 @@ export function AnalysisTopBar() {
             style={{
               width: "100%",
               height: 32,
-              background: "rgba(0, 4, 48,0.7)",
+              background: "rgba(0, 1, 23,0.7)",
               border: `1px solid ${C.border}`,
               borderRadius: 6,
               paddingLeft: 32,
@@ -297,7 +297,7 @@ export function AnalysisTopBar() {
             width: 32,
             height: 32,
             borderRadius: 6,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             border: `1px solid ${C.border}`,
             display: "flex",
             alignItems: "center",
@@ -317,7 +317,7 @@ export function AnalysisTopBar() {
               height: 14,
               borderRadius: 7,
               background: C.red,
-              border: "1.5px solid #000430",
+              border: "1.5px solid #000117",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -338,7 +338,7 @@ export function AnalysisTopBar() {
             gap: 7,
             padding: "4px 8px",
             borderRadius: 6,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             border: `1px solid ${C.border}`,
             cursor: "pointer",
             flexShrink: 0,
@@ -376,7 +376,7 @@ export function AnalysisTopBar() {
           alignItems: "center",
           padding: "0 16px",
           gap: 5,
-          background: "rgba(0, 4, 48,0.5)",
+          background: "rgba(0, 1, 23,0.5)",
           overflowX: "auto",
         }}
       >

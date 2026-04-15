@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   accent: "#d6b68d",
   border: "rgba(44, 61, 127,0.32)",
   text: "#ddeaf8",
@@ -31,7 +31,7 @@ function VDivider() {
 }
 
 function ActionBtn({ icon, label, accent, gold }: { icon: ReactNode; label?: string; accent?: boolean; gold?: boolean }) {
-  const bg = accent ? "rgba(214, 182, 141,0.1)" : gold ? "rgba(244,185,66,0.1)" : "rgba(0, 4, 48,0.5)";
+  const bg = accent ? "rgba(214, 182, 141,0.1)" : gold ? "rgba(244,185,66,0.1)" : "rgba(0, 1, 23,0.5)";
   const border = accent ? "rgba(214, 182, 141,0.3)" : gold ? "rgba(244,185,66,0.3)" : C.border;
   const color = accent ? C.accent : gold ? C.gold : C.dim;
   return (
@@ -103,7 +103,7 @@ export function WorkspacesTopBar() {
           {wsOpen && (
             <div style={{
               position: "absolute", top: "calc(100% + 4px)", left: 0, zIndex: 100,
-              background: "#000430", border: `1px solid ${C.border}`, borderRadius: 6,
+              background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6,
               minWidth: 220, boxShadow: "0 8px 24px rgba(0,0,0,0.4)", overflow: "hidden",
             }}>
               {WORKSPACES.map((ws) => (
@@ -134,7 +134,7 @@ export function WorkspacesTopBar() {
             type="text" value={search} onChange={(e) => setSearch(e.target.value)}
             placeholder="Rechercher widgets, marchés, sociétés, indicateurs…"
             style={{
-              width: "100%", height: 32, background: "rgba(0, 4, 48,0.7)", border: `1px solid ${C.border}`,
+              width: "100%", height: 32, background: "rgba(0, 1, 23,0.7)", border: `1px solid ${C.border}`,
               borderRadius: 6, paddingLeft: 32, paddingRight: 48, color: C.text, fontSize: 11, outline: "none",
             }}
           />
@@ -164,13 +164,13 @@ export function WorkspacesTopBar() {
         <VDivider />
 
         {/* Bell */}
-        <button style={{ position: "relative", width: 32, height: 32, borderRadius: 6, background: "rgba(0, 4, 48,0.5)", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: C.dim, flexShrink: 0 }}>
+        <button style={{ position: "relative", width: 32, height: 32, borderRadius: 6, background: "rgba(0, 1, 23,0.5)", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: C.dim, flexShrink: 0 }}>
           <Bell size={14} />
-          <div style={{ position: "absolute", top: 4, right: 4, minWidth: 14, height: 14, borderRadius: 7, background: C.red, border: "1.5px solid #000430", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 8, fontWeight: 700, color: "#fff" }}>5</div>
+          <div style={{ position: "absolute", top: 4, right: 4, minWidth: 14, height: 14, borderRadius: 7, background: C.red, border: "1.5px solid #000117", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 8, fontWeight: 700, color: "#fff" }}>5</div>
         </button>
 
         {/* User */}
-        <button style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 8px", borderRadius: 6, background: "rgba(0, 4, 48,0.5)", border: `1px solid ${C.border}`, cursor: "pointer", flexShrink: 0 }}>
+        <button style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 8px", borderRadius: 6, background: "rgba(0, 1, 23,0.5)", border: `1px solid ${C.border}`, cursor: "pointer", flexShrink: 0 }}>
           <div style={{ width: 24, height: 24, borderRadius: "50%", background: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 700, color: "#fff" }}>AK</div>
           <div style={{ textAlign: "left" }}>
             <div style={{ fontSize: 10, color: C.text, fontWeight: 600, lineHeight: 1 }}>Adjoua Koné</div>
@@ -181,7 +181,7 @@ export function WorkspacesTopBar() {
       </div>
 
       {/* Row 2 — workspace metadata bar */}
-      <div style={{ height: 32, display: "flex", alignItems: "center", padding: "0 16px", gap: 10, background: "rgba(0, 4, 48,0.5)" }}>
+      <div style={{ height: 32, display: "flex", alignItems: "center", padding: "0 16px", gap: 10, background: "rgba(0, 1, 23,0.5)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <Layers size={9} color={C.purple} />
           <span style={{ fontSize: 9, color: C.muted }}>8 widgets actifs</span>

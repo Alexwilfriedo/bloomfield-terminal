@@ -9,7 +9,7 @@ const C = {
   dim: "#6b96b8",
   muted: "#54678d",
   border: "rgba(44, 61, 127,0.32)",
-  surface: "rgba(0, 4, 48,0.45)",
+  surface: "rgba(0, 1, 23,0.45)",
   accent: "#d6b68d",
 };
 
@@ -87,11 +87,11 @@ export function TopMoversWidget() {
             borderRadius: 5,
             cursor: "pointer",
             transition: "background 0.1s",
-            background: i % 2 === 0 ? "rgba(0, 4, 48,0.15)" : "transparent",
+            background: i % 2 === 0 ? "rgba(0, 1, 23,0.15)" : "transparent",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.06)")}
           onMouseLeave={(e) =>
-            (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 4, 48,0.15)" : "transparent")
+            (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 1, 23,0.15)" : "transparent")
           }
         >
           <div>

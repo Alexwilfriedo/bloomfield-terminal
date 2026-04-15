@@ -179,7 +179,7 @@ export function ComparisonWidget() {
       <div
         style={{
           marginTop: 10,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           border: `1px solid ${C.border}`,
           borderRadius: 6,
           padding: "6px 6px 4px",
@@ -198,7 +198,7 @@ export function ComparisonWidget() {
             <YAxis tick={{ fontSize: 7, fill: C.muted }} axisLine={false} tickLine={false} />
             <Tooltip
               contentStyle={{
-                background: "#000430",
+                background: "#000117",
                 border: `1px solid ${C.border}`,
                 borderRadius: 4,
                 fontSize: 10,

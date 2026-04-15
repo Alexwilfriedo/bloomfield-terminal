@@ -21,7 +21,7 @@ export function Root() {
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
-        background: "#000430",
+        background: "#000117",
         fontFamily: "'Inter', 'SF Pro Text', system-ui, -apple-system, sans-serif",
       }}
     >

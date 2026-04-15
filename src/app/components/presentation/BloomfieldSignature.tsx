@@ -8,10 +8,10 @@ import { Search, Bell, RefreshCw, ChevronDown, Shield, Zap, TrendingUp, Trending
 
 /* ─── Shared colour palette ──────────────────────────────────────────────── */
 export const C = {
-  dark: "#000430",
-  surface: "#000430",
-  elevated: "#000430",
-  panel: "rgba(0, 4, 48,0.9)",
+  dark: "#000117",
+  surface: "#000117",
+  elevated: "#000117",
+  panel: "rgba(0, 1, 23,0.9)",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -54,7 +54,7 @@ export function TerminalHeader({ screenLabel, screenIcon, screenColor = C.accent
       {/* Search */}
       <div style={{ flex: 1, maxWidth: 340, position: "relative", display: "flex", alignItems: "center", marginLeft: 4 }}>
         <Search size={11} style={{ position: "absolute", left: 9, color: C.dim, pointerEvents: "none" }} />
-        <input placeholder="Rechercher marchés, titres, indicateurs, pays…" style={{ width: "100%", height: 28, background: "rgba(0, 4, 48,0.65)", border: `1px solid ${C.border}`, borderRadius: 5, paddingLeft: 27, paddingRight: 10, color: C.dim, fontSize: 10, outline: "none" }} readOnly />
+        <input placeholder="Rechercher marchés, titres, indicateurs, pays…" style={{ width: "100%", height: 28, background: "rgba(0, 1, 23,0.65)", border: `1px solid ${C.border}`, borderRadius: 5, paddingLeft: 27, paddingRight: 10, color: C.dim, fontSize: 10, outline: "none" }} readOnly />
       </div>
       <div style={{ flex: 1 }} />
       {/* Live + Date */}
@@ -69,7 +69,7 @@ export function TerminalHeader({ screenLabel, screenIcon, screenColor = C.accent
       </button>
       <button style={{ position: "relative", width: 26, height: 26, borderRadius: 4, background: "transparent", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: C.dim }}>
         <Bell size={12} />
-        <div style={{ position: "absolute", top: 2, right: 2, width: 12, height: 12, borderRadius: "50%", background: C.red, fontSize: 7, fontWeight: 800, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", border: "1.5px solid #000430" }}>5</div>
+        <div style={{ position: "absolute", top: 2, right: 2, width: 12, height: 12, borderRadius: "50%", background: C.red, fontSize: 7, fontWeight: 800, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", border: "1.5px solid #000117" }}>5</div>
       </button>
       <div style={{ width: 26, height: 26, borderRadius: "50%", background: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 700, color: "#fff", cursor: "pointer", flexShrink: 0 }}>AK</div>
     </div>
@@ -198,7 +198,7 @@ export function BFDMacroSignal({ signal, zone, summary, factors }: BFDMacroSigna
   const sColor = signal === "HAUSSIER" ? C.green : signal === "BAISSIER" ? C.red : C.gold;
   const sIcon = signal === "HAUSSIER" ? <TrendingUp size={10} /> : signal === "BAISSIER" ? <TrendingDown size={10} /> : <Minus size={10} />;
   return (
-    <div style={{ padding: "9px 11px", background: "rgba(0, 4, 48,0.5)", border: `1px solid ${C.border}`, borderRadius: 6 }}>
+    <div style={{ padding: "9px 11px", background: "rgba(0, 1, 23,0.5)", border: `1px solid ${C.border}`, borderRadius: 6 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 6 }}>
         <Activity size={9} color={C.accent} />
         <span style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>Signal Macro BFD</span>
@@ -260,7 +260,7 @@ interface BFDImpactBlockProps { items: ImpactItem[]; criticite: "FAIBLE" | "MOD�
 export function BFDImpactBlock({ items, criticite, impactType }: BFDImpactBlockProps) {
   const cColor = criticite === "ÉLEVÉE" ? C.red : criticite === "MODÉRÉE" ? C.gold : C.green;
   return (
-    <div style={{ padding: "8px 10px", background: "rgba(0, 4, 48,0.4)", border: `1px solid ${C.border}`, borderRadius: 5 }}>
+    <div style={{ padding: "8px 10px", background: "rgba(0, 1, 23,0.4)", border: `1px solid ${C.border}`, borderRadius: 5 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 6 }}>
         <Zap size={9} color={C.accent} />
         <span style={{ fontSize: 8, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.06em" }}>Impact Marché BFD</span>
@@ -269,7 +269,7 @@ export function BFDImpactBlock({ items, criticite, impactType }: BFDImpactBlockP
       <div style={{ fontSize: 8.5, color: C.dim, marginBottom: 5 }}>{impactType}</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
         {items.map((item, i) => (
-          <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, padding: "3px 7px", borderRadius: 3, background: "rgba(0, 4, 48,0.35)" }}>
+          <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, padding: "3px 7px", borderRadius: 3, background: "rgba(0, 1, 23,0.35)" }}>
             <span style={{ fontSize: 7.5, color: item.type === "Titre" ? C.accent : item.type === "Pays" ? C.gold : C.purple, fontWeight: 700, minWidth: 40 }}>{item.type}</span>
             <span style={{ flex: 1, fontSize: 9, color: C.text }}>{item.label}</span>
             <span style={{ fontSize: 11, fontWeight: 800, color: item.impact === "+" ? C.green : item.impact === "-" ? C.red : C.gold }}>{item.impact === "+" ? "▲" : item.impact === "-" ? "▼" : "→"}</span>
@@ -285,7 +285,7 @@ interface MiniWidgetProps { title: string; accent?: string; topRight?: ReactNode
 export function MiniWidget({ title, accent = C.accent, topRight, children, noPad }: MiniWidgetProps) {
   return (
     <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 7, display: "flex", flexDirection: "column", overflow: "hidden", height: "100%" }}>
-      <div style={{ display: "flex", alignItems: "center", padding: "7px 11px", borderBottom: `1px solid ${C.border}`, background: "rgba(0, 4, 48,0.45)", flexShrink: 0, gap: 7 }}>
+      <div style={{ display: "flex", alignItems: "center", padding: "7px 11px", borderBottom: `1px solid ${C.border}`, background: "rgba(0, 1, 23,0.45)", flexShrink: 0, gap: 7 }}>
         <div style={{ width: 2, height: 12, borderRadius: 2, background: accent, flexShrink: 0 }} />
         <span style={{ fontSize: 10, fontWeight: 700, color: C.text, textTransform: "uppercase", letterSpacing: "0.05em" }}>{title}</span>
         <div style={{ flex: 1 }} />

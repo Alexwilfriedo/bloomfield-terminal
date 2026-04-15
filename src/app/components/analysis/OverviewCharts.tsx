@@ -57,7 +57,7 @@ const RevenueTooltip = ({ active, payload, label }: {
 }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000430", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
+    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
       <div style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, marginBottom: 5 }}>{label}</div>
       {payload.map((p) => (
         <div key={p.name} style={{ display: "flex", gap: 10, marginBottom: 3 }}>
@@ -79,7 +79,7 @@ const MarginTooltip = ({ active, payload, label }: {
 }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000430", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
+    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
       <div style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, marginBottom: 5 }}>{label}</div>
       {payload.map((p) => (
         <div key={p.name} style={{ display: "flex", gap: 10, marginBottom: 3 }}>

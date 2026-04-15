@@ -70,7 +70,7 @@ export function LiveTicker() {
     <div
       style={{
         height: 32,
-        background: "#000430",
+        background: "#000117",
         borderBottom: "1px solid rgba(44, 61, 127,0.32)",
         overflow: "hidden",
         display: "flex",
@@ -87,7 +87,7 @@ export function LiveTicker() {
           top: 0,
           width: 60,
           height: "100%",
-          background: "linear-gradient(to right, #000430, transparent)",
+          background: "linear-gradient(to right, #000117, transparent)",
           zIndex: 2,
           pointerEvents: "none",
         }}
@@ -101,7 +101,7 @@ export function LiveTicker() {
           top: 0,
           height: "100%",
           width: 72,
-          background: "#000430",
+          background: "#000117",
           borderRight: "1px solid rgba(44, 61, 127,0.32)",
           display: "flex",
           alignItems: "center",
@@ -160,7 +160,7 @@ export function LiveTicker() {
           top: 0,
           width: 40,
           height: "100%",
-          background: "linear-gradient(to left, #000430, transparent)",
+          background: "linear-gradient(to left, #000117, transparent)",
           zIndex: 2,
           pointerEvents: "none",
         }}

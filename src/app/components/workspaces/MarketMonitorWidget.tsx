@@ -51,7 +51,7 @@ export function MarketMonitorWidget() {
 
         {/* Indices */}
         {INDICES.map((idx) => (
-          <div key={idx.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "7px 10px", background: "rgba(0, 4, 48,0.45)", borderRadius: 6, border: `1px solid ${C.border}` }}>
+          <div key={idx.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "7px 10px", background: "rgba(0, 1, 23,0.45)", borderRadius: 6, border: `1px solid ${C.border}` }}>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 9, color: C.dim, fontWeight: 500 }}>{idx.name}</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 5, marginTop: 1 }}>
@@ -67,7 +67,7 @@ export function MarketMonitorWidget() {
         {/* Market stats */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 5 }}>
           {MARKET_STATS.map((s) => (
-            <div key={s.label} style={{ background: "rgba(0, 4, 48,0.45)", border: `1px solid ${C.border}`, borderRadius: 5, padding: "5px 6px", textAlign: "center" }}>
+            <div key={s.label} style={{ background: "rgba(0, 1, 23,0.45)", border: `1px solid ${C.border}`, borderRadius: 5, padding: "5px 6px", textAlign: "center" }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums", lineHeight: 1.2 }}>{s.value}</div>
               {s.unit && <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>{s.unit}</div>}
               <div style={{ fontSize: 7.5, color: C.muted, opacity: 0.7 }}>{s.label}</div>
@@ -80,7 +80,7 @@ export function MarketMonitorWidget() {
           <div style={{ fontSize: 9, fontWeight: 700, color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 4 }}>Principaux Mouvements</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             {TOP_MOVERS.map((m) => (
-              <div key={m.ticker} style={{ display: "flex", alignItems: "center", gap: 6, padding: "3px 6px", borderRadius: 4, background: "rgba(0, 4, 48,0.3)", cursor: "pointer" }}>
+              <div key={m.ticker} style={{ display: "flex", alignItems: "center", gap: 6, padding: "3px 6px", borderRadius: 4, background: "rgba(0, 1, 23,0.3)", cursor: "pointer" }}>
                 <div style={{ width: 18, height: 18, borderRadius: 4, background: m.up ? "rgba(16,200,122,0.12)" : "rgba(244,56,96,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   {m.up ? <TrendingUp size={9} color={C.green} /> : <TrendingDown size={9} color={C.red} />}
                 </div>
@@ -101,7 +101,7 @@ export function MarketMonitorWidget() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
             {SIGNALS.map((sig) => (
-              <div key={sig.target} style={{ display: "flex", alignItems: "center", gap: 6, padding: "3px 8px", borderRadius: 4, background: "rgba(0, 4, 48,0.3)", border: `1px solid rgba(44, 61, 127,0.16)` }}>
+              <div key={sig.target} style={{ display: "flex", alignItems: "center", gap: 6, padding: "3px 8px", borderRadius: 4, background: "rgba(0, 1, 23,0.3)", border: `1px solid rgba(44, 61, 127,0.16)` }}>
                 <span style={{ fontSize: 9 }}>{sig.dot}</span>
                 <span style={{ fontSize: 9, color: sig.color, fontWeight: 600 }}>{sig.label}</span>
                 <span style={{ fontSize: 9, color: C.dim, marginLeft: "auto" }}>{sig.target}</span>

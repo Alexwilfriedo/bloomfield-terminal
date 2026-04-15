@@ -14,7 +14,7 @@ export function FlashInsightsWidget() {
     <WidgetShell title="Flash Insights" subtitle="Note du jour · Vidéo · Rapport recommandé" lastUpdate="08 Avr" accentColor={C.purple}>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {/* Today's editorial note */}
-        <div style={{ padding: "10px 11px", background: "rgba(0, 4, 48,0.5)", borderRadius: 6, border: `1px solid ${C.border}`, position: "relative", overflow: "hidden" }}>
+        <div style={{ padding: "10px 11px", background: "rgba(0, 1, 23,0.5)", borderRadius: 6, border: `1px solid ${C.border}`, position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 2, background: "linear-gradient(180deg, #d6b68d 0%, #a78bfa 100%)" }} />
           <div style={{ paddingLeft: 8 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 5 }}>
@@ -44,7 +44,7 @@ export function FlashInsightsWidget() {
         </div>
 
         {/* Video briefing */}
-        <div style={{ display: "flex", gap: 9, padding: "8px 10px", background: "rgba(0, 4, 48,0.4)", borderRadius: 6, border: `1px solid ${C.border}`, cursor: "pointer" }}>
+        <div style={{ display: "flex", gap: 9, padding: "8px 10px", background: "rgba(0, 1, 23,0.4)", borderRadius: 6, border: `1px solid ${C.border}`, cursor: "pointer" }}>
           <div style={{ position: "relative", width: 72, height: 48, borderRadius: 4, overflow: "hidden", flexShrink: 0 }}>
             <img src={VIDEO_IMG} alt="video" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
             <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -52,7 +52,7 @@ export function FlashInsightsWidget() {
                 <Play size={10} color="#fff" fill="#fff" style={{ marginLeft: 1 }} />
               </div>
             </div>
-            <div style={{ position: "absolute", bottom: 3, right: 3, padding: "1px 4px", background: "rgba(0, 4, 48,0.85)", borderRadius: 2, fontSize: 7.5, fontWeight: 700, color: C.text }}>12:34</div>
+            <div style={{ position: "absolute", bottom: 3, right: 3, padding: "1px 4px", background: "rgba(0, 1, 23,0.85)", borderRadius: 2, fontSize: 7.5, fontWeight: 700, color: C.text }}>12:34</div>
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 3 }}>
@@ -62,13 +62,13 @@ export function FlashInsightsWidget() {
             <div style={{ fontSize: 9.5, fontWeight: 700, color: C.text, lineHeight: 1.3, marginBottom: 3 }}>Flash Marché BRVM — Session 08 Avr · Volumes & Flux</div>
             <div style={{ fontSize: 8, color: C.muted }}>Adjoua Koné · Analyste Marchés Bloomfield</div>
           </div>
-          <button style={{ width: 20, height: 20, borderRadius: 3, background: "rgba(0, 4, 48,0.5)", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: C.muted, flexShrink: 0, alignSelf: "flex-start" }}>
+          <button style={{ width: 20, height: 20, borderRadius: 3, background: "rgba(0, 1, 23,0.5)", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: C.muted, flexShrink: 0, alignSelf: "flex-start" }}>
             <Bookmark size={8} />
           </button>
         </div>
 
         {/* Recommended report */}
-        <div style={{ display: "flex", gap: 9, padding: "8px 10px", background: "rgba(0, 4, 48,0.4)", borderRadius: 6, border: `1px solid ${C.border}`, cursor: "pointer" }}>
+        <div style={{ display: "flex", gap: 9, padding: "8px 10px", background: "rgba(0, 1, 23,0.4)", borderRadius: 6, border: `1px solid ${C.border}`, cursor: "pointer" }}>
           <div style={{ width: 36, height: 46, borderRadius: 4, background: "rgba(167,139,250,0.12)", border: "1px solid rgba(167,139,250,0.2)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexShrink: 0, gap: 2 }}>
             <FileText size={12} color={C.purple} />
             <span style={{ fontSize: 6.5, fontWeight: 800, color: C.purple }}>PDF</span>

@@ -9,7 +9,7 @@ const C = {
   dim: "#6b96b8",
   muted: "#54678d",
   border: "rgba(44, 61, 127,0.32)",
-  surface: "#000430",
+  surface: "#000117",
 };
 
 interface MarketItem {
@@ -79,7 +79,7 @@ export function InternationalMarketsWidget() {
           alignItems: "center",
           gap: 5,
           padding: "0 12px",
-          background: "rgba(0, 4, 48,0.5)",
+          background: "rgba(0, 1, 23,0.5)",
           borderRight: `1px solid ${C.border}`,
           flexShrink: 0,
           minWidth: 88,
@@ -210,7 +210,7 @@ export function InternationalMarketsWidget() {
           padding: "0 12px",
           borderLeft: `1px solid ${C.border}`,
           flexShrink: 0,
-          background: "rgba(0, 4, 48,0.3)",
+          background: "rgba(0, 1, 23,0.3)",
         }}
       >
         <div

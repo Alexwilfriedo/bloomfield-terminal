@@ -186,7 +186,7 @@ export function MacroWidget() {
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "#000430",
+                    background: "#000117",
                     border: `1px solid ${C.border}`,
                     borderRadius: 4,
                     fontSize: 10,
@@ -204,7 +204,7 @@ export function MacroWidget() {
               alignItems: "center",
               gap: 6,
               padding: "5px 10px",
-              background: "rgba(0, 4, 48,0.5)",
+              background: "rgba(0, 1, 23,0.5)",
               border: `1px solid ${C.border}`,
               borderRadius: 6,
               marginTop: 4,
@@ -263,7 +263,7 @@ function MacroKPI({
         alignItems: "center",
         justifyContent: "space-between",
         padding: "4px 8px",
-        background: "rgba(0, 4, 48,0.4)",
+        background: "rgba(0, 1, 23,0.4)",
         borderRadius: 5,
         border: `1px solid ${C2.border}`,
       }}

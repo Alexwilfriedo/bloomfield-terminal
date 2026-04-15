@@ -2,7 +2,7 @@ import { FileDown, BookOpen, ChevronRight, Download, Calendar, Globe2, Building2
 import type { ReactNode } from "react";
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -157,7 +157,7 @@ export function ReportsSection() {
           gap: 8,
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
         }}
       >
         <FileDown size={13} color={C.accent} />
@@ -210,7 +210,7 @@ export function ReportsSection() {
           <div
             key={report.id}
             style={{
-              background: "rgba(0, 4, 48,0.5)",
+              background: "rgba(0, 1, 23,0.5)",
               border: `1px solid ${C.border}`,
               borderRadius: 7,
               padding: "12px 13px",
@@ -249,7 +249,7 @@ export function ReportsSection() {
                   width: 36,
                   height: 44,
                   borderRadius: 5,
-                  background: `linear-gradient(135deg, ${report.typeColor}22 0%, rgba(0, 4, 48,0.8) 100%)`,
+                  background: `linear-gradient(135deg, ${report.typeColor}22 0%, rgba(0, 1, 23,0.8) 100%)`,
                   border: `1px solid ${report.typeColor}30`,
                   display: "flex",
                   flexDirection: "column",

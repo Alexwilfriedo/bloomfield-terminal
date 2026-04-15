@@ -17,8 +17,8 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -176,7 +176,7 @@ function SectionHeader({ icon, title, count, badge }: { icon: ReactNode; title: 
         alignItems: "center",
         justifyContent: "space-between",
         padding: "6px 10px 5px",
-        background: "rgba(0, 4, 48,0.3)",
+        background: "rgba(0, 1, 23,0.3)",
         borderBottom: `1px solid ${C.border}`,
         flexShrink: 0,
       }}
@@ -188,7 +188,7 @@ function SectionHeader({ icon, title, count, badge }: { icon: ReactNode; title: 
           <span style={{ fontSize: 8, color: C.muted, background: "rgba(44, 61, 127,0.2)", borderRadius: 8, padding: "0 5px" }}>{count}</span>
         )}
         {badge !== undefined && badge > 0 && (
-          <span style={{ fontSize: 8, fontWeight: 700, color: "#000430", background: C.gold, borderRadius: 8, padding: "0 5px" }}>{badge}</span>
+          <span style={{ fontSize: 8, fontWeight: 700, color: "#000117", background: C.gold, borderRadius: 8, padding: "0 5px" }}>{badge}</span>
         )}
       </div>
     </div>
@@ -255,7 +255,7 @@ export function AnalysisRightPanel() {
           justifyContent: "space-between",
           padding: "6px 10px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
         }}
       >

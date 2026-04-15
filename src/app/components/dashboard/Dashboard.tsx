@@ -18,7 +18,7 @@ export function Dashboard() {
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
-        background: "#000430",
+        background: "#000117",
         minWidth: 0,
       }}
     >

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Zap, ExternalLink, ChevronRight, TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -203,7 +203,7 @@ export function FlashNewsFeed() {
           gap: 8,
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
         }}
       >
         <div
@@ -418,7 +418,7 @@ export function FlashNewsFeed() {
         style={{
           width: "100%",
           padding: "8px 14px",
-          background: "rgba(0, 4, 48,0.3)",
+          background: "rgba(0, 1, 23,0.3)",
           border: "none",
           borderTop: `1px solid ${C.border}`,
           display: "flex",

@@ -110,7 +110,7 @@ export function WorkspaceLibraryWidget() {
               onMouseLeave={() => setHoveredWs(null)}
               style={{
                 padding: "10px 11px", borderRadius: 6, cursor: "pointer",
-                background: isActive ? ws.color + "12" : isHovered ? "rgba(214, 182, 141,0.04)" : "rgba(0, 4, 48,0.45)",
+                background: isActive ? ws.color + "12" : isHovered ? "rgba(214, 182, 141,0.04)" : "rgba(0, 1, 23,0.45)",
                 border: `1px solid ${isActive ? ws.color + "40" : C.border}`,
                 position: "relative", transition: "all 0.15s",
               }}
@@ -156,17 +156,17 @@ export function WorkspaceLibraryWidget() {
                   onClick={(e) => { e.stopPropagation(); setActiveWs(ws.id); }}
                   style={{
                     flex: 1, padding: "4px 0", borderRadius: 4, border: `1px solid ${isActive ? ws.color + "40" : C.border}`,
-                    background: isActive ? ws.color + "18" : "rgba(0, 4, 48,0.5)",
+                    background: isActive ? ws.color + "18" : "rgba(0, 1, 23,0.5)",
                     color: isActive ? ws.color : C.dim,
                     fontSize: 8.5, fontWeight: 700, cursor: "pointer",
                   }}
                 >
                   {isActive ? "Actif" : "Ouvrir"}
                 </button>
-                <button onClick={(e) => e.stopPropagation()} style={{ width: 24, height: 24, borderRadius: 4, background: "rgba(0, 4, 48,0.5)", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: C.muted }}>
+                <button onClick={(e) => e.stopPropagation()} style={{ width: 24, height: 24, borderRadius: 4, background: "rgba(0, 1, 23,0.5)", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: C.muted }}>
                   <Copy size={8} />
                 </button>
-                <button onClick={(e) => e.stopPropagation()} style={{ width: 24, height: 24, borderRadius: 4, background: "rgba(0, 4, 48,0.5)", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: C.muted }}>
+                <button onClick={(e) => e.stopPropagation()} style={{ width: 24, height: 24, borderRadius: 4, background: "rgba(0, 1, 23,0.5)", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: C.muted }}>
                   <Share2 size={8} />
                 </button>
               </div>
@@ -175,9 +175,9 @@ export function WorkspaceLibraryWidget() {
         })}
 
         {/* Add new card */}
-        <div style={{ padding: "10px 11px", borderRadius: 6, cursor: "pointer", background: "rgba(0, 4, 48,0.3)", border: `1px dashed rgba(214, 182, 141,0.25)`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6, minHeight: 120 }}
+        <div style={{ padding: "10px 11px", borderRadius: 6, cursor: "pointer", background: "rgba(0, 1, 23,0.3)", border: `1px dashed rgba(214, 182, 141,0.25)`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6, minHeight: 120 }}
           onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "rgba(214, 182, 141,0.04)"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "rgba(0, 4, 48,0.3)"; }}>
+          onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "rgba(0, 1, 23,0.3)"; }}>
           <div style={{ width: 28, height: 28, borderRadius: "50%", background: "rgba(214, 182, 141,0.08)", border: "1px solid rgba(214, 182, 141,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Plus size={12} color={C.accent} />
           </div>
@@ -186,7 +186,7 @@ export function WorkspaceLibraryWidget() {
       </div>
 
       {/* Bottom stats */}
-      <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 8, padding: "6px 10px", background: "rgba(0, 4, 48,0.4)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 8, padding: "6px 10px", background: "rgba(0, 1, 23,0.4)", borderRadius: 5, border: `1px solid ${C.border}` }}>
         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <Layers size={10} color={C.purple} />
           <span style={{ fontSize: 9, color: C.muted }}>{WORKSPACES.length} workspaces sauvegardés</span>

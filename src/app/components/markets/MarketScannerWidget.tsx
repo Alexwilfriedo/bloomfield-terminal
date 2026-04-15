@@ -353,7 +353,7 @@ export function MarketScannerWidget() {
                   gap: 4,
                   background:
                     i % 2 === 0
-                      ? "rgba(0, 4, 48,0.1)"
+                      ? "rgba(0, 1, 23,0.1)"
                       : "transparent",
                   borderBottom: `1px solid ${C.border}10`,
                   cursor: "pointer",
@@ -367,7 +367,7 @@ export function MarketScannerWidget() {
                 onMouseLeave={(e) =>
                   (e.currentTarget.style.background =
                     i % 2 === 0
-                      ? "rgba(0, 4, 48,0.1)"
+                      ? "rgba(0, 1, 23,0.1)"
                       : "transparent")
                 }
               >
@@ -574,7 +574,7 @@ export function MarketScannerWidget() {
             gap: 14,
             padding: "5px 12px",
             borderTop: `1px solid ${C.border}`,
-            background: "rgba(0, 4, 48,0.3)",
+            background: "rgba(0, 1, 23,0.3)",
             flexShrink: 0,
           }}
         >

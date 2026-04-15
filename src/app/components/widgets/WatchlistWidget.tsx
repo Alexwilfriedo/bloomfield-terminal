@@ -39,7 +39,7 @@ export function WatchlistWidget() {
             padding: "2px 7px",
             borderRadius: 4,
             border: `1px solid ${C.border}`,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             color: C.dim,
             fontSize: 9,
             fontWeight: 600,
@@ -82,12 +82,12 @@ export function WatchlistWidget() {
               borderRadius: 5,
               cursor: "pointer",
               transition: "background 0.1s",
-              background: i % 2 === 0 ? "rgba(0, 4, 48,0.12)" : "transparent",
+              background: i % 2 === 0 ? "rgba(0, 1, 23,0.12)" : "transparent",
               alignItems: "center",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.06)")}
             onMouseLeave={(e) =>
-              (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 4, 48,0.12)" : "transparent")
+              (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 1, 23,0.12)" : "transparent")
             }
           >
             {/* Ticker + name */}
@@ -135,7 +135,7 @@ export function WatchlistWidget() {
         style={{
           marginTop: 8,
           padding: "6px 8px",
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           borderRadius: 5,
           border: `1px solid ${C.border}`,
           display: "flex",

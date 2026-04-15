@@ -72,7 +72,7 @@ export function S6_Workspace() {
       <div style={{ flexShrink: 0 }}>
         <TerminalHeader screenLabel="Workspace" screenIcon={<LayoutGrid size={13} />} screenColor={C.purple} badge="MON WORKSPACE PREMIUM" />
         {/* Workspace toolbar */}
-        <div style={{ height: 32, display: "flex", alignItems: "center", padding: "0 14px", gap: 8, background: "rgba(0, 4, 48,0.5)", borderBottom: `1px solid ${C.border}` }}>
+        <div style={{ height: 32, display: "flex", alignItems: "center", padding: "0 14px", gap: 8, background: "rgba(0, 1, 23,0.5)", borderBottom: `1px solid ${C.border}` }}>
           <Layers size={9} color={C.purple} />
           <span style={{ fontSize: 9, color: C.muted }}>8 widgets actifs</span>
           <div style={{ width: 1, height: 14, background: C.border }} />
@@ -81,7 +81,7 @@ export function S6_Workspace() {
           <button style={{ display: "flex", alignItems: "center", gap: 4, padding: "3px 9px", borderRadius: 4, background: "rgba(214, 182, 141,0.1)", border: "1px solid rgba(214, 182, 141,0.25)", color: C.accent, fontSize: 8.5, fontWeight: 700, cursor: "pointer" }}>
             <Plus size={9} />Ajouter Widget
           </button>
-          <button style={{ display: "flex", alignItems: "center", gap: 4, padding: "3px 9px", borderRadius: 4, background: "rgba(0, 4, 48,0.5)", border: `1px solid ${C.border}`, color: C.dim, fontSize: 8.5, fontWeight: 600, cursor: "pointer" }}>
+          <button style={{ display: "flex", alignItems: "center", gap: 4, padding: "3px 9px", borderRadius: 4, background: "rgba(0, 1, 23,0.5)", border: `1px solid ${C.border}`, color: C.dim, fontSize: 8.5, fontWeight: 600, cursor: "pointer" }}>
             <Save size={9} />Sauvegarder
           </button>
         </div>
@@ -110,7 +110,7 @@ export function S6_Workspace() {
               <MiniWidget title="Moniteur de Marché" accent={C.accent} topRight={<DataBadge source="BRVM" live />}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 5, height: "100%" }}>
                   {INDICES_W.map((idx) => (
-                    <div key={idx.id} style={{ display: "flex", alignItems: "center", gap: 7, padding: "5px 8px", background: "rgba(0, 4, 48,0.5)", borderRadius: 4, border: `1px solid ${C.border}` }}>
+                    <div key={idx.id} style={{ display: "flex", alignItems: "center", gap: 7, padding: "5px 8px", background: "rgba(0, 1, 23,0.5)", borderRadius: 4, border: `1px solid ${C.border}` }}>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: 8.5, color: C.muted }}>{idx.name}</div>
                         <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginTop: 1 }}>
@@ -123,7 +123,7 @@ export function S6_Workspace() {
                   ))}
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 4, marginTop: 2 }}>
                     {[["Hausses", "24", C.green], ["Baisses", "11", C.red], ["Volume", "1,28M", C.gold], ["Val. éch.", "4,82 Mds", C.accent]].map(([l, v, col]) => (
-                      <div key={String(l)} style={{ padding: "4px 7px", background: "rgba(0, 4, 48,0.4)", borderRadius: 3, border: `1px solid ${C.border}` }}>
+                      <div key={String(l)} style={{ padding: "4px 7px", background: "rgba(0, 1, 23,0.4)", borderRadius: 3, border: `1px solid ${C.border}` }}>
                         <div style={{ fontSize: 11, fontWeight: 800, color: String(col) }}>{v}</div>
                         <div style={{ fontSize: 7.5, color: C.muted }}>{l}</div>
                       </div>
@@ -138,7 +138,7 @@ export function S6_Workspace() {
               <MiniWidget title="Macro Watch · UEMOA" accent={C.gold} topRight={<DataBadge source="BCEAO" time="T1 2026" />}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
                   {MACRO_W.map((m, i) => (
-                    <div key={`mw-${i}`} style={{ display: "flex", alignItems: "center", gap: 7, padding: "6px 8px", background: "rgba(0, 4, 48,0.45)", borderRadius: 4, border: `1px solid ${C.border}` }}>
+                    <div key={`mw-${i}`} style={{ display: "flex", alignItems: "center", gap: 7, padding: "6px 8px", background: "rgba(0, 1, 23,0.45)", borderRadius: 4, border: `1px solid ${C.border}` }}>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: 8, color: C.muted }}>{m.label}</div>
                         <div style={{ fontSize: 14, fontWeight: 800, color: m.color, marginTop: 1 }}>{m.val}</div>
@@ -196,7 +196,7 @@ export function S6_Workspace() {
                   ))}
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 4, marginTop: 5 }}>
                     {[["Hausses", `${WATCHLIST_W.filter((w) => w.up).length}`, C.green], ["Baisses", `${WATCHLIST_W.filter((w) => !w.up).length}`, C.red], ["Perf. moy.", "+2.3%", C.gold]].map(([l, v, col]) => (
-                      <div key={String(l)} style={{ textAlign: "center", padding: "3px 4px", background: "rgba(0, 4, 48,0.4)", borderRadius: 3 }}>
+                      <div key={String(l)} style={{ textAlign: "center", padding: "3px 4px", background: "rgba(0, 1, 23,0.4)", borderRadius: 3 }}>
                         <div style={{ fontSize: 12, fontWeight: 800, color: String(col) }}>{v}</div>
                         <div style={{ fontSize: 7.5, color: C.muted }}>{l}</div>
                       </div>
@@ -238,7 +238,7 @@ export function S6_Workspace() {
                     <div style={{ fontSize: 9, fontWeight: 700, color: C.text, lineHeight: 1.3, marginBottom: 3 }}>Pause BCEAO : portage obligataire UEMOA reste attractif</div>
                     <div style={{ fontSize: 8, color: C.muted }}>M. Ouédraogo · 9 min · BFD Research</div>
                   </div>
-                  <div style={{ display: "flex", gap: 7, padding: "6px 8px", background: "rgba(0, 4, 48,0.4)", borderRadius: 5, border: `1px solid ${C.border}`, cursor: "pointer" }}>
+                  <div style={{ display: "flex", gap: 7, padding: "6px 8px", background: "rgba(0, 1, 23,0.4)", borderRadius: 5, border: `1px solid ${C.border}`, cursor: "pointer" }}>
                     <div style={{ width: 52, height: 36, borderRadius: 3, background: "rgba(244,56,96,0.1)", border: "1px solid rgba(244,56,96,0.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                       <div style={{ width: 18, height: 18, borderRadius: "50%", background: C.red + "cc", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <span style={{ fontSize: 8, color: "#fff" }}>▶</span>
@@ -249,7 +249,7 @@ export function S6_Workspace() {
                       <div style={{ fontSize: 8.5, color: C.dim, lineHeight: 1.3 }}>Flash BRVM · Session 08 Avr</div>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: 7, padding: "6px 8px", background: "rgba(0, 4, 48,0.4)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+                  <div style={{ display: "flex", gap: 7, padding: "6px 8px", background: "rgba(0, 1, 23,0.4)", borderRadius: 5, border: `1px solid ${C.border}` }}>
                     <FileText size={11} color={C.purple} style={{ flexShrink: 0, marginTop: 1 }} />
                     <div>
                       <div style={{ fontSize: 7.5, color: C.gold, fontWeight: 700, marginBottom: 1 }}>RAPPORT PREMIUM</div>
@@ -315,7 +315,7 @@ export function S6_Workspace() {
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 5 }}>
                   {WORKSPACES_LIB.map((ws) => (
                     <div key={ws.id} onClick={() => setActiveWs(ws.id)}
-                      style={{ padding: "7px 8px", borderRadius: 5, background: activeWs === ws.id ? ws.color + "12" : "rgba(0, 4, 48,0.45)", border: `1px solid ${activeWs === ws.id ? ws.color + "40" : C.border}`, cursor: "pointer", position: "relative" }}>
+                      style={{ padding: "7px 8px", borderRadius: 5, background: activeWs === ws.id ? ws.color + "12" : "rgba(0, 1, 23,0.45)", border: `1px solid ${activeWs === ws.id ? ws.color + "40" : C.border}`, cursor: "pointer", position: "relative" }}>
                       {activeWs === ws.id && <CheckCircle2 size={9} color={ws.color} style={{ position: "absolute", top: 4, right: 4 }} />}
                       <div style={{ fontSize: 14, marginBottom: 4 }}>{ws.icon}</div>
                       <div style={{ fontSize: 8.5, fontWeight: activeWs === ws.id ? 700 : 500, color: activeWs === ws.id ? ws.color : C.dim, lineHeight: 1.25, marginBottom: 2 }}>{ws.name}</div>
@@ -352,7 +352,7 @@ export function S6_Workspace() {
               { label: "FX & Matières Prem.", icon: <Globe2 size={9} />, color: C.green, added: false },
               { label: "Rapports Récents", icon: <FileText size={9} />, color: C.gold, added: false },
             ].map((w, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 7, padding: "5px 7px", borderRadius: 4, background: "rgba(0, 4, 48,0.35)", border: `1px solid rgba(44, 61, 127,0.16)`, marginBottom: 3, cursor: "pointer" }}>
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 7, padding: "5px 7px", borderRadius: 4, background: "rgba(0, 1, 23,0.35)", border: `1px solid rgba(44, 61, 127,0.16)`, marginBottom: 3, cursor: "pointer" }}>
                 <span style={{ color: w.color }}>{w.icon}</span>
                 <span style={{ flex: 1, fontSize: 9, color: C.dim }}>{w.label}</span>
                 <Plus size={8} color={C.accent} />

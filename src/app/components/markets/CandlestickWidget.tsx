@@ -8,8 +8,8 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -338,7 +338,7 @@ export function CandlestickWidget() {
           alignItems: "center",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
           gap: 8,
         }}
@@ -353,7 +353,7 @@ export function CandlestickWidget() {
               display: "flex",
               alignItems: "center",
               gap: 4,
-              background: "rgba(0, 4, 48,0.5)",
+              background: "rgba(0, 1, 23,0.5)",
               border: `1px solid ${C.border}`,
               borderRadius: 4,
               padding: "3px 8px",
@@ -458,7 +458,7 @@ export function CandlestickWidget() {
           gap: 5,
           padding: "5px 12px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.3)",
+          background: "rgba(0, 1, 23,0.3)",
           flexShrink: 0,
           overflowX: "auto",
         }}

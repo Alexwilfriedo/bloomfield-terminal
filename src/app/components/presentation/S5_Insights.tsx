@@ -164,7 +164,7 @@ export function S5_Insights() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
               {AI_RECS.map((r) => (
-                <div key={r.title} style={{ display: "flex", gap: 7, padding: "6px 8px", borderRadius: 4, background: "rgba(0, 4, 48,0.4)", border: `1px solid rgba(44, 61, 127,0.18)`, cursor: "pointer" }}>
+                <div key={r.title} style={{ display: "flex", gap: 7, padding: "6px 8px", borderRadius: 4, background: "rgba(0, 1, 23,0.4)", border: `1px solid rgba(44, 61, 127,0.18)`, cursor: "pointer" }}>
                   <div style={{ minWidth: 26, height: 20, borderRadius: 3, background: r.color + "18", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <span style={{ fontSize: 9, fontWeight: 800, color: r.color }}>{r.score}</span>
                   </div>

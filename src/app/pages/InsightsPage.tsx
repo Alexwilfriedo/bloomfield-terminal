@@ -17,14 +17,14 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   accent: "#d6b68d",
   border: "rgba(44, 61, 127,0.32)",
   text: "#ddeaf8",
   dim: "#6b96b8",
   muted: "#54678d",
   gold: "#f4b942",
-  dark: "#000430",
+  dark: "#000117",
   purple: "#a78bfa",
 };
 
@@ -342,7 +342,7 @@ function MarketPulseWidget() {
         style={{
           padding: "8px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           display: "flex",
           alignItems: "center",
           gap: 6,

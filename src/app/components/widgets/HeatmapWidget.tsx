@@ -102,7 +102,7 @@ export function HeatmapWidget() {
         <div
           style={{
             flex: 1,
-            background: "rgba(0, 4, 48,0.45)",
+            background: "rgba(0, 1, 23,0.45)",
             borderRadius: 6,
             border: `1px solid ${C.border}`,
             padding: "8px 8px 4px",
@@ -135,7 +135,7 @@ export function HeatmapWidget() {
               />
               <Tooltip
                 contentStyle={{
-                  background: "#000430",
+                  background: "#000117",
                   border: `1px solid ${C.border}`,
                   borderRadius: 4,
                   fontSize: 10,

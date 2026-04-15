@@ -71,7 +71,7 @@ export function S3_Macro() {
                 const isActive = c.id === activeCountry;
                 const scoreColor = c.score >= 72 ? C.green : c.score >= 55 ? C.gold : c.score >= 38 ? C.orange : C.red;
                 return (
-                  <button key={c.id} onClick={() => setActiveCountry(c.id)} style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 9px", borderRadius: 5, border: `1px solid ${isActive ? scoreColor + "50" : "rgba(44, 61, 127,0.22)"}`, background: isActive ? scoreColor + "12" : "rgba(0, 4, 48,0.5)", cursor: "pointer" }}>
+                  <button key={c.id} onClick={() => setActiveCountry(c.id)} style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 9px", borderRadius: 5, border: `1px solid ${isActive ? scoreColor + "50" : "rgba(44, 61, 127,0.22)"}`, background: isActive ? scoreColor + "12" : "rgba(0, 1, 23,0.5)", cursor: "pointer" }}>
                     <span style={{ fontSize: 11 }}>{c.flag}</span>
                     <span style={{ fontSize: 9, fontWeight: isActive ? 700 : 500, color: isActive ? scoreColor : C.muted }}>{c.label}</span>
                     {isActive && <span style={{ fontSize: 8, fontWeight: 800, color: scoreColor }}>{c.score}</span>}
@@ -105,7 +105,7 @@ export function S3_Macro() {
           <MiniWidget title={`Indicateurs Clés — ${cData.label}`} topRight={<DataBadge source="BAfD · FMI · BCEAO" time="T1 2026" />}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5 }}>
               {kpis.map((k, i) => (
-                <div key={`kpi-${activeCountry}-${i}`} style={{ padding: "7px 9px", background: "rgba(0, 4, 48,0.5)", borderRadius: 5, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", gap: 7 }}>
+                <div key={`kpi-${activeCountry}-${i}`} style={{ padding: "7px 9px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", gap: 7 }}>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: 8, color: C.muted, marginBottom: 1 }}>{k.label}</div>
                     <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
@@ -129,7 +129,7 @@ export function S3_Macro() {
           <MiniWidget title={`Finances Publiques · ${cData.flag} ${cData.label} 2026P`} topRight={<DataBadge source="Ministère Finances · BAfD" time="2026P" />}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6, marginBottom: 8 }}>
               {FINANCE_PUBLIQUE.map((fp) => (
-                <div key={fp.label} style={{ display: "flex", gap: 7, padding: "7px 9px", background: "rgba(0, 4, 48,0.45)", borderRadius: 5, border: `1px solid ${C.border}`, alignItems: "center" }}>
+                <div key={fp.label} style={{ display: "flex", gap: 7, padding: "7px 9px", background: "rgba(0, 1, 23,0.45)", borderRadius: 5, border: `1px solid ${C.border}`, alignItems: "center" }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: 8, color: C.muted, marginBottom: 2 }}>{fp.label}</div>
                     <div style={{ fontSize: 14, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>{fp.val}</div>
@@ -140,7 +140,7 @@ export function S3_Macro() {
               ))}
             </div>
             {/* Debt bar */}
-            <div style={{ padding: "7px 10px", background: "rgba(0, 4, 48,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+            <div style={{ padding: "7px 10px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
               <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 5 }}>
                 <span style={{ fontSize: 9, color: C.dim }}>Dette / PIB</span>
                 <span style={{ fontSize: 13, fontWeight: 800, color: C.gold, marginLeft: "auto" }}>52.4%</span>

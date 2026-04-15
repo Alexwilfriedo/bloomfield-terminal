@@ -21,7 +21,7 @@ const C = {
   green: "#10c87a",
   red: "#f43860",
   purple: "#a78bfa",
-  surface: "#000430",
+  surface: "#000117",
   orange: "#fb923c",
 };
 
@@ -133,7 +133,7 @@ const BarTooltip = ({ active, payload, label }: {
 }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000430", border: `1px solid ${C.border}`, borderRadius: 6, padding: "6px 10px" }}>
+    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "6px 10px" }}>
       <div style={{ fontSize: 9.5, fontWeight: 700, color: C.text }}>{label}</div>
       {payload.map((p) => (
         <div key={p.name} style={{ fontSize: 9, color: C.dim }}>
@@ -166,7 +166,7 @@ export function SectorBenchmarkWidget() {
             display: "flex",
             gap: 0,
             borderBottom: `1px solid ${C.border}`,
-            background: "rgba(0, 4, 48,0.3)",
+            background: "rgba(0, 1, 23,0.3)",
             flexShrink: 0,
           }}
         >
@@ -193,7 +193,7 @@ export function SectorBenchmarkWidget() {
           <div style={{ flex: 1.2, overflow: "auto", minWidth: 0 }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 10.5 }}>
               <thead>
-                <tr style={{ background: "rgba(0, 4, 48,0.5)" }}>
+                <tr style={{ background: "rgba(0, 1, 23,0.5)" }}>
                   {["#", "Société", "Mkt Cap", "PNB", "RN", "ROE", "ROA", "P/E", "P/B", "Tier1", "NPL"].map((h) => (
                     <th
                       key={h}
@@ -219,7 +219,7 @@ export function SectorBenchmarkWidget() {
                   <tr
                     key={p.ticker}
                     style={{
-                      background: p.isSelf ? "rgba(244,185,66,0.06)" : i % 2 === 0 ? "rgba(0, 4, 48,0.2)" : "transparent",
+                      background: p.isSelf ? "rgba(244,185,66,0.06)" : i % 2 === 0 ? "rgba(0, 1, 23,0.2)" : "transparent",
                       borderBottom: `1px solid ${C.border}20`,
                       cursor: "default",
                     }}
@@ -228,7 +228,7 @@ export function SectorBenchmarkWidget() {
                       (e.currentTarget.style.background = p.isSelf
                         ? "rgba(244,185,66,0.06)"
                         : i % 2 === 0
-                        ? "rgba(0, 4, 48,0.2)"
+                        ? "rgba(0, 1, 23,0.2)"
                         : "transparent")
                     }
                   >
@@ -302,7 +302,7 @@ export function SectorBenchmarkWidget() {
               borderLeft: `1px solid ${C.border}`,
               display: "flex",
               flexDirection: "column",
-              background: "rgba(0, 4, 48,0.2)",
+              background: "rgba(0, 1, 23,0.2)",
               flexShrink: 0,
             }}
           >

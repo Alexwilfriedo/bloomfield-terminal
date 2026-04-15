@@ -1,5 +1,7 @@
 import { Suspense, lazy, Component, type ReactNode } from "react";
 import { createBrowserRouter } from "react-router";
+import { ProtectedRoute } from "./auth/ProtectedRoute";
+import { LoginPage } from "./pages/LoginPage";
 import { Root } from "./pages/Root";
 import { DashboardPage } from "./pages/DashboardPage";
 import { MarketsPage } from "./pages/MarketsPage";
@@ -138,20 +140,32 @@ function WorkspacesPageRoute() {
 
 export const router = createBrowserRouter(
   [
+    // Public route — login screen
     {
-      path: "/presentation",
-      Component: PresentationPage,
+      path: "/login",
+      Component: LoginPage,
     },
+    // Protected routes — anything below requires authentication.
+    // ProtectedRoute redirects to /login when the auth context is empty.
     {
-      path: "/",
-      Component: Root,
+      Component: ProtectedRoute,
       children: [
-        { index: true, Component: DashboardPage },
-        { path: "markets", Component: MarketsPage },
-        { path: "macro", Component: MacroPageRoute },
-        { path: "analysis", Component: AnalysisPageRoute },
-        { path: "insights", Component: InsightsPageRoute },
-        { path: "workspaces", Component: WorkspacesPageRoute },
+        {
+          path: "/presentation",
+          Component: PresentationPage,
+        },
+        {
+          path: "/",
+          Component: Root,
+          children: [
+            { index: true, Component: DashboardPage },
+            { path: "markets", Component: MarketsPage },
+            { path: "macro", Component: MacroPageRoute },
+            { path: "analysis", Component: AnalysisPageRoute },
+            { path: "insights", Component: InsightsPageRoute },
+            { path: "workspaces", Component: WorkspacesPageRoute },
+          ],
+        },
       ],
     },
   ]

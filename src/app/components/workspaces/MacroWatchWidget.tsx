@@ -64,7 +64,7 @@ export function MacroWatchWidget() {
         {/* Indicators grid */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5 }}>
           {data.map((item, i) => (
-            <div key={`${activeCountry}-${i}`} style={{ padding: "7px 9px", background: "rgba(0, 4, 48,0.45)", borderRadius: 6, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", gap: 8 }}>
+            <div key={`${activeCountry}-${i}`} style={{ padding: "7px 9px", background: "rgba(0, 1, 23,0.45)", borderRadius: 6, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 8, color: C.muted, marginBottom: 2 }}>{item.label}</div>
                 <div style={{ display: "flex", alignItems: "baseline", gap: 5 }}>

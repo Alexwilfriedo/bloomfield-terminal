@@ -157,7 +157,7 @@ function SentimentGauge({ score }: { score: number }) {
             borderRadius: "50%",
             background: color,
             boxShadow: `0 0 6px ${color}`,
-            border: "1px solid #000430",
+            border: "1px solid #000117",
           }}
         />
       </div>
@@ -445,7 +445,7 @@ function SignalsTable({
             gridTemplateColumns: "1fr 64px 72px 55px 56px",
             padding: "5px 4px",
             borderRadius: 5,
-            background: i % 2 === 0 ? "rgba(0, 4, 48,0.12)" : "transparent",
+            background: i % 2 === 0 ? "rgba(0, 1, 23,0.12)" : "transparent",
             cursor: "pointer",
             transition: "background 0.1s",
             alignItems: "center",
@@ -455,7 +455,7 @@ function SignalsTable({
           }
           onMouseLeave={(e) =>
             (e.currentTarget.style.background =
-              i % 2 === 0 ? "rgba(0, 4, 48,0.12)" : "transparent")
+              i % 2 === 0 ? "rgba(0, 1, 23,0.12)" : "transparent")
           }
         >
           <div>
@@ -492,7 +492,7 @@ function SignalsTable({
         style={{
           marginTop: 8,
           padding: "5px 8px",
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           border: `1px solid ${C.border}`,
           borderRadius: 5,
           display: "flex",
@@ -557,7 +557,7 @@ function IndicatorsView() {
               key={ind.label}
               style={{
                 padding: "8px 10px",
-                background: "rgba(0, 4, 48,0.45)",
+                background: "rgba(0, 1, 23,0.45)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 6,
                 borderLeft: `2px solid ${ind.color}`,
@@ -597,7 +597,7 @@ function IndicatorsView() {
                 alignItems: "center",
                 gap: 8,
                 padding: "4px 8px",
-                background: "rgba(0, 4, 48,0.4)",
+                background: "rgba(0, 1, 23,0.4)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 5,
               }}

@@ -17,9 +17,9 @@ import {
 import { useTerminal, type OrderStatus } from "../../context/TerminalContext";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
-  dark: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
+  dark: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -152,7 +152,7 @@ export function OrderTicketPanel() {
         style={{
           position: "fixed",
           inset: 0,
-          background: "rgba(0, 4, 48,0.6)",
+          background: "rgba(0, 1, 23,0.6)",
           zIndex: 200,
           backdropFilter: "blur(1px)",
         }}
@@ -185,7 +185,7 @@ export function OrderTicketPanel() {
             alignItems: "center",
             padding: "12px 16px",
             borderBottom: `1px solid ${C.border}`,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             flexShrink: 0,
             gap: 10,
           }}
@@ -370,7 +370,7 @@ export function OrderTicketPanel() {
                   style={{
                     width: "100%",
                     height: 36,
-                    background: "rgba(0, 4, 48,0.6)",
+                    background: "rgba(0, 1, 23,0.6)",
                     border: `1px solid ${C.border}`,
                     borderRadius: 5,
                     color: C.text,
@@ -396,7 +396,7 @@ export function OrderTicketPanel() {
                   style={{
                     width: "100%",
                     height: 36,
-                    background: "rgba(0, 4, 48,0.6)",
+                    background: "rgba(0, 1, 23,0.6)",
                     border: `1px solid ${C.border}`,
                     borderRadius: 5,
                     color: C.text,
@@ -451,7 +451,7 @@ export function OrderTicketPanel() {
               style={{
                 width: "100%",
                 height: 64,
-                background: "rgba(0, 4, 48,0.6)",
+                background: "rgba(0, 1, 23,0.6)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 5,
                 color: C.dim,
@@ -568,7 +568,7 @@ export function OrderTicketPanel() {
           style={{
             padding: "12px 16px",
             borderTop: `1px solid ${C.border}`,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             flexShrink: 0,
           }}
         >
@@ -696,7 +696,7 @@ function ComplianceRow({ ok, label, detail }: { ok: boolean; label: string; deta
         alignItems: "center",
         gap: 8,
         padding: "5px 8px",
-        background: "rgba(0, 4, 48,0.4)",
+        background: "rgba(0, 1, 23,0.4)",
         border: `1px solid ${C.border}`,
         borderRadius: 4,
       }}

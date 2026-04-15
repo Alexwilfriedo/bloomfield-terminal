@@ -181,7 +181,7 @@ export function SovereignYieldsWidget() {
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "#000430",
+                    background: "#000117",
                     border: `1px solid ${C.border}`,
                     borderRadius: 4,
                     fontSize: 10,
@@ -239,14 +239,14 @@ export function SovereignYieldsWidget() {
                 display: "grid",
                 gridTemplateColumns: cols.map((c) => c.w).join(" "),
                 padding: "6px 12px",
-                background: i % 2 === 0 ? "rgba(0, 4, 48,0.1)" : "transparent",
+                background: i % 2 === 0 ? "rgba(0, 1, 23,0.1)" : "transparent",
                 borderBottom: `1px solid ${C.border}20`,
                 cursor: "pointer",
                 transition: "background 0.1s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.05)")}
               onMouseLeave={(e) =>
-                (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 4, 48,0.1)" : "transparent")
+                (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 1, 23,0.1)" : "transparent")
               }
             >
               {/* Country */}

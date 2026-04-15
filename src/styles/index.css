@@ -12,16 +12,16 @@
 
 :root {
   /* Canvas & surfaces */
-  --brand-tertiary: #000430;
-  --surface-bg: #000430;
-  --surface-secondary-bg: #000430;
-  --surface-dark: #000430;
+  --brand-tertiary: #000117;
+  --surface-bg: #000117;
+  --surface-secondary-bg: #000117;
+  --surface-dark: #000117;
   --surface-hover: rgba(214, 182, 141, 0.06);
-  --bg-faint: rgba(0, 4, 48, 0.35);
-  --bg-subtle: rgba(0, 4, 48, 0.55);
+  --bg-faint: rgba(0, 1, 23, 0.35);
+  --bg-subtle: rgba(0, 1, 23, 0.55);
   --bg-hover: rgba(214, 182, 141, 0.06);
-  --input-bg: rgba(0, 4, 48, 0.8);
-  --modal-scrim: rgba(0, 4, 48, 0.75);
+  --input-bg: rgba(0, 1, 23, 0.8);
+  --modal-scrim: rgba(0, 1, 23, 0.75);
 
   /* Brand accent — Bloomfield Teal */
   --brand-primary: #d6b68d;
@@ -42,7 +42,7 @@
 
   /* On-brand text */
   --on-brand: #ffffff;
-  --on-reverse: #000430;
+  --on-reverse: #000117;
 
   /* Status */
   --success: #10c87a;
@@ -54,8 +54,8 @@
   --bt-green: #10c87a;
   --bt-red: #f43860;
   --bt-accent: #d6b68d;
-  --bt-surface-card: #000430;
-  --bt-surface-elevated: #000430;
+  --bt-surface-card: #000117;
+  --bt-surface-elevated: #000117;
   --bt-border: rgba(44, 61, 127, 0.32);
 }
 

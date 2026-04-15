@@ -3,7 +3,7 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -140,7 +140,7 @@ function ModuleCard({ module }: { module: Module }) {
   return (
     <div
       style={{
-        background: "rgba(0, 4, 48,0.5)",
+        background: "rgba(0, 1, 23,0.5)",
         border: `1px solid ${C.border}`,
         borderRadius: 7,
         padding: "12px 13px",
@@ -382,7 +382,7 @@ export function EducationSection() {
           gap: 8,
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
         }}
       >
         <GraduationCap size={13} color={C.purple} />
@@ -435,7 +435,7 @@ export function EducationSection() {
           gap: 20,
           padding: "8px 14px",
           borderBottom: `1px solid rgba(44, 61, 127,0.16)`,
-          background: "rgba(0, 4, 48,0.2)",
+          background: "rgba(0, 1, 23,0.2)",
         }}
       >
         {[

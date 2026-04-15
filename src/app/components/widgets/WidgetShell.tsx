@@ -33,7 +33,7 @@ interface WidgetShellProps {
 }
 
 const C = {
-  surface: "#000430",
+  surface: "#000117",
   border: "rgba(44, 61, 127,0.32)",
   accent: "#d6b68d",
   text: "#ddeaf8",
@@ -77,7 +77,7 @@ export function WidgetShell({
           padding: "8px 12px",
           borderBottom: `1px solid ${C.border}`,
           flexShrink: 0,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           cursor: panel.dragHandleClass ? "grab" : "default",
           userSelect: "none",
         }}

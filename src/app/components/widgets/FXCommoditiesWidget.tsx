@@ -131,7 +131,7 @@ export function FXWidget() {
               gridTemplateColumns: "1fr 70px 55px",
               padding: "5px 6px",
               borderRadius: 5,
-              background: "rgba(0, 4, 48,0.4)",
+              background: "rgba(0, 1, 23,0.4)",
               border: `1px solid ${C.border}`,
               alignItems: "center",
             }}
@@ -221,7 +221,7 @@ export function CommoditiesWidget() {
                 alignItems: "center",
                 gap: 8,
                 padding: "5px 8px",
-                background: "rgba(0, 4, 48,0.4)",
+                background: "rgba(0, 1, 23,0.4)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 6,
               }}

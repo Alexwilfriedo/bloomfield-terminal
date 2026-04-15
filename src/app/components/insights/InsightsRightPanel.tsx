@@ -19,8 +19,8 @@ import {
 } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -96,7 +96,7 @@ function PanelSection({
           alignItems: "center",
           gap: 6,
           padding: "9px 12px",
-          background: "rgba(0, 4, 48,0.3)",
+          background: "rgba(0, 1, 23,0.3)",
           borderBottom: `1px solid rgba(44, 61, 127,0.16)`,
         }}
       >
@@ -170,7 +170,7 @@ export function InsightsRightPanel() {
           alignItems: "center",
           padding: "0 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
         }}
       >
@@ -184,7 +184,7 @@ export function InsightsRightPanel() {
             width: 20,
             height: 20,
             borderRadius: 3,
-            background: "rgba(0, 4, 48,0.5)",
+            background: "rgba(0, 1, 23,0.5)",
             border: `1px solid ${C.border}`,
             display: "flex",
             alignItems: "center",
@@ -268,7 +268,7 @@ export function InsightsRightPanel() {
                   gap: 7,
                   padding: "6px 8px",
                   borderRadius: 4,
-                  background: "rgba(0, 4, 48,0.4)",
+                  background: "rgba(0, 1, 23,0.4)",
                   border: `1px solid rgba(44, 61, 127,0.16)`,
                   cursor: "pointer",
                   transition: "border-color 0.1s",
@@ -346,7 +346,7 @@ export function InsightsRightPanel() {
                   gap: 7,
                   padding: "7px 8px",
                   borderRadius: 4,
-                  background: "rgba(0, 4, 48,0.4)",
+                  background: "rgba(0, 1, 23,0.4)",
                   border: `1px solid rgba(44, 61, 127,0.16)`,
                   cursor: "pointer",
                   transition: "border-color 0.1s",

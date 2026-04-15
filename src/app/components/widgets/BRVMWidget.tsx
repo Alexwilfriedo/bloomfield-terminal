@@ -174,7 +174,7 @@ export function BRVMWidget() {
                   />
                   <Tooltip
                     contentStyle={{
-                      background: "#000430",
+                      background: "#000117",
                       border: `1px solid ${C.border}`,
                       borderRadius: 4,
                       fontSize: 10,
@@ -199,7 +199,7 @@ export function BRVMWidget() {
               alignItems: "center",
               gap: 8,
               padding: "6px 10px",
-              background: "rgba(0, 4, 48,0.45)",
+              background: "rgba(0, 1, 23,0.45)",
               borderRadius: 6,
               border: `1px solid ${C.border}`,
             }}
@@ -287,7 +287,7 @@ export function BRVMWidget() {
             <div
               key={s.label}
               style={{
-                background: "rgba(0, 4, 48,0.45)",
+                background: "rgba(0, 1, 23,0.45)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 5,
                 padding: "5px 8px",

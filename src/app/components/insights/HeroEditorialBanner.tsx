@@ -10,7 +10,7 @@ const C = {
   border: "rgba(44, 61, 127,0.32)",
   red: "#f43860",
   orange: "#fb923c",
-  surface: "#000430",
+  surface: "#000117",
 };
 
 const HERO_IMAGE = "https://images.unsplash.com/photo-1773869804179-42dcadb5e437?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxBZnJpY2FuJTIwZmluYW5jaWFsJTIwZGlzdHJpY3QlMjBza3lsaW5lJTIwY2l0eXxlbnwxfHx8fDE3NzU2OTEwODV8MA&ixlib=rb-4.1.0&q=80&w=1080";
@@ -39,7 +39,7 @@ export function HeroEditorialBanner() {
         borderRadius: 8,
         overflow: "hidden",
         border: `1px solid ${C.border}`,
-        background: "#000430",
+        background: "#000117",
         minHeight: 240,
         display: "flex",
         flexDirection: "column",
@@ -63,7 +63,7 @@ export function HeroEditorialBanner() {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(90deg, rgba(0, 4, 48,0.98) 0%, rgba(0, 4, 48,0.88) 55%, rgba(0, 4, 48,0.60) 100%)",
+            "linear-gradient(90deg, rgba(0, 1, 23,0.98) 0%, rgba(0, 1, 23,0.88) 55%, rgba(0, 1, 23,0.60) 100%)",
         }}
       />
 
@@ -88,7 +88,7 @@ export function HeroEditorialBanner() {
           alignItems: "center",
           gap: 8,
           padding: "6px 20px",
-          background: "rgba(0, 4, 48,0.5)",
+          background: "rgba(0, 1, 23,0.5)",
           borderBottom: "1px solid rgba(244,185,66,0.15)",
           flexShrink: 0,
         }}
@@ -285,7 +285,7 @@ export function HeroEditorialBanner() {
             <button
               style={{
                 display: "flex", alignItems: "center", gap: 4, padding: "6px 9px",
-                borderRadius: 5, background: "rgba(0, 4, 48,0.5)",
+                borderRadius: 5, background: "rgba(0, 1, 23,0.5)",
                 border: `1px solid ${C.border}`, color: C.dim, fontSize: 9, fontWeight: 600, cursor: "pointer",
               }}
             >
@@ -296,7 +296,7 @@ export function HeroEditorialBanner() {
             <button
               style={{
                 display: "flex", alignItems: "center", gap: 4, padding: "6px 9px",
-                borderRadius: 5, background: "rgba(0, 4, 48,0.5)",
+                borderRadius: 5, background: "rgba(0, 1, 23,0.5)",
                 border: `1px solid ${C.border}`, color: C.dim, fontSize: 9, fontWeight: 600, cursor: "pointer",
               }}
             >
@@ -330,7 +330,7 @@ export function HeroEditorialBanner() {
                 style={{
                   padding: "7px 9px",
                   borderRadius: 5,
-                  background: "rgba(0, 4, 48,0.6)",
+                  background: "rgba(0, 1, 23,0.6)",
                   border: `1px solid ${C.border}`,
                   display: "flex",
                   flexDirection: "column",

@@ -13,8 +13,8 @@ import {
 import { Landmark, Minus, Activity } from "lucide-react";
 
 const C = {
-  surface: "#000430",
-  elevated: "#000430",
+  surface: "#000117",
+  elevated: "#000117",
   accent: "#d6b68d",
   gold: "#f4b942",
   green: "#10c87a",
@@ -89,7 +89,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return (
     <div
       style={{
-        background: "#000430",
+        background: "#000117",
         border: `1px solid ${C.border}`,
         borderRadius: 5,
         padding: "6px 10px",
@@ -128,7 +128,7 @@ export function MacroMarketsWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 4, 48,0.4)",
+          background: "rgba(0, 1, 23,0.4)",
           flexShrink: 0,
         }}
       >
@@ -279,7 +279,7 @@ export function MacroMarketsWidget() {
                   name="Taux dir."
                   stroke={C.accent}
                   strokeWidth={2}
-                  dot={{ r: 3, fill: C.accent, stroke: "#000430", strokeWidth: 2 }}
+                  dot={{ r: 3, fill: C.accent, stroke: "#000117", strokeWidth: 2 }}
                 />
               </LineChart>
             </ResponsiveContainer>
