@@ -6,6 +6,7 @@ import { VideoSection } from "../components/insights/VideoSection";
 import { ResearchNotesSection } from "../components/insights/ResearchNotesSection";
 import { ReportsSection } from "../components/insights/ReportsSection";
 import { EducationSection } from "../components/insights/EducationSection";
+import { ZoomableSection } from "../components/insights/ZoomableSection";
 import { LiveTicker } from "../components/terminal/LiveTicker";
 import {
   Newspaper,
@@ -167,66 +168,95 @@ export function InsightsPage() {
             {/* TOP STORIES TAB */}
             {activeTab === "top-stories" && (
               <>
-                {/* Hero */}
-                <HeroEditorialBanner />
+                <ZoomableSection title="Analyse Phare">
+                  <HeroEditorialBanner />
+                </ZoomableSection>
 
                 {/* Two-column layout: flash news + video */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-                  <FlashNewsFeed />
+                  <ZoomableSection title="Flash Info">
+                    <FlashNewsFeed />
+                  </ZoomableSection>
                   <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                    {/* Featured research note teaser */}
-                    <FeaturedResearchTeaser />
-                    {/* Quick stats widget */}
-                    <MarketPulseWidget />
+                    <ZoomableSection title="Note de Recherche à la Une">
+                      <FeaturedResearchTeaser />
+                    </ZoomableSection>
+                    <ZoomableSection title="Market Pulse">
+                      <MarketPulseWidget />
+                    </ZoomableSection>
                   </div>
                 </div>
 
-                {/* Video section */}
-                <VideoSection />
+                <ZoomableSection title="Vidéos · Analyses Bloomfield">
+                  <VideoSection />
+                </ZoomableSection>
 
-                {/* Research notes */}
-                <ResearchNotesSection />
+                <ZoomableSection title="Notes de Recherche">
+                  <ResearchNotesSection />
+                </ZoomableSection>
               </>
             )}
 
             {/* MARKETS TAB */}
             {activeTab === "markets" && (
               <>
-                <HeroEditorialBanner />
-                <FlashNewsFeed />
-                <ResearchNotesSection />
+                <ZoomableSection title="Analyse Phare">
+                  <HeroEditorialBanner />
+                </ZoomableSection>
+                <ZoomableSection title="Flash Info">
+                  <FlashNewsFeed />
+                </ZoomableSection>
+                <ZoomableSection title="Notes de Recherche">
+                  <ResearchNotesSection />
+                </ZoomableSection>
               </>
             )}
 
             {/* MACRO TAB */}
             {activeTab === "macro" && (
               <>
-                <HeroEditorialBanner />
-                <ResearchNotesSection />
-                <ReportsSection />
+                <ZoomableSection title="Analyse Phare">
+                  <HeroEditorialBanner />
+                </ZoomableSection>
+                <ZoomableSection title="Notes de Recherche">
+                  <ResearchNotesSection />
+                </ZoomableSection>
+                <ZoomableSection title="Rapports">
+                  <ReportsSection />
+                </ZoomableSection>
               </>
             )}
 
             {/* VIDEOS TAB */}
             {activeTab === "videos" && (
               <>
-                <VideoSection />
-                <VideoSection />
+                <ZoomableSection title="Vidéos · Analyses">
+                  <VideoSection />
+                </ZoomableSection>
+                <ZoomableSection title="Vidéos · Formation">
+                  <VideoSection />
+                </ZoomableSection>
               </>
             )}
 
             {/* REPORTS TAB */}
             {activeTab === "reports" && (
               <>
-                <ReportsSection />
-                <ReportsSection />
+                <ZoomableSection title="Rapports Sectoriels">
+                  <ReportsSection />
+                </ZoomableSection>
+                <ZoomableSection title="Rapports Macro">
+                  <ReportsSection />
+                </ZoomableSection>
               </>
             )}
 
             {/* EDUCATION TAB */}
             {activeTab === "education" && (
               <>
-                <EducationSection />
+                <ZoomableSection title="Formation">
+                  <EducationSection />
+                </ZoomableSection>
               </>
             )}
           </div>
