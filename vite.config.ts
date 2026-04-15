@@ -33,4 +33,21 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv', '**/*.geojson'],
+
+  build: {
+    // Split heavy third-party libraries into their own chunks so the
+    // main bundle stays under ~500 KB and the production minifier does
+    // not blow the container memory budget during `vite build`.
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router'],
+          'chart-vendor': ['recharts'],
+          'map-vendor': ['react-simple-maps', 'd3-geo', 'd3-zoom', 'd3-selection', 'topojson-client'],
+          'grid-vendor': ['react-grid-layout'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 700,
+  },
 })

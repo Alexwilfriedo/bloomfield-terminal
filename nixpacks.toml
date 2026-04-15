@@ -4,8 +4,11 @@ nixPkgs = ["nodejs_20", "npm-9_x"]
 [phases.install]
 cmds = ["npm ci --include=dev"]
 
+# Bump Node's old-generation heap so the production Vite build does
+# not get OOM-killed on constrained runners. Recharts + react-simple-maps
+# + react-grid-layout push the minifier past the default 2 GB cap.
 [phases.build]
-cmds = ["npm run build"]
+cmds = ["NODE_OPTIONS=--max-old-space-size=4096 npm run build"]
 
 [start]
 cmd = "npm run start"
