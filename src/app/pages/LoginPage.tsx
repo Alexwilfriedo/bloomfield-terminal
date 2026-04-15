@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Lock, User, AlertCircle, ArrowRight } from "lucide-react";
 
-import logoUrl from "../../assets/logo-bloomfield-terminal.png";
+import logoUrl from "../../assets/logo-bloomfield-login.png";
 import { useAuth } from "../auth/AuthContext";
 
 const C = {
@@ -132,23 +132,23 @@ export function LoginPage() {
           }}
         />
 
-        {/* Logo */}
+        {/* Logo — vertical mark (B icon + TERMINAL wordmark) */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
-            marginBottom: 6,
+            marginBottom: 10,
           }}
         >
           <img
             src={logoUrl}
             alt="Bloomfield Terminal"
             style={{
-              height: 44,
+              height: 96,
               width: "auto",
               display: "block",
               objectFit: "contain",
-              filter: "drop-shadow(0 2px 10px rgba(214, 182, 141, 0.2))",
+              filter: "drop-shadow(0 6px 24px rgba(214, 82, 82, 0.25))",
             }}
             draggable={false}
           />
@@ -163,25 +163,14 @@ export function LoginPage() {
             color: C.muted,
             letterSpacing: "0.25em",
             textTransform: "uppercase",
-            marginBottom: 28,
+            marginBottom: 16,
           }}
         >
           Intelligence des Marchés · BRVM · UEMOA
         </div>
 
-        {/* Heading */}
+        {/* Subheading */}
         <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <div
-            style={{
-              fontSize: 18,
-              fontWeight: 700,
-              color: C.text,
-              letterSpacing: "-0.01em",
-              marginBottom: 4,
-            }}
-          >
-            Accès Terminal
-          </div>
           <div style={{ fontSize: 11, color: C.dim }}>
             Identifiez-vous pour accéder à votre cockpit analyste
           </div>
