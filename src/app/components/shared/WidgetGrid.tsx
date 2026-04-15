@@ -44,7 +44,10 @@ export interface WidgetGridProps {
 
 const DRAG_HANDLE_CLASS = "bt-drag-handle";
 const DRAGGABLE_HANDLE_SELECTOR = `.${DRAG_HANDLE_CLASS}`;
-const DRAGGABLE_CANCEL_SELECTOR = "button";
+// Elements inside a widget that must NOT start a drag when clicked.
+// RGL walks up from the mousedown target; any match here stops the drag.
+const DRAGGABLE_CANCEL_SELECTOR =
+  "button, a, input, select, textarea, label, [role='button'], [contenteditable='true']";
 const RESIZE_HANDLES: Array<"s" | "e" | "se"> = ["s", "e", "se"];
 const MARGIN: [number, number] = [8, 8];
 const CONTAINER_PADDING: [number, number] = [0, 0];
@@ -301,7 +304,14 @@ export function WidgetGrid({
   const children = useMemo(
     () =>
       Object.entries(widgets).map(([key, { element }]) => (
-        <div key={key}>
+        // Apply .bt-drag-handle on the wrapper itself so the ENTIRE
+        // widget body is draggable. Works for widgets that use
+        // WidgetShell (where the header also has the class, harmless
+        // duplication) AND for raw widgets with no shell (macro,
+        // candlestick, orders tracking, etc.). Interactive elements
+        // (buttons, inputs, anchors) are protected via draggableCancel
+        // above, so clicks inside them still work normally.
+        <div key={key} className={DRAG_HANDLE_CLASS}>
           <PanelContext.Provider
             value={{
               dragHandleClass: DRAG_HANDLE_CLASS,
