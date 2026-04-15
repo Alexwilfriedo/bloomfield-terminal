@@ -1,0 +1,221 @@
+@import './fonts.css';
+@import '@figma/astraui/styles.css';
+@import './tailwind.css';
+@import './theme.css';
+@import 'react-grid-layout/css/styles.css';
+@import 'react-resizable/css/styles.css';
+
+/* ============================================================
+   BLOOMFIELD TERMINAL — Dark Navy Theme Override
+   Overrides @figma/astraui design tokens for premium fintech
+   ============================================================ */
+
+:root {
+  /* Canvas & surfaces */
+  --brand-tertiary: #000430;
+  --surface-bg: #000430;
+  --surface-secondary-bg: #000430;
+  --surface-dark: #000430;
+  --surface-hover: rgba(214, 182, 141, 0.06);
+  --bg-faint: rgba(0, 4, 48, 0.35);
+  --bg-subtle: rgba(0, 4, 48, 0.55);
+  --bg-hover: rgba(214, 182, 141, 0.06);
+  --input-bg: rgba(0, 4, 48, 0.8);
+  --modal-scrim: rgba(0, 4, 48, 0.75);
+
+  /* Brand accent — Bloomfield Teal */
+  --brand-primary: #d6b68d;
+  --brand-hover: #d6b68d;
+  --brand-dark: #d6b68d;
+  --brand-secondary: rgba(214, 182, 141, 0.12);
+  --brand-muted: rgba(214, 182, 141, 0.07);
+
+  /* Text hierarchy */
+  --text-primary: #ddeaf8;
+  --text-secondary: #6b96b8;
+  --text-tertiary: #54678d;
+
+  /* Borders */
+  --border-primary: rgba(44, 61, 127, 0.32);
+  --border-secondary: rgba(44, 61, 127, 0.22);
+  --border-selected: #d6b68d;
+
+  /* On-brand text */
+  --on-brand: #ffffff;
+  --on-reverse: #000430;
+
+  /* Status */
+  --success: #10c87a;
+  --warning: #f4b942;
+  --danger: #f43860;
+
+  /* Bloomfield custom tokens */
+  --bt-gold: #f4b942;
+  --bt-green: #10c87a;
+  --bt-red: #f43860;
+  --bt-accent: #d6b68d;
+  --bt-surface-card: #000430;
+  --bt-surface-elevated: #000430;
+  --bt-border: rgba(44, 61, 127, 0.32);
+}
+
+/* ============================================================
+   react-grid-layout · resize handles — dark theme visibility
+   ============================================================ */
+
+.react-grid-item > .react-resizable-handle {
+  background-image: none !important;
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease;
+  z-index: 5;
+}
+
+.react-grid-item:hover > .react-resizable-handle,
+.react-grid-item.react-draggable-dragging > .react-resizable-handle,
+.react-grid-item.resizing > .react-resizable-handle {
+  opacity: 1;
+}
+
+.react-grid-item > .react-resizable-handle::after {
+  content: none !important;
+  border: none !important;
+}
+
+/* SE corner — teal chevron */
+.react-grid-item > .react-resizable-handle.react-resizable-handle-se {
+  width: 16px;
+  height: 16px;
+  right: 2px;
+  bottom: 2px;
+  cursor: se-resize;
+  background:
+    linear-gradient(135deg,
+      transparent 0%, transparent 55%,
+      #d6b68d 55%, #d6b68d 65%,
+      transparent 65%, transparent 75%,
+      #d6b68d 75%, #d6b68d 85%,
+      transparent 85%);
+  border-radius: 2px;
+}
+
+/* Bottom edge — horizontal bar */
+.react-grid-item > .react-resizable-handle.react-resizable-handle-s {
+  bottom: 2px;
+  left: 50%;
+  width: 36px;
+  height: 3px;
+  margin-left: -18px;
+  transform: none;
+  cursor: s-resize;
+  background: #d6b68d;
+  border-radius: 2px;
+}
+
+/* Right edge — vertical bar */
+.react-grid-item > .react-resizable-handle.react-resizable-handle-e {
+  right: 2px;
+  top: 50%;
+  width: 3px;
+  height: 36px;
+  margin-top: -18px;
+  transform: none;
+  cursor: e-resize;
+  background: #d6b68d;
+  border-radius: 2px;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: rgba(214, 182, 141, 0.18) !important;
+  border: 1px dashed #d6b68d !important;
+  border-radius: 8px;
+  opacity: 1 !important;
+}
+
+/* ============================================================
+   BLOOMFIELD Terminal · Signature Scrollbar
+   --------------------------------------------------------------
+   Capsule teal gradient, subtle glow, expand-on-hover.
+   - Idle    : 4px ultra-fine teal capsule, faint glow
+   - Hover   : expands to 8px, gradient brightens, halo x2
+   - Active  : solid teal, full halo pulse
+   Applied globally (WebKit + Firefox).
+   ============================================================ */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(214, 182, 141, 0.45) transparent;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  /* Barely-there groove that becomes visible only when the thumb
+     shows up — gives the eye something to anchor on. */
+  box-shadow: inset 0 0 0 1px rgba(214, 182, 141, 0.04);
+  margin: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  /* 14px track - 10px border = 4px effective thumb (ultra-fine capsule) */
+  border: 5px solid transparent;
+  background-clip: padding-box;
+  background-image: linear-gradient(
+    180deg,
+    rgba(214, 182, 141, 0.35) 0%,
+    rgba(214, 182, 141, 0.55) 50%,
+    rgba(214, 182, 141, 0.35) 100%
+  );
+  background-color: transparent;
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 182, 141, 0.25),
+    0 0 6px rgba(214, 182, 141, 0.25);
+  transition:
+    border-width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease,
+    background-image 0.25s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  /* 14 - 6 = 8px capsule */
+  border: 3px solid transparent;
+  background-image: linear-gradient(
+    180deg,
+    #d6b68d 0%,
+    #d6b68d 50%,
+    #d6b68d 100%
+  );
+  background-clip: padding-box;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 0 14px rgba(214, 182, 141, 0.55),
+    0 0 28px rgba(214, 182, 141, 0.25);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  /* 14 - 4 = 10px solid teal capsule with full halo */
+  border: 2px solid transparent;
+  background-image: none;
+  background-color: #d6b68d;
+  background-clip: padding-box;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    0 0 18px rgba(214, 182, 141, 0.8),
+    0 0 36px rgba(214, 182, 141, 0.4);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
