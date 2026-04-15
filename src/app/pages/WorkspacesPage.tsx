@@ -430,3 +430,5 @@ function PortfolioSignalsWidget() {
     </div>
   );
 }
+
+export default WorkspacesPage;

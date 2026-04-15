@@ -40,7 +40,6 @@ export function HeroEditorialBanner() {
         overflow: "hidden",
         border: `1px solid ${C.border}`,
         background: "#000117",
-        minHeight: 240,
         display: "flex",
         flexDirection: "column",
       }}
@@ -143,7 +142,6 @@ export function HeroEditorialBanner() {
         style={{
           position: "relative",
           zIndex: 2,
-          flex: 1,
           display: "flex",
           padding: "16px 20px",
           gap: 20,
