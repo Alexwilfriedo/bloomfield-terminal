@@ -1,0 +1,50 @@
+# Node
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+
+# Build output — regenerated in the container
+dist
+build
+.vite
+.turbo
+.cache
+
+# Git
+.git
+.gitignore
+.github
+
+# IDE / OS noise
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Env & secrets — NEVER ship into an image
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs
+*.log
+logs
+
+# Tests & coverage
+coverage
+.nyc_output
+*.lcov
+
+# Misc
+README.md
+ATTRIBUTIONS.md
+CLAUDE.md
+guidelines
+*.local
+.claude
