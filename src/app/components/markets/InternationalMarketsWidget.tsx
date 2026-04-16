@@ -59,7 +59,7 @@ export function InternationalMarketsWidget() {
         borderRadius: "8px 8px 0 0",
         overflow: "hidden",
         flexShrink: 0,
-        height: 58,
+        height: 74,
       }}
     >
       {/* Label */}
