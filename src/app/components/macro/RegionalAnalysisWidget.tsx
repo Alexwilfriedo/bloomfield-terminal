@@ -1,20 +1,6 @@
 import { useState } from "react";
 import { TrendingUp, TrendingDown, Minus, MapPin, BarChart3 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 interface Country {
   code: string;
@@ -140,10 +126,10 @@ const COUNTRIES: Country[] = [
 ];
 
 const RISK_COLORS: Record<string, string> = {
-  stable: C.green,
-  moderate: C.gold,
-  elevated: C.orange,
-  high: C.red,
+  stable: "#10c87a",
+  moderate: "#f4b942",
+  elevated: "#fb923c",
+  high: "#f43860",
 };
 
 const RISK_LABELS: Record<string, string> = {
@@ -156,6 +142,7 @@ const RISK_LABELS: Record<string, string> = {
 type SortKey = "gdp" | "growth" | "inflation" | "debtGdp" | "extBalance" | "riskScore";
 
 function RiskDots({ score, max = 5 }: { score: number; max?: number }) {
+  const C = useThemeColors();
   return (
     <div style={{ display: "flex", gap: 2 }}>
       {Array.from({ length: max }).map((_, i) => {
@@ -169,7 +156,7 @@ function RiskDots({ score, max = 5 }: { score: number; max?: number }) {
               width: 6,
               height: 6,
               borderRadius: "50%",
-              background: filled ? color : "rgba(44, 61, 127,0.25)",
+              background: filled ? color : "var(--bt-border-a25)",
               boxShadow: filled ? `0 0 3px ${color}60` : "none",
             }}
           />
@@ -189,6 +176,7 @@ function UEMOAMap({
   selected: string;
   onSelect: (code: string) => void;
 }) {
+  const C = useThemeColors();
   // Schematic layout positions (cx, cy, w, h, rx) for each country
   const shapes: Record<string, { x: number; y: number; w: number; h: number }> = {
     SEN: { x: 8, y: 22, w: 72, h: 48 },
@@ -215,7 +203,7 @@ function UEMOAMap({
         style={{ display: "block" }}
       >
         {/* Background ocean */}
-        <rect width="308" height="180" fill="rgba(0, 1, 23,0.8)" rx="6" />
+        <rect width="308" height="180" fill="var(--bt-overlay-80)" rx="6" />
         {/* Grid */}
         {[0, 1, 2, 3].map((i) => (
           <line
@@ -224,7 +212,7 @@ function UEMOAMap({
             y1={45 * i}
             x2="308"
             y2={45 * i}
-            stroke="rgba(44, 61, 127,0.12)"
+            stroke="var(--bt-border-a12)"
             strokeWidth="0.5"
           />
         ))}
@@ -235,7 +223,7 @@ function UEMOAMap({
             y1="0"
             x2={76 * i}
             y2="180"
-            stroke="rgba(44, 61, 127,0.12)"
+            stroke="var(--bt-border-a12)"
             strokeWidth="0.5"
           />
         ))}
@@ -324,7 +312,7 @@ function UEMOAMap({
         </g>
 
         {/* "UEMOA" watermark */}
-        <text x="154" y="92" textAnchor="middle" fill="rgba(44, 61, 127,0.12)" fontSize="30" fontWeight="800" fontFamily="'Inter', system-ui, sans-serif">
+        <text x="154" y="92" textAnchor="middle" fill="var(--bt-border-a12)" fontSize="30" fontWeight="800" fontFamily="'Inter', system-ui, sans-serif">
           UEMOA
         </text>
       </svg>
@@ -333,6 +321,7 @@ function UEMOAMap({
 }
 
 export function RegionalAnalysisWidget() {
+  const C = useThemeColors();
   const [sortKey, setSortKey] = useState<SortKey>("riskScore");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [selectedCountry, setSelectedCountry] = useState("CIV");
@@ -376,22 +365,22 @@ export function RegionalAnalysisWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
           <div style={{ width: 3, height: 14, borderRadius: 2, background: C.purple }} />
           <BarChart3 size={11} color={C.purple} />
-          <span style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
             Analyse Comparative Régionale — UEMOA 2023
           </span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-          <span style={{ fontSize: 8, color: C.muted }}>8 États membres · Données INS · FMI · BCEAO</span>
+          <span style={{ fontSize: 10, color: C.muted }}>8 États membres · Données INS · FMI · BCEAO</span>
           <span
             style={{
-              fontSize: 7.5,
+              fontSize: 9.5,
               fontWeight: 700,
               color: C.purple,
               background: "rgba(167,139,250,0.1)",
@@ -423,7 +412,7 @@ export function RegionalAnalysisWidget() {
               display: "grid",
               gridTemplateColumns: "140px 70px 64px 64px 72px 70px 90px 80px",
               padding: "5px 12px",
-              background: "rgba(0, 1, 23,0.5)",
+              background: "var(--bt-overlay-50)",
               position: "sticky",
               top: 0,
               zIndex: 2,
@@ -445,7 +434,7 @@ export function RegionalAnalysisWidget() {
                 key={col.label}
                 onClick={() => col.key && handleSort(col.key)}
                 style={{
-                  fontSize: 8,
+                  fontSize: 10,
                   fontWeight: 700,
                   color: sortKey === col.key ? C.accent : C.muted,
                   letterSpacing: "0.05em",
@@ -459,7 +448,7 @@ export function RegionalAnalysisWidget() {
               >
                 {col.label}
                 {col.key && sortKey === col.key && (
-                  <span style={{ fontSize: 8 }}>{sortDir === "asc" ? "↑" : "↓"}</span>
+                  <span style={{ fontSize: 10 }}>{sortDir === "asc" ? "↑" : "↓"}</span>
                 )}
               </div>
             ))}
@@ -482,9 +471,9 @@ export function RegionalAnalysisWidget() {
                   padding: "6px 12px",
                   gap: 4,
                   background: isSelected
-                    ? "rgba(214, 182, 141,0.07)"
+                    ? "var(--bt-accent-a08)"
                     : i % 2 === 0
-                    ? "rgba(0, 1, 23,0.1)"
+                    ? "var(--bt-overlay-10)"
                     : "transparent",
                   borderBottom: `1px solid ${C.border}10`,
                   borderLeft: isSelected ? `2px solid ${C.accent}` : "2px solid transparent",
@@ -493,27 +482,27 @@ export function RegionalAnalysisWidget() {
                   alignItems: "center",
                 }}
                 onMouseEnter={(e) =>
-                  !isSelected && (e.currentTarget.style.background = "rgba(214, 182, 141,0.04)")
+                  !isSelected && (e.currentTarget.style.background = "var(--bt-accent-a06)")
                 }
                 onMouseLeave={(e) =>
                   !isSelected &&
                   (e.currentTarget.style.background =
-                    i % 2 === 0 ? "rgba(0, 1, 23,0.1)" : "transparent")
+                    i % 2 === 0 ? "var(--bt-overlay-10)" : "transparent")
                 }
               >
                 {/* Country */}
                 <div style={{ display: "flex", alignItems: "center", gap: 6, minWidth: 0 }}>
-                  <span style={{ fontSize: 13 }}>{c.flag}</span>
+                  <span style={{ fontSize: 15 }}>{c.flag}</span>
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, color: isSelected ? C.accent : C.text, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    <div style={{ fontSize: 12, fontWeight: 700, color: isSelected ? C.accent : C.text, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {c.name}
                     </div>
-                    <div style={{ fontSize: 7.5, color: C.muted }}>{c.code}</div>
+                    <div style={{ fontSize: 9.5, color: C.muted }}>{c.code}</div>
                   </div>
                 </div>
 
                 {/* GDP */}
-                <div style={{ fontSize: 10, fontWeight: 600, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+                <div style={{ fontSize: 12, fontWeight: 600, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                   {c.gdp}
                 </div>
 
@@ -530,7 +519,7 @@ export function RegionalAnalysisWidget() {
                 <ValueCell value={c.extBalance} suffix="%" color={c.extBalance >= 0 ? C.green : C.red} />
 
                 {/* Rating */}
-                <div style={{ fontSize: 9, fontWeight: 600, color: C.dim, fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: C.dim, fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                   {c.rating}
                 </div>
 
@@ -548,17 +537,17 @@ export function RegionalAnalysisWidget() {
               padding: "6px 12px",
               gap: 4,
               borderTop: `1px solid ${C.border}`,
-              background: "rgba(214, 182, 141,0.04)",
+              background: "var(--bt-accent-a06)",
               alignItems: "center",
             }}
           >
-            <div style={{ fontSize: 8.5, fontWeight: 700, color: C.accent, letterSpacing: "0.04em" }}>MOY. UEMOA</div>
-            <div style={{ fontSize: 10, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>2 444</div>
-            <div style={{ fontSize: 10, fontWeight: 700, color: C.green, fontVariantNumeric: "tabular-nums" }}>5.0%</div>
-            <div style={{ fontSize: 10, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>4.2%</div>
-            <div style={{ fontSize: 10, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>59.1%</div>
-            <div style={{ fontSize: 10, fontWeight: 700, color: C.red, fontVariantNumeric: "tabular-nums" }}>-8.2%</div>
-            <div style={{ fontSize: 8.5, color: C.muted }}>—</div>
+            <div style={{ fontSize: 10.5, fontWeight: 700, color: C.accent, letterSpacing: "0.04em" }}>MOY. UEMOA</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>2 444</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: C.green, fontVariantNumeric: "tabular-nums" }}>5.0%</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>4.2%</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>59.1%</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: C.red, fontVariantNumeric: "tabular-nums" }}>-8.2%</div>
+            <div style={{ fontSize: 10.5, color: C.muted }}>—</div>
             <RiskDots score={3} />
           </div>
         </div>
@@ -576,7 +565,7 @@ export function RegionalAnalysisWidget() {
           {/* Map title */}
           <div style={{ display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
             <MapPin size={10} color={C.purple} />
-            <span style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            <span style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
               Carte Risque UEMOA
             </span>
           </div>
@@ -602,13 +591,13 @@ export function RegionalAnalysisWidget() {
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 8 }}>
-                <span style={{ fontSize: 16 }}>{selected.flag}</span>
+                <span style={{ fontSize: 18 }}>{selected.flag}</span>
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>{selected.name}</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{selected.name}</div>
                   <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
                     <span
                       style={{
-                        fontSize: 7.5,
+                        fontSize: 9.5,
                         fontWeight: 700,
                         color: RISK_COLORS[selected.riskLevel],
                         background: RISK_COLORS[selected.riskLevel] + "14",
@@ -620,7 +609,7 @@ export function RegionalAnalysisWidget() {
                     >
                       {RISK_LABELS[selected.riskLevel].toUpperCase()}
                     </span>
-                    <span style={{ fontSize: 8, color: C.muted }}>{selected.rating}</span>
+                    <span style={{ fontSize: 10, color: C.muted }}>{selected.rating}</span>
                   </div>
                 </div>
               </div>
@@ -635,7 +624,7 @@ export function RegionalAnalysisWidget() {
 
           {/* Top performers strip */}
           <div style={{ flexShrink: 0 }}>
-            <div style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 5 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 5 }}>
               Top Croissance
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -645,10 +634,10 @@ export function RegionalAnalysisWidget() {
                   style={{ display: "flex", alignItems: "center", gap: 6 }}
                   onClick={() => setSelectedCountry(c.code)}
                 >
-                  <span style={{ fontSize: 8, fontWeight: 700, color: C.muted, width: 10 }}>{i + 1}</span>
-                  <span style={{ fontSize: 11 }}>{c.flag}</span>
-                  <span style={{ fontSize: 9, color: C.dim, flex: 1 }}>{c.name}</span>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: C.green, fontVariantNumeric: "tabular-nums" }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: C.muted, width: 10 }}>{i + 1}</span>
+                  <span style={{ fontSize: 13 }}>{c.flag}</span>
+                  <span style={{ fontSize: 11, color: C.dim, flex: 1 }}>{c.name}</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: C.green, fontVariantNumeric: "tabular-nums" }}>
                     +{c.growth}%
                   </span>
                 </div>
@@ -685,7 +674,7 @@ function ValueCell({
       )}
       <span
         style={{
-          fontSize: 10,
+          fontSize: 12,
           fontWeight: 600,
           color,
           fontVariantNumeric: "tabular-nums",
@@ -700,10 +689,11 @@ function ValueCell({
 }
 
 function QuickStat({ label, value, color }: { label: string; value: string; color: string }) {
+  const C = useThemeColors();
   return (
     <div>
-      <div style={{ fontSize: 7.5, color: C.muted }}>{label}</div>
-      <div style={{ fontSize: 12, fontWeight: 700, color, fontVariantNumeric: "tabular-nums", marginTop: 1 }}>
+      <div style={{ fontSize: 9.5, color: C.muted }}>{label}</div>
+      <div style={{ fontSize: 14, fontWeight: 700, color, fontVariantNumeric: "tabular-nums", marginTop: 1 }}>
         {value}
       </div>
     </div>

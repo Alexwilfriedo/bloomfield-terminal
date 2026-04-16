@@ -1,18 +1,7 @@
 import { WidgetShell } from "./WidgetShell";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { LineChart, Line, ResponsiveContainer, Tooltip } from "recharts";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const fxData = [
   { pair: "XOF / USD", value: "596.42", change: "+0.71", pct: "+0.12%", up: true, fixed: false },
@@ -52,7 +41,7 @@ const commodities = [
     up: true,
     icon: "⬡",
     sparkData: [2290, 2310, 2320, 2335, 2330, 2340, 2347],
-    color: C.gold,
+    color: "#f4b942",
   },
   {
     name: "Pétrole WTI",
@@ -99,6 +88,7 @@ function Spark({ data, color }: { data: number[]; color: string }) {
 }
 
 export function FXWidget() {
+  const C = useThemeColors();
   return (
     <WidgetShell
       title="Taux de Change"
@@ -117,7 +107,7 @@ export function FXWidget() {
           }}
         >
           {["Paire", "Cours", "Var."].map((h) => (
-            <div key={h} style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+            <div key={h} style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>
               {h}
             </div>
           ))}
@@ -131,20 +121,20 @@ export function FXWidget() {
               gridTemplateColumns: "1fr 70px 55px",
               padding: "5px 6px",
               borderRadius: 5,
-              background: "rgba(0, 1, 23,0.4)",
+              background: "var(--bt-overlay-40)",
               border: `1px solid ${C.border}`,
               alignItems: "center",
             }}
           >
             <div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>
                 {row.pair}
               </div>
               {row.note && (
-                <div style={{ fontSize: 8, color: C.accent, opacity: 0.8 }}>{row.note}</div>
+                <div style={{ fontSize: 10, color: C.accent, opacity: 0.8 }}>{row.note}</div>
               )}
             </div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
               {row.value}
             </div>
             <div
@@ -152,7 +142,7 @@ export function FXWidget() {
                 display: "flex",
                 alignItems: "center",
                 gap: 3,
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: 600,
                 color: row.fixed ? C.muted : row.up ? C.green : C.red,
               }}
@@ -174,8 +164,8 @@ export function FXWidget() {
           style={{
             marginTop: 4,
             padding: "5px 8px",
-            background: "rgba(214, 182, 141,0.06)",
-            border: `1px solid rgba(214, 182, 141,0.15)`,
+            background: "var(--bt-accent-a06)",
+            border: `1px solid var(--bt-accent-a15)`,
             borderRadius: 5,
             display: "flex",
             alignItems: "center",
@@ -191,7 +181,7 @@ export function FXWidget() {
               flexShrink: 0,
             }}
           />
-          <span style={{ fontSize: 9, color: C.dim }}>
+          <span style={{ fontSize: 11, color: C.dim }}>
             <strong style={{ color: C.accent }}>BCEAO</strong> — Taux directeur:{" "}
             <strong style={{ color: C.text }}>3.50%</strong> · Réserves UEMOA:{" "}
             <strong style={{ color: C.text }}>$32.4 Mds</strong>
@@ -203,6 +193,7 @@ export function FXWidget() {
 }
 
 export function CommoditiesWidget() {
+  const C = useThemeColors();
   return (
     <WidgetShell
       title="Matières Premières"
@@ -221,7 +212,7 @@ export function CommoditiesWidget() {
                 alignItems: "center",
                 gap: 8,
                 padding: "5px 8px",
-                background: "rgba(0, 1, 23,0.4)",
+                background: "var(--bt-overlay-40)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 6,
               }}
@@ -231,11 +222,11 @@ export function CommoditiesWidget() {
                   width: 28,
                   height: 28,
                   borderRadius: 5,
-                  background: "rgba(44, 61, 127,0.2)",
+                  background: "var(--bt-border-a20)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 14,
+                  fontSize: 16,
                   flexShrink: 0,
                 }}
               >
@@ -243,14 +234,14 @@ export function CommoditiesWidget() {
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: C.text }}>{c.name}</span>
-                  <span style={{ fontSize: 8, color: C.muted, letterSpacing: "0.04em" }}>{c.ticker}</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{c.name}</span>
+                  <span style={{ fontSize: 10, color: C.muted, letterSpacing: "0.04em" }}>{c.ticker}</span>
                 </div>
                 <div style={{ display: "flex", alignItems: "baseline", gap: 5, marginTop: 1 }}>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+                  <span style={{ fontSize: 15, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                     {c.value}
                   </span>
-                  <span style={{ fontSize: 9, color: C.muted }}>{c.unit}</span>
+                  <span style={{ fontSize: 11, color: C.muted }}>{c.unit}</span>
                 </div>
               </div>
               <div style={{ flexShrink: 0 }}>
@@ -258,7 +249,7 @@ export function CommoditiesWidget() {
               </div>
               <div
                 style={{
-                  fontSize: 11,
+                  fontSize: 13,
                   fontWeight: 700,
                   color: c.up ? C.green : C.red,
                   minWidth: 50,

@@ -1,19 +1,6 @@
 import { useState } from "react";
 import { Zap, ExternalLink, ChevronRight, TrendingUp, TrendingDown, Minus } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 interface NewsItem {
   id: number;
@@ -37,9 +24,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "14:32",
     headline: "BCEAO maintient son taux directeur à 3,5% — stabilité monétaire confirmée pour le T2 2026",
     country: "UEMOA",
-    countryColor: C.accent,
+    countryColor: "#d6b68d",
     tag: "BCEAO",
-    tagColor: C.accent,
+    tagColor: "#d6b68d",
     sentiment: "neutral",
     source: "Communiqué officiel",
     isBreaking: true,
@@ -52,9 +39,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "13:58",
     headline: "SONATEL SA annonce un résultat net FY2025 de 243,7 Mds XOF, en hausse de 11,4% — dividende proposé : 1 800 XOF/action",
     country: "Sénégal",
-    countryColor: C.gold,
+    countryColor: "#f4b942",
     tag: "RÉSULTATS",
-    tagColor: C.green,
+    tagColor: "#10c87a",
     sentiment: "up",
     source: "Bloomfield Research",
     isNew: true,
@@ -66,9 +53,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "13:45",
     headline: "Côte d'Ivoire : émission obligataire souveraine 7 ans sur le marché UMOA-Titres — taux facial 6,40% · taux de couverture 138%",
     country: "Côte d'Ivoire",
-    countryColor: C.orange,
+    countryColor: "#fb923c",
     tag: "DETTE SOUV.",
-    tagColor: C.orange,
+    tagColor: "#fb923c",
     sentiment: "neutral",
     source: "UMOA-Titres",
     isNew: true,
@@ -80,9 +67,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "13:12",
     headline: "BRVM Composite clôture en hausse de 0,73% — PALM CI et BOLLORE CI parmi les principales hausses de la séance",
     country: "BRVM",
-    countryColor: C.accent,
+    countryColor: "#d6b68d",
     tag: "MARCHÉS",
-    tagColor: C.accent,
+    tagColor: "#d6b68d",
     sentiment: "up",
     source: "BRVM",
     impactAssets: ["PALM CI", "BOLLORE CI", "BRVM Composite"],
@@ -93,9 +80,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "12:44",
     headline: "FMI relève ses prévisions de croissance pour la zone UEMOA à 6,8% pour 2026, soulignant la résilience budgétaire",
     country: "UEMOA",
-    countryColor: C.accent,
+    countryColor: "#d6b68d",
     tag: "MACRO",
-    tagColor: C.purple,
+    tagColor: "#a78bfa",
     sentiment: "up",
     source: "FMI · World Economic Outlook",
     impactAssets: ["Zone XOF", "Tous pays UEMOA"],
@@ -106,9 +93,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "12:07",
     headline: "Le cacao à 8 245 USD/tonne sur ICE — les producteurs ivoiriens bénéficient d'un effet prix favorable sur les recettes d'exportation",
     country: "Côte d'Ivoire",
-    countryColor: C.orange,
+    countryColor: "#fb923c",
     tag: "MATIÈRES P.",
-    tagColor: C.purple,
+    tagColor: "#a78bfa",
     sentiment: "up",
     source: "ICE Futures Europe",
     impactAssets: ["Cacao ICE", "CIV Balance commerciale"],
@@ -119,9 +106,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "11:30",
     headline: "Bank of Africa CI publie ses résultats semestriels — PNB en progression de 8,2% malgré une hausse du coût du risque",
     country: "Côte d'Ivoire",
-    countryColor: C.orange,
+    countryColor: "#fb923c",
     tag: "BANQUE",
-    tagColor: C.gold,
+    tagColor: "#f4b942",
     sentiment: "neutral",
     source: "Bloomfield Research",
     impactAssets: ["BOA CI BRVM"],
@@ -132,9 +119,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "10:55",
     headline: "Burkina Faso : le déficit budgétaire prévisionnel 2026 se dégrade à 5,2% du PIB selon les nouvelles projections du MFB",
     country: "Burkina Faso",
-    countryColor: C.red,
+    countryColor: "#f43860",
     tag: "BUDGET",
-    tagColor: C.red,
+    tagColor: "#f43860",
     sentiment: "down",
     source: "Ministère des Finances",
     impactAssets: ["OAT BFA", "Notation souveraine BFA"],
@@ -145,9 +132,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "10:20",
     headline: "Sénégal : les réserves de change s'établissent à 5,3 mois d'importations — confort externe confirmé",
     country: "Sénégal",
-    countryColor: C.gold,
+    countryColor: "#f4b942",
     tag: "RÉSERVES",
-    tagColor: C.green,
+    tagColor: "#10c87a",
     sentiment: "up",
     source: "BCEAO · Bulletin Mensuel",
     impactAssets: ["XOF stabilité", "SEN notation"],
@@ -158,9 +145,9 @@ const NEWS_ITEMS: NewsItem[] = [
     time: "09:48",
     headline: "Togo : TOGOCOM maintient sa position dominante sur les services data · part de marché estimée à 42% au T1 2026",
     country: "Togo",
-    countryColor: C.green,
+    countryColor: "#10c87a",
     tag: "TÉLÉCOM",
-    tagColor: C.accent,
+    tagColor: "#d6b68d",
     sentiment: "up",
     source: "ARCEP Togo",
     impactAssets: ["TOGOCOM BRVM"],
@@ -169,12 +156,14 @@ const NEWS_ITEMS: NewsItem[] = [
 ];
 
 function SentimentIcon({ sentiment }: { sentiment: "up" | "down" | "neutral" }) {
+  const C = useThemeColors();
   if (sentiment === "up") return <TrendingUp size={9} color={C.green} />;
   if (sentiment === "down") return <TrendingDown size={9} color={C.red} />;
   return <Minus size={9} color={C.muted} />;
 }
 
 export function FlashNewsFeed() {
+  const C = useThemeColors();
   const [expanded, setExpanded] = useState(false);
   const [showImpact, setShowImpact] = useState(true);
 
@@ -203,7 +192,7 @@ export function FlashNewsFeed() {
           gap: 8,
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
         }}
       >
         <div
@@ -226,11 +215,11 @@ export function FlashNewsFeed() {
               boxShadow: `0 0 5px ${C.red}`,
             }}
           />
-          <span style={{ fontSize: 8.5, fontWeight: 800, color: C.red, letterSpacing: "0.1em" }}>FLASH</span>
+          <span style={{ fontSize: 10.5, fontWeight: 800, color: C.red, letterSpacing: "0.1em" }}>FLASH</span>
         </div>
         <Zap size={12} color={C.gold} />
-        <span style={{ fontSize: 11, fontWeight: 700, color: C.text }}>Actualités en Temps Réel</span>
-        <span style={{ fontSize: 9, color: C.muted }}>· Marchés & Économie UEMOA</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Actualités en Temps Réel</span>
+        <span style={{ fontSize: 11, color: C.muted }}>· Marchés & Économie UEMOA</span>
         <div style={{ flex: 1 }} />
         <button
           onClick={() => setShowImpact(!showImpact)}
@@ -240,7 +229,7 @@ export function FlashNewsFeed() {
             background: showImpact ? "rgba(244,185,66,0.1)" : "transparent",
             border: `1px solid ${showImpact ? "rgba(244,185,66,0.3)" : C.border}`,
             color: showImpact ? C.gold : C.muted,
-            fontSize: 8,
+            fontSize: 10,
             fontWeight: 700,
             cursor: "pointer",
             letterSpacing: "0.04em",
@@ -248,14 +237,14 @@ export function FlashNewsFeed() {
         >
           IMPACT MARCHÉ
         </button>
-        <span style={{ fontSize: 9, color: C.muted }}>14:32</span>
+        <span style={{ fontSize: 11, color: C.muted }}>14:32</span>
         <div
           style={{
             padding: "2px 7px",
             borderRadius: 3,
-            background: "rgba(214, 182, 141,0.08)",
-            border: "1px solid rgba(214, 182, 141,0.2)",
-            fontSize: 8.5,
+            background: "var(--bt-accent-a08)",
+            border: "1px solid var(--bt-accent-a20)",
+            fontSize: 10.5,
             color: C.accent,
             fontWeight: 700,
           }}
@@ -274,13 +263,13 @@ export function FlashNewsFeed() {
               alignItems: "flex-start",
               gap: 10,
               padding: "9px 14px",
-              borderBottom: idx < visibleItems.length - 1 ? `1px solid rgba(44, 61, 127,0.16)` : "none",
+              borderBottom: idx < visibleItems.length - 1 ? `1px solid var(--bt-border-a16)` : "none",
               background: item.isNew ? "rgba(214, 182, 141,0.025)" : "transparent",
               cursor: "pointer",
               transition: "background 0.1s",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLDivElement).style.background = "rgba(214, 182, 141,0.04)";
+              (e.currentTarget as HTMLDivElement).style.background = "var(--bt-accent-a06)";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLDivElement).style.background = item.isNew
@@ -299,7 +288,7 @@ export function FlashNewsFeed() {
                 flexShrink: 0,
               }}
             >
-              <span style={{ fontSize: 9, fontWeight: 600, color: C.muted, fontVariantNumeric: "tabular-nums" }}>
+              <span style={{ fontSize: 11, fontWeight: 600, color: C.muted, fontVariantNumeric: "tabular-nums" }}>
                 {item.time}
               </span>
               <SentimentIcon sentiment={item.sentiment} />
@@ -327,7 +316,7 @@ export function FlashNewsFeed() {
                   borderRadius: 2,
                   background: "rgba(244,56,96,0.12)",
                   border: "1px solid rgba(244,56,96,0.3)",
-                  fontSize: 7.5,
+                  fontSize: 9.5,
                   fontWeight: 800,
                   color: C.red,
                   letterSpacing: "0.08em",
@@ -343,7 +332,7 @@ export function FlashNewsFeed() {
               <p
                 style={{
                   margin: 0,
-                  fontSize: 11,
+                  fontSize: 13,
                   color: item.isNew ? C.text : "#a0b8d4",
                   lineHeight: 1.45,
                   fontWeight: item.isBreaking ? 600 : 400,
@@ -358,7 +347,7 @@ export function FlashNewsFeed() {
                     borderRadius: 2,
                     background: item.countryColor + "14",
                     border: `1px solid ${item.countryColor}30`,
-                    fontSize: 8,
+                    fontSize: 10,
                     fontWeight: 700,
                     color: item.countryColor,
                     letterSpacing: "0.05em",
@@ -372,7 +361,7 @@ export function FlashNewsFeed() {
                     borderRadius: 2,
                     background: item.tagColor + "10",
                     border: `1px solid ${item.tagColor}25`,
-                    fontSize: 8,
+                    fontSize: 10,
                     fontWeight: 700,
                     color: item.tagColor,
                     letterSpacing: "0.05em",
@@ -380,7 +369,7 @@ export function FlashNewsFeed() {
                 >
                   {item.tag}
                 </span>
-                <span style={{ fontSize: 8.5, color: C.muted }}>{item.source}</span>
+                <span style={{ fontSize: 10.5, color: C.muted }}>{item.source}</span>
 
                 {/* Impact assets */}
                 {showImpact && item.impactAssets && item.impactAssets.length > 0 && (
@@ -391,9 +380,9 @@ export function FlashNewsFeed() {
                         style={{
                           padding: "1px 5px",
                           borderRadius: 2,
-                          background: "rgba(214, 182, 141,0.08)",
-                          border: "1px solid rgba(214, 182, 141,0.18)",
-                          fontSize: 7.5,
+                          background: "var(--bt-accent-a08)",
+                          border: "1px solid var(--bt-accent-a18)",
+                          fontSize: 9.5,
                           color: C.accent,
                           fontWeight: 600,
                         }}
@@ -418,7 +407,7 @@ export function FlashNewsFeed() {
         style={{
           width: "100%",
           padding: "8px 14px",
-          background: "rgba(0, 1, 23,0.3)",
+          background: "var(--bt-overlay-30)",
           border: "none",
           borderTop: `1px solid ${C.border}`,
           display: "flex",
@@ -427,7 +416,7 @@ export function FlashNewsFeed() {
           gap: 5,
           cursor: "pointer",
           color: C.dim,
-          fontSize: 10,
+          fontSize: 12,
           fontWeight: 600,
           letterSpacing: "0.04em",
         }}

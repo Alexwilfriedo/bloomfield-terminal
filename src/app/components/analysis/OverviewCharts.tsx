@@ -12,19 +12,7 @@ import {
   ReferenceLine,
 } from "recharts";
 import { WidgetShell } from "../widgets/WidgetShell";
-
-const C = {
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const REVENUE_DATA = [
   { year: "FY2020", PNB: 112.4, "RBE": 44.2, "Résultat Net": 24.8 },
@@ -57,15 +45,15 @@ const RevenueTooltip = ({ active, payload, label }: {
 }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
-      <div style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, marginBottom: 5 }}>{label}</div>
+    <div style={{ background: "#000117", border: `1px solid var(--bt-border-a32)`, borderRadius: 6, padding: "8px 12px" }}>
+      <div style={{ fontSize: 11.5, fontWeight: 700, color: "#6b96b8", marginBottom: 5 }}>{label}</div>
       {payload.map((p) => (
         <div key={p.name} style={{ display: "flex", gap: 10, marginBottom: 3 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <div style={{ width: 8, height: 8, borderRadius: 2, background: p.color }} />
-            <span style={{ fontSize: 9, color: C.dim }}>{p.name}</span>
+            <span style={{ fontSize: 11, color: "#6b96b8" }}>{p.name}</span>
           </div>
-          <span style={{ fontSize: 9, fontWeight: 700, color: C.text, marginLeft: "auto" }}>{p.value.toFixed(1)} Mds</span>
+          <span style={{ fontSize: 11, fontWeight: 700, color: "#ddeaf8", marginLeft: "auto" }}>{p.value.toFixed(1)} Mds</span>
         </div>
       ))}
     </div>
@@ -79,15 +67,15 @@ const MarginTooltip = ({ active, payload, label }: {
 }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
-      <div style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, marginBottom: 5 }}>{label}</div>
+    <div style={{ background: "#000117", border: `1px solid var(--bt-border-a32)`, borderRadius: 6, padding: "8px 12px" }}>
+      <div style={{ fontSize: 11.5, fontWeight: 700, color: "#6b96b8", marginBottom: 5 }}>{label}</div>
       {payload.map((p) => (
         <div key={p.name} style={{ display: "flex", gap: 10, marginBottom: 3 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <div style={{ width: 8, height: 2, background: p.color, borderRadius: 1 }} />
-            <span style={{ fontSize: 9, color: C.dim }}>{p.name}</span>
+            <span style={{ fontSize: 11, color: "#6b96b8" }}>{p.name}</span>
           </div>
-          <span style={{ fontSize: 9, fontWeight: 700, color: C.text, marginLeft: "auto" }}>{p.value.toFixed(1)}%</span>
+          <span style={{ fontSize: 11, fontWeight: 700, color: "#ddeaf8", marginLeft: "auto" }}>{p.value.toFixed(1)}%</span>
         </div>
       ))}
     </div>
@@ -95,6 +83,7 @@ const MarginTooltip = ({ active, payload, label }: {
 };
 
 export function OverviewCharts() {
+  const C = useThemeColors();
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, height: "100%" }}>
       {/* Revenue & Profitability */}
@@ -108,8 +97,8 @@ export function OverviewCharts() {
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart data={REVENUE_DATA} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="2 2" stroke={C.border} />
-              <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 8 }} tickLine={false} axisLine={{ stroke: C.border }} />
-              <YAxis tick={{ fill: C.muted, fontSize: 8 }} tickLine={false} axisLine={false} />
+              <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 10 }} tickLine={false} axisLine={{ stroke: C.border }} />
+              <YAxis tick={{ fill: C.muted, fontSize: 10 }} tickLine={false} axisLine={false} />
               <Tooltip content={<RevenueTooltip />} />
               <Bar key="bar-PNB" dataKey="PNB" fill={C.accent} fillOpacity={0.5} radius={[2, 2, 0, 0]} name="PNB" />
               <Bar key="bar-RBE" dataKey="RBE" fill={C.purple} fillOpacity={0.5} radius={[2, 2, 0, 0]} name="RBE" />
@@ -130,8 +119,8 @@ export function OverviewCharts() {
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={MARGIN_DATA} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="2 2" stroke={C.border} />
-              <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 8 }} tickLine={false} axisLine={{ stroke: C.border }} />
-              <YAxis tick={{ fill: C.muted, fontSize: 8 }} tickLine={false} axisLine={false} />
+              <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 10 }} tickLine={false} axisLine={{ stroke: C.border }} />
+              <YAxis tick={{ fill: C.muted, fontSize: 10 }} tickLine={false} axisLine={false} />
               <Tooltip content={<MarginTooltip />} />
               <Area key="area-marge" type="monotone" dataKey="Marge Nette" stroke={C.gold} fill={C.gold} fillOpacity={0.12} strokeWidth={2} dot={{ fill: C.gold, r: 2 }} name="Marge Nette" />
               <Area key="area-roe" type="monotone" dataKey="ROE" stroke={C.green} fill={C.green} fillOpacity={0.1} strokeWidth={2} dot={{ fill: C.green, r: 2 }} name="ROE" />
@@ -153,8 +142,8 @@ export function OverviewCharts() {
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={ASSET_DATA} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="2 2" stroke={C.border} />
-              <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 8 }} tickLine={false} axisLine={{ stroke: C.border }} />
-              <YAxis tick={{ fill: C.muted, fontSize: 8 }} tickLine={false} axisLine={false} />
+              <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 10 }} tickLine={false} axisLine={{ stroke: C.border }} />
+              <YAxis tick={{ fill: C.muted, fontSize: 10 }} tickLine={false} axisLine={false} />
               <Tooltip content={<RevenueTooltip />} />
               <Area key="area-actif" type="monotone" dataKey="Total Actif" stroke={C.purple} fill={C.purple} fillOpacity={0.1} strokeWidth={2} name="Total Actif" />
               <Area key="area-depots" type="monotone" dataKey="Dépôts" stroke={C.accent} fill={C.accent} fillOpacity={0.1} strokeWidth={2} name="Dépôts" />

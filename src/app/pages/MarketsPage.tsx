@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { Layout } from "react-grid-layout";
 
 import { LiveTicker } from "../components/terminal/LiveTicker";
+import { MarketsTopBar } from "../components/markets/MarketsTopBar";
 import { RightPanel } from "../components/markets/RightPanel";
 import { MarketScannerWidget } from "../components/markets/MarketScannerWidget";
 import { CandlestickWidget } from "../components/markets/CandlestickWidget";
@@ -13,6 +14,7 @@ import { SovereignYieldsWidget } from "../components/widgets/SovereignYieldsWidg
 import { FXWidget, CommoditiesWidget } from "../components/widgets/FXCommoditiesWidget";
 import { WidgetGrid } from "../components/shared/WidgetGrid";
 import { useTerminal } from "../context/TerminalContext";
+import { useThemeColors } from "../hooks/useThemeColors";
 import {
   ShoppingCart,
   Bot,
@@ -21,20 +23,6 @@ import {
   Target,
   Shield,
 } from "lucide-react";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  orange: "#fb923c",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  surface: "#000117",
-  dark: "#000117",
-};
 
 const MARKETS_STORAGE_KEY = "bloomfield.markets.layout.v1";
 
@@ -72,6 +60,7 @@ const MARKETS_WIDGETS: Record<string, { element: ReactNode; title: string }> = {
 
 function MarketsActionBar() {
   const { openOrderPanel, openAIPanel } = useTerminal();
+  const C = useThemeColors();
 
   const DECISION_BLOCKS = [
     {
@@ -107,8 +96,8 @@ function MarketsActionBar() {
       label: "Souverains UEMOA",
       value: "OAT CIV 6.89%",
       detail: "Fenêtre d'entrée favorable",
-      bg: "rgba(214, 182, 141,0.06)",
-      border: "rgba(214, 182, 141,0.2)",
+      bg: "var(--bt-accent-a06)",
+      border: "var(--bt-accent-a20)",
     },
   ];
 
@@ -119,7 +108,7 @@ function MarketsActionBar() {
         alignItems: "center",
         gap: 8,
         padding: "7px 12px",
-        background: "rgba(0, 1, 23,0.6)",
+        background: "var(--bt-overlay-60)",
         borderBottom: `1px solid ${C.border}`,
         flexShrink: 0,
         overflowX: "auto",
@@ -145,13 +134,13 @@ function MarketsActionBar() {
         >
           <span style={{ color: block.color }}>{block.icon}</span>
           <div>
-            <div style={{ fontSize: 7.5, color: block.color, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+            <div style={{ fontSize: 9.5, color: block.color, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase" }}>
               {block.label}
             </div>
-            <div style={{ fontSize: 9.5, fontWeight: 700, color: C.text, marginTop: 1 }}>
+            <div style={{ fontSize: 11.5, fontWeight: 700, color: C.text, marginTop: 1 }}>
               {block.value}
             </div>
-            <div style={{ fontSize: 7.5, color: C.muted }}>{block.detail}</div>
+            <div style={{ fontSize: 9.5, color: C.muted }}>{block.detail}</div>
           </div>
         </div>
       ))}
@@ -169,7 +158,7 @@ function MarketsActionBar() {
           border: "1px solid rgba(167,139,250,0.3)",
           background: "rgba(167,139,250,0.08)",
           color: "#a78bfa",
-          fontSize: 9.5,
+          fontSize: 11.5,
           fontWeight: 700,
           cursor: "pointer",
           letterSpacing: "0.02em",
@@ -194,7 +183,7 @@ function MarketsActionBar() {
           border: "none",
           background: `linear-gradient(90deg, ${C.accent} 0%, #d6b68d 100%)`,
           color: "#fff",
-          fontSize: 9.5,
+          fontSize: 11.5,
           fontWeight: 800,
           cursor: "pointer",
           letterSpacing: "0.04em",
@@ -213,6 +202,8 @@ function MarketsActionBar() {
 }
 
 export function MarketsPage() {
+  const C = useThemeColors();
+
   return (
     <div
       style={{
@@ -222,6 +213,7 @@ export function MarketsPage() {
         overflow: "hidden",
       }}
     >
+      <MarketsTopBar />
       <LiveTicker />
       <MarketsActionBar />
 
@@ -242,7 +234,7 @@ export function MarketsPage() {
             flexDirection: "column",
             minWidth: 0,
             minHeight: 0,
-            background: "#000117",
+            background: C.surface,
           }}
         >
           {/* International markets strip — fixed above the grid */}

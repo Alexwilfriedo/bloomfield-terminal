@@ -1,19 +1,5 @@
 import { Play, Clock, Eye, Bookmark, ChevronRight, Tv2, ExternalLink } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  dark: "#000117",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const ANALYST_IMG = "https://images.unsplash.com/photo-1758691736490-03d39c292d7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBhbmFseXN0JTIwcHJvZmVzc2lvbmFsJTIwcHJlc2VudGF0aW9ufGVufDF8fHx8MTc3NTY5MTA4NXww&ixlib=rb-4.1.0&q=80&w=400";
 const CONF_IMG = "https://images.unsplash.com/photo-1763739530672-4aadafbd81ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxBZnJpY2FuJTIwYnVzaW5lc3MlMjBleGVjdXRpdmUlMjBjb25mZXJlbmNlfGVufDF8fHx8MTc3NTY5MTA4NXww&ixlib=rb-4.1.0&q=80&w=400";
@@ -45,7 +31,7 @@ const VIDEOS: VideoCard[] = [
     views: "2 847",
     date: "Aujourd'hui",
     tag: "FLASH MARCHÉ",
-    tagColor: C.red,
+    tagColor: "#f43860",
     thumbnail: MARKET_IMG,
     isLive: false,
     isNew: true,
@@ -60,7 +46,7 @@ const VIDEOS: VideoCard[] = [
     views: "1 562",
     date: "08 Avr 2026",
     tag: "MACRO",
-    tagColor: C.purple,
+    tagColor: "#a78bfa",
     thumbnail: ANALYST_IMG,
     isLive: false,
     isNew: true,
@@ -75,7 +61,7 @@ const VIDEOS: VideoCard[] = [
     views: "4 203",
     date: "07 Avr 2026",
     tag: "RÉSULTATS",
-    tagColor: C.green,
+    tagColor: "#10c87a",
     thumbnail: CONF_IMG,
     isLive: false,
     isNew: false,
@@ -90,7 +76,7 @@ const VIDEOS: VideoCard[] = [
     views: "987",
     date: "06 Avr 2026",
     tag: "OBLIGATIONS",
-    tagColor: C.orange,
+    tagColor: "#fb923c",
     thumbnail: MARKET_IMG,
     isLive: false,
     isNew: false,
@@ -102,10 +88,11 @@ const VIDEOS: VideoCard[] = [
 const orange = "#fb923c";
 
 function VideoCard({ video }: { video: VideoCard }) {
+  const C = useThemeColors();
   return (
     <div
       style={{
-        background: "rgba(0, 1, 23,0.5)",
+        background: "var(--bt-overlay-50)",
         border: `1px solid ${C.border}`,
         borderRadius: 7,
         overflow: "hidden",
@@ -113,7 +100,7 @@ function VideoCard({ video }: { video: VideoCard }) {
         transition: "border-color 0.15s",
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(214, 182, 141,0.3)";
+        (e.currentTarget as HTMLDivElement).style.borderColor = "var(--bt-accent-a30)";
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLDivElement).style.borderColor = C.border;
@@ -124,7 +111,7 @@ function VideoCard({ video }: { video: VideoCard }) {
         style={{
           position: "relative",
           height: 130,
-          background: "#000117",
+          background: C.surface,
           overflow: "hidden",
         }}
       >
@@ -143,7 +130,7 @@ function VideoCard({ video }: { video: VideoCard }) {
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(180deg, transparent 30%, rgba(0, 1, 23,0.85) 100%)",
+            background: "linear-gradient(180deg, transparent 30%, var(--bt-overlay-85) 100%)",
           }}
         />
         {/* Play button */}
@@ -173,8 +160,8 @@ function VideoCard({ video }: { video: VideoCard }) {
             right: 8,
             padding: "2px 6px",
             borderRadius: 3,
-            background: "rgba(0, 1, 23,0.85)",
-            fontSize: 9,
+            background: "var(--bt-overlay-85)",
+            fontSize: 11,
             fontWeight: 700,
             color: C.text,
             fontVariantNumeric: "tabular-nums",
@@ -190,7 +177,7 @@ function VideoCard({ video }: { video: VideoCard }) {
                 padding: "2px 5px",
                 borderRadius: 2,
                 background: "rgba(16,200,122,0.85)",
-                fontSize: 7.5,
+                fontSize: 9.5,
                 fontWeight: 800,
                 color: "#fff",
                 letterSpacing: "0.06em",
@@ -205,7 +192,7 @@ function VideoCard({ video }: { video: VideoCard }) {
                 padding: "2px 5px",
                 borderRadius: 2,
                 background: "rgba(244,56,96,0.9)",
-                fontSize: 7.5,
+                fontSize: 9.5,
                 fontWeight: 800,
                 color: "#fff",
                 letterSpacing: "0.06em",
@@ -223,7 +210,7 @@ function VideoCard({ video }: { video: VideoCard }) {
               padding: "2px 5px",
               borderRadius: 2,
               background: video.tagColor + "cc",
-              fontSize: 7.5,
+              fontSize: 9.5,
               fontWeight: 700,
               color: "#fff",
               letterSpacing: "0.05em",
@@ -241,7 +228,7 @@ function VideoCard({ video }: { video: VideoCard }) {
               padding: "2px 5px",
               borderRadius: 2,
               background: "rgba(244,185,66,0.9)",
-              fontSize: 7.5,
+              fontSize: 9.5,
               fontWeight: 800,
               color: "#000117",
               letterSpacing: "0.06em",
@@ -257,7 +244,7 @@ function VideoCard({ video }: { video: VideoCard }) {
         <p
           style={{
             margin: "0 0 7px",
-            fontSize: 10.5,
+            fontSize: 12.5,
             fontWeight: 600,
             color: C.text,
             lineHeight: 1.4,
@@ -280,7 +267,7 @@ function VideoCard({ video }: { video: VideoCard }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 7.5,
+              fontSize: 9.5,
               fontWeight: 700,
               color: "#fff",
               flexShrink: 0,
@@ -289,19 +276,19 @@ function VideoCard({ video }: { video: VideoCard }) {
             {video.analyst.split(" ").map((n) => n[0]).join("").slice(0, 2)}
           </div>
           <div>
-            <div style={{ fontSize: 9, fontWeight: 700, color: C.dim }}>{video.analyst}</div>
-            <div style={{ fontSize: 7.5, color: C.muted }}>{video.role}</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: C.dim }}>{video.analyst}</div>
+            <div style={{ fontSize: 9.5, color: C.muted }}>{video.role}</div>
           </div>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
             <Eye size={8.5} color={C.muted} />
-            <span style={{ fontSize: 8.5, color: C.muted }}>{video.views}</span>
+            <span style={{ fontSize: 10.5, color: C.muted }}>{video.views}</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
             <Clock size={8.5} color={C.muted} />
-            <span style={{ fontSize: 8.5, color: C.muted }}>{video.date}</span>
+            <span style={{ fontSize: 10.5, color: C.muted }}>{video.date}</span>
           </div>
           <div style={{ flex: 1 }} />
           <button
@@ -309,7 +296,7 @@ function VideoCard({ video }: { video: VideoCard }) {
               width: 22,
               height: 22,
               borderRadius: 4,
-              background: "rgba(0, 1, 23,0.5)",
+              background: "var(--bt-overlay-50)",
               border: `1px solid ${C.border}`,
               display: "flex",
               alignItems: "center",
@@ -328,6 +315,7 @@ function VideoCard({ video }: { video: VideoCard }) {
 }
 
 export function VideoSection() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -345,12 +333,12 @@ export function VideoSection() {
           gap: 8,
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
         }}
       >
         <Tv2 size={13} color={C.accent} />
-        <span style={{ fontSize: 11, fontWeight: 700, color: C.text }}>Bloomfield Web TV</span>
-        <span style={{ fontSize: 9, color: C.muted }}>· Briefings & Décodages Vidéo</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Bloomfield Web TV</span>
+        <span style={{ fontSize: 11, color: C.muted }}>· Briefings & Décodages Vidéo</span>
         <div style={{ flex: 1 }} />
         <div
           style={{
@@ -361,7 +349,7 @@ export function VideoSection() {
             borderRadius: 3,
             background: "rgba(244,56,96,0.08)",
             border: "1px solid rgba(244,56,96,0.2)",
-            fontSize: 8.5,
+            fontSize: 10.5,
             color: C.red,
             fontWeight: 700,
             cursor: "pointer",
@@ -377,10 +365,10 @@ export function VideoSection() {
             gap: 4,
             padding: "4px 9px",
             borderRadius: 4,
-            background: "rgba(214, 182, 141,0.08)",
-            border: "1px solid rgba(214, 182, 141,0.2)",
+            background: "var(--bt-accent-a08)",
+            border: "1px solid var(--bt-accent-a20)",
             color: C.accent,
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 600,
             cursor: "pointer",
           }}

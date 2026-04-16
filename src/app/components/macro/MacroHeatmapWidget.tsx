@@ -1,20 +1,6 @@
 import { useState } from "react";
 import { BarChart3, ArrowUpDown } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  orange: "#fb923c",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 interface CountryRow {
   code: string;
@@ -68,24 +54,26 @@ function getCellColor(value: number, key: string): { bg: string; text: string } 
   };
 
   const t = thresholds[key];
-  if (!t) return { bg: "transparent", text: C.muted };
+  if (!t) return { bg: "transparent", text: "#54678d" };
 
   const inRange = (v: number, [lo, hi]: number[]) => v >= lo && v < hi;
   const check = (range: number[]) => inRange(value, range);
 
-  if (check(t.green)) return { bg: "rgba(16,200,122,0.18)", text: C.green };
-  if (check(t.gold)) return { bg: "rgba(244,185,66,0.18)", text: C.gold };
-  if (check(t.orange)) return { bg: "rgba(251,146,60,0.18)", text: C.orange };
-  return { bg: "rgba(244,56,96,0.15)", text: C.red };
+  if (check(t.green)) return { bg: "rgba(16,200,122,0.18)", text: "#10c87a" };
+  if (check(t.gold)) return { bg: "rgba(244,185,66,0.18)", text: "#f4b942" };
+  if (check(t.orange)) return { bg: "rgba(251,146,60,0.18)", text: "#fb923c" };
+  return { bg: "rgba(244,56,96,0.15)", text: "#f43860" };
 }
 
 function TrendIcon({ trend }: { trend: "up" | "stable" | "down" }) {
-  if (trend === "up") return <span style={{ fontSize: 8, color: C.green }}>▲</span>;
-  if (trend === "down") return <span style={{ fontSize: 8, color: C.red }}>▼</span>;
-  return <span style={{ fontSize: 8, color: C.muted }}>→</span>;
+  const C = useThemeColors();
+  if (trend === "up") return <span style={{ fontSize: 10, color: C.green }}>▲</span>;
+  if (trend === "down") return <span style={{ fontSize: 10, color: C.red }}>▼</span>;
+  return <span style={{ fontSize: 10, color: C.muted }}>→</span>;
 }
 
 export function MacroHeatmapWidget() {
+  const C = useThemeColors();
   const [showComparison, setShowComparison] = useState(false);
 
   const rows = showComparison ? COUNTRIES : COUNTRIES.filter((c) => c.uemoa);
@@ -110,17 +98,17 @@ export function MacroHeatmapWidget() {
           justifyContent: "space-between",
           padding: "6px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <div style={{ width: 3, height: 14, borderRadius: 2, background: C.purple }} />
           <BarChart3 size={11} color={C.purple} />
-          <span style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
             Heatmap Macro Comparative
           </span>
-          <span style={{ fontSize: 7.5, color: C.muted }}>· UEMOA & Comparaison Régionale 2025</span>
+          <span style={{ fontSize: 9.5, color: C.muted }}>· UEMOA & Comparaison Régionale 2025</span>
         </div>
         <button
           onClick={() => setShowComparison(!showComparison)}
@@ -128,9 +116,9 @@ export function MacroHeatmapWidget() {
             padding: "2px 8px",
             borderRadius: 3,
             border: `1px solid ${showComparison ? C.accent + "50" : C.border}`,
-            background: showComparison ? "rgba(214, 182, 141,0.1)" : "transparent",
+            background: showComparison ? "var(--bt-accent-a10)" : "transparent",
             color: showComparison ? C.accent : C.muted,
-            fontSize: 8.5,
+            fontSize: 10.5,
             fontWeight: showComparison ? 700 : 500,
             cursor: "pointer",
             display: "flex",
@@ -151,7 +139,7 @@ export function MacroHeatmapWidget() {
             display: "grid",
             gridTemplateColumns: "130px repeat(7, 1fr) 60px",
             padding: "5px 10px",
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             position: "sticky",
             top: 0,
             zIndex: 2,
@@ -159,14 +147,14 @@ export function MacroHeatmapWidget() {
             gap: 3,
           }}
         >
-          <div style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: C.muted, letterSpacing: "0.05em", textTransform: "uppercase" }}>
             PAYS
           </div>
           {INDICATORS.map((ind) => (
             <div
               key={ind.key}
               style={{
-                fontSize: 7.5,
+                fontSize: 9.5,
                 fontWeight: 700,
                 color: C.muted,
                 letterSpacing: "0.04em",
@@ -176,10 +164,10 @@ export function MacroHeatmapWidget() {
               }}
             >
               {ind.label}
-              <div style={{ fontSize: 6.5, color: C.muted, opacity: 0.7, fontWeight: 400 }}>{ind.unit}</div>
+              <div style={{ fontSize: 8.5, color: C.muted, opacity: 0.7, fontWeight: 400 }}>{ind.unit}</div>
             </div>
           ))}
-          <div style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.04em", textTransform: "uppercase", textAlign: "center" }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: C.muted, letterSpacing: "0.04em", textTransform: "uppercase", textAlign: "center" }}>
             TEND.
           </div>
         </div>
@@ -199,7 +187,7 @@ export function MacroHeatmapWidget() {
                 background: isComparison
                   ? "rgba(167,139,250,0.04)"
                   : i % 2 === 0
-                  ? "rgba(0, 1, 23,0.08)"
+                  ? "var(--bt-overlay-10)"
                   : "transparent",
                 borderBottom: `1px solid ${C.border}10`,
                 borderLeft: isUemoa ? `2px solid rgba(244,185,66,0.25)` : isComparison ? `2px solid rgba(167,139,250,0.25)` : "2px solid transparent",
@@ -208,15 +196,15 @@ export function MacroHeatmapWidget() {
             >
               {/* Country */}
               <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                <span style={{ fontSize: 13 }}>{country.flag}</span>
+                <span style={{ fontSize: 15 }}>{country.flag}</span>
                 <div>
-                  <div style={{ fontSize: 9.5, fontWeight: 700, color: isUemoa ? C.gold : isComparison ? C.purple : C.text }}>
+                  <div style={{ fontSize: 11.5, fontWeight: 700, color: isUemoa ? C.gold : isComparison ? C.purple : C.text }}>
                     {country.name}
                   </div>
                   <div style={{ display: "flex", gap: 3 }}>
-                    <span style={{ fontSize: 7, color: C.muted }}>{country.code}</span>
+                    <span style={{ fontSize: 9, color: C.muted }}>{country.code}</span>
                     {isUemoa && (
-                      <span style={{ fontSize: 6.5, color: C.gold, fontWeight: 700 }}>UEMOA</span>
+                      <span style={{ fontSize: 8.5, color: C.gold, fontWeight: 700 }}>UEMOA</span>
                     )}
                   </div>
                 </div>
@@ -238,7 +226,7 @@ export function MacroHeatmapWidget() {
                   >
                     <span
                       style={{
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: 700,
                         color: text,
                         fontVariantNumeric: "tabular-nums",
@@ -277,13 +265,13 @@ export function MacroHeatmapWidget() {
                 bottom: 0,
               }}
             >
-              <div style={{ fontSize: 8.5, fontWeight: 700, color: C.accent, letterSpacing: "0.04em" }}>MOY. UEMOA</div>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.accent, letterSpacing: "0.04em" }}>MOY. UEMOA</div>
               {INDICATORS.map((ind) => {
                 const val = avg(ind.key as keyof CountryRow);
                 const { bg, text } = getCellColor(val, ind.key);
                 return (
                   <div key={ind.key} style={{ background: bg, borderRadius: 3, padding: "3px 4px", textAlign: "center" }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: text, fontVariantNumeric: "tabular-nums" }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: text, fontVariantNumeric: "tabular-nums" }}>
                       {val}
                     </span>
                   </div>
@@ -300,7 +288,7 @@ export function MacroHeatmapWidget() {
         style={{
           padding: "4px 12px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.3)",
+          background: "var(--bt-overlay-30)",
           display: "flex",
           gap: 12,
           flexShrink: 0,
@@ -314,11 +302,11 @@ export function MacroHeatmapWidget() {
         ].map((item) => (
           <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <div style={{ width: 8, height: 8, borderRadius: 2, background: item.color, opacity: 0.8 }} />
-            <span style={{ fontSize: 7.5, color: C.muted }}>{item.label}</span>
+            <span style={{ fontSize: 9.5, color: C.muted }}>{item.label}</span>
           </div>
         ))}
         <div style={{ flex: 1 }} />
-        <span style={{ fontSize: 7.5, color: C.muted }}>Sources : BCEAO · FMI · Banque Mondiale · 2025</span>
+        <span style={{ fontSize: 9.5, color: C.muted }}>Sources : BCEAO · FMI · Banque Mondiale · 2025</span>
       </div>
     </div>
   );

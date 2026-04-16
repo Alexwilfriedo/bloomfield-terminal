@@ -1,15 +1,6 @@
 import { WidgetShell } from "./WidgetShell";
 import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
-
-const C = {
-  accent: "#d6b68d",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const sectors = [
   { name: "Télécoms", pct: 2.14, cap: "2 840" },
@@ -44,6 +35,7 @@ function getHeatColor(pct: number) {
 }
 
 export function HeatmapWidget() {
+  const C = useThemeColors();
   return (
     <WidgetShell
       title="Performance Sectorielle"
@@ -74,12 +66,12 @@ export function HeatmapWidget() {
                   transition: "all 0.15s",
                 }}
               >
-                <div style={{ fontSize: 10, color: "#a0bcd4", fontWeight: 600, letterSpacing: "0.01em" }}>
+                <div style={{ fontSize: 12, color: "#a0bcd4", fontWeight: 600, letterSpacing: "0.01em" }}>
                   {s.name}
                 </div>
                 <div
                   style={{
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: 800,
                     color: colors.text,
                     fontVariantNumeric: "tabular-nums",
@@ -90,7 +82,7 @@ export function HeatmapWidget() {
                   {s.pct > 0 ? "+" : ""}
                   {s.pct.toFixed(2)}%
                 </div>
-                <div style={{ fontSize: 9, color: C.muted, marginTop: 2 }}>
+                <div style={{ fontSize: 11, color: C.muted, marginTop: 2 }}>
                   Cap: {s.cap} Mds
                 </div>
               </div>
@@ -102,14 +94,14 @@ export function HeatmapWidget() {
         <div
           style={{
             flex: 1,
-            background: "rgba(0, 1, 23,0.45)",
+            background: "var(--bt-overlay-45)",
             borderRadius: 6,
             border: `1px solid ${C.border}`,
             padding: "8px 8px 4px",
             minHeight: 80,
           }}
         >
-          <div style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 4 }}>
+          <div style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 4 }}>
             BRVM Composite — 8 séances
           </div>
           <ResponsiveContainer width="100%" height={70}>
@@ -120,25 +112,25 @@ export function HeatmapWidget() {
                   <stop offset="100%" stopColor={C.accent} stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(44, 61, 127,0.2)" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--bt-border-a20)" vertical={false} />
               <XAxis
                 dataKey="d"
-                tick={{ fontSize: 8, fill: C.muted }}
+                tick={{ fontSize: 10, fill: C.muted }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fontSize: 8, fill: C.muted }}
+                tick={{ fontSize: 10, fill: C.muted }}
                 axisLine={false}
                 tickLine={false}
                 domain={["auto", "auto"]}
               />
               <Tooltip
                 contentStyle={{
-                  background: "#000117",
+                  background: C.surface,
                   border: `1px solid ${C.border}`,
                   borderRadius: 4,
-                  fontSize: 10,
+                  fontSize: 12,
                   color: C.text,
                 }}
                 formatter={(v: number) => [v.toFixed(2), "BRVM Composite"]}

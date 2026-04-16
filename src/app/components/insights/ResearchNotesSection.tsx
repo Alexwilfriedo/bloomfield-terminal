@@ -1,19 +1,6 @@
 import { useState } from "react";
 import { FileText, ArrowUpRight, Bookmark, Share2, ChevronRight, TrendingUp, TrendingDown, Minus, Star, Lock } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 interface ResearchNote {
   id: number;
@@ -42,12 +29,12 @@ const NOTES: ResearchNote[] = [
     title: "SONATEL : Upgrade vers BUY — Cible 19 500 XOF | Momentum bénéficiaire supérieur aux attentes",
     summary: "Suite aux résultats FY2025, nous relevons notre recommandation sur SONATEL à BUY avec un objectif de cours de 19 500 XOF. Le groupe affiche une résilience opérationnelle remarquable malgré un environnement concurrentiel intense au Sénégal.",
     type: "NOTE ANALYSTE",
-    typeColor: C.accent,
+    typeColor: "#d6b68d",
     rating: "BUY",
     target: "19 500 XOF",
     company: "SONATEL",
     country: "Sénégal",
-    countryColor: C.gold,
+    countryColor: "#f4b942",
     sector: "Télécoms",
     author: "Issa Diabaté",
     authorInitials: "ID",
@@ -62,9 +49,9 @@ const NOTES: ResearchNote[] = [
     title: "BCEAO Q1 2026 — Implications de la pause monétaire pour la liquidité bancaire UEMOA",
     summary: "Le maintien du taux directeur à 3,5% consolide un environnement de financement favorable pour les établissements de crédit de la zone. Analyse des effets de transmission et implications pour les marges d'intérêt nettes du secteur bancaire régional.",
     type: "MACRO BRIEF",
-    typeColor: C.purple,
+    typeColor: "#a78bfa",
     country: "UEMOA",
-    countryColor: C.accent,
+    countryColor: "#d6b68d",
     sector: "Politique Monétaire",
     author: "Moussa Ouédraogo",
     authorInitials: "MO",
@@ -79,12 +66,12 @@ const NOTES: ResearchNote[] = [
     title: "PALM CI : Neutral maintenu — La flambée des prix du cacao soutient le résultat mais crée un risque sur les marges",
     summary: "Malgré un niveau record du cacao à 8 245 USD/tonne, les dépenses d'intrants et la pression salariale en Côte d'Ivoire pourraient comprimer les marges brutes de PALM CI au S1 2026. Nous maintenons NEUTRAL avec cible 8 500 XOF.",
     type: "NOTE ANALYSTE",
-    typeColor: C.accent,
+    typeColor: "#d6b68d",
     rating: "NEUTRAL",
     target: "8 500 XOF",
     company: "PALM CI",
     country: "Côte d'Ivoire",
-    countryColor: C.orange,
+    countryColor: "#fb923c",
     sector: "Agroalimentaire",
     author: "Adjoua Koné",
     authorInitials: "AK",
@@ -99,9 +86,9 @@ const NOTES: ResearchNote[] = [
     title: "Obligations Souveraines UEMOA — Analyse de la courbe des taux et opportunités de positionnement T2 2026",
     summary: "La courbe souveraine UEMOA présente des opportunités de valeur relative sur le segment 5-7 ans. Les spreads CI-SN s'élargissent légèrement en faveur d'une surpondération des titres sénégalais malgré la dégradation récente du solde budgétaire.",
     type: "OBLIGATIONS",
-    typeColor: C.gold,
+    typeColor: "#f4b942",
     country: "UEMOA",
-    countryColor: C.accent,
+    countryColor: "#d6b68d",
     sector: "Marchés Obligataires",
     author: "Aissatou Bah",
     authorInitials: "AB",
@@ -116,9 +103,9 @@ const NOTES: ResearchNote[] = [
     title: "Secteur Bancaire BRVM — Bilan T1 2026 : Rentabilité, risques et perspectives de dividendes",
     summary: "Le secteur bancaire coté sur la BRVM affiche une rentabilité solide au T1 2026. ROE moyen de 14,2%, ratio coût du risque stable à 1,2%, et perspectives de distributions attractives pour les actionnaires en 2026-2027.",
     type: "SECTEUR",
-    typeColor: C.green,
+    typeColor: "#10c87a",
     country: "BRVM",
-    countryColor: C.accent,
+    countryColor: "#d6b68d",
     sector: "Banques",
     author: "Issa Diabaté",
     authorInitials: "ID",
@@ -131,13 +118,14 @@ const NOTES: ResearchNote[] = [
 ];
 
 const RATING_COLORS: Record<string, string> = {
-  BUY: C.green,
-  SELL: C.red,
-  HOLD: C.gold,
-  NEUTRAL: C.muted,
+  BUY: "#10c87a",
+  SELL: "#f43860",
+  HOLD: "#f4b942",
+  NEUTRAL: "#54678d",
 };
 
 function RatingBadge({ rating }: { rating: string }) {
+  const C = useThemeColors();
   const color = RATING_COLORS[rating] || C.muted;
   return (
     <span
@@ -146,7 +134,7 @@ function RatingBadge({ rating }: { rating: string }) {
         borderRadius: 3,
         background: color + "18",
         border: `1px solid ${color}40`,
-        fontSize: 8.5,
+        fontSize: 10.5,
         fontWeight: 800,
         color,
         letterSpacing: "0.06em",
@@ -159,6 +147,7 @@ function RatingBadge({ rating }: { rating: string }) {
 }
 
 function StarRating({ stars }: { stars: number }) {
+  const C = useThemeColors();
   return (
     <div style={{ display: "flex", gap: 1 }}>
       {[1, 2, 3, 4, 5].map((i) => (
@@ -174,6 +163,7 @@ function StarRating({ stars }: { stars: number }) {
 }
 
 export function ResearchNotesSection() {
+  const C = useThemeColors();
   const [activeFilter, setActiveFilter] = useState("Tous");
 
   const FILTERS = ["Tous", "Équité", "Macro", "Obligations", "Sectoriels"];
@@ -195,12 +185,12 @@ export function ResearchNotesSection() {
           gap: 8,
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
         }}
       >
         <FileText size={13} color={C.gold} />
-        <span style={{ fontSize: 11, fontWeight: 700, color: C.text }}>Notes de Recherche</span>
-        <span style={{ fontSize: 9, color: C.muted }}>· Analyses & Recommandations Bloomfield</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Notes de Recherche</span>
+        <span style={{ fontSize: 11, color: C.muted }}>· Analyses & Recommandations Bloomfield</span>
         <div style={{ flex: 1 }} />
         {FILTERS.map((f) => (
           <button
@@ -209,10 +199,10 @@ export function ResearchNotesSection() {
             style={{
               padding: "3px 8px",
               borderRadius: 3,
-              border: `1px solid ${activeFilter === f ? "rgba(244,185,66,0.4)" : "rgba(44, 61, 127,0.22)"}`,
+              border: `1px solid ${activeFilter === f ? "rgba(244,185,66,0.4)" : "var(--bt-border-a22)"}`,
               background: activeFilter === f ? "rgba(244,185,66,0.1)" : "transparent",
               color: activeFilter === f ? C.gold : C.muted,
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: activeFilter === f ? 700 : 500,
               cursor: "pointer",
             }}
@@ -230,7 +220,7 @@ export function ResearchNotesSection() {
             background: "rgba(244,185,66,0.08)",
             border: "1px solid rgba(244,185,66,0.2)",
             color: C.gold,
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 600,
             cursor: "pointer",
           }}
@@ -249,13 +239,13 @@ export function ResearchNotesSection() {
               display: "flex",
               gap: 14,
               padding: "12px 14px",
-              borderBottom: idx < NOTES.length - 1 ? `1px solid rgba(44, 61, 127,0.16)` : "none",
+              borderBottom: idx < NOTES.length - 1 ? `1px solid var(--bt-border-a16)` : "none",
               cursor: "pointer",
               transition: "background 0.1s",
               background: note.isNew ? "rgba(214, 182, 141,0.02)" : "transparent",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLDivElement).style.background = "rgba(214, 182, 141,0.04)";
+              (e.currentTarget as HTMLDivElement).style.background = "var(--bt-accent-a06)";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLDivElement).style.background = note.isNew
@@ -274,7 +264,7 @@ export function ResearchNotesSection() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: 700,
                   color: "#fff",
                 }}
@@ -294,7 +284,7 @@ export function ResearchNotesSection() {
                       borderRadius: 2,
                       background: "rgba(16,200,122,0.12)",
                       border: "1px solid rgba(16,200,122,0.3)",
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       fontWeight: 800,
                       color: C.green,
                       letterSpacing: "0.06em",
@@ -309,7 +299,7 @@ export function ResearchNotesSection() {
                     borderRadius: 2,
                     background: note.typeColor + "14",
                     border: `1px solid ${note.typeColor}35`,
-                    fontSize: 8,
+                    fontSize: 10,
                     fontWeight: 700,
                     color: note.typeColor,
                     letterSpacing: "0.06em",
@@ -323,7 +313,7 @@ export function ResearchNotesSection() {
                     borderRadius: 2,
                     background: note.countryColor + "14",
                     border: `1px solid ${note.countryColor}30`,
-                    fontSize: 8,
+                    fontSize: 10,
                     fontWeight: 600,
                     color: note.countryColor,
                   }}
@@ -331,7 +321,7 @@ export function ResearchNotesSection() {
                   {note.country}
                 </span>
                 {note.sector && (
-                  <span style={{ fontSize: 8.5, color: C.muted }}>{note.sector}</span>
+                  <span style={{ fontSize: 10.5, color: C.muted }}>{note.sector}</span>
                 )}
                 {note.isPremium && (
                   <span
@@ -343,7 +333,7 @@ export function ResearchNotesSection() {
                       borderRadius: 2,
                       background: "rgba(244,185,66,0.1)",
                       border: "1px solid rgba(244,185,66,0.25)",
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       fontWeight: 700,
                       color: C.gold,
                     }}
@@ -357,7 +347,7 @@ export function ResearchNotesSection() {
               {/* Title */}
               <div
                 style={{
-                  fontSize: 11.5,
+                  fontSize: 13.5,
                   fontWeight: 700,
                   color: C.text,
                   lineHeight: 1.35,
@@ -371,7 +361,7 @@ export function ResearchNotesSection() {
               <p
                 style={{
                   margin: "0 0 7px",
-                  fontSize: 10.5,
+                  fontSize: 12.5,
                   color: C.dim,
                   lineHeight: 1.5,
                   display: "-webkit-box",
@@ -387,15 +377,15 @@ export function ResearchNotesSection() {
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                 {note.rating && <RatingBadge rating={note.rating} />}
                 {note.target && (
-                  <span style={{ fontSize: 9, color: C.gold, fontWeight: 600 }}>Cible : {note.target}</span>
+                  <span style={{ fontSize: 11, color: C.gold, fontWeight: 600 }}>Cible : {note.target}</span>
                 )}
                 {note.stars && <StarRating stars={note.stars} />}
-                <span style={{ fontSize: 8.5, color: C.muted }}>
+                <span style={{ fontSize: 10.5, color: C.muted }}>
                   {note.author} · {note.date}
                 </span>
                 <span
                   style={{
-                    fontSize: 8.5,
+                    fontSize: 10.5,
                     color: C.muted,
                     display: "flex",
                     alignItems: "center",
@@ -412,7 +402,7 @@ export function ResearchNotesSection() {
                       width: 22,
                       height: 22,
                       borderRadius: 4,
-                      background: "rgba(0, 1, 23,0.5)",
+                      background: "var(--bt-overlay-50)",
                       border: `1px solid ${C.border}`,
                       display: "flex",
                       alignItems: "center",
@@ -429,7 +419,7 @@ export function ResearchNotesSection() {
                       width: 22,
                       height: 22,
                       borderRadius: 4,
-                      background: "rgba(0, 1, 23,0.5)",
+                      background: "var(--bt-overlay-50)",
                       border: `1px solid ${C.border}`,
                       display: "flex",
                       alignItems: "center",
@@ -448,10 +438,10 @@ export function ResearchNotesSection() {
                       gap: 3,
                       padding: "3px 8px",
                       borderRadius: 4,
-                      background: "rgba(214, 182, 141,0.08)",
-                      border: "1px solid rgba(214, 182, 141,0.2)",
+                      background: "var(--bt-accent-a08)",
+                      border: "1px solid var(--bt-accent-a20)",
                       color: C.accent,
-                      fontSize: 8.5,
+                      fontSize: 10.5,
                       fontWeight: 600,
                       cursor: "pointer",
                     }}

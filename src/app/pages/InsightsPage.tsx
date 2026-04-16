@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { InsightsTopBar } from "../components/insights/InsightsTopBar";
 import { InsightsRightPanel } from "../components/insights/InsightsRightPanel";
 import { HeroEditorialBanner } from "../components/insights/HeroEditorialBanner";
 import { FlashNewsFeed } from "../components/insights/FlashNewsFeed";
@@ -8,6 +9,7 @@ import { ReportsSection } from "../components/insights/ReportsSection";
 import { EducationSection } from "../components/insights/EducationSection";
 import { ZoomableSection } from "../components/insights/ZoomableSection";
 import { LiveTicker } from "../components/terminal/LiveTicker";
+import { useThemeColors } from "../hooks/useThemeColors";
 import {
   Newspaper,
   TrendingUp,
@@ -16,18 +18,6 @@ import {
   FileText,
   GraduationCap,
 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  dark: "#000117",
-  purple: "#a78bfa",
-};
 
 const TABS = [
   { id: "top-stories", label: "À La Une", icon: Newspaper },
@@ -42,6 +32,7 @@ type TabId = (typeof TABS)[number]["id"];
 
 export function InsightsPage() {
   const [activeTab, setActiveTab] = useState<TabId>("top-stories");
+  const C = useThemeColors();
 
   return (
     <div
@@ -53,6 +44,9 @@ export function InsightsPage() {
         background: C.dark,
       }}
     >
+      {/* Module top bar with filters */}
+      <InsightsTopBar />
+
       {/* Live ticker */}
       <LiveTicker />
 
@@ -99,7 +93,7 @@ export function InsightsPage() {
                     border: "none",
                     borderBottom: `2px solid ${isActive ? C.accent : "transparent"}`,
                     color: isActive ? C.accent : C.muted,
-                    fontSize: 10.5,
+                    fontSize: 12.5,
                     fontWeight: isActive ? 700 : 500,
                     cursor: "pointer",
                     letterSpacing: "0.02em",
@@ -147,8 +141,8 @@ export function InsightsPage() {
                   boxShadow: `0 0 5px ${C.gold}`,
                 }}
               />
-              <span style={{ fontSize: 9, fontWeight: 700, color: C.gold }}>PREMIUM</span>
-              <span style={{ fontSize: 7.5, color: C.muted }}>· Accès Complet</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.gold }}>PREMIUM</span>
+              <span style={{ fontSize: 9.5, color: C.muted }}>· Accès Complet</span>
             </div>
           </div>
 
@@ -272,6 +266,8 @@ export function InsightsPage() {
 /* ─── Supplementary sub-components ───────────────────────────────────────── */
 
 function FeaturedResearchTeaser() {
+  const C = useThemeColors();
+
   return (
     <div
       style={{
@@ -302,7 +298,7 @@ function FeaturedResearchTeaser() {
               borderRadius: 3,
               background: "rgba(244,185,66,0.12)",
               border: "1px solid rgba(244,185,66,0.3)",
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 800,
               color: C.gold,
               letterSpacing: "0.08em",
@@ -310,12 +306,12 @@ function FeaturedResearchTeaser() {
           >
             NOTE ANALYSTE
           </span>
-          <span style={{ fontSize: 8, color: C.muted }}>08 Avr 2026 · 12 min</span>
+          <span style={{ fontSize: 10, color: C.muted }}>08 Avr 2026 · 12 min</span>
         </div>
         <h3
           style={{
             margin: "0 0 6px",
-            fontSize: 13,
+            fontSize: 15,
             fontWeight: 800,
             color: C.text,
             lineHeight: 1.3,
@@ -323,7 +319,7 @@ function FeaturedResearchTeaser() {
         >
           SONATEL : Upgrade BUY · Cible 19 500 XOF
         </h3>
-        <p style={{ margin: "0 0 10px", fontSize: 10, color: C.dim, lineHeight: 1.5 }}>
+        <p style={{ margin: "0 0 10px", fontSize: 12, color: C.dim, lineHeight: 1.5 }}>
           Résultats FY2025 au-dessus des attentes. ARPU données en hausse de 14%. Nous relevons la cible de cours et maintenons notre conviction constructive sur le titre.
         </p>
         <div style={{ display: "flex", gap: 6 }}>
@@ -333,9 +329,9 @@ function FeaturedResearchTeaser() {
               style={{
                 padding: "2px 6px",
                 borderRadius: 3,
-                background: i === 3 ? "rgba(16,200,122,0.12)" : "rgba(44, 61, 127,0.2)",
-                border: `1px solid ${i === 3 ? "rgba(16,200,122,0.3)" : "rgba(44, 61, 127,0.3)"}`,
-                fontSize: 8,
+                background: i === 3 ? "rgba(16,200,122,0.12)" : "var(--bt-border-a20)",
+                border: `1px solid ${i === 3 ? "rgba(16,200,122,0.3)" : "var(--bt-border-a32)"}`,
+                fontSize: 10,
                 color: i === 3 ? "#10c87a" : C.muted,
                 fontWeight: i === 3 ? 700 : 500,
               }}
@@ -350,6 +346,8 @@ function FeaturedResearchTeaser() {
 }
 
 function MarketPulseWidget() {
+  const C = useThemeColors();
+
   const metrics = [
     { label: "BRVM Composite", value: "284.12", change: "+0.73%", up: true },
     { label: "BRVM 10", value: "437.80", change: "+0.45%", up: true },
@@ -372,7 +370,7 @@ function MarketPulseWidget() {
         style={{
           padding: "8px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           display: "flex",
           alignItems: "center",
           gap: 6,
@@ -387,10 +385,10 @@ function MarketPulseWidget() {
             boxShadow: "0 0 6px #10c87a",
           }}
         />
-        <span style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+        <span style={{ fontSize: 11.5, fontWeight: 700, color: C.dim, letterSpacing: "0.06em", textTransform: "uppercase" }}>
           Pouls des Marchés
         </span>
-        <span style={{ fontSize: 8, color: C.muted }}>· Temps réel</span>
+        <span style={{ fontSize: 10, color: C.muted }}>· Temps réel</span>
       </div>
       <div
         style={{
@@ -404,18 +402,18 @@ function MarketPulseWidget() {
             key={m.label}
             style={{
               padding: "8px 12px",
-              borderRight: i % 2 === 0 ? `1px solid rgba(44, 61, 127,0.16)` : "none",
-              borderBottom: i < metrics.length - 2 ? `1px solid rgba(44, 61, 127,0.16)` : "none",
+              borderRight: i % 2 === 0 ? `1px solid var(--bt-border-a16)` : "none",
+              borderBottom: i < metrics.length - 2 ? `1px solid var(--bt-border-a16)` : "none",
             }}
           >
-            <div style={{ fontSize: 8, color: C.muted, marginBottom: 2 }}>{m.label}</div>
+            <div style={{ fontSize: 10, color: C.muted, marginBottom: 2 }}>{m.label}</div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 5 }}>
-              <span style={{ fontSize: 12, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+              <span style={{ fontSize: 14, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                 {m.value}
               </span>
               <span
                 style={{
-                  fontSize: 8.5,
+                  fontSize: 10.5,
                   fontWeight: 600,
                   color: m.up === null ? C.muted : m.up ? "#10c87a" : "#f43860",
                 }}

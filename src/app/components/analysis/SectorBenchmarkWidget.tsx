@@ -10,20 +10,7 @@ import {
 } from "recharts";
 import { WidgetShell } from "../widgets/WidgetShell";
 import { TrendingUp, Award } from "lucide-react";
-
-const C = {
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  purple: "#a78bfa",
-  surface: "#000117",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const PEERS = [
   {
@@ -124,34 +111,36 @@ const PEERS = [
   },
 ];
 
-const ROE_DATA = PEERS.map((p) => ({ name: p.ticker, ROE: parseFloat(p.roe), fill: p.isSelf ? C.gold : C.accent }));
+const ROE_DATA = PEERS.map((p) => ({ name: p.ticker, ROE: parseFloat(p.roe), fill: p.isSelf ? "#f4b942" : "#d6b68d" }));
 
-const BarTooltip = ({ active, payload, label }: {
+function BarTooltip({ active, payload, label }: {
   active?: boolean;
   payload?: { value: number; name: string }[];
   label?: string;
-}) => {
+}) {
+  const C = useThemeColors();
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "6px 10px" }}>
-      <div style={{ fontSize: 9.5, fontWeight: 700, color: C.text }}>{label}</div>
+    <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 6, padding: "6px 10px" }}>
+      <div style={{ fontSize: 11.5, fontWeight: 700, color: C.text }}>{label}</div>
       {payload.map((p) => (
-        <div key={p.name} style={{ fontSize: 9, color: C.dim }}>
+        <div key={p.name} style={{ fontSize: 11, color: C.dim }}>
           {p.name}: <strong style={{ color: C.text }}>{p.value}%</strong>
         </div>
       ))}
     </div>
   );
-};
+}
 
 const SECTOR_METRICS = [
-  { label: "Croissance PNB sectorielle", value: "+9.8%", period: "FY2023", color: C.green },
-  { label: "Marge nette moyenne", value: "21.4%", period: "Secteur BRVM", color: C.accent },
-  { label: "ROE médian sectoriel", value: "14.1%", period: "Banques CIV", color: C.gold },
-  { label: "NPL moyen", value: "6.8%", period: "UEMOA", color: C.red },
+  { label: "Croissance PNB sectorielle", value: "+9.8%", period: "FY2023", color: "#10c87a" },
+  { label: "Marge nette moyenne", value: "21.4%", period: "Secteur BRVM", color: "#d6b68d" },
+  { label: "ROE médian sectoriel", value: "14.1%", period: "Banques CIV", color: "#f4b942" },
+  { label: "NPL moyen", value: "6.8%", period: "UEMOA", color: "#f43860" },
 ];
 
 export function SectorBenchmarkWidget() {
+  const C = useThemeColors();
   return (
     <WidgetShell
       title="Analyse Sectorielle & Benchmarking"
@@ -166,7 +155,7 @@ export function SectorBenchmarkWidget() {
             display: "flex",
             gap: 0,
             borderBottom: `1px solid ${C.border}`,
-            background: "rgba(0, 1, 23,0.3)",
+            background: "var(--bt-overlay-30)",
             flexShrink: 0,
           }}
         >
@@ -179,11 +168,11 @@ export function SectorBenchmarkWidget() {
                 borderRight: i < SECTOR_METRICS.length - 1 ? `1px solid ${C.border}` : "none",
               }}
             >
-              <div style={{ fontSize: 7.5, color: C.muted, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+              <div style={{ fontSize: 9.5, color: C.muted, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
                 {m.label}
               </div>
-              <div style={{ fontSize: 14, fontWeight: 800, color: m.color, marginTop: 2, lineHeight: 1 }}>{m.value}</div>
-              <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>{m.period}</div>
+              <div style={{ fontSize: 16, fontWeight: 800, color: m.color, marginTop: 2, lineHeight: 1 }}>{m.value}</div>
+              <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1 }}>{m.period}</div>
             </div>
           ))}
         </div>
@@ -191,9 +180,9 @@ export function SectorBenchmarkWidget() {
         <div style={{ display: "flex", flex: 1, overflow: "hidden", minHeight: 0 }}>
           {/* Left: peer table */}
           <div style={{ flex: 1.2, overflow: "auto", minWidth: 0 }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 10.5 }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12.5 }}>
               <thead>
-                <tr style={{ background: "rgba(0, 1, 23,0.5)" }}>
+                <tr style={{ background: "var(--bt-overlay-50)" }}>
                   {["#", "Société", "Mkt Cap", "PNB", "RN", "ROE", "ROA", "P/E", "P/B", "Tier1", "NPL"].map((h) => (
                     <th
                       key={h}
@@ -201,7 +190,7 @@ export function SectorBenchmarkWidget() {
                         padding: "7px 10px",
                         textAlign: h === "Société" ? "left" : "right",
                         color: C.muted,
-                        fontSize: 8.5,
+                        fontSize: 10.5,
                         fontWeight: 700,
                         letterSpacing: "0.05em",
                         textTransform: "uppercase",
@@ -219,35 +208,35 @@ export function SectorBenchmarkWidget() {
                   <tr
                     key={p.ticker}
                     style={{
-                      background: p.isSelf ? "rgba(244,185,66,0.06)" : i % 2 === 0 ? "rgba(0, 1, 23,0.2)" : "transparent",
+                      background: p.isSelf ? "rgba(244,185,66,0.06)" : i % 2 === 0 ? "var(--bt-overlay-20)" : "transparent",
                       borderBottom: `1px solid ${C.border}20`,
                       cursor: "default",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.07)")}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bt-accent-a08)")}
                     onMouseLeave={(e) =>
                       (e.currentTarget.style.background = p.isSelf
                         ? "rgba(244,185,66,0.06)"
                         : i % 2 === 0
-                        ? "rgba(0, 1, 23,0.2)"
+                        ? "var(--bt-overlay-20)"
                         : "transparent")
                     }
                   >
                     <td style={{ padding: "7px 10px", textAlign: "center" }}>
-                      {i === 0 ? <Award size={11} color={C.gold} /> : <span style={{ fontSize: 9, color: C.muted }}>{i + 1}</span>}
+                      {i === 0 ? <Award size={11} color={C.gold} /> : <span style={{ fontSize: 11, color: C.muted }}>{i + 1}</span>}
                     </td>
                     <td style={{ padding: "7px 10px", minWidth: 150 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                        <span style={{ fontSize: 12 }}>{p.flag}</span>
+                        <span style={{ fontSize: 14 }}>{p.flag}</span>
                         <div>
-                          <div style={{ fontSize: 10, fontWeight: p.isSelf ? 800 : 600, color: p.isSelf ? C.gold : C.text }}>
+                          <div style={{ fontSize: 12, fontWeight: p.isSelf ? 800 : 600, color: p.isSelf ? C.gold : C.text }}>
                             {p.ticker}
                           </div>
-                          <div style={{ fontSize: 8, color: C.muted }}>{p.name}</div>
+                          <div style={{ fontSize: 10, color: C.muted }}>{p.name}</div>
                         </div>
                         {p.isSelf && (
                           <span
                             style={{
-                              fontSize: 7,
+                              fontSize: 9,
                               fontWeight: 700,
                               color: C.gold,
                               background: "rgba(244,185,66,0.12)",
@@ -278,7 +267,7 @@ export function SectorBenchmarkWidget() {
                         style={{
                           padding: "7px 10px",
                           textAlign: "right",
-                          fontSize: 10,
+                          fontSize: 12,
                           fontWeight: p.isSelf ? 700 : 400,
                           color: (cell as { v: string; color?: string }).color ?? (p.isSelf ? C.gold : C.dim),
                           fontVariantNumeric: "tabular-nums",
@@ -286,7 +275,7 @@ export function SectorBenchmarkWidget() {
                         }}
                       >
                         {cell.v}
-                        {"unit" in cell && <span style={{ fontSize: 8, color: C.muted, marginLeft: 2 }}>{(cell as { v: string; unit: string }).unit}</span>}
+                        {"unit" in cell && <span style={{ fontSize: 10, color: C.muted, marginLeft: 2 }}>{(cell as { v: string; unit: string }).unit}</span>}
                       </td>
                     ))}
                   </tr>
@@ -302,20 +291,20 @@ export function SectorBenchmarkWidget() {
               borderLeft: `1px solid ${C.border}`,
               display: "flex",
               flexDirection: "column",
-              background: "rgba(0, 1, 23,0.2)",
+              background: "var(--bt-overlay-20)",
               flexShrink: 0,
             }}
           >
             {/* ROE comparison */}
             <div style={{ flex: 1, padding: "8px 10px", borderBottom: `1px solid ${C.border}` }}>
-              <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 4 }}>
+              <div style={{ fontSize: 10, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 4 }}>
                 ROE Comparé (%)
               </div>
               <ResponsiveContainer width="100%" height="90%">
                 <BarChart data={ROE_DATA} layout="vertical" margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="2 2" stroke={C.border} horizontal={false} />
-                  <XAxis type="number" tick={{ fill: C.muted, fontSize: 7 }} tickLine={false} axisLine={false} domain={[0, 22]} />
-                  <YAxis type="category" dataKey="name" tick={{ fill: C.dim, fontSize: 8 }} tickLine={false} axisLine={false} width={42} />
+                  <XAxis type="number" tick={{ fill: C.muted, fontSize: 9 }} tickLine={false} axisLine={false} domain={[0, 22]} />
+                  <YAxis type="category" dataKey="name" tick={{ fill: C.dim, fontSize: 10 }} tickLine={false} axisLine={false} width={42} />
                   <Tooltip content={<BarTooltip />} />
                   <Bar dataKey="ROE" radius={[0, 3, 3, 0]}>
                     {ROE_DATA.map((entry, index) => (
@@ -328,17 +317,17 @@ export function SectorBenchmarkWidget() {
 
             {/* Performance ranking */}
             <div style={{ flex: 1, padding: "8px 10px" }}>
-              <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+              <div style={{ fontSize: 10, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
                 Classement Performance / Risque
               </div>
               {PEERS.slice(0, 4).map((p, i) => (
                 <div key={p.ticker} style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
-                  <span style={{ fontSize: 8, color: C.muted, width: 12, flexShrink: 0 }}>#{i + 1}</span>
-                  <span style={{ fontSize: 8, fontWeight: p.isSelf ? 700 : 500, color: p.isSelf ? C.gold : C.dim, width: 42, flexShrink: 0 }}>
+                  <span style={{ fontSize: 10, color: C.muted, width: 12, flexShrink: 0 }}>#{i + 1}</span>
+                  <span style={{ fontSize: 10, fontWeight: p.isSelf ? 700 : 500, color: p.isSelf ? C.gold : C.dim, width: 42, flexShrink: 0 }}>
                     {p.ticker}
                   </span>
                   <div style={{ flex: 1, position: "relative" }}>
-                    <div style={{ height: 4, background: "rgba(44, 61, 127,0.2)", borderRadius: 3 }}>
+                    <div style={{ height: 4, background: "var(--bt-border-a20)", borderRadius: 3 }}>
                       <div
                         style={{
                           position: "absolute",
@@ -355,7 +344,7 @@ export function SectorBenchmarkWidget() {
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 3, flexShrink: 0 }}>
                     <TrendingUp size={8} color={C.green} />
-                    <span style={{ fontSize: 8.5, fontWeight: 700, color: p.isSelf ? C.gold : C.dim }}>
+                    <span style={{ fontSize: 10.5, fontWeight: 700, color: p.isSelf ? C.gold : C.dim }}>
                       {p.roe}%
                     </span>
                   </div>

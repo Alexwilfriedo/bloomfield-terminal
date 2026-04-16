@@ -11,19 +11,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { useTerminal } from "../../context/TerminalContext";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 type SortKey = "ticker" | "price" | "pct" | "vol" | "w52" | "rsi" | "pe";
 type SortDir = "asc" | "desc";
@@ -95,6 +83,7 @@ function SVGSparkline({ data, color }: { data: number[]; color: string }) {
 }
 
 function RSIBar({ value }: { value: number }) {
+  const C = useThemeColors();
   const color =
     value >= 70 ? C.red : value <= 30 ? C.green : C.gold;
   return (
@@ -103,7 +92,7 @@ function RSIBar({ value }: { value: number }) {
         style={{
           width: 44,
           height: 5,
-          background: "rgba(44, 61, 127,0.2)",
+          background: "var(--bt-border-a20)",
           borderRadius: 3,
           position: "relative",
           overflow: "hidden",
@@ -120,7 +109,7 @@ function RSIBar({ value }: { value: number }) {
         <div style={{ position: "absolute", left: "70%", top: 0, bottom: 0, width: 1, background: "rgba(255,255,255,0.18)" }} />
         <div style={{ position: "absolute", left: "30%", top: 0, bottom: 0, width: 1, background: "rgba(255,255,255,0.18)" }} />
       </div>
-      <span style={{ fontSize: 9, fontWeight: 700, color, fontVariantNumeric: "tabular-nums", minWidth: 20 }}>
+      <span style={{ fontSize: 11, fontWeight: 700, color, fontVariantNumeric: "tabular-nums", minWidth: 20 }}>
         {value}
       </span>
     </div>
@@ -128,6 +117,7 @@ function RSIBar({ value }: { value: number }) {
 }
 
 function SectorBadge({ label }: { label: string }) {
+  const C = useThemeColors();
   const colorMap: Record<string, string> = {
     Finance: C.accent,
     Télécom: C.purple,
@@ -141,7 +131,7 @@ function SectorBadge({ label }: { label: string }) {
   return (
     <span
       style={{
-        fontSize: 7.5,
+        fontSize: 9.5,
         fontWeight: 600,
         color,
         background: color + "14",
@@ -174,6 +164,7 @@ const COLS = [
 const gridCols = COLS.map((c) => c.w).join(" ");
 
 export function MarketScannerWidget() {
+  const C = useThemeColors();
   const [sector, setSector] = useState<string>("Tous");
   const [sortKey, setSortKey] = useState<SortKey>("rank");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
@@ -237,7 +228,7 @@ export function MarketScannerWidget() {
         >
           <span
             style={{
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: 700,
               color: C.muted,
               letterSpacing: "0.07em",
@@ -256,9 +247,9 @@ export function MarketScannerWidget() {
                 borderRadius: 4,
                 border: `1px solid ${sector === s ? C.accent + "50" : C.border}`,
                 background:
-                  sector === s ? "rgba(214, 182, 141,0.12)" : "transparent",
+                  sector === s ? "var(--bt-accent-a12)" : "transparent",
                 color: sector === s ? C.accent : C.dim,
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: sector === s ? 700 : 500,
                 cursor: "pointer",
                 letterSpacing: "0.02em",
@@ -271,7 +262,7 @@ export function MarketScannerWidget() {
             </button>
           ))}
           <div style={{ flex: 1 }} />
-          <span style={{ fontSize: 9, color: C.muted, flexShrink: 0 }}>
+          <span style={{ fontSize: 11, color: C.muted, flexShrink: 0 }}>
             {sorted.length} titre{sorted.length !== 1 ? "s" : ""}
           </span>
           <div
@@ -279,7 +270,7 @@ export function MarketScannerWidget() {
               display: "flex",
               alignItems: "center",
               gap: 3,
-              fontSize: 8,
+              fontSize: 10,
               color: C.muted,
               flexShrink: 0,
             }}
@@ -312,7 +303,7 @@ export function MarketScannerWidget() {
                   col.sortable ? handleSort(col.key as SortKey) : undefined
                 }
                 style={{
-                  fontSize: 8.5,
+                  fontSize: 10.5,
                   fontWeight: 700,
                   color:
                     sortKey === col.key ? C.accent : C.muted,
@@ -328,7 +319,7 @@ export function MarketScannerWidget() {
               >
                 {col.label}
                 {col.sortable && sortKey === col.key && (
-                  <span style={{ fontSize: 8, color: C.accent }}>
+                  <span style={{ fontSize: 10, color: C.accent }}>
                     {sortDir === "asc" ? "↑" : "↓"}
                   </span>
                 )}
@@ -353,7 +344,7 @@ export function MarketScannerWidget() {
                   gap: 4,
                   background:
                     i % 2 === 0
-                      ? "rgba(0, 1, 23,0.1)"
+                      ? "var(--bt-overlay-10)"
                       : "transparent",
                   borderBottom: `1px solid ${C.border}10`,
                   cursor: "pointer",
@@ -362,19 +353,19 @@ export function MarketScannerWidget() {
                 }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.background =
-                    "rgba(214, 182, 141,0.06)")
+                    "var(--bt-accent-a06)")
                 }
                 onMouseLeave={(e) =>
                   (e.currentTarget.style.background =
                     i % 2 === 0
-                      ? "rgba(0, 1, 23,0.1)"
+                      ? "var(--bt-overlay-10)"
                       : "transparent")
                 }
               >
                 {/* Rank */}
                 <div
                   style={{
-                    fontSize: 9,
+                    fontSize: 11,
                     color: C.muted,
                     fontVariantNumeric: "tabular-nums",
                   }}
@@ -386,7 +377,7 @@ export function MarketScannerWidget() {
                 <div style={{ minWidth: 0 }}>
                   <div
                     style={{
-                      fontSize: 11,
+                      fontSize: 13,
                       fontWeight: 700,
                       color: C.text,
                       overflow: "hidden",
@@ -398,7 +389,7 @@ export function MarketScannerWidget() {
                   </div>
                   <div
                     style={{
-                      fontSize: 8,
+                      fontSize: 10,
                       color: C.muted,
                       overflow: "hidden",
                       textOverflow: "ellipsis",
@@ -417,7 +408,7 @@ export function MarketScannerWidget() {
                 {/* Price */}
                 <div
                   style={{
-                    fontSize: 11,
+                    fontSize: 13,
                     fontWeight: 700,
                     color: C.text,
                     fontVariantNumeric: "tabular-nums",
@@ -432,7 +423,7 @@ export function MarketScannerWidget() {
                     display: "flex",
                     alignItems: "center",
                     gap: 3,
-                    fontSize: 11,
+                    fontSize: 13,
                     fontWeight: 700,
                     color: isUp ? C.green : C.red,
                     fontVariantNumeric: "tabular-nums",
@@ -450,7 +441,7 @@ export function MarketScannerWidget() {
                 {/* Volume */}
                 <div
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                     color: C.dim,
                     fontVariantNumeric: "tabular-nums",
                   }}
@@ -461,7 +452,7 @@ export function MarketScannerWidget() {
                 {/* 52W performance */}
                 <div
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: 600,
                     color: w52Color,
                     fontVariantNumeric: "tabular-nums",
@@ -479,7 +470,7 @@ export function MarketScannerWidget() {
                 {/* P/E */}
                 <div
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                     color: stock.pe ? C.dim : C.muted,
                     fontVariantNumeric: "tabular-nums",
                   }}
@@ -511,10 +502,10 @@ export function MarketScannerWidget() {
                       gap: 3,
                       padding: "2px 6px",
                       borderRadius: 3,
-                      border: `1px solid rgba(214, 182, 141,0.3)`,
-                      background: "rgba(214, 182, 141,0.08)",
+                      border: `1px solid var(--bt-accent-a30)`,
+                      background: "var(--bt-accent-a08)",
                       color: C.accent,
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       fontWeight: 700,
                       cursor: "pointer",
                       letterSpacing: "0.02em",
@@ -522,10 +513,10 @@ export function MarketScannerWidget() {
                       flexShrink: 0,
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = "rgba(214, 182, 141,0.18)";
+                      e.currentTarget.style.background = "var(--bt-accent-a18)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "rgba(214, 182, 141,0.08)";
+                      e.currentTarget.style.background = "var(--bt-accent-a08)";
                     }}
                   >
                     <ShoppingCart size={8} />
@@ -574,7 +565,7 @@ export function MarketScannerWidget() {
             gap: 14,
             padding: "5px 12px",
             borderTop: `1px solid ${C.border}`,
-            background: "rgba(0, 1, 23,0.3)",
+            background: "var(--bt-overlay-30)",
             flexShrink: 0,
           }}
         >
@@ -585,7 +576,7 @@ export function MarketScannerWidget() {
           <FooterLegendItem color={C.green} label="Perf. 52S > 0 : Momentum haussier" />
           <FooterLegendItem color={C.red} label="Perf. 52S < 0 : Tendance baissière" />
           <div style={{ flex: 1 }} />
-          <span style={{ fontSize: 8, color: C.muted }}>
+          <span style={{ fontSize: 10, color: C.muted }}>
             Source : BRVM · Données de clôture 15:30 GMT
           </span>
         </div>
@@ -621,7 +612,7 @@ function IconAction({
         padding: 0,
       }}
       onMouseEnter={(e) =>
-        (e.currentTarget.style.background = "rgba(214, 182, 141,0.1)")
+        (e.currentTarget.style.background = "var(--bt-accent-a10)")
       }
       onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
     >
@@ -631,6 +622,7 @@ function IconAction({
 }
 
 function FooterLegendItem({ color, label }: { color: string; label: string }) {
+  const C = useThemeColors();
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
       <div
@@ -643,7 +635,7 @@ function FooterLegendItem({ color, label }: { color: string; label: string }) {
           flexShrink: 0,
         }}
       />
-      <span style={{ fontSize: 8, color: C.muted }}>{label}</span>
+      <span style={{ fontSize: 10, color: C.muted }}>{label}</span>
     </div>
   );
 }

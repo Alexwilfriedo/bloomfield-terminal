@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { useState } from "react";
 import type { ReactNode } from "react";
 import {
@@ -13,21 +14,12 @@ import {
   AlertCircle,
   FileDown,
   Filter,
+  Sun,
+  Moon,
 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  purple: "#a78bfa",
-  dark: "#000117",
-};
+import logoUrl from "../../../assets/logo-bloomfield-terminal.png";
+import { useThemeColors } from "../../hooks/useThemeColors";
+import { useBloomfieldTheme } from "../../context/ThemeContext";
 
 const COUNTRIES = ["Tous", "Côte d'Ivoire", "Sénégal", "Mali", "Burkina Faso", "Togo", "Bénin", "Niger", "Guinée-Bissau"];
 const TOPICS = ["Tous", "Marchés", "Macro", "Obligations", "Change", "Matières Premières", "Secteurs", "Politique Monétaire"];
@@ -45,16 +37,17 @@ function FilterPill({
   onClick: () => void;
   color: string;
 }) {
+  const C = useThemeColors();
   return (
     <button
       onClick={onClick}
       style={{
         padding: "3px 8px",
         borderRadius: 4,
-        border: `1px solid ${active ? color + "50" : "rgba(44, 61, 127,0.22)"}`,
+        border: `1px solid ${active ? color + "50" : "var(--bt-border-a22)"}`,
         background: active ? color + "14" : "transparent",
         color: active ? color : C.muted,
-        fontSize: 9.5,
+        fontSize: 11.5,
         fontWeight: active ? 700 : 500,
         cursor: "pointer",
         letterSpacing: "0.02em",
@@ -69,10 +62,11 @@ function FilterPill({
 }
 
 function FilterLabel({ children }: { children: ReactNode }) {
+  const C = useThemeColors();
   return (
     <span
       style={{
-        fontSize: 8.5,
+        fontSize: 10.5,
         fontWeight: 700,
         color: C.muted,
         letterSpacing: "0.08em",
@@ -94,6 +88,7 @@ function ActionBtn({
   label?: string;
   accent?: boolean;
 }) {
+  const C = useThemeColors();
   return (
     <button
       style={{
@@ -101,11 +96,11 @@ function ActionBtn({
         alignItems: "center",
         gap: 4,
         padding: label ? "4px 9px" : "5px 7px",
-        background: accent ? "rgba(214, 182, 141,0.1)" : "rgba(0, 1, 23,0.5)",
-        border: `1px solid ${accent ? "rgba(214, 182, 141,0.3)" : C.border}`,
+        background: accent ? "var(--bt-accent-a10)" : "var(--bt-overlay-50)",
+        border: `1px solid ${accent ? "var(--bt-accent-a30)" : C.border}`,
         borderRadius: 5,
         color: accent ? C.accent : C.dim,
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: 600,
         cursor: "pointer",
         letterSpacing: "0.02em",
@@ -120,6 +115,7 @@ function ActionBtn({
 }
 
 function VDivider() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -134,6 +130,9 @@ function VDivider() {
 }
 
 export function InsightsTopBar() {
+  const C = useThemeColors();
+  const navigate = useNavigate();
+  const { toggleTheme, isDark } = useBloomfieldTheme();
   const [search, setSearch] = useState("");
   const [activeCountry, setActiveCountry] = useState("Tous");
   const [activeTopic, setActiveTopic] = useState("Tous");
@@ -161,28 +160,8 @@ export function InsightsTopBar() {
         }}
       >
         {/* Brand */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
-          <div
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 6,
-              background: "linear-gradient(135deg, #d6b68d 0%, #d6b68d 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <span style={{ color: "#fff", fontSize: 11, fontWeight: 700 }}>BT</span>
-          </div>
-          <div>
-            <div style={{ color: C.text, fontSize: 12, fontWeight: 700, lineHeight: 1, letterSpacing: "0.01em" }}>
-              BLOOMFIELD
-            </div>
-            <div style={{ color: C.accent, fontSize: 8, fontWeight: 600, lineHeight: 1, letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 1 }}>
-              TERMINAL
-            </div>
-          </div>
+        <div style={{ display: "flex", alignItems: "center", minWidth: 160, flexShrink: 0 }}>
+          <img src={logoUrl} alt="Bloomfield Terminal" onClick={() => navigate("/")} style={{ height: 28, width: "auto", display: "block", objectFit: "contain", cursor: "pointer" }} draggable={false} />
         </div>
 
         {/* Page label */}
@@ -198,10 +177,10 @@ export function InsightsTopBar() {
         >
           <Lightbulb size={14} color={C.gold} />
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: C.text, letterSpacing: "0.06em", textTransform: "uppercase", lineHeight: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: C.text, letterSpacing: "0.06em", textTransform: "uppercase", lineHeight: 1 }}>
               INSIGHTS
             </div>
-            <div style={{ fontSize: 8, color: C.muted, marginTop: 1, letterSpacing: "0.03em" }}>
+            <div style={{ fontSize: 10, color: C.muted, marginTop: 1, letterSpacing: "0.03em" }}>
               Intelligence & Éducation Financière
             </div>
           </div>
@@ -231,8 +210,8 @@ export function InsightsTopBar() {
               boxShadow: `0 0 6px ${C.green}`,
             }}
           />
-          <span style={{ fontSize: 9, color: C.green, fontWeight: 700, letterSpacing: "0.08em" }}>EN DIRECT</span>
-          <span style={{ fontSize: 8, color: C.muted, marginLeft: 2 }}>47 alertes</span>
+          <span style={{ fontSize: 11, color: C.green, fontWeight: 700, letterSpacing: "0.08em" }}>EN DIRECT</span>
+          <span style={{ fontSize: 10, color: C.muted, marginLeft: 2 }}>47 alertes</span>
         </div>
 
         {/* Smart Search */}
@@ -246,13 +225,13 @@ export function InsightsTopBar() {
             style={{
               width: "100%",
               height: 32,
-              background: "rgba(0, 1, 23,0.7)",
+              background: "var(--bt-overlay-70)",
               border: `1px solid ${C.border}`,
               borderRadius: 6,
               paddingLeft: 32,
               paddingRight: 52,
               color: C.text,
-              fontSize: 11,
+              fontSize: 13,
               outline: "none",
             }}
           />
@@ -260,9 +239,9 @@ export function InsightsTopBar() {
             style={{
               position: "absolute",
               right: 8,
-              fontSize: 9,
+              fontSize: 11,
               color: C.muted,
-              background: "rgba(44, 61, 127,0.25)",
+              background: "var(--bt-border-a25)",
               border: `1px solid ${C.border}`,
               borderRadius: 4,
               padding: "1px 5px",
@@ -277,7 +256,7 @@ export function InsightsTopBar() {
         <div style={{ flex: 1 }} />
 
         {/* Date */}
-        <div style={{ fontSize: 10, color: C.dim, fontWeight: 500 }}>Mer 08 Avr 2026</div>
+        <div style={{ fontSize: 12, color: C.dim, fontWeight: 500 }}>Mer 08 Avr 2026</div>
 
         <VDivider />
 
@@ -291,6 +270,22 @@ export function InsightsTopBar() {
         </div>
 
         <VDivider />
+        {/* Theme toggle */}
+        <button
+          onClick={toggleTheme}
+          title={isDark ? "Mode clair" : "Mode sombre"}
+          style={{
+            width: 32, height: 32, borderRadius: 6,
+            background: isDark ? "rgba(244,185,66,0.08)" : "rgba(44,61,127,0.08)",
+            border: `1px solid ${isDark ? "rgba(244,185,66,0.22)" : "rgba(44,61,127,0.18)"}`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "pointer", color: isDark ? C.gold : "#4a6480",
+            transition: "all 0.2s", flexShrink: 0,
+          }}
+        >
+          {isDark ? <Sun size={14} /> : <Moon size={14} />}
+        </button>
+
 
         {/* Bell */}
         <button
@@ -299,7 +294,7 @@ export function InsightsTopBar() {
             width: 32,
             height: 32,
             borderRadius: 6,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             border: `1px solid ${C.border}`,
             display: "flex",
             alignItems: "center",
@@ -319,11 +314,11 @@ export function InsightsTopBar() {
               height: 14,
               borderRadius: 7,
               background: C.red,
-              border: "1.5px solid #000117",
+              border: `1.5px solid ${C.surface}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 700,
               color: "#fff",
             }}
@@ -340,7 +335,7 @@ export function InsightsTopBar() {
             gap: 7,
             padding: "4px 8px",
             borderRadius: 6,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             border: `1px solid ${C.border}`,
             cursor: "pointer",
             flexShrink: 0,
@@ -355,7 +350,7 @@ export function InsightsTopBar() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: 700,
               color: "#fff",
             }}
@@ -363,8 +358,8 @@ export function InsightsTopBar() {
             AK
           </div>
           <div style={{ textAlign: "left" }}>
-            <div style={{ fontSize: 10, color: C.text, fontWeight: 600, lineHeight: 1 }}>Adjoua Koné</div>
-            <div style={{ fontSize: 8, color: C.muted, lineHeight: 1, marginTop: 2 }}>Analyste Senior · Premium</div>
+            <div style={{ fontSize: 12, color: C.text, fontWeight: 600, lineHeight: 1 }}>Adjoua Koné</div>
+            <div style={{ fontSize: 10, color: C.muted, lineHeight: 1, marginTop: 2 }}>Analyste Senior · Premium</div>
           </div>
           <ChevronDown size={11} color={C.muted} />
         </button>
@@ -378,7 +373,7 @@ export function InsightsTopBar() {
           alignItems: "center",
           padding: "0 16px",
           gap: 5,
-          background: "rgba(0, 1, 23,0.5)",
+          background: "var(--bt-overlay-50)",
           overflowX: "auto",
         }}
       >
@@ -411,7 +406,7 @@ export function InsightsTopBar() {
 
         <div style={{ display: "flex", alignItems: "center", gap: 4, flexShrink: 0 }}>
           <AlertCircle size={10} color={C.gold} />
-          <span style={{ fontSize: 8.5, color: C.gold, fontWeight: 600 }}>3 nouvelles publications premium</span>
+          <span style={{ fontSize: 10.5, color: C.gold, fontWeight: 600 }}>3 nouvelles publications premium</span>
         </div>
 
         <div
@@ -419,9 +414,9 @@ export function InsightsTopBar() {
             marginLeft: 8,
             padding: "2px 8px",
             borderRadius: 3,
-            background: "rgba(214, 182, 141,0.1)",
-            border: "1px solid rgba(214, 182, 141,0.25)",
-            fontSize: 8.5,
+            background: "var(--bt-accent-a10)",
+            border: "1px solid var(--bt-accent-a25)",
+            fontSize: 10.5,
             color: C.accent,
             fontWeight: 700,
             letterSpacing: "0.06em",

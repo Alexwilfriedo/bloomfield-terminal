@@ -397,7 +397,7 @@ function ZoomOverlay({
         position: "fixed",
         inset: 0,
         zIndex: 9999,
-        background: "rgba(0, 1, 23,0.92)",
+        background: "var(--bt-overlay-92)",
         backdropFilter: "blur(6px)",
         padding: 24,
         display: "flex",
@@ -415,7 +415,7 @@ function ZoomOverlay({
       >
         <div
           style={{
-            fontSize: 11,
+            fontSize: 13,
             fontWeight: 700,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
@@ -433,11 +433,11 @@ function ZoomOverlay({
             alignItems: "center",
             gap: 6,
             padding: "5px 10px",
-            background: "rgba(214, 182, 141,0.08)",
+            background: "var(--bt-accent-a08)",
             border: `1px solid ${accent}`,
             borderRadius: 4,
             color: accent,
-            fontSize: 10,
+            fontSize: 12,
             fontWeight: 700,
             letterSpacing: "0.06em",
             textTransform: "uppercase",

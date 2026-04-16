@@ -15,21 +15,7 @@ import {
   ChevronRight,
   BarChart3,
 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  orange: "#fb923c",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const REPORT = {
   company: "SGBCI",
@@ -86,6 +72,7 @@ const VALUATION = [
 ];
 
 function RecommBadge({ rec }: { rec: string }) {
+  const C = useThemeColors();
   const colors: Record<string, { bg: string; text: string; border: string }> = {
     ACHAT: { bg: "rgba(16,200,122,0.15)", text: C.green, border: "rgba(16,200,122,0.3)" },
     VENTE: { bg: "rgba(244,56,96,0.15)", text: C.red, border: "rgba(244,56,96,0.3)" },
@@ -99,7 +86,7 @@ function RecommBadge({ rec }: { rec: string }) {
         borderRadius: 4,
         background: s.bg,
         border: `1px solid ${s.border}`,
-        fontSize: 11,
+        fontSize: 13,
         fontWeight: 800,
         color: s.text,
         letterSpacing: "0.08em",
@@ -111,6 +98,7 @@ function RecommBadge({ rec }: { rec: string }) {
 }
 
 function SectionHeader({ title, icon }: { title: string; icon?: React.ReactNode }) {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -125,7 +113,7 @@ function SectionHeader({ title, icon }: { title: string; icon?: React.ReactNode 
       {icon && <span style={{ color: C.accent }}>{icon}</span>}
       <span
         style={{
-          fontSize: 9.5,
+          fontSize: 11.5,
           fontWeight: 700,
           color: C.dim,
           letterSpacing: "0.07em",
@@ -139,6 +127,7 @@ function SectionHeader({ title, icon }: { title: string; icon?: React.ReactNode 
 }
 
 export function ReportSummaryWidget() {
+  const C = useThemeColors();
   const [expandedSection, setExpandedSection] = useState<string | null>("valuation");
 
   const toggle = (s: string) => setExpandedSection(expandedSection === s ? null : s);
@@ -163,7 +152,7 @@ export function ReportSummaryWidget() {
         style={{
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
@@ -172,10 +161,10 @@ export function ReportSummaryWidget() {
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
               <FileText size={12} color={C.gold} />
-              <span style={{ fontSize: 8.5, fontWeight: 700, color: C.gold, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              <span style={{ fontSize: 10.5, fontWeight: 700, color: C.gold, letterSpacing: "0.08em", textTransform: "uppercase" }}>
                 BILAN DE RAPPORT — NOTE ANALYSTE
               </span>
-              <span style={{ fontSize: 7.5, color: C.muted }}>· {REPORT.period} · {REPORT.date}</span>
+              <span style={{ fontSize: 9.5, color: C.muted }}>· {REPORT.period} · {REPORT.date}</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div
@@ -184,11 +173,11 @@ export function ReportSummaryWidget() {
                   height: 36,
                   borderRadius: 8,
                   background: "linear-gradient(135deg, #1a4a7a 0%, #000117 100%)",
-                  border: "1px solid rgba(214, 182, 141,0.25)",
+                  border: "1px solid var(--bt-accent-a25)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 11,
+                  fontSize: 13,
                   fontWeight: 800,
                   color: C.accent,
                   flexShrink: 0,
@@ -197,8 +186,8 @@ export function ReportSummaryWidget() {
                 SG
               </div>
               <div>
-                <div style={{ fontSize: 15, fontWeight: 800, color: C.text }}>{REPORT.company}</div>
-                <div style={{ fontSize: 8.5, color: C.muted }}>{REPORT.fullName}</div>
+                <div style={{ fontSize: 17, fontWeight: 800, color: C.text }}>{REPORT.company}</div>
+                <div style={{ fontSize: 10.5, color: C.muted }}>{REPORT.fullName}</div>
               </div>
             </div>
           </div>
@@ -220,18 +209,18 @@ export function ReportSummaryWidget() {
           >
             <RecommBadge rec={REPORT.recommendation} />
             <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-              <span style={{ fontSize: 8, color: C.muted }}>Objectif</span>
-              <span style={{ fontSize: 14, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+              <span style={{ fontSize: 10, color: C.muted }}>Objectif</span>
+              <span style={{ fontSize: 16, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                 {REPORT.target}
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
               <TrendingUp size={10} color={C.green} />
-              <span style={{ fontSize: 10.5, fontWeight: 700, color: C.green }}>
+              <span style={{ fontSize: 12.5, fontWeight: 700, color: C.green }}>
                 Potentiel {REPORT.upside}
               </span>
             </div>
-            <div style={{ fontSize: 7.5, color: C.muted }}>Horizon {REPORT.horizon}</div>
+            <div style={{ fontSize: 9.5, color: C.muted }}>Horizon {REPORT.horizon}</div>
           </div>
         </div>
 
@@ -246,7 +235,7 @@ export function ReportSummaryWidget() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 7.5,
+              fontSize: 9.5,
               fontWeight: 700,
               color: "#fff",
               flexShrink: 0,
@@ -254,12 +243,12 @@ export function ReportSummaryWidget() {
           >
             AK
           </div>
-          <span style={{ fontSize: 9, color: C.dim }}>{REPORT.analyst} · {REPORT.analystTitle}</span>
+          <span style={{ fontSize: 11, color: C.dim }}>{REPORT.analyst} · {REPORT.analystTitle}</span>
           <div style={{ width: 1, height: 14, background: C.border }} />
           <Star size={10} color={C.gold} fill={C.gold} />
-          <span style={{ fontSize: 9, color: C.gold, fontWeight: 600 }}>{REPORT.rating}</span>
-          <span style={{ fontSize: 8, color: C.muted }}>· {REPORT.ratingAgency}</span>
-          <span style={{ fontSize: 8, color: C.muted }}>· Classement sectoriel: {REPORT.sectorRanking}</span>
+          <span style={{ fontSize: 11, color: C.gold, fontWeight: 600 }}>{REPORT.rating}</span>
+          <span style={{ fontSize: 10, color: C.muted }}>· {REPORT.ratingAgency}</span>
+          <span style={{ fontSize: 10, color: C.muted }}>· Classement sectoriel: {REPORT.sectorRanking}</span>
         </div>
       </div>
 
@@ -280,18 +269,18 @@ export function ReportSummaryWidget() {
                   padding: "7px 9px",
                 }}
               >
-                <div style={{ fontSize: 7.5, color: C.muted, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 2 }}>
+                <div style={{ fontSize: 9.5, color: C.muted, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 2 }}>
                   {kpi.label}
                 </div>
-                <div style={{ fontSize: 12, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+                <div style={{ fontSize: 14, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                   {kpi.value}
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
                   {kpi.up ? <TrendingUp size={9} color={C.green} /> : <TrendingDown size={9} color={C.red} />}
-                  <span style={{ fontSize: 9, fontWeight: 700, color: kpi.up ? C.green : C.red }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: kpi.up ? C.green : C.red }}>
                     {kpi.change}
                   </span>
-                  <span style={{ fontSize: 7.5, color: C.muted }}>{kpi.note}</span>
+                  <span style={{ fontSize: 9.5, color: C.muted }}>{kpi.note}</span>
                 </div>
               </div>
             ))}
@@ -306,7 +295,7 @@ export function ReportSummaryWidget() {
           >
             <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
               <Target size={12} color={C.accent} />
-              <span style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
+              <span style={{ fontSize: 11.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
                 Méthodes de Valorisation
               </span>
             </div>
@@ -328,16 +317,16 @@ export function ReportSummaryWidget() {
                   }}
                 >
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 9.5, fontWeight: 600, color: C.text }}>{v.method}</div>
-                    <div style={{ fontSize: 7.5, color: C.muted }}>Pondération: {v.weight}</div>
+                    <div style={{ fontSize: 11.5, fontWeight: 600, color: C.text }}>{v.method}</div>
+                    <div style={{ fontSize: 9.5, color: C.muted }}>Pondération: {v.weight}</div>
                   </div>
                   <div style={{ textAlign: "right" }}>
-                    <div style={{ fontSize: 12, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>
                       {v.target}
                     </div>
                     <span
                       style={{
-                        fontSize: 8,
+                        fontSize: 10,
                         fontWeight: 700,
                         color: C.green,
                         background: "rgba(16,200,122,0.12)",
@@ -364,7 +353,7 @@ export function ReportSummaryWidget() {
               {STRENGTHS.map((s, i) => (
                 <div key={i} style={{ display: "flex", gap: 6, alignItems: "flex-start" }}>
                   <div style={{ width: 5, height: 5, borderRadius: "50%", background: C.green, marginTop: 4, flexShrink: 0 }} />
-                  <span style={{ fontSize: 9, color: C.dim, lineHeight: 1.45 }}>{s}</span>
+                  <span style={{ fontSize: 11, color: C.dim, lineHeight: 1.45 }}>{s}</span>
                 </div>
               ))}
             </div>
@@ -377,7 +366,7 @@ export function ReportSummaryWidget() {
               {RISKS.map((r, i) => (
                 <div key={i} style={{ display: "flex", gap: 6, alignItems: "flex-start" }}>
                   <div style={{ width: 5, height: 5, borderRadius: "50%", background: C.orange, marginTop: 4, flexShrink: 0 }} />
-                  <span style={{ fontSize: 9, color: C.dim, lineHeight: 1.45 }}>{r}</span>
+                  <span style={{ fontSize: 11, color: C.dim, lineHeight: 1.45 }}>{r}</span>
                 </div>
               ))}
             </div>
@@ -402,9 +391,9 @@ export function ReportSummaryWidget() {
                     padding: "7px 9px",
                   }}
                 >
-                  <div style={{ fontSize: 8.5, fontWeight: 700, color: C.text, marginBottom: 3 }}>{cat.label}</div>
-                  <div style={{ fontSize: 7.5, color: impactColor, fontWeight: 600, marginBottom: 2 }}>{cat.date}</div>
-                  <div style={{ fontSize: 8, color: C.muted, lineHeight: 1.4 }}>{cat.desc}</div>
+                  <div style={{ fontSize: 10.5, fontWeight: 700, color: C.text, marginBottom: 3 }}>{cat.label}</div>
+                  <div style={{ fontSize: 9.5, color: impactColor, fontWeight: 600, marginBottom: 2 }}>{cat.date}</div>
+                  <div style={{ fontSize: 10, color: C.muted, lineHeight: 1.4 }}>{cat.desc}</div>
                 </div>
               );
             })}
@@ -417,14 +406,14 @@ export function ReportSummaryWidget() {
         style={{
           padding: "8px 14px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           display: "flex",
           alignItems: "center",
           gap: 8,
           flexShrink: 0,
         }}
       >
-        <span style={{ fontSize: 8, color: C.muted }}>Rapport complet disponible :</span>
+        <span style={{ fontSize: 10, color: C.muted }}>Rapport complet disponible :</span>
         {[
           { icon: <Download size={11} />, label: "Télécharger PDF", accent: true },
           { icon: <Mail size={11} />, label: "Envoyer par mail", accent: false },
@@ -440,9 +429,9 @@ export function ReportSummaryWidget() {
               padding: "4px 10px",
               borderRadius: 4,
               border: `1px solid ${btn.accent ? "rgba(244,185,66,0.4)" : C.border}`,
-              background: btn.accent ? "rgba(244,185,66,0.12)" : "rgba(0, 1, 23,0.4)",
+              background: btn.accent ? "rgba(244,185,66,0.12)" : "var(--bt-overlay-40)",
               color: btn.accent ? C.gold : C.dim,
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: btn.accent ? 700 : 500,
               cursor: "pointer",
             }}
@@ -452,7 +441,7 @@ export function ReportSummaryWidget() {
           </button>
         ))}
         <div style={{ flex: 1 }} />
-        <span style={{ fontSize: 7.5, color: C.muted }}>
+        <span style={{ fontSize: 9.5, color: C.muted }}>
           Bloomfield Intelligence · Note d'Analyse Propriétaire · {REPORT.date}
         </span>
       </div>

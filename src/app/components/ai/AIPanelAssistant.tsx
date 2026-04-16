@@ -18,22 +18,7 @@ import {
   Shield,
 } from "lucide-react";
 import { useTerminal } from "../../context/TerminalContext";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  dark: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 type Category = "marché" | "entreprise" | "macro" | "signal" | "ordre";
 
@@ -58,7 +43,7 @@ const DECISION_BLOCKS = [
     type: "signal",
     label: "Signal du Jour",
     icon: <Zap size={10} />,
-    color: C.gold,
+    color: "#f4b942",
     title: "PALM CI · Signal MOMENTUM HAUSSIER",
     detail: "RSI 72 + volume +42% · Cacao CI en forte hausse",
   },
@@ -66,7 +51,7 @@ const DECISION_BLOCKS = [
     type: "opportunite",
     label: "Opportunité Détectée",
     icon: <TrendingUp size={10} />,
-    color: C.green,
+    color: "#10c87a",
     title: "SGBCI · Décote 18% vs pairs BRVM",
     detail: "P/BV 0.92x · ROE 18.3% · Potentiel +27.3%",
   },
@@ -74,7 +59,7 @@ const DECISION_BLOCKS = [
     type: "vigilance",
     label: "Zone de Vigilance",
     icon: <AlertTriangle size={10} />,
-    color: C.orange,
+    color: "#fb923c",
     title: "SAPH CI · Pression sur marges",
     detail: "RSI 29 · Coûts production +18% · Révision -23.7%",
   },
@@ -82,18 +67,18 @@ const DECISION_BLOCKS = [
     type: "recommandation",
     label: "Recommandation",
     icon: <Shield size={10} />,
-    color: C.accent,
+    color: "#d6b68d",
     title: "Souverains CIV/SEN · Fenêtre d'entrée",
     detail: "Rendements 6.8–7.2% · Prochaine émission 15 Mai",
   },
 ];
 
 const CATEGORY_CONFIG: Record<Category, { label: string; color: string; icon: React.ReactNode }> = {
-  marché: { label: "Marché", color: C.accent, icon: <TrendingUp size={10} /> },
-  entreprise: { label: "Entreprise", color: C.gold, icon: <BarChart3 size={10} /> },
-  macro: { label: "Macro", color: C.purple, icon: <Globe2 size={10} /> },
-  signal: { label: "Signal", color: C.green, icon: <Zap size={10} /> },
-  ordre: { label: "Ordre", color: C.orange, icon: <ShoppingCart size={10} /> },
+  marché: { label: "Marché", color: "#d6b68d", icon: <TrendingUp size={10} /> },
+  entreprise: { label: "Entreprise", color: "#f4b942", icon: <BarChart3 size={10} /> },
+  macro: { label: "Macro", color: "#a78bfa", icon: <Globe2 size={10} /> },
+  signal: { label: "Signal", color: "#10c87a", icon: <Zap size={10} /> },
+  ordre: { label: "Ordre", color: "#fb923c", icon: <ShoppingCart size={10} /> },
 };
 
 const PROMPTS: Prompt[] = [
@@ -356,17 +341,18 @@ function AIResponse({
   actionLabel?: string;
   actionAssetCode?: string;
 }) {
+  const C = useThemeColors();
   const { openOrderPanel } = useTerminal();
   return (
     <div>
       <div
         style={{
-          fontSize: 10.5,
+          fontSize: 12.5,
           fontWeight: 700,
           color: C.text,
           marginBottom: 8,
           paddingBottom: 6,
-          borderBottom: `1px solid rgba(214, 182, 141,0.15)`,
+          borderBottom: `1px solid var(--bt-accent-a15)`,
         }}
       >
         {title}
@@ -375,7 +361,7 @@ function AIResponse({
         <div key={i} style={{ marginBottom: 8 }}>
           <div
             style={{
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 700,
               color: C.accent,
               letterSpacing: "0.07em",
@@ -385,7 +371,7 @@ function AIResponse({
           >
             {s.label}
           </div>
-          <p style={{ margin: 0, fontSize: 9.5, color: C.dim, lineHeight: 1.55 }}>
+          <p style={{ margin: 0, fontSize: 11.5, color: C.dim, lineHeight: 1.55 }}>
             {s.content}
           </p>
         </div>
@@ -404,7 +390,7 @@ function AIResponse({
           }}
         >
           <AlertTriangle size={9} color={C.gold} />
-          <span style={{ fontSize: 8, color: C.gold }}>{warning}</span>
+          <span style={{ fontSize: 10, color: C.gold }}>{warning}</span>
         </div>
       )}
       {/* Tags */}
@@ -413,11 +399,11 @@ function AIResponse({
           <span
             key={tag}
             style={{
-              fontSize: 7.5,
+              fontSize: 9.5,
               fontWeight: 600,
               color: C.dim,
-              background: "rgba(214, 182, 141,0.08)",
-              border: "1px solid rgba(214, 182, 141,0.15)",
+              background: "var(--bt-accent-a08)",
+              border: "1px solid var(--bt-accent-a15)",
               borderRadius: 3,
               padding: "1px 6px",
             }}
@@ -428,12 +414,12 @@ function AIResponse({
       </div>
       {/* Confidence */}
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 6 }}>
-        <span style={{ fontSize: 7.5, color: C.muted }}>Confiance IA</span>
+        <span style={{ fontSize: 9.5, color: C.muted }}>Confiance IA</span>
         <div
           style={{
             height: 3,
             width: 80,
-            background: "rgba(44, 61, 127,0.2)",
+            background: "var(--bt-border-a20)",
             borderRadius: 2,
             overflow: "hidden",
           }}
@@ -450,7 +436,7 @@ function AIResponse({
         </div>
         <span
           style={{
-            fontSize: 7.5,
+            fontSize: 9.5,
             fontWeight: 700,
             color: confidence >= 85 ? C.green : confidence >= 70 ? C.gold : C.orange,
           }}
@@ -458,7 +444,7 @@ function AIResponse({
           {confidence}%
         </span>
         <div style={{ flex: 1 }} />
-        <span style={{ fontSize: 7.5, color: C.muted }}>
+        <span style={{ fontSize: 9.5, color: C.muted }}>
           Bloomfield AI · {new Date().toLocaleDateString("fr-FR")}
         </span>
       </div>
@@ -471,9 +457,9 @@ function AIResponse({
             padding: "7px 12px",
             borderRadius: 5,
             border: `1px solid ${C.accent}40`,
-            background: "rgba(214, 182, 141,0.1)",
+            background: "var(--bt-accent-a10)",
             color: C.accent,
-            fontSize: 9.5,
+            fontSize: 11.5,
             fontWeight: 700,
             cursor: "pointer",
             display: "flex",
@@ -495,6 +481,7 @@ function formatTime() {
 }
 
 export function AIPanelAssistant() {
+  const C = useThemeColors();
   const { isAIPanelOpen, aiInitialPrompt, closeAIPanel, openOrderPanel } = useTerminal();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
@@ -637,7 +624,7 @@ export function AIPanelAssistant() {
         style={{
           position: "fixed",
           inset: 0,
-          background: "rgba(0, 1, 23,0.55)",
+          background: "var(--bt-overlay-55)",
           zIndex: 200,
           backdropFilter: "blur(1px)",
         }}
@@ -676,7 +663,7 @@ export function AIPanelAssistant() {
             alignItems: "center",
             padding: "11px 16px",
             borderBottom: `1px solid ${C.border}`,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             flexShrink: 0,
             gap: 10,
           }}
@@ -699,7 +686,7 @@ export function AIPanelAssistant() {
           <div style={{ flex: 1 }}>
             <div
               style={{
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: 800,
                 color: C.text,
                 letterSpacing: "0.04em",
@@ -711,7 +698,7 @@ export function AIPanelAssistant() {
               BLOOMFIELD AI
               <span
                 style={{
-                  fontSize: 7,
+                  fontSize: 9,
                   fontWeight: 700,
                   color: C.purple,
                   background: `${C.purple}18`,
@@ -724,7 +711,7 @@ export function AIPanelAssistant() {
                 ANALYST ASSISTANT
               </span>
             </div>
-            <div style={{ fontSize: 8.5, color: C.muted, marginTop: 1 }}>
+            <div style={{ fontSize: 10.5, color: C.muted, marginTop: 1 }}>
               Intelligence financière africaine · BRVM · UEMOA · BCEAO
             </div>
           </div>
@@ -740,7 +727,7 @@ export function AIPanelAssistant() {
                 boxShadow: `0 0 6px ${C.green}`,
               }}
             />
-            <span style={{ fontSize: 8, color: C.green, fontWeight: 600 }}>EN LIGNE</span>
+            <span style={{ fontSize: 10, color: C.green, fontWeight: 600 }}>EN LIGNE</span>
           </div>
 
           <button
@@ -775,7 +762,7 @@ export function AIPanelAssistant() {
             >
               <div
                 style={{
-                  fontSize: 8,
+                  fontSize: 10,
                   fontWeight: 700,
                   color: C.muted,
                   letterSpacing: "0.08em",
@@ -818,7 +805,7 @@ export function AIPanelAssistant() {
                       <span style={{ color: block.color }}>{block.icon}</span>
                       <span
                         style={{
-                          fontSize: 7.5,
+                          fontSize: 9.5,
                           fontWeight: 700,
                           color: block.color,
                           letterSpacing: "0.05em",
@@ -830,7 +817,7 @@ export function AIPanelAssistant() {
                     </div>
                     <div
                       style={{
-                        fontSize: 9,
+                        fontSize: 11,
                         fontWeight: 700,
                         color: C.text,
                         marginBottom: 2,
@@ -839,7 +826,7 @@ export function AIPanelAssistant() {
                     >
                       {block.title}
                     </div>
-                    <div style={{ fontSize: 8, color: C.dim }}>{block.detail}</div>
+                    <div style={{ fontSize: 10, color: C.dim }}>{block.detail}</div>
                   </div>
                 ))}
               </div>
@@ -862,9 +849,9 @@ export function AIPanelAssistant() {
                   borderRadius: 3,
                   border: `1px solid ${activeCategory === "all" ? C.accent + "50" : C.border}`,
                   background:
-                    activeCategory === "all" ? "rgba(214, 182, 141,0.1)" : "transparent",
+                    activeCategory === "all" ? "var(--bt-accent-a10)" : "transparent",
                   color: activeCategory === "all" ? C.accent : C.muted,
-                  fontSize: 8.5,
+                  fontSize: 10.5,
                   fontWeight: activeCategory === "all" ? 700 : 500,
                   cursor: "pointer",
                 }}
@@ -887,7 +874,7 @@ export function AIPanelAssistant() {
                       border: `1px solid ${isActive ? cfg.color + "50" : C.border}`,
                       background: isActive ? cfg.color + "12" : "transparent",
                       color: isActive ? cfg.color : C.muted,
-                      fontSize: 8.5,
+                      fontSize: 10.5,
                       fontWeight: isActive ? 700 : 500,
                       cursor: "pointer",
                     }}
@@ -905,7 +892,7 @@ export function AIPanelAssistant() {
             <div style={{ padding: "8px 14px 12px" }}>
               <div
                 style={{
-                  fontSize: 8,
+                  fontSize: 10,
                   fontWeight: 700,
                   color: C.muted,
                   letterSpacing: "0.08em",
@@ -935,7 +922,7 @@ export function AIPanelAssistant() {
                         transition: "all 0.1s",
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "rgba(214, 182, 141,0.07)";
+                        e.currentTarget.style.background = "var(--bt-accent-a08)";
                         e.currentTarget.style.borderColor = C.accent + "40";
                       }}
                       onMouseLeave={(e) => {
@@ -945,7 +932,7 @@ export function AIPanelAssistant() {
                     >
                       <span
                         style={{
-                          fontSize: 7,
+                          fontSize: 9,
                           fontWeight: 700,
                           color: catCfg.color,
                           background: catCfg.color + "12",
@@ -958,7 +945,7 @@ export function AIPanelAssistant() {
                       >
                         {catCfg.label.toUpperCase()}
                       </span>
-                      <span style={{ fontSize: 9.5, color: C.dim, flex: 1 }}>
+                      <span style={{ fontSize: 11.5, color: C.dim, flex: 1 }}>
                         {prompt.label}
                       </span>
                       <ChevronRight size={11} color={C.muted} />
@@ -984,7 +971,7 @@ export function AIPanelAssistant() {
                   border: `1px solid ${C.border}`,
                   background: "transparent",
                   color: C.muted,
-                  fontSize: 8,
+                  fontSize: 10,
                   cursor: "pointer",
                 }}
               >
@@ -1012,14 +999,14 @@ export function AIPanelAssistant() {
                     borderRadius: "50%",
                     background:
                       msg.type === "user"
-                        ? "rgba(214, 182, 141,0.15)"
+                        ? "var(--bt-accent-a15)"
                         : `${C.purple}22`,
                     border: `1px solid ${msg.type === "user" ? C.accent + "30" : C.purple + "30"}`,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
-                    fontSize: 8,
+                    fontSize: 10,
                     fontWeight: 700,
                     color: msg.type === "user" ? C.accent : C.purple,
                   }}
@@ -1039,7 +1026,7 @@ export function AIPanelAssistant() {
                       padding: "9px 11px",
                       background:
                         msg.type === "user"
-                          ? "rgba(214, 182, 141,0.1)"
+                          ? "var(--bt-accent-a10)"
                           : C.elevated,
                       border: `1px solid ${msg.type === "user" ? C.accent + "25" : C.border}`,
                       borderRadius: msg.type === "user" ? "8px 8px 2px 8px" : "8px 8px 8px 2px",
@@ -1051,7 +1038,7 @@ export function AIPanelAssistant() {
                       <p
                         style={{
                           margin: 0,
-                          fontSize: 9.5,
+                          fontSize: 11.5,
                           color: msg.type === "user" ? C.text : C.dim,
                           lineHeight: 1.5,
                         }}
@@ -1062,7 +1049,7 @@ export function AIPanelAssistant() {
                   </div>
                   <div
                     style={{
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       color: C.muted,
                       marginTop: 3,
                       textAlign: msg.type === "user" ? "right" : "left",
@@ -1145,7 +1132,7 @@ export function AIPanelAssistant() {
           style={{
             padding: "10px 14px",
             borderTop: `1px solid ${C.border}`,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             flexShrink: 0,
           }}
         >
@@ -1153,7 +1140,7 @@ export function AIPanelAssistant() {
             style={{
               display: "flex",
               gap: 6,
-              background: "rgba(0, 1, 23,0.6)",
+              background: "var(--bt-overlay-60)",
               border: `1px solid ${C.border}`,
               borderRadius: 7,
               padding: "6px 10px",
@@ -1177,7 +1164,7 @@ export function AIPanelAssistant() {
                 border: "none",
                 outline: "none",
                 color: C.text,
-                fontSize: 9.5,
+                fontSize: 11.5,
                 fontFamily: "inherit",
               }}
             />
@@ -1192,7 +1179,7 @@ export function AIPanelAssistant() {
                 background:
                   inputValue.trim()
                     ? `linear-gradient(135deg, ${C.purple} 0%, ${C.accent} 100%)`
-                    : "rgba(44, 61, 127,0.2)",
+                    : "var(--bt-border-a20)",
                 color: inputValue.trim() ? "#fff" : C.muted,
                 display: "flex",
                 alignItems: "center",
@@ -1205,7 +1192,7 @@ export function AIPanelAssistant() {
             </button>
           </div>
           <div style={{ textAlign: "center", marginTop: 5 }}>
-            <span style={{ fontSize: 7.5, color: C.muted }}>
+            <span style={{ fontSize: 9.5, color: C.muted }}>
               Bloomfield AI · Assistant d'intelligence institutionnelle · Ne constitue pas un conseil en investissement
             </span>
           </div>

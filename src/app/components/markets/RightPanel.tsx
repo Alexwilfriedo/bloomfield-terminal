@@ -12,21 +12,7 @@ import {
   CheckCircle,
   Clock,
 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const watchlist = [
   { ticker: "SONATEL", full: "Sonatel SA / SN", price: "16 800", pct: "+5.21%", up: true, sector: "Télécom" },
@@ -49,7 +35,7 @@ const news = [
   {
     id: 1,
     tag: "BCEAO",
-    tagColor: C.accent,
+    tagColor: "#d6b68d",
     headline: "BCEAO maintient son taux directeur à 3,50% — Décision du Comité de Politique Monétaire",
     source: "BCEAO / Bloomfield",
     time: "il y a 15 min",
@@ -58,7 +44,7 @@ const news = [
   {
     id: 2,
     tag: "DETTES",
-    tagColor: C.gold,
+    tagColor: "#f4b942",
     headline: "CIV : émission obligataire 200 Mds FCFA — sursouscrit ×2.4",
     source: "UMOA-Titres",
     time: "il y a 1 h",
@@ -67,7 +53,7 @@ const news = [
   {
     id: 3,
     tag: "RÉSULTATS",
-    tagColor: C.green,
+    tagColor: "#10c87a",
     headline: "SONATEL publie S1 2024 : bénéfice net +8,3% à 183 Mds FCFA",
     source: "SONATEL IR",
     time: "il y a 2 h",
@@ -75,7 +61,7 @@ const news = [
   {
     id: 4,
     tag: "FMI",
-    tagColor: C.purple,
+    tagColor: "#a78bfa",
     headline: "FMI relève prévisions UEMOA à 6,1% pour 2025 (WEO)",
     source: "FMI World Economic Outlook",
     time: "il y a 3 h",
@@ -83,7 +69,7 @@ const news = [
   {
     id: 5,
     tag: "BRVM",
-    tagColor: C.accent,
+    tagColor: "#d6b68d",
     headline: "BRVM : capitalisation record à 7 843 Mds FCFA — nouveau sommet historique",
     source: "BRVM / Bloomfield",
     time: "il y a 4 h",
@@ -99,7 +85,7 @@ const news = [
   {
     id: 7,
     tag: "PÉTROLE",
-    tagColor: C.orange,
+    tagColor: "#fb923c",
     headline: "WTI recule à 71,84 USD/bl sur craintes demande Asie",
     source: "Reuters / Bloomfield",
     time: "il y a 6 h",
@@ -107,6 +93,7 @@ const news = [
 ];
 
 export function RightPanel() {
+  const C = useThemeColors();
   const [collapsed, setCollapsed] = useState(false);
 
   if (collapsed) {
@@ -129,8 +116,8 @@ export function RightPanel() {
             width: 22,
             height: 22,
             borderRadius: 4,
-            background: "rgba(214, 182, 141,0.08)",
-            border: `1px solid rgba(214, 182, 141,0.2)`,
+            background: "var(--bt-accent-a08)",
+            border: `1px solid var(--bt-accent-a20)`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -164,13 +151,13 @@ export function RightPanel() {
           justifyContent: "space-between",
           padding: "6px 10px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
         <span
           style={{
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 700,
             color: C.muted,
             letterSpacing: "0.08em",
@@ -220,7 +207,7 @@ export function RightPanel() {
                 border: `1px solid ${C.border}`,
                 background: "transparent",
                 color: C.dim,
-                fontSize: 8,
+                fontSize: 10,
                 fontWeight: 600,
                 cursor: "pointer",
                 letterSpacing: "0.04em",
@@ -260,7 +247,7 @@ export function RightPanel() {
                 <div style={{ minWidth: 0 }}>
                   <div
                     style={{
-                      fontSize: 10,
+                      fontSize: 12,
                       fontWeight: 700,
                       color: C.text,
                       overflow: "hidden",
@@ -270,12 +257,12 @@ export function RightPanel() {
                   >
                     {item.ticker}
                   </div>
-                  <div style={{ fontSize: 7, color: C.muted }}>{item.sector}</div>
+                  <div style={{ fontSize: 9, color: C.muted }}>{item.sector}</div>
                 </div>
               </div>
               <div
                 style={{
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: 700,
                   color: C.text,
                   fontVariantNumeric: "tabular-nums",
@@ -290,7 +277,7 @@ export function RightPanel() {
                   alignItems: "center",
                   justifyContent: "flex-end",
                   gap: 2,
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: 700,
                   color: item.up ? C.green : C.red,
                   fontVariantNumeric: "tabular-nums",
@@ -364,7 +351,7 @@ export function RightPanel() {
               onMouseEnter={(e) =>
                 (e.currentTarget.style.background = alert.triggered
                   ? "rgba(244,185,66,0.07)"
-                  : "rgba(214, 182, 141,0.04)")
+                  : "var(--bt-accent-a06)")
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.background = alert.triggered
@@ -381,7 +368,7 @@ export function RightPanel() {
                 <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                   <span
                     style={{
-                      fontSize: 10,
+                      fontSize: 12,
                       fontWeight: 700,
                       color: alert.triggered ? C.gold : C.text,
                     }}
@@ -391,7 +378,7 @@ export function RightPanel() {
                   {alert.triggered && (
                     <span
                       style={{
-                        fontSize: 7,
+                        fontSize: 9,
                         fontWeight: 700,
                         color: C.gold,
                         background: "rgba(244,185,66,0.15)",
@@ -405,13 +392,13 @@ export function RightPanel() {
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: 9, color: C.dim, marginTop: 1 }}>
+                <div style={{ fontSize: 11, color: C.dim, marginTop: 1 }}>
                   {alert.condition}
                 </div>
                 {alert.triggered && (
                   <div
                     style={{
-                      fontSize: 8,
+                      fontSize: 10,
                       color: C.gold,
                       marginTop: 1,
                       display: "flex",
@@ -503,7 +490,7 @@ export function RightPanel() {
               >
                 <span
                   style={{
-                    fontSize: 7,
+                    fontSize: 9,
                     fontWeight: 700,
                     color: item.tagColor,
                     background: item.tagColor + "15",
@@ -521,7 +508,7 @@ export function RightPanel() {
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div
                     style={{
-                      fontSize: 10,
+                      fontSize: 12,
                       color: i === 0 ? C.text : "#a8c8e0",
                       fontWeight: i === 0 ? 600 : 400,
                       lineHeight: 1.4,
@@ -537,11 +524,11 @@ export function RightPanel() {
                       marginTop: 3,
                     }}
                   >
-                    <span style={{ fontSize: 8, color: C.muted }}>
+                    <span style={{ fontSize: 10, color: C.muted }}>
                       {item.source}
                     </span>
-                    <span style={{ fontSize: 8, color: C.muted }}>·</span>
-                    <span style={{ fontSize: 8, color: C.muted }}>
+                    <span style={{ fontSize: 10, color: C.muted }}>·</span>
+                    <span style={{ fontSize: 10, color: C.muted }}>
                       {item.time}
                     </span>
                   </div>
@@ -575,6 +562,7 @@ function SectionHeader({
   badge?: number;
   sub?: string;
 }) {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -582,7 +570,7 @@ function SectionHeader({
         alignItems: "center",
         justifyContent: "space-between",
         padding: "6px 10px 5px",
-        background: "rgba(0, 1, 23,0.3)",
+        background: "var(--bt-overlay-30)",
         borderBottom: `1px solid ${C.border}`,
       }}
     >
@@ -590,7 +578,7 @@ function SectionHeader({
         {icon}
         <span
           style={{
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 700,
             color: C.dim,
             letterSpacing: "0.06em",
@@ -602,9 +590,9 @@ function SectionHeader({
         {count !== undefined && (
           <span
             style={{
-              fontSize: 8,
+              fontSize: 10,
               color: C.muted,
-              background: "rgba(44, 61, 127,0.2)",
+              background: "var(--bt-border-a20)",
               borderRadius: 8,
               padding: "0px 5px",
             }}
@@ -615,7 +603,7 @@ function SectionHeader({
         {badge !== undefined && (
           <span
             style={{
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 700,
               color: "#000117",
               background: C.gold,
@@ -627,7 +615,7 @@ function SectionHeader({
           </span>
         )}
         {sub && (
-          <span style={{ fontSize: 8, color: C.muted }}>{sub}</span>
+          <span style={{ fontSize: 10, color: C.muted }}>{sub}</span>
         )}
       </div>
       {action}
@@ -644,11 +632,12 @@ function MiniStat({
   label: string;
   color: string;
 }) {
+  const C = useThemeColors();
   return (
     <div style={{ textAlign: "center" }}>
       <div
         style={{
-          fontSize: 12,
+          fontSize: 14,
           fontWeight: 700,
           color,
           fontVariantNumeric: "tabular-nums",
@@ -656,7 +645,7 @@ function MiniStat({
       >
         {value}
       </div>
-      <div style={{ fontSize: 7, color: C.muted }}>{label}</div>
+      <div style={{ fontSize: 9, color: C.muted }}>{label}</div>
     </div>
   );
 }

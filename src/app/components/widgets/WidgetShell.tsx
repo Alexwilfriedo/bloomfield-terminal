@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useContext } from "react";
 import { RefreshCw, Maximize2, MoreHorizontal } from "lucide-react";
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 /**
  * PanelContext lets a host (e.g. the dashboard grid) wire the existing
@@ -32,15 +33,6 @@ interface WidgetShellProps {
   style?: React.CSSProperties;
 }
 
-const C = {
-  surface: "#000117",
-  border: "rgba(44, 61, 127,0.32)",
-  accent: "#d6b68d",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-};
-
 export function WidgetShell({
   title,
   subtitle,
@@ -51,6 +43,7 @@ export function WidgetShell({
   noPadding = false,
   style,
 }: WidgetShellProps) {
+  const C = useThemeColors();
   const panel = useContext(PanelContext);
   const headerClass = panel.dragHandleClass ?? "";
 
@@ -77,7 +70,7 @@ export function WidgetShell({
           padding: "8px 12px",
           borderBottom: `1px solid ${C.border}`,
           flexShrink: 0,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           cursor: panel.dragHandleClass ? "grab" : "default",
           userSelect: "none",
         }}
@@ -96,7 +89,7 @@ export function WidgetShell({
           <div style={{ minWidth: 0 }}>
             <div
               style={{
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: 700,
                 color: C.text,
                 letterSpacing: "0.04em",
@@ -110,7 +103,7 @@ export function WidgetShell({
               {title}
             </div>
             {subtitle && (
-              <div style={{ fontSize: 9, color: C.muted, marginTop: 1, letterSpacing: "0.02em" }}>
+              <div style={{ fontSize: 11, color: C.muted, marginTop: 1, letterSpacing: "0.02em" }}>
                 {subtitle}
               </div>
             )}
@@ -119,7 +112,7 @@ export function WidgetShell({
 
         <div style={{ display: "flex", alignItems: "center", gap: 4, flexShrink: 0 }}>
           {lastUpdate && (
-            <span style={{ fontSize: 9, color: C.muted, letterSpacing: "0.02em" }}>
+            <span style={{ fontSize: 11, color: C.muted, letterSpacing: "0.02em" }}>
               {lastUpdate}
             </span>
           )}
@@ -171,6 +164,7 @@ interface IconBtnProps {
 }
 
 function IconBtn({ children, onClick, disabled, title }: IconBtnProps) {
+  const C = useThemeColors();
   return (
     <button
       type="button"
@@ -194,7 +188,7 @@ function IconBtn({ children, onClick, disabled, title }: IconBtnProps) {
       onMouseEnter={(e) => {
         if (disabled) return;
         e.currentTarget.style.color = C.accent;
-        e.currentTarget.style.background = "rgba(214, 182, 141,0.08)";
+        e.currentTarget.style.background = "var(--bt-accent-a08)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.color = C.muted;

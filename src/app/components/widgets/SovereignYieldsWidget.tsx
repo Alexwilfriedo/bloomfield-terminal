@@ -1,17 +1,6 @@
 import { WidgetShell } from "./WidgetShell";
 import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid, Cell } from "recharts";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  amber: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const yields = [
   {
@@ -82,7 +71,7 @@ const yields = [
     spread: "+578bp",
     change: "+8bp",
     up: true,
-    ratingColor: C.red,
+    ratingColor: "#f43860",
   },
   {
     country: "Mali",
@@ -96,7 +85,7 @@ const yields = [
     spread: "+612bp",
     change: "+5bp",
     up: true,
-    ratingColor: C.red,
+    ratingColor: "#f43860",
   },
   {
     country: "Niger",
@@ -110,7 +99,7 @@ const yields = [
     spread: "+525bp",
     change: "+4bp",
     up: true,
-    ratingColor: C.red,
+    ratingColor: "#f43860",
   },
 ];
 
@@ -132,6 +121,7 @@ const cols = [
 ];
 
 export function SovereignYieldsWidget() {
+  const C = useThemeColors();
   return (
     <WidgetShell
       title="Dettes Souveraines UEMOA"
@@ -151,7 +141,7 @@ export function SovereignYieldsWidget() {
             flexDirection: "column",
           }}
         >
-          <div style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 6 }}>
+          <div style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 6 }}>
             Taux 10 ans (%)
           </div>
           <div style={{ flex: 1, minHeight: 0 }}>
@@ -162,11 +152,11 @@ export function SovereignYieldsWidget() {
                 margin={{ top: 0, bottom: 0, left: 0, right: 12 }}
                 barSize={10}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(44, 61, 127,0.15)" horizontal={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--bt-border-a16)" horizontal={false} />
                 <XAxis
                   type="number"
                   domain={[4, 11]}
-                  tick={{ fontSize: 8, fill: C.muted }}
+                  tick={{ fontSize: 10, fill: C.muted }}
                   axisLine={false}
                   tickLine={false}
                   tickCount={4}
@@ -174,17 +164,17 @@ export function SovereignYieldsWidget() {
                 <YAxis
                   type="category"
                   dataKey="name"
-                  tick={{ fontSize: 9, fill: C.dim }}
+                  tick={{ fontSize: 11, fill: C.dim }}
                   axisLine={false}
                   tickLine={false}
                   width={22}
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "#000117",
+                    background: C.surface,
                     border: `1px solid ${C.border}`,
                     borderRadius: 4,
-                    fontSize: 10,
+                    fontSize: 12,
                     color: C.text,
                   }}
                   formatter={(v: number) => [`${v.toFixed(2)}%`, "Taux 10 ans"]}
@@ -219,7 +209,7 @@ export function SovereignYieldsWidget() {
               <div
                 key={col.key}
                 style={{
-                  fontSize: 9,
+                  fontSize: 11,
                   color: C.muted,
                   fontWeight: 700,
                   letterSpacing: "0.05em",
@@ -239,29 +229,29 @@ export function SovereignYieldsWidget() {
                 display: "grid",
                 gridTemplateColumns: cols.map((c) => c.w).join(" "),
                 padding: "6px 12px",
-                background: i % 2 === 0 ? "rgba(0, 1, 23,0.1)" : "transparent",
+                background: i % 2 === 0 ? "var(--bt-overlay-10)" : "transparent",
                 borderBottom: `1px solid ${C.border}20`,
                 cursor: "pointer",
                 transition: "background 0.1s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.05)")}
               onMouseLeave={(e) =>
-                (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 1, 23,0.1)" : "transparent")
+                (e.currentTarget.style.background = i % 2 === 0 ? "var(--bt-overlay-10)" : "transparent")
               }
             >
               {/* Country */}
               <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
                 <CountryFlag iso={row.iso} />
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: C.text }}>{row.country}</div>
-                  <div style={{ fontSize: 9, color: C.muted }}>{row.outlook}</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: C.text }}>{row.country}</div>
+                  <div style={{ fontSize: 11, color: C.muted }}>{row.outlook}</div>
                 </div>
               </div>
               {/* Rating */}
               <div>
                 <span
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: 700,
                     color: row.ratingColor,
                     background: row.ratingColor + "15",
@@ -278,7 +268,7 @@ export function SovereignYieldsWidget() {
                 <div
                   key={k}
                   style={{
-                    fontSize: 11,
+                    fontSize: 13,
                     fontWeight: k === "y10" ? 700 : 500,
                     color: k === "y10" ? C.gold : C.dim,
                     fontVariantNumeric: "tabular-nums",
@@ -288,13 +278,13 @@ export function SovereignYieldsWidget() {
                 </div>
               ))}
               {/* Spread */}
-              <div style={{ fontSize: 11, color: C.dim, fontVariantNumeric: "tabular-nums" }}>
+              <div style={{ fontSize: 13, color: C.dim, fontVariantNumeric: "tabular-nums" }}>
                 {row.spread}
               </div>
               {/* Change */}
               <div
                 style={{
-                  fontSize: 11,
+                  fontSize: 13,
                   fontWeight: 600,
                   color: row.up ? C.red : C.green,
                   fontVariantNumeric: "tabular-nums",

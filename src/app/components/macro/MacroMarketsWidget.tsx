@@ -11,21 +11,7 @@ import {
   Area,
 } from "recharts";
 import { Landmark, Minus, Activity } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const RATE_HISTORY = [
   { date: "Jan 22", rate: 2.25, reserve: 3.0 },
@@ -71,10 +57,10 @@ const MACRO_SIGNALS: {
 ];
 
 const SIGNAL_COLORS: Record<SignalLevel, string> = {
-  positif: C.green,
-  neutre: C.dim,
-  attention: C.gold,
-  risque: C.red,
+  positif: "#10c87a",
+  neutre: "#6b96b8",
+  attention: "#f4b942",
+  risque: "#f43860",
 };
 
 const SIGNAL_LABELS: Record<SignalLevel, string> = {
@@ -90,11 +76,11 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     <div
       style={{
         background: "#000117",
-        border: `1px solid ${C.border}`,
+        border: `1px solid var(--bt-border-a32)`,
         borderRadius: 5,
         padding: "6px 10px",
-        fontSize: 10,
-        color: C.text,
+        fontSize: 12,
+        color: "#ddeaf8",
       }}
     >
       <div style={{ fontWeight: 700, marginBottom: 3 }}>{label}</div>
@@ -108,6 +94,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function MacroMarketsWidget() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -128,14 +115,14 @@ export function MacroMarketsWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
           <div style={{ width: 3, height: 14, borderRadius: 2, background: C.accent }} />
           <Landmark size={11} color={C.accent} />
-          <span style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
             Politique Monétaire BCEAO & Signaux Macro-Financiers
           </span>
         </div>
@@ -147,14 +134,14 @@ export function MacroMarketsWidget() {
               gap: 4,
               padding: "2px 8px",
               borderRadius: 4,
-              background: "rgba(214, 182, 141,0.1)",
-              border: "1px solid rgba(214, 182, 141,0.25)",
+              background: "var(--bt-accent-a10)",
+              border: "1px solid var(--bt-accent-a25)",
             }}
           >
             <div style={{ width: 5, height: 5, borderRadius: "50%", background: C.green, boxShadow: `0 0 4px ${C.green}` }} />
-            <span style={{ fontSize: 8.5, fontWeight: 700, color: C.accent }}>CPM Mars 2024</span>
+            <span style={{ fontSize: 10.5, fontWeight: 700, color: C.accent }}>CPM Mars 2024</span>
           </div>
-          <span style={{ fontSize: 8, color: C.muted }}>UEMOA</span>
+          <span style={{ fontSize: 10, color: C.muted }}>UEMOA</span>
         </div>
       </div>
 
@@ -179,25 +166,25 @@ export function MacroMarketsWidget() {
             overflow: "auto",
           }}
         >
-          <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 2 }}>
+          <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 2 }}>
             Taux BCEAO
           </div>
 
           {/* Big rate display */}
           <div
             style={{
-              background: "rgba(214, 182, 141,0.06)",
-              border: "1px solid rgba(214, 182, 141,0.2)",
+              background: "var(--bt-accent-a06)",
+              border: "1px solid var(--bt-accent-a20)",
               borderRadius: 6,
               padding: "10px 12px",
               textAlign: "center",
             }}
           >
-            <div style={{ fontSize: 8, color: C.dim, marginBottom: 4, letterSpacing: "0.05em" }}>TAUX DIRECTEUR</div>
-            <div style={{ fontSize: 32, fontWeight: 800, color: C.accent, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>
+            <div style={{ fontSize: 10, color: C.dim, marginBottom: 4, letterSpacing: "0.05em" }}>TAUX DIRECTEUR</div>
+            <div style={{ fontSize: 34, fontWeight: 800, color: C.accent, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>
               3.50
             </div>
-            <div style={{ fontSize: 11, color: C.muted, marginTop: 2 }}>%</div>
+            <div style={{ fontSize: 13, color: C.muted, marginTop: 2 }}>%</div>
             <div
               style={{
                 display: "inline-flex",
@@ -211,7 +198,7 @@ export function MacroMarketsWidget() {
               }}
             >
               <Minus size={9} color={C.dim} />
-              <span style={{ fontSize: 9, fontWeight: 600, color: C.dim }}>Inchangé · CPM Mar 24</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: C.dim }}>Inchangé · CPM Mar 24</span>
             </div>
           </div>
 
@@ -230,16 +217,16 @@ export function MacroMarketsWidget() {
               }}
             >
               <div>
-                <div style={{ fontSize: 8, color: C.muted }}>{stat.label}</div>
-                <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>{stat.detail}</div>
+                <div style={{ fontSize: 10, color: C.muted }}>{stat.label}</div>
+                <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1 }}>{stat.detail}</div>
               </div>
               <div style={{ textAlign: "right" }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+                <div style={{ fontSize: 15, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                   {stat.value}
                 </div>
                 <div
                   style={{
-                    fontSize: 8,
+                    fontSize: 10,
                     fontWeight: 600,
                     color: stat.delta === 0 ? C.muted : stat.delta > 0 ? C.red : C.green,
                   }}
@@ -262,15 +249,15 @@ export function MacroMarketsWidget() {
             overflow: "auto",
           }}
         >
-          <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
             Historique Taux Directeur
           </div>
           <div style={{ height: 90 }}>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={RATE_HISTORY} margin={{ top: 4, right: 8, bottom: 0, left: -24 }}>
-                <CartesianGrid strokeDasharray="2 4" stroke="rgba(44, 61, 127,0.18)" vertical={false} />
-                <XAxis dataKey="date" tick={{ fill: C.muted, fontSize: 7.5 }} axisLine={false} tickLine={false} />
-                <YAxis domain={[1.5, 4.5]} tick={{ fill: C.muted, fontSize: 7.5 }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="2 4" stroke="var(--bt-border-a20)" vertical={false} />
+                <XAxis dataKey="date" tick={{ fill: C.muted, fontSize: 9.5 }} axisLine={false} tickLine={false} />
+                <YAxis domain={[1.5, 4.5]} tick={{ fill: C.muted, fontSize: 9.5 }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} />
                 <ReferenceLine y={3.5} stroke={C.accent} strokeDasharray="4 2" strokeOpacity={0.6} />
                 <Line
@@ -285,7 +272,7 @@ export function MacroMarketsWidget() {
             </ResponsiveContainer>
           </div>
 
-          <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
             Agrégats Monétaires (% croissance AoA)
           </div>
           <div style={{ height: 80 }}>
@@ -301,9 +288,9 @@ export function MacroMarketsWidget() {
                     <stop offset="100%" stopColor={C.green} stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="2 4" stroke="rgba(44, 61, 127,0.18)" vertical={false} />
-                <XAxis dataKey="date" tick={{ fill: C.muted, fontSize: 7.5 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: C.muted, fontSize: 7.5 }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="2 4" stroke="var(--bt-border-a20)" vertical={false} />
+                <XAxis dataKey="date" tick={{ fill: C.muted, fontSize: 9.5 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: C.muted, fontSize: 9.5 }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} />
                 <Area key="area-m2" dataKey="m2" name="M3" stroke={C.purple} fill="url(#m2grad)" strokeWidth={1.8} dot={false} />
                 <Area key="area-credit" dataKey="credit" name="Crédit privé" stroke={C.green} fill="url(#credGrad)" strokeWidth={1.8} dot={false} />
@@ -315,11 +302,11 @@ export function MacroMarketsWidget() {
           <div style={{ display: "flex", gap: 12 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
               <div style={{ width: 12, height: 2, background: C.purple, borderRadius: 1 }} />
-              <span style={{ fontSize: 8, color: C.muted }}>M3 UEMOA</span>
+              <span style={{ fontSize: 10, color: C.muted }}>M3 UEMOA</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
               <div style={{ width: 12, height: 2, background: C.green, borderRadius: 1 }} />
-              <span style={{ fontSize: 8, color: C.muted }}>Crédit sect. privé</span>
+              <span style={{ fontSize: 10, color: C.muted }}>Crédit sect. privé</span>
             </div>
           </div>
         </div>
@@ -328,7 +315,7 @@ export function MacroMarketsWidget() {
         <div style={{ padding: "10px 12px", overflow: "auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 8 }}>
             <Activity size={10} color={C.gold} />
-            <span style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            <span style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
               Signaux Macro-Financiers
             </span>
           </div>
@@ -338,7 +325,7 @@ export function MacroMarketsWidget() {
             {Object.entries(SIGNAL_COLORS).map(([k, col]) => (
               <div key={k} style={{ display: "flex", alignItems: "center", gap: 3 }}>
                 <div style={{ width: 7, height: 7, borderRadius: "50%", background: col }} />
-                <span style={{ fontSize: 7.5, color: C.muted, textTransform: "capitalize" }}>{k}</span>
+                <span style={{ fontSize: 9.5, color: C.muted, textTransform: "capitalize" }}>{k}</span>
               </div>
             ))}
           </div>
@@ -379,7 +366,7 @@ export function MacroMarketsWidget() {
                       flexShrink: 0,
                     }}
                   >
-                    <span style={{ fontSize: 9, fontWeight: 700, color }}>{symbol}</span>
+                    <span style={{ fontSize: 11, fontWeight: 700, color }}>{symbol}</span>
                   </div>
 
                   {/* Content */}
@@ -387,10 +374,10 @@ export function MacroMarketsWidget() {
                     <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                       <span
                         style={{
-                          fontSize: 7,
+                          fontSize: 9,
                           fontWeight: 600,
                           color: C.muted,
-                          background: "rgba(44, 61, 127,0.2)",
+                          background: "var(--bt-border-a20)",
                           borderRadius: 3,
                           padding: "1px 4px",
                           letterSpacing: "0.04em",
@@ -398,15 +385,15 @@ export function MacroMarketsWidget() {
                       >
                         {sig.category.toUpperCase()}
                       </span>
-                      <span style={{ fontSize: 9, fontWeight: 600, color: C.text }}>{sig.label}</span>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: C.text }}>{sig.label}</span>
                     </div>
-                    <div style={{ fontSize: 8, color: C.muted, marginTop: 1 }}>{sig.detail}</div>
+                    <div style={{ fontSize: 10, color: C.muted, marginTop: 1 }}>{sig.detail}</div>
                   </div>
 
                   {/* Level badge */}
                   <span
                     style={{
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       fontWeight: 700,
                       color,
                       whiteSpace: "nowrap",
@@ -434,12 +421,12 @@ export function MacroMarketsWidget() {
             }}
           >
             <div>
-              <div style={{ fontSize: 8.5, fontWeight: 700, color: C.gold }}>Score Macro-Financier UEMOA</div>
-              <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>5 positifs · 3 attention · 0 risque</div>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.gold }}>Score Macro-Financier UEMOA</div>
+              <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1 }}>5 positifs · 3 attention · 0 risque</div>
             </div>
             <div style={{ textAlign: "right" }}>
-              <div style={{ fontSize: 20, fontWeight: 800, color: C.gold, fontVariantNumeric: "tabular-nums" }}>62</div>
-              <div style={{ fontSize: 7.5, color: C.muted }}>/100</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: C.gold, fontVariantNumeric: "tabular-nums" }}>62</div>
+              <div style={{ fontSize: 9.5, color: C.muted }}>/100</div>
             </div>
           </div>
         </div>

@@ -15,19 +15,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 // Market sentiment score 0-100
 const SENTIMENT_SCORE = 68;
@@ -50,13 +38,14 @@ const signals: {
 ];
 
 const sentimentIndicators = [
-  { label: "Advance/Decline", value: "32 / 18", sub: "+14 nette", color: C.green, icon: TrendingUp },
-  { label: "New Highs", value: "12", sub: "52 semaines", color: C.accent, icon: Activity },
-  { label: "Volume BUY/SELL", value: "62% / 38%", sub: "Flux acheteur", color: C.gold, icon: Zap },
-  { label: "Volatilité BRVM", value: "Faible", sub: "VIX proxy: 14.2", color: C.purple, icon: AlertTriangle },
+  { label: "Advance/Decline", value: "32 / 18", sub: "+14 nette", color: "#10c87a", icon: TrendingUp },
+  { label: "New Highs", value: "12", sub: "52 semaines", color: "#d6b68d", icon: Activity },
+  { label: "Volume BUY/SELL", value: "62% / 38%", sub: "Flux acheteur", color: "#f4b942", icon: Zap },
+  { label: "Volatilité BRVM", value: "Faible", sub: "VIX proxy: 14.2", color: "#a78bfa", icon: AlertTriangle },
 ];
 
 function SentimentGauge({ score }: { score: number }) {
+  const C = useThemeColors();
   // Gauge going from 0 (extreme fear) to 100 (extreme greed)
   const color =
     score >= 70 ? C.green : score >= 50 ? C.gold : score >= 30 ? C.orange : C.red;
@@ -66,7 +55,7 @@ function SentimentGauge({ score }: { score: number }) {
   // Arc chart data
   const data = [
     { name: "score", value: score, fill: color },
-    { name: "rest", value: 100 - score, fill: "rgba(44, 61, 127,0.15)" },
+    { name: "rest", value: 100 - score, fill: "var(--bt-border-a16)" },
   ];
 
   return (
@@ -105,7 +94,7 @@ function SentimentGauge({ score }: { score: number }) {
         >
           <div
             style={{
-              fontSize: 22,
+              fontSize: 24,
               fontWeight: 800,
               color,
               fontVariantNumeric: "tabular-nums",
@@ -119,18 +108,18 @@ function SentimentGauge({ score }: { score: number }) {
       </div>
       {/* Labels */}
       <div style={{ display: "flex", justifyContent: "space-between", width: "100%", marginTop: 2 }}>
-        <span style={{ fontSize: 8, color: C.red, fontWeight: 600 }}>PEUR</span>
-        <span style={{ fontSize: 9, fontWeight: 700, color, letterSpacing: "0.02em" }}>
+        <span style={{ fontSize: 10, color: C.red, fontWeight: 600 }}>PEUR</span>
+        <span style={{ fontSize: 11, fontWeight: 700, color, letterSpacing: "0.02em" }}>
           {label}
         </span>
-        <span style={{ fontSize: 8, color: C.green, fontWeight: 600 }}>AVIDITÉ</span>
+        <span style={{ fontSize: 10, color: C.green, fontWeight: 600 }}>AVIDITÉ</span>
       </div>
       {/* Progress bar */}
       <div
         style={{
           width: "100%",
           height: 4,
-          background: "rgba(44, 61, 127,0.2)",
+          background: "var(--bt-border-a20)",
           borderRadius: 4,
           marginTop: 6,
           position: "relative",
@@ -157,7 +146,7 @@ function SentimentGauge({ score }: { score: number }) {
             borderRadius: "50%",
             background: color,
             boxShadow: `0 0 6px ${color}`,
-            border: "1px solid #000117",
+            border: `1px solid ${C.surface}`,
           }}
         />
       </div>
@@ -166,6 +155,7 @@ function SentimentGauge({ score }: { score: number }) {
 }
 
 function SignalBadge({ signal }: { signal: "BUY" | "SELL" | "NEUTRAL" }) {
+  const C = useThemeColors();
   const cfg = {
     BUY: { color: C.green, bg: "rgba(16,200,122,0.12)", border: "rgba(16,200,122,0.3)", icon: TrendingUp },
     SELL: { color: C.red, bg: "rgba(244,56,96,0.12)", border: "rgba(244,56,96,0.3)", icon: TrendingDown },
@@ -175,7 +165,7 @@ function SignalBadge({ signal }: { signal: "BUY" | "SELL" | "NEUTRAL" }) {
   return (
     <div
       style={{
-        display: "flex",
+        display: "inline-flex",
         alignItems: "center",
         gap: 3,
         padding: "2px 6px",
@@ -183,10 +173,11 @@ function SignalBadge({ signal }: { signal: "BUY" | "SELL" | "NEUTRAL" }) {
         background: cfg.bg,
         border: `1px solid ${cfg.border}`,
         color: cfg.color,
-        fontSize: 9,
+        fontSize: 11,
         fontWeight: 700,
         letterSpacing: "0.05em",
         whiteSpace: "nowrap",
+        width: "fit-content",
       }}
     >
       <Icon size={8} />
@@ -196,6 +187,7 @@ function SignalBadge({ signal }: { signal: "BUY" | "SELL" | "NEUTRAL" }) {
 }
 
 function RSIBar({ value }: { value: number }) {
+  const C = useThemeColors();
   const color = value >= 70 ? C.red : value <= 30 ? C.green : C.gold;
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
@@ -203,7 +195,7 @@ function RSIBar({ value }: { value: number }) {
         style={{
           width: 52,
           height: 5,
-          background: "rgba(44, 61, 127,0.2)",
+          background: "var(--bt-border-a20)",
           borderRadius: 3,
           position: "relative",
           overflow: "hidden",
@@ -222,7 +214,7 @@ function RSIBar({ value }: { value: number }) {
         {/* Oversold line at 30 */}
         <div style={{ position: "absolute", left: "30%", top: 0, bottom: 0, width: 1, background: "rgba(255,255,255,0.2)" }} />
       </div>
-      <span style={{ fontSize: 9, fontWeight: 700, color, fontVariantNumeric: "tabular-nums", minWidth: 18 }}>
+      <span style={{ fontSize: 11, fontWeight: 700, color, fontVariantNumeric: "tabular-nums", minWidth: 18 }}>
         {value}
       </span>
     </div>
@@ -230,6 +222,7 @@ function RSIBar({ value }: { value: number }) {
 }
 
 export function SentimentWidget() {
+  const C = useThemeColors();
   const [view, setView] = useState<"signals" | "indicators">("signals");
 
   const buyCount = signals.filter((s) => s.signal === "BUY").length;
@@ -257,7 +250,7 @@ export function SentimentWidget() {
             flexShrink: 0,
           }}
         >
-          <div style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>
             Baromètre BRVM
           </div>
           <SentimentGauge score={SENTIMENT_SCORE} />
@@ -271,7 +264,7 @@ export function SentimentWidget() {
               marginTop: 4,
             }}
           >
-            <div style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 2 }}>
+            <div style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 2 }}>
               Résumé des signaux
             </div>
             <SignalRow label="Achats" count={buyCount} total={signals.length} color={C.green} />
@@ -291,11 +284,11 @@ export function SentimentWidget() {
           >
             <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
               <CheckCircle size={10} color={C.green} />
-              <span style={{ fontSize: 9, fontWeight: 700, color: C.green, letterSpacing: "0.04em" }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.green, letterSpacing: "0.04em" }}>
                 MARCHÉ OUVERT
               </span>
             </div>
-            <div style={{ fontSize: 8, color: C.muted, marginTop: 3 }}>
+            <div style={{ fontSize: 10, color: C.muted, marginTop: 3 }}>
               Session: 09:00 – 15:30 GMT
             </div>
           </div>
@@ -350,6 +343,7 @@ function SignalRow({
   total: number;
   color: string;
 }) {
+  const C = useThemeColors();
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
       <div
@@ -361,12 +355,12 @@ function SignalRow({
           flexShrink: 0,
         }}
       />
-      <span style={{ fontSize: 9, color: C.dim, flex: 1 }}>{label}</span>
+      <span style={{ fontSize: 11, color: C.dim, flex: 1 }}>{label}</span>
       <div
         style={{
           flex: 1,
           height: 4,
-          background: "rgba(44, 61, 127,0.2)",
+          background: "var(--bt-border-a20)",
           borderRadius: 2,
           overflow: "hidden",
         }}
@@ -383,7 +377,7 @@ function SignalRow({
       </div>
       <span
         style={{
-          fontSize: 10,
+          fontSize: 12,
           fontWeight: 700,
           color,
           minWidth: 14,
@@ -409,13 +403,14 @@ function SignalsTable({
     strength: number;
   }[];
 }) {
+  const C = useThemeColors();
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
       {/* Header */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 64px 72px 55px 56px",
+          gridTemplateColumns: "1fr 80px 72px 55px 56px",
           padding: "2px 4px 5px",
           borderBottom: `1px solid ${C.border}`,
           marginBottom: 2,
@@ -425,7 +420,7 @@ function SignalsTable({
           <div
             key={h}
             style={{
-              fontSize: 9,
+              fontSize: 11,
               color: C.muted,
               fontWeight: 600,
               letterSpacing: "0.05em",
@@ -442,27 +437,27 @@ function SignalsTable({
           key={s.ticker}
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 64px 72px 55px 56px",
+            gridTemplateColumns: "1fr 80px 72px 55px 56px",
             padding: "5px 4px",
             borderRadius: 5,
-            background: i % 2 === 0 ? "rgba(0, 1, 23,0.12)" : "transparent",
+            background: i % 2 === 0 ? "var(--bt-overlay-12)" : "transparent",
             cursor: "pointer",
             transition: "background 0.1s",
             alignItems: "center",
           }}
           onMouseEnter={(e) =>
-            (e.currentTarget.style.background = "rgba(214, 182, 141,0.06)")
+            (e.currentTarget.style.background = "var(--bt-accent-a06)")
           }
           onMouseLeave={(e) =>
             (e.currentTarget.style.background =
-              i % 2 === 0 ? "rgba(0, 1, 23,0.12)" : "transparent")
+              i % 2 === 0 ? "var(--bt-overlay-12)" : "transparent")
           }
         >
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>
               {s.ticker}
             </div>
-            <div style={{ fontSize: 8, color: C.muted }}>{s.name}</div>
+            <div style={{ fontSize: 10, color: C.muted }}>{s.name}</div>
           </div>
           <div>
             <SignalBadge signal={s.signal} />
@@ -472,7 +467,7 @@ function SignalsTable({
           </div>
           <div
             style={{
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: 700,
               color: s.momentum > 0 ? C.green : C.red,
               fontVariantNumeric: "tabular-nums",
@@ -492,7 +487,7 @@ function SignalsTable({
         style={{
           marginTop: 8,
           padding: "5px 8px",
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           border: `1px solid ${C.border}`,
           borderRadius: 5,
           display: "flex",
@@ -500,15 +495,15 @@ function SignalsTable({
           alignItems: "center",
         }}
       >
-        <span style={{ fontSize: 8, color: C.muted }}>
+        <span style={{ fontSize: 10, color: C.muted }}>
           RSI:{" "}
           <span style={{ color: C.red }}>{"≥70"} Surach.</span> ·{" "}
           <span style={{ color: C.green }}>{"≤30"} Surv.</span>
         </span>
-        <span style={{ fontSize: 8, color: C.muted }}>
+        <span style={{ fontSize: 10, color: C.muted }}>
           Mom. = Variation 5 séances
         </span>
-        <span style={{ fontSize: 8, color: C.muted }}>
+        <span style={{ fontSize: 10, color: C.muted }}>
           Force = Score composite 0–100
         </span>
       </div>
@@ -517,6 +512,7 @@ function SignalsTable({
 }
 
 function StrengthBar({ value }: { value: number }) {
+  const C = useThemeColors();
   const color = value >= 70 ? C.green : value >= 40 ? C.gold : C.red;
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
@@ -524,7 +520,7 @@ function StrengthBar({ value }: { value: number }) {
         style={{
           width: 32,
           height: 5,
-          background: "rgba(44, 61, 127,0.2)",
+          background: "var(--bt-border-a20)",
           borderRadius: 3,
           overflow: "hidden",
         }}
@@ -538,7 +534,7 @@ function StrengthBar({ value }: { value: number }) {
           }}
         />
       </div>
-      <span style={{ fontSize: 9, fontWeight: 700, color, fontVariantNumeric: "tabular-nums" }}>
+      <span style={{ fontSize: 11, fontWeight: 700, color, fontVariantNumeric: "tabular-nums" }}>
         {value}
       </span>
     </div>
@@ -546,6 +542,7 @@ function StrengthBar({ value }: { value: number }) {
 }
 
 function IndicatorsView() {
+  const C = useThemeColors();
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       {/* 4 sentiment indicators */}
@@ -557,7 +554,7 @@ function IndicatorsView() {
               key={ind.label}
               style={{
                 padding: "8px 10px",
-                background: "rgba(0, 1, 23,0.45)",
+                background: "var(--bt-overlay-45)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 6,
                 borderLeft: `2px solid ${ind.color}`,
@@ -565,14 +562,14 @@ function IndicatorsView() {
             >
               <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 4 }}>
                 <Icon size={10} color={ind.color} />
-                <span style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.03em" }}>
+                <span style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.03em" }}>
                   {ind.label}
                 </span>
               </div>
-              <div style={{ fontSize: 14, fontWeight: 800, color: ind.color, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.01em" }}>
+              <div style={{ fontSize: 16, fontWeight: 800, color: ind.color, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.01em" }}>
                 {ind.value}
               </div>
-              <div style={{ fontSize: 8, color: C.muted, marginTop: 2 }}>{ind.sub}</div>
+              <div style={{ fontSize: 10, color: C.muted, marginTop: 2 }}>{ind.sub}</div>
             </div>
           );
         })}
@@ -580,7 +577,7 @@ function IndicatorsView() {
 
       {/* Macro risk signals */}
       <div>
-        <div style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 5 }}>
+        <div style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 5 }}>
           Signaux de risque macroéconomique
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -597,17 +594,17 @@ function IndicatorsView() {
                 alignItems: "center",
                 gap: 8,
                 padding: "4px 8px",
-                background: "rgba(0, 1, 23,0.4)",
+                background: "var(--bt-overlay-40)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 5,
               }}
             >
-              <span style={{ fontSize: 10, color: C.dim, flex: 1 }}>{r.label}</span>
+              <span style={{ fontSize: 12, color: C.dim, flex: 1 }}>{r.label}</span>
               <div
                 style={{
                   width: 80,
                   height: 5,
-                  background: "rgba(44, 61, 127,0.2)",
+                  background: "var(--bt-border-a20)",
                   borderRadius: 3,
                   overflow: "hidden",
                   flexShrink: 0,
@@ -625,7 +622,7 @@ function IndicatorsView() {
               </div>
               <span
                 style={{
-                  fontSize: 9,
+                  fontSize: 11,
                   fontWeight: 700,
                   color: r.color,
                   minWidth: 48,
@@ -652,6 +649,7 @@ function TabButton({
   active: boolean;
   onClick: () => void;
 }) {
+  const C = useThemeColors();
   return (
     <button
       onClick={onClick}
@@ -661,7 +659,7 @@ function TabButton({
         border: "none",
         borderBottom: `2px solid ${active ? C.green : "transparent"}`,
         color: active ? C.text : C.muted,
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: active ? 700 : 500,
         cursor: "pointer",
         letterSpacing: "0.02em",

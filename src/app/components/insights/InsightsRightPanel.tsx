@@ -18,49 +18,36 @@ import {
   ChevronLeft,
 } from "lucide-react";
 
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const SAVED_ITEMS = [
-  { id: 1, title: "BCEAO : Taux directeur Q1 2026 — Décryptage", type: "ANALYSE", date: "Auj.", color: C.accent },
-  { id: 2, title: "Rapport Trimestriel UEMOA — T1 2026", type: "RAPPORT", date: "05 Avr", color: C.gold },
-  { id: 3, title: "Module : Valorisation DCF — 35% complété", type: "FORMATION", date: "Hier", color: C.purple },
-  { id: 4, title: "SONATEL Upgrade BUY — Note Bloomfield", type: "NOTE", date: "08 Avr", color: C.green },
+  { id: 1, title: "BCEAO : Taux directeur Q1 2026 — Décryptage", type: "ANALYSE", date: "Auj.", color: "#d6b68d" },
+  { id: 2, title: "Rapport Trimestriel UEMOA — T1 2026", type: "RAPPORT", date: "05 Avr", color: "#f4b942" },
+  { id: 3, title: "Module : Valorisation DCF — 35% complété", type: "FORMATION", date: "Hier", color: "#a78bfa" },
+  { id: 4, title: "SONATEL Upgrade BUY — Note Bloomfield", type: "NOTE", date: "08 Avr", color: "#10c87a" },
 ];
 
 const RECOMMENDED = [
-  { id: 1, title: "Analyse: Pétrole — Impact sur les économies importatrices UEMOA", type: "ANALYSE", score: 98, color: C.accent },
-  { id: 2, title: "Vidéo: Construction de portefeuille en XOF — Stratégie 2026", type: "VIDÉO", score: 94, color: C.orange },
-  { id: 3, title: "Rapport: Perspectives du secteur télécom Afrique subsaharienne", type: "RAPPORT", score: 91, color: C.gold },
-  { id: 4, title: "Module: Analyse des Risques Souverains Avancés", type: "FORMATION", score: 87, color: C.purple },
+  { id: 1, title: "Analyse: Pétrole — Impact sur les économies importatrices UEMOA", type: "ANALYSE", score: 98, color: "#d6b68d" },
+  { id: 2, title: "Vidéo: Construction de portefeuille en XOF — Stratégie 2026", type: "VIDÉO", score: 94, color: "#fb923c" },
+  { id: 3, title: "Rapport: Perspectives du secteur télécom Afrique subsaharienne", type: "RAPPORT", score: 91, color: "#f4b942" },
+  { id: 4, title: "Module: Analyse des Risques Souverains Avancés", type: "FORMATION", score: 87, color: "#a78bfa" },
 ];
 
 const EVENTS = [
-  { id: 1, date: "09 Avr", time: "10:00", title: "BCEAO : Publication du Bulletin Mensuel de Statistiques Monétaires", type: "BCEAO", typeColor: C.accent, isToday: false },
-  { id: 2, date: "10 Avr", time: "—", title: "BRVM : Clôture des souscriptions OAT Côte d'Ivoire 7 ans — Tranche 2026-A", type: "OBLIGATIONS", typeColor: C.gold, isToday: false },
-  { id: 3, date: "12 Avr", time: "14:00", title: "Webinaire Bloomfield : Stratégie Obligataire UEMOA — T2 2026", type: "WEBINAIRE", typeColor: C.purple, isToday: false },
-  { id: 4, date: "15 Avr", time: "—", title: "SONATEL : Date limite de versement dividende FY2025", type: "DIVIDENDE", typeColor: C.green, isToday: false },
-  { id: 5, date: "17 Avr", time: "09:00", title: "BCEAO : Résultats adjudication BAT 26 semaines — SN, CI, ML", type: "ADJUDICATION", typeColor: C.accent, isToday: false },
-  { id: 6, date: "22 Avr", time: "11:00", title: "Conférence BRVM : Résultats annuels SGBCI FY2025 — AGO 2026", type: "AGO", typeColor: C.orange, isToday: false },
+  { id: 1, date: "09 Avr", time: "10:00", title: "BCEAO : Publication du Bulletin Mensuel de Statistiques Monétaires", type: "BCEAO", typeColor: "#d6b68d", isToday: false },
+  { id: 2, date: "10 Avr", time: "—", title: "BRVM : Clôture des souscriptions OAT Côte d'Ivoire 7 ans — Tranche 2026-A", type: "OBLIGATIONS", typeColor: "#f4b942", isToday: false },
+  { id: 3, date: "12 Avr", time: "14:00", title: "Webinaire Bloomfield : Stratégie Obligataire UEMOA — T2 2026", type: "WEBINAIRE", typeColor: "#a78bfa", isToday: false },
+  { id: 4, date: "15 Avr", time: "—", title: "SONATEL : Date limite de versement dividende FY2025", type: "DIVIDENDE", typeColor: "#10c87a", isToday: false },
+  { id: 5, date: "17 Avr", time: "09:00", title: "BCEAO : Résultats adjudication BAT 26 semaines — SN, CI, ML", type: "ADJUDICATION", typeColor: "#d6b68d", isToday: false },
+  { id: 6, date: "22 Avr", time: "11:00", title: "Conférence BRVM : Résultats annuels SGBCI FY2025 — AGO 2026", type: "AGO", typeColor: "#fb923c", isToday: false },
 ];
 
 const LIVE_ALERTS = [
-  { id: 1, type: "info", message: "BRVM Composite franchit 285 points — premier passage en 18 mois", time: "14:27", color: C.accent },
-  { id: 2, type: "warning", message: "PALM CI : fort volume inhabituellement élevé sur les 30 dernières minutes", time: "13:58", color: C.gold },
-  { id: 3, type: "success", message: "SONATEL résultats FY2025 : dividende confirmé 1 800 XOF/action", time: "13:45", color: C.green },
-  { id: 4, type: "error", message: "XOF/USD : franchissement du seuil d'alerte 598 — surveillance renforcée", time: "12:30", color: C.red },
+  { id: 1, type: "info", message: "BRVM Composite franchit 285 points — premier passage en 18 mois", time: "14:27", color: "#d6b68d" },
+  { id: 2, type: "warning", message: "PALM CI : fort volume inhabituellement élevé sur les 30 dernières minutes", time: "13:58", color: "#f4b942" },
+  { id: 3, type: "success", message: "SONATEL résultats FY2025 : dividende confirmé 1 800 XOF/action", time: "13:45", color: "#10c87a" },
+  { id: 4, type: "error", message: "XOF/USD : franchissement du seuil d'alerte 598 — surveillance renforcée", time: "12:30", color: "#f43860" },
 ];
 
 const ALERT_ICONS: Record<string, ReactNode> = {
@@ -83,6 +70,7 @@ function PanelSection({
   children: ReactNode;
   action?: ReactNode;
 }) {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -96,12 +84,12 @@ function PanelSection({
           alignItems: "center",
           gap: 6,
           padding: "9px 12px",
-          background: "rgba(0, 1, 23,0.3)",
-          borderBottom: `1px solid rgba(44, 61, 127,0.16)`,
+          background: "var(--bt-overlay-30)",
+          borderBottom: `1px solid var(--bt-border-a16)`,
         }}
       >
         <span style={{ color }}>{icon}</span>
-        <span style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+        <span style={{ fontSize: 11.5, fontWeight: 700, color: C.dim, letterSpacing: "0.06em", textTransform: "uppercase" }}>
           {title}
         </span>
         <div style={{ flex: 1 }} />
@@ -113,6 +101,7 @@ function PanelSection({
 }
 
 export function InsightsRightPanel() {
+  const C = useThemeColors();
   const [collapsed, setCollapsed] = useState(false);
 
   if (collapsed) {
@@ -135,8 +124,8 @@ export function InsightsRightPanel() {
             width: 22,
             height: 22,
             borderRadius: 4,
-            background: "rgba(214, 182, 141,0.1)",
-            border: "1px solid rgba(214, 182, 141,0.2)",
+            background: "var(--bt-accent-a10)",
+            border: "1px solid var(--bt-accent-a20)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -170,11 +159,11 @@ export function InsightsRightPanel() {
           alignItems: "center",
           padding: "0 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
-        <span style={{ fontSize: 10, fontWeight: 700, color: C.dim, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: C.dim, letterSpacing: "0.06em", textTransform: "uppercase" }}>
           Panneau Intelligence
         </span>
         <div style={{ flex: 1 }} />
@@ -184,7 +173,7 @@ export function InsightsRightPanel() {
             width: 20,
             height: 20,
             borderRadius: 3,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             border: `1px solid ${C.border}`,
             display: "flex",
             alignItems: "center",
@@ -205,7 +194,7 @@ export function InsightsRightPanel() {
           icon={<Bell size={10} />}
           color={C.red}
           action={
-            <span style={{ fontSize: 8, color: C.red, fontWeight: 700 }}>
+            <span style={{ fontSize: 10, color: C.red, fontWeight: 700 }}>
               {LIVE_ALERTS.length} actives
             </span>
           }
@@ -229,7 +218,7 @@ export function InsightsRightPanel() {
                   <p
                     style={{
                       margin: 0,
-                      fontSize: 9,
+                      fontSize: 11,
                       color: C.dim,
                       lineHeight: 1.4,
                       display: "-webkit-box",
@@ -240,7 +229,7 @@ export function InsightsRightPanel() {
                   >
                     {alert.message}
                   </p>
-                  <span style={{ fontSize: 7.5, color: C.muted }}>{alert.time}</span>
+                  <span style={{ fontSize: 9.5, color: C.muted }}>{alert.time}</span>
                 </div>
               </div>
             ))}
@@ -268,16 +257,16 @@ export function InsightsRightPanel() {
                   gap: 7,
                   padding: "6px 8px",
                   borderRadius: 4,
-                  background: "rgba(0, 1, 23,0.4)",
-                  border: `1px solid rgba(44, 61, 127,0.16)`,
+                  background: "var(--bt-overlay-40)",
+                  border: `1px solid var(--bt-border-a16)`,
                   cursor: "pointer",
                   transition: "border-color 0.1s",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(214, 182, 141,0.2)";
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "var(--bt-accent-a20)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(44, 61, 127,0.16)";
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "var(--bt-border-a16)";
                 }}
               >
                 <div
@@ -298,7 +287,7 @@ export function InsightsRightPanel() {
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div
                     style={{
-                      fontSize: 9,
+                      fontSize: 11,
                       fontWeight: 600,
                       color: C.text,
                       overflow: "hidden",
@@ -311,14 +300,14 @@ export function InsightsRightPanel() {
                   <div style={{ display: "flex", gap: 5, marginTop: 1 }}>
                     <span
                       style={{
-                        fontSize: 7.5,
+                        fontSize: 9.5,
                         color: item.color,
                         fontWeight: 700,
                       }}
                     >
                       {item.type}
                     </span>
-                    <span style={{ fontSize: 7.5, color: C.muted }}>{item.date}</span>
+                    <span style={{ fontSize: 9.5, color: C.muted }}>{item.date}</span>
                   </div>
                 </div>
                 <X size={8} color={C.muted} style={{ flexShrink: 0 }} />
@@ -333,7 +322,7 @@ export function InsightsRightPanel() {
           icon={<Star size={10} />}
           color={C.accent}
           action={
-            <span style={{ fontSize: 8, color: C.muted }}>Basé sur votre profil</span>
+            <span style={{ fontSize: 10, color: C.muted }}>Basé sur votre profil</span>
           }
         >
           <div style={{ padding: "6px 10px", display: "flex", flexDirection: "column", gap: 4 }}>
@@ -346,8 +335,8 @@ export function InsightsRightPanel() {
                   gap: 7,
                   padding: "7px 8px",
                   borderRadius: 4,
-                  background: "rgba(0, 1, 23,0.4)",
-                  border: `1px solid rgba(44, 61, 127,0.16)`,
+                  background: "var(--bt-overlay-40)",
+                  border: `1px solid var(--bt-border-a16)`,
                   cursor: "pointer",
                   transition: "border-color 0.1s",
                 }}
@@ -355,7 +344,7 @@ export function InsightsRightPanel() {
                   (e.currentTarget as HTMLDivElement).style.borderColor = `${item.color}30`;
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(44, 61, 127,0.16)";
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "var(--bt-border-a16)";
                 }}
               >
                 <div
@@ -370,12 +359,12 @@ export function InsightsRightPanel() {
                     flexShrink: 0,
                   }}
                 >
-                  <span style={{ fontSize: 8.5, fontWeight: 800, color: item.color }}>{item.score}</span>
+                  <span style={{ fontSize: 10.5, fontWeight: 800, color: item.color }}>{item.score}</span>
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div
                     style={{
-                      fontSize: 9,
+                      fontSize: 11,
                       fontWeight: 600,
                       color: C.dim,
                       lineHeight: 1.4,
@@ -389,7 +378,7 @@ export function InsightsRightPanel() {
                   </div>
                   <span
                     style={{
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       color: item.color,
                       fontWeight: 700,
                     }}
@@ -408,7 +397,7 @@ export function InsightsRightPanel() {
           icon={<Calendar size={10} />}
           color={C.purple}
           action={
-            <button style={{ background: "none", border: "none", cursor: "pointer", color: C.muted, display: "flex", alignItems: "center", gap: 2, fontSize: 8 }}>
+            <button style={{ background: "none", border: "none", cursor: "pointer", color: C.muted, display: "flex", alignItems: "center", gap: 2, fontSize: 10 }}>
               Calendrier
               <ChevronRight size={8} />
             </button>
@@ -423,7 +412,7 @@ export function InsightsRightPanel() {
                   gap: 7,
                   cursor: "pointer",
                   padding: "5px 0",
-                  borderBottom: `1px solid rgba(44, 61, 127,0.12)`,
+                  borderBottom: `1px solid var(--bt-border-a12)`,
                 }}
               >
                 {/* Date block */}
@@ -441,17 +430,17 @@ export function InsightsRightPanel() {
                     border: `1px solid ${event.typeColor}25`,
                   }}
                 >
-                  <span style={{ fontSize: 8, fontWeight: 800, color: event.typeColor, lineHeight: 1 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: event.typeColor, lineHeight: 1 }}>
                     {event.date.split(" ")[0]}
                   </span>
-                  <span style={{ fontSize: 7, color: C.muted, lineHeight: 1 }}>
+                  <span style={{ fontSize: 9, color: C.muted, lineHeight: 1 }}>
                     {event.date.split(" ")[1]}
                   </span>
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div
                     style={{
-                      fontSize: 9,
+                      fontSize: 11,
                       fontWeight: 600,
                       color: C.text,
                       lineHeight: 1.35,
@@ -466,7 +455,7 @@ export function InsightsRightPanel() {
                   <div style={{ display: "flex", gap: 5, marginTop: 2 }}>
                     <span
                       style={{
-                        fontSize: 7.5,
+                        fontSize: 9.5,
                         color: event.typeColor,
                         fontWeight: 700,
                       }}
@@ -474,7 +463,7 @@ export function InsightsRightPanel() {
                       {event.type}
                     </span>
                     {event.time !== "—" && (
-                      <span style={{ display: "flex", alignItems: "center", gap: 2, fontSize: 7.5, color: C.muted }}>
+                      <span style={{ display: "flex", alignItems: "center", gap: 2, fontSize: 9.5, color: C.muted }}>
                         <Clock size={7} />
                         {event.time}
                       </span>
@@ -495,7 +484,7 @@ export function InsightsRightPanel() {
                 background: "rgba(167,139,250,0.07)",
                 border: "1px dashed rgba(167,139,250,0.3)",
                 color: C.purple,
-                fontSize: 9,
+                fontSize: 11,
                 fontWeight: 600,
                 cursor: "pointer",
                 letterSpacing: "0.04em",
@@ -514,7 +503,7 @@ export function InsightsRightPanel() {
         >
           <div style={{ padding: "8px 10px" }}>
             <div style={{ marginBottom: 6 }}>
-              <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", marginBottom: 5 }}>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", marginBottom: 5 }}>
                 PAYS
               </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
@@ -524,9 +513,9 @@ export function InsightsRightPanel() {
                     style={{
                       padding: "2px 6px",
                       borderRadius: 3,
-                      background: "rgba(214, 182, 141,0.08)",
-                      border: "1px solid rgba(214, 182, 141,0.2)",
-                      fontSize: 8,
+                      background: "var(--bt-accent-a08)",
+                      border: "1px solid var(--bt-accent-a20)",
+                      fontSize: 10,
                       color: C.accent,
                       cursor: "pointer",
                     }}
@@ -537,7 +526,7 @@ export function InsightsRightPanel() {
               </div>
             </div>
             <div style={{ marginBottom: 6 }}>
-              <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", marginBottom: 5 }}>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", marginBottom: 5 }}>
                 SOCIÉTÉS LIÉES
               </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
@@ -549,7 +538,7 @@ export function InsightsRightPanel() {
                       borderRadius: 3,
                       background: "rgba(244,185,66,0.08)",
                       border: "1px solid rgba(244,185,66,0.2)",
-                      fontSize: 8,
+                      fontSize: 10,
                       color: C.gold,
                       cursor: "pointer",
                     }}
@@ -560,7 +549,7 @@ export function InsightsRightPanel() {
               </div>
             </div>
             <div>
-              <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", marginBottom: 5 }}>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", marginBottom: 5 }}>
                 INDICATEURS
               </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
@@ -572,7 +561,7 @@ export function InsightsRightPanel() {
                       borderRadius: 3,
                       background: "rgba(167,139,250,0.08)",
                       border: "1px solid rgba(167,139,250,0.2)",
-                      fontSize: 8,
+                      fontSize: 10,
                       color: C.purple,
                       cursor: "pointer",
                     }}

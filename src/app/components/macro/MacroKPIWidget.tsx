@@ -1,18 +1,5 @@
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 interface KPI {
   key: string;
@@ -37,7 +24,7 @@ const KPIS: KPI[] = [
     label: "PIB Réel",
     sublabel: "Produit Intérieur Brut",
     category: "Croissance",
-    categoryColor: C.green,
+    categoryColor: "#10c87a",
     value: "6 850",
     unit: "Mds FCFA",
     period: "Exercice 2023",
@@ -45,14 +32,14 @@ const KPIS: KPI[] = [
     changeVal: 6.3,
     prevLabel: "2022 : 5 850 Mds",
     spark: [5200, 5500, 5780, 5850, 6850],
-    accentColor: C.green,
+    accentColor: "#10c87a",
   },
   {
     key: "inflation",
     label: "Inflation IHPC",
     sublabel: "Indice Harmonisé",
     category: "Prix",
-    categoryColor: C.gold,
+    categoryColor: "#f4b942",
     value: "4.2",
     unit: "% / an",
     period: "T3 2024",
@@ -61,14 +48,14 @@ const KPIS: KPI[] = [
     prevLabel: "T2 2024 : 5.0%",
     spark: [2.8, 6.1, 7.8, 5.0, 4.2],
     invertGood: true,
-    accentColor: C.gold,
+    accentColor: "#f4b942",
   },
   {
     key: "unemployment",
     label: "Chômage",
     sublabel: "Taux de chômage",
     category: "Emploi",
-    categoryColor: C.accent,
+    categoryColor: "#d6b68d",
     value: "8.4",
     unit: "%",
     period: "Exercice 2023",
@@ -77,14 +64,14 @@ const KPIS: KPI[] = [
     prevLabel: "2022 : 8.7%",
     spark: [9.5, 9.1, 8.8, 8.7, 8.4],
     invertGood: true,
-    accentColor: C.accent,
+    accentColor: "#d6b68d",
   },
   {
     key: "trade",
     label: "Solde Commercial",
     sublabel: "% du PIB",
     category: "Commerce",
-    categoryColor: C.purple,
+    categoryColor: "#a78bfa",
     value: "−2.3",
     unit: "% PIB",
     period: "Exercice 2023",
@@ -92,14 +79,14 @@ const KPIS: KPI[] = [
     changeVal: 0.4,
     prevLabel: "2022 : −2.7%",
     spark: [-3.5, -3.2, -3.0, -2.7, -2.3],
-    accentColor: C.purple,
+    accentColor: "#a78bfa",
   },
   {
     key: "growth",
     label: "Croissance Réelle",
     sublabel: "Taux annuel",
     category: "Croissance",
-    categoryColor: C.green,
+    categoryColor: "#10c87a",
     value: "6.3",
     unit: "%",
     period: "Exercice 2023",
@@ -107,14 +94,14 @@ const KPIS: KPI[] = [
     changeVal: 0.4,
     prevLabel: "2022 : 5.9%",
     spark: [3.2, 2.0, 7.1, 5.9, 6.3],
-    accentColor: C.green,
+    accentColor: "#10c87a",
   },
   {
     key: "debt",
     label: "Dette Publique",
     sublabel: "% du PIB",
     category: "Finances Pub.",
-    categoryColor: C.red,
+    categoryColor: "#f43860",
     value: "57.8",
     unit: "% PIB",
     period: "Exercice 2023",
@@ -123,7 +110,7 @@ const KPIS: KPI[] = [
     prevLabel: "2022 : 55.7%",
     spark: [48.2, 52.1, 54.3, 55.7, 57.8],
     invertGood: true,
-    accentColor: C.red,
+    accentColor: "#f43860",
   },
 ];
 
@@ -162,10 +149,10 @@ function SVGSparkline({ data, color }: { data: number[]; color: string }) {
 }
 
 function getChangeColor(val: number, invertGood?: boolean): string {
-  if (val === 0) return C.muted;
+  if (val === 0) return "#54678d";
   const positive = val > 0;
-  if (invertGood) return positive ? C.red : C.green;
-  return positive ? C.green : C.red;
+  if (invertGood) return positive ? "#f43860" : "#10c87a";
+  return positive ? "#10c87a" : "#f43860";
 }
 
 function getChangeIcon(val: number) {
@@ -175,6 +162,7 @@ function getChangeIcon(val: number) {
 }
 
 export function MacroKPIWidget() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -195,7 +183,7 @@ export function MacroKPIWidget() {
           justifyContent: "space-between",
           padding: "6px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
@@ -210,7 +198,7 @@ export function MacroKPIWidget() {
           />
           <span
             style={{
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: 700,
               color: C.dim,
               letterSpacing: "0.08em",
@@ -221,7 +209,7 @@ export function MacroKPIWidget() {
           </span>
           <span
             style={{
-              fontSize: 8,
+              fontSize: 10,
               color: C.muted,
               background: "rgba(167,139,250,0.1)",
               border: "1px solid rgba(167,139,250,0.2)",
@@ -233,10 +221,10 @@ export function MacroKPIWidget() {
           </span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontSize: 8, color: C.muted }}>Dernière MAJ : Avr 2024</span>
+          <span style={{ fontSize: 10, color: C.muted }}>Dernière MAJ : Avr 2024</span>
           <span
             style={{
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 600,
               color: C.green,
               background: "rgba(16,200,122,0.1)",
@@ -276,7 +264,7 @@ export function MacroKPIWidget() {
                 overflow: "hidden",
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "rgba(214, 182, 141,0.04)")
+                (e.currentTarget.style.background = "var(--bt-accent-a06)")
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.background = "transparent")
@@ -317,7 +305,7 @@ export function MacroKPIWidget() {
                   >
                     <span
                       style={{
-                        fontSize: 7.5,
+                        fontSize: 9.5,
                         fontWeight: 700,
                         color: kpi.categoryColor,
                         letterSpacing: "0.04em",
@@ -329,7 +317,7 @@ export function MacroKPIWidget() {
                   </div>
                   <div
                     style={{
-                      fontSize: 9,
+                      fontSize: 11,
                       fontWeight: 600,
                       color: C.dim,
                       lineHeight: 1.2,
@@ -353,7 +341,7 @@ export function MacroKPIWidget() {
                 >
                   <span
                     style={{
-                      fontSize: 22,
+                      fontSize: 24,
                       fontWeight: 800,
                       color: C.text,
                       fontVariantNumeric: "tabular-nums",
@@ -365,7 +353,7 @@ export function MacroKPIWidget() {
                   </span>
                   <span
                     style={{
-                      fontSize: 9,
+                      fontSize: 11,
                       color: C.muted,
                       fontWeight: 500,
                     }}
@@ -396,7 +384,7 @@ export function MacroKPIWidget() {
                     <span style={{ color: changeColor }}>{getChangeIcon(kpi.changeVal)}</span>
                     <span
                       style={{
-                        fontSize: 9,
+                        fontSize: 11,
                         fontWeight: 700,
                         color: changeColor,
                         fontVariantNumeric: "tabular-nums",
@@ -405,12 +393,12 @@ export function MacroKPIWidget() {
                       {kpi.change}
                     </span>
                   </div>
-                  <span style={{ fontSize: 7.5, color: C.muted }}>{kpi.prevLabel}</span>
+                  <span style={{ fontSize: 9.5, color: C.muted }}>{kpi.prevLabel}</span>
                 </div>
               </div>
 
               {/* Period */}
-              <div style={{ fontSize: 7.5, color: C.muted, marginTop: 4 }}>
+              <div style={{ fontSize: 9.5, color: C.muted, marginTop: 4 }}>
                 {kpi.period}
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Globe2, TrendingUp, TrendingDown, Minus, BookOpen } from "lucide-react";
-import { C, TerminalHeader, DataBadge, MiniWidget, Spk, BFDScore, BFDMacroSignal, BFDZoneVigilance, BFDOpportunite } from "./BloomfieldSignature";
+import { C, DataBadge, MiniWidget, Spk, BFDScore, BFDMacroSignal, BFDZoneVigilance, BFDOpportunite } from "./BloomfieldSignature";
 import { LiveTicker } from "../terminal/LiveTicker";
 
 const COUNTRIES = [
@@ -57,24 +57,23 @@ export function S3_Macro() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", overflow: "hidden", background: C.dark }}>
-      <TerminalHeader screenLabel="Intelligence Macro" screenIcon={<Globe2 size={13} />} screenColor={C.gold} badge="UEMOA" />
-      <LiveTicker />
+<LiveTicker />
       <div style={{ flex: 1, display: "flex", overflow: "hidden", minHeight: 0 }}>
 
         {/* LEFT */}
         <div style={{ width: 350, flexShrink: 0, borderRight: `1px solid ${C.border}`, overflow: "auto", padding: 10, display: "flex", flexDirection: "column", gap: 9 }}>
           {/* Country selector */}
           <div style={{ padding: "10px 12px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: 7 }}>
-            <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 7 }}>Focus Pays</div>
+            <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 7 }}>Focus Pays</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
               {COUNTRIES.map((c) => {
                 const isActive = c.id === activeCountry;
                 const scoreColor = c.score >= 72 ? C.green : c.score >= 55 ? C.gold : c.score >= 38 ? C.orange : C.red;
                 return (
-                  <button key={c.id} onClick={() => setActiveCountry(c.id)} style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 9px", borderRadius: 5, border: `1px solid ${isActive ? scoreColor + "50" : "rgba(44, 61, 127,0.22)"}`, background: isActive ? scoreColor + "12" : "rgba(0, 1, 23,0.5)", cursor: "pointer" }}>
-                    <span style={{ fontSize: 11 }}>{c.flag}</span>
-                    <span style={{ fontSize: 9, fontWeight: isActive ? 700 : 500, color: isActive ? scoreColor : C.muted }}>{c.label}</span>
-                    {isActive && <span style={{ fontSize: 8, fontWeight: 800, color: scoreColor }}>{c.score}</span>}
+                  <button key={c.id} onClick={() => setActiveCountry(c.id)} style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 9px", borderRadius: 5, border: `1px solid ${isActive ? scoreColor + "50" : "var(--bt-border-a22)"}`, background: isActive ? scoreColor + "12" : "var(--bt-overlay-50)", cursor: "pointer" }}>
+                    <span style={{ fontSize: 13 }}>{c.flag}</span>
+                    <span style={{ fontSize: 11, fontWeight: isActive ? 700 : 500, color: isActive ? scoreColor : C.muted }}>{c.label}</span>
+                    {isActive && <span style={{ fontSize: 10, fontWeight: 800, color: scoreColor }}>{c.score}</span>}
                   </button>
                 );
               })}
@@ -93,8 +92,8 @@ export function S3_Macro() {
                     <div style={{ height: 3, borderRadius: 2, background: C.border, marginBottom: 3, overflow: "hidden" }}>
                       <div style={{ height: "100%", width: `${scores2[i]}%`, background: col, borderRadius: 2 }} />
                     </div>
-                    <div style={{ fontSize: 7, color: C.muted, lineHeight: 1.3 }}>{d}</div>
-                    <div style={{ fontSize: 9.5, fontWeight: 700, color: col }}>{scores2[i]}</div>
+                    <div style={{ fontSize: 9, color: C.muted, lineHeight: 1.3 }}>{d}</div>
+                    <div style={{ fontSize: 11.5, fontWeight: 700, color: col }}>{scores2[i]}</div>
                   </div>
                 );
               })}
@@ -105,12 +104,12 @@ export function S3_Macro() {
           <MiniWidget title={`Indicateurs Clés — ${cData.label}`} topRight={<DataBadge source="BAfD · FMI · BCEAO" time="T1 2026" />}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5 }}>
               {kpis.map((k, i) => (
-                <div key={`kpi-${activeCountry}-${i}`} style={{ padding: "7px 9px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", gap: 7 }}>
+                <div key={`kpi-${activeCountry}-${i}`} style={{ padding: "7px 9px", background: "var(--bt-overlay-50)", borderRadius: 5, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", gap: 7 }}>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 8, color: C.muted, marginBottom: 1 }}>{k.label}</div>
+                    <div style={{ fontSize: 10, color: C.muted, marginBottom: 1 }}>{k.label}</div>
                     <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
-                      <span style={{ fontSize: 14, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>{k.val}</span>
-                      <span style={{ fontSize: 8, color: k.color, display: "flex", alignItems: "center", gap: 1 }}>
+                      <span style={{ fontSize: 16, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>{k.val}</span>
+                      <span style={{ fontSize: 10, color: k.color, display: "flex", alignItems: "center", gap: 1 }}>
                         {k.dir === "up" ? <TrendingUp size={7} /> : k.dir === "down" ? <TrendingDown size={7} /> : <Minus size={7} />}
                         {k.sub}
                       </span>
@@ -129,32 +128,32 @@ export function S3_Macro() {
           <MiniWidget title={`Finances Publiques · ${cData.flag} ${cData.label} 2026P`} topRight={<DataBadge source="Ministère Finances · BAfD" time="2026P" />}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6, marginBottom: 8 }}>
               {FINANCE_PUBLIQUE.map((fp) => (
-                <div key={fp.label} style={{ display: "flex", gap: 7, padding: "7px 9px", background: "rgba(0, 1, 23,0.45)", borderRadius: 5, border: `1px solid ${C.border}`, alignItems: "center" }}>
+                <div key={fp.label} style={{ display: "flex", gap: 7, padding: "7px 9px", background: "var(--bt-overlay-45)", borderRadius: 5, border: `1px solid ${C.border}`, alignItems: "center" }}>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 8, color: C.muted, marginBottom: 2 }}>{fp.label}</div>
-                    <div style={{ fontSize: 14, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>{fp.val}</div>
-                    <div style={{ fontSize: 8, color: fp.up ? C.green : C.red }}>{fp.pct}</div>
+                    <div style={{ fontSize: 10, color: C.muted, marginBottom: 2 }}>{fp.label}</div>
+                    <div style={{ fontSize: 16, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>{fp.val}</div>
+                    <div style={{ fontSize: 10, color: fp.up ? C.green : C.red }}>{fp.pct}</div>
                   </div>
                   {fp.up ? <TrendingUp size={12} color={C.green} /> : <TrendingDown size={12} color={C.red} />}
                 </div>
               ))}
             </div>
             {/* Debt bar */}
-            <div style={{ padding: "7px 10px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+            <div style={{ padding: "7px 10px", background: "var(--bt-overlay-50)", borderRadius: 5, border: `1px solid ${C.border}` }}>
               <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 5 }}>
-                <span style={{ fontSize: 9, color: C.dim }}>Dette / PIB</span>
-                <span style={{ fontSize: 13, fontWeight: 800, color: C.gold, marginLeft: "auto" }}>52.4%</span>
-                <span style={{ fontSize: 8, color: C.muted }}>Seuil UEMOA : 70%</span>
+                <span style={{ fontSize: 11, color: C.dim }}>Dette / PIB</span>
+                <span style={{ fontSize: 15, fontWeight: 800, color: C.gold, marginLeft: "auto" }}>52.4%</span>
+                <span style={{ fontSize: 10, color: C.muted }}>Seuil UEMOA : 70%</span>
               </div>
-              <div style={{ height: 8, borderRadius: 4, background: "rgba(44, 61, 127,0.25)", overflow: "hidden" }}>
+              <div style={{ height: 8, borderRadius: 4, background: "var(--bt-border-a25)", overflow: "hidden" }}>
                 <div style={{ height: "100%", width: "74.9%", background: `linear-gradient(90deg, ${C.green} 0%, ${C.gold} 75%, ${C.red} 100%)`, borderRadius: 4, position: "relative" }}>
                   <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 2, background: "#fff", opacity: 0.7 }} />
                 </div>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: 3 }}>
-                <span style={{ fontSize: 7.5, color: C.green }}>0%</span>
-                <span style={{ fontSize: 7.5, color: C.gold }}>52.4% (actuel)</span>
-                <span style={{ fontSize: 7.5, color: C.red }}>70% (seuil)</span>
+                <span style={{ fontSize: 9.5, color: C.green }}>0%</span>
+                <span style={{ fontSize: 9.5, color: C.gold }}>52.4% (actuel)</span>
+                <span style={{ fontSize: 9.5, color: C.red }}>70% (seuil)</span>
               </div>
             </div>
           </MiniWidget>
@@ -180,18 +179,18 @@ export function S3_Macro() {
             <div>
               <div style={{ display: "grid", gridTemplateColumns: "90px 1fr 1fr 1fr 1fr 50px", padding: "2px 4px", marginBottom: 3, borderBottom: `1px solid ${C.border}` }}>
                 {["Pays", "PIB 2026", "Inflation", "Dette/PIB", "Déficit", "Score"].map((h) => (
-                  <div key={h} style={{ fontSize: 7.5, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.04em" }}>{h}</div>
+                  <div key={h} style={{ fontSize: 9.5, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.04em" }}>{h}</div>
                 ))}
               </div>
               {REGIONAL.map((r) => (
-                <div key={r.c} style={{ display: "grid", gridTemplateColumns: "90px 1fr 1fr 1fr 1fr 50px", padding: "5px 4px", borderBottom: `1px solid rgba(44, 61, 127,0.1)`, alignItems: "center", cursor: "pointer" }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: C.text }}>{r.c}</span>
-                  <span style={{ fontSize: 10, color: C.green, fontVariantNumeric: "tabular-nums" }}>{r.pib}</span>
-                  <span style={{ fontSize: 10, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{r.inf}</span>
-                  <span style={{ fontSize: 10, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{r.dette}</span>
-                  <span style={{ fontSize: 10, color: C.red, fontVariantNumeric: "tabular-nums" }}>{r.def}</span>
+                <div key={r.c} style={{ display: "grid", gridTemplateColumns: "90px 1fr 1fr 1fr 1fr 50px", padding: "5px 4px", borderBottom: `1px solid var(--bt-border-a12)`, alignItems: "center", cursor: "pointer" }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: C.text }}>{r.c}</span>
+                  <span style={{ fontSize: 12, color: C.green, fontVariantNumeric: "tabular-nums" }}>{r.pib}</span>
+                  <span style={{ fontSize: 12, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{r.inf}</span>
+                  <span style={{ fontSize: 12, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{r.dette}</span>
+                  <span style={{ fontSize: 12, color: C.red, fontVariantNumeric: "tabular-nums" }}>{r.def}</span>
                   <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                    <span style={{ fontSize: 10, fontWeight: 800, color: r.scoreColor }}>{r.score}</span>
+                    <span style={{ fontSize: 12, fontWeight: 800, color: r.scoreColor }}>{r.score}</span>
                   </div>
                 </div>
               ))}
@@ -203,21 +202,21 @@ export function S3_Macro() {
         <div style={{ width: 248, flexShrink: 0, borderLeft: `1px solid ${C.border}`, overflow: "auto", display: "flex", flexDirection: "column" }}>
           {/* BCEAO Politique */}
           <div style={{ padding: "8px 10px", borderBottom: `1px solid ${C.border}` }}>
-            <div style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>Politique Monétaire BCEAO</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>Politique Monétaire BCEAO</div>
             <div style={{ padding: "8px 10px", background: "rgba(244,185,66,0.08)", border: "1px solid rgba(244,185,66,0.22)", borderRadius: 5 }}>
-              <div style={{ fontSize: 8, color: C.muted, marginBottom: 3 }}>Taux directeur (08 Avr 2026)</div>
+              <div style={{ fontSize: 10, color: C.muted, marginBottom: 3 }}>Taux directeur (08 Avr 2026)</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-                <span style={{ fontSize: 22, fontWeight: 800, color: C.gold }}>3.50%</span>
-                <span style={{ fontSize: 9, color: C.green, fontWeight: 700 }}>INCHANGÉ</span>
+                <span style={{ fontSize: 24, fontWeight: 800, color: C.gold }}>3.50%</span>
+                <span style={{ fontSize: 11, color: C.green, fontWeight: 700 }}>INCHANGÉ</span>
               </div>
               <Spk data={[3.0, 3.0, 3.25, 3.5, 3.5, 3.5, 3.5]} color={C.gold} id="bceao-rate" w={200} h={30} />
-              <div style={{ fontSize: 8, color: C.muted, marginTop: 3 }}>Prochaine réunion CMP : 30 Avr 2026</div>
+              <div style={{ fontSize: 10, color: C.muted, marginTop: 3 }}>Prochaine réunion CMP : 30 Avr 2026</div>
             </div>
             <div style={{ marginTop: 6, display: "flex", flexDirection: "column", gap: 3 }}>
               {[["Taux d'escompte", "5.00%"], ["Taux de pension", "6.50%"], ["Inflation cible UEMOA", "<3%"]].map(([l, v]) => (
-                <div key={l} style={{ display: "flex", padding: "3px 0", borderBottom: `1px solid rgba(44, 61, 127,0.1)` }}>
-                  <span style={{ flex: 1, fontSize: 8.5, color: C.muted }}>{l}</span>
-                  <span style={{ fontSize: 9, fontWeight: 600, color: C.text }}>{v}</span>
+                <div key={l} style={{ display: "flex", padding: "3px 0", borderBottom: `1px solid var(--bt-border-a12)` }}>
+                  <span style={{ flex: 1, fontSize: 10.5, color: C.muted }}>{l}</span>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: C.text }}>{v}</span>
                 </div>
               ))}
             </div>
@@ -237,14 +236,14 @@ export function S3_Macro() {
           <div style={{ padding: "8px 10px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 6 }}>
               <BookOpen size={9} color={C.purple} />
-              <span style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Publications BFD</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Publications BFD</span>
             </div>
             {PUBLICATIONS.map((p, i) => (
-              <div key={i} style={{ display: "flex", gap: 7, padding: "6px 0", borderBottom: `1px solid rgba(44, 61, 127,0.1)`, cursor: "pointer" }}>
-                <span style={{ fontSize: 7, padding: "1px 4px", borderRadius: 2, background: p.color + "14", border: `1px solid ${p.color}25`, color: p.color, fontWeight: 800, alignSelf: "flex-start", marginTop: 1 }}>{p.tag}</span>
+              <div key={i} style={{ display: "flex", gap: 7, padding: "6px 0", borderBottom: `1px solid var(--bt-border-a12)`, cursor: "pointer" }}>
+                <span style={{ fontSize: 9, padding: "1px 4px", borderRadius: 2, background: p.color + "14", border: `1px solid ${p.color}25`, color: p.color, fontWeight: 800, alignSelf: "flex-start", marginTop: 1 }}>{p.tag}</span>
                 <div>
-                  <div style={{ fontSize: 8.5, color: C.dim, lineHeight: 1.4 }}>{p.title}</div>
-                  <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>{p.date} Avr 2026</div>
+                  <div style={{ fontSize: 10.5, color: C.dim, lineHeight: 1.4 }}>{p.title}</div>
+                  <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1 }}>{p.date} Avr 2026</div>
                 </div>
               </div>
             ))}

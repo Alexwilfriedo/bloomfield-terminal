@@ -1,18 +1,5 @@
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 interface KPI {
   key: string;
@@ -34,98 +21,98 @@ const KPIS: KPI[] = [
     key: "pnb",
     label: "PNB",
     category: "Revenus",
-    categoryColor: C.accent,
+    categoryColor: "#d6b68d",
     value: "154.6",
     unit: "Mds XOF",
     change: "+12.0%",
     changeVal: 12.0,
     prev: "137.9 · FY2022",
     spark: [95.4, 108.7, 124.3, 137.9, 154.6],
-    accentColor: C.accent,
+    accentColor: "#d6b68d",
   },
   {
     key: "ebitda",
     label: "EBITDA",
     category: "Performance",
-    categoryColor: C.green,
+    categoryColor: "#10c87a",
     value: "74.3",
     unit: "Mds XOF",
     change: "+14.2%",
     changeVal: 14.2,
     prev: "65.1 · FY2022",
     spark: [42.1, 51.8, 60.4, 65.1, 74.3],
-    accentColor: C.green,
+    accentColor: "#10c87a",
   },
   {
     key: "ni",
     label: "Résultat Net",
     category: "Rentabilité",
-    categoryColor: C.gold,
+    categoryColor: "#f4b942",
     value: "41.2",
     unit: "Mds XOF",
     change: "+17.4%",
     changeVal: 17.4,
     prev: "35.1 · FY2022",
     spark: [24.8, 29.4, 35.1, 35.1, 41.2],
-    accentColor: C.gold,
+    accentColor: "#f4b942",
   },
   {
     key: "margin",
     label: "Marge Nette",
     category: "Marges",
-    categoryColor: C.purple,
+    categoryColor: "#a78bfa",
     value: "26.7",
     unit: "%",
     change: "+1.2pp",
     changeVal: 1.2,
     prev: "25.5% · FY2022",
     spark: [22.1, 23.8, 25.1, 25.5, 26.7],
-    accentColor: C.purple,
+    accentColor: "#a78bfa",
   },
   {
     key: "roe",
     label: "ROE",
     category: "Efficacité",
-    categoryColor: C.green,
+    categoryColor: "#10c87a",
     value: "18.3",
     unit: "%",
     change: "+1.4pp",
     changeVal: 1.4,
     prev: "16.9% · FY2022",
     spark: [14.2, 15.8, 16.4, 16.9, 18.3],
-    accentColor: C.green,
+    accentColor: "#10c87a",
   },
   {
     key: "roa",
     label: "ROA",
     category: "Efficacité",
-    categoryColor: C.accent,
+    categoryColor: "#d6b68d",
     value: "1.65",
     unit: "%",
     change: "+0.12pp",
     changeVal: 0.12,
     prev: "1.53% · FY2022",
     spark: [1.21, 1.38, 1.48, 1.53, 1.65],
-    accentColor: C.accent,
+    accentColor: "#d6b68d",
   },
   {
     key: "tier1",
     label: "Tier 1",
     category: "Solvabilité",
-    categoryColor: C.orange,
+    categoryColor: "#fb923c",
     value: "11.8",
     unit: "%",
     change: "+0.3pp",
     changeVal: 0.3,
     prev: "11.5% · FY2022",
     spark: [10.8, 11.1, 11.3, 11.5, 11.8],
-    accentColor: C.orange,
+    accentColor: "#fb923c",
   },
   {
     key: "npl",
     label: "Taux NPL",
     category: "Risque",
-    categoryColor: C.red,
+    categoryColor: "#f43860",
     value: "4.2",
     unit: "%",
     change: "−0.4pp",
@@ -133,7 +120,7 @@ const KPIS: KPI[] = [
     prev: "4.6% · FY2022",
     spark: [6.1, 5.5, 5.0, 4.6, 4.2],
     invertGood: true,
-    accentColor: C.red,
+    accentColor: "#f43860",
   },
 ];
 
@@ -173,13 +160,14 @@ function SVGSparkline({ data, color }: { data: number[]; color: string }) {
 }
 
 function getChangeColor(val: number, invertGood?: boolean): string {
-  if (val === 0) return C.muted;
+  if (val === 0) return "#54678d";
   const positive = val > 0;
-  if (invertGood) return positive ? C.red : C.green;
-  return positive ? C.green : C.red;
+  if (invertGood) return positive ? "#f43860" : "#10c87a";
+  return positive ? "#10c87a" : "#f43860";
 }
 
 export function FinancialKPICards() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -200,18 +188,18 @@ export function FinancialKPICards() {
           justifyContent: "space-between",
           padding: "6px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ width: 3, height: 14, borderRadius: 2, background: C.gold }} />
-          <span style={{ fontSize: 10, fontWeight: 700, color: C.dim, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: C.dim, letterSpacing: "0.08em", textTransform: "uppercase" }}>
             Indicateurs Financiers Clés
           </span>
           <span
             style={{
-              fontSize: 8,
+              fontSize: 10,
               color: C.gold,
               background: "rgba(244,185,66,0.1)",
               border: "1px solid rgba(244,185,66,0.2)",
@@ -223,7 +211,7 @@ export function FinancialKPICards() {
             SGBCI · FY2023
           </span>
         </div>
-        <span style={{ fontSize: 8, color: C.muted }}>vs. FY2022 · Consolidé · XOF</span>
+        <span style={{ fontSize: 10, color: C.muted }}>vs. FY2022 · Consolidé · XOF</span>
       </div>
 
       {/* KPI grid */}
@@ -250,7 +238,7 @@ export function FinancialKPICards() {
                 transition: "background 0.15s",
                 overflow: "hidden",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.04)")}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bt-accent-a06)")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             >
               {/* Accent top bar */}
@@ -272,7 +260,7 @@ export function FinancialKPICards() {
                   <span
                     style={{
                       display: "inline-block",
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       fontWeight: 700,
                       color: kpi.categoryColor,
                       background: kpi.categoryColor + "14",
@@ -285,7 +273,7 @@ export function FinancialKPICards() {
                   >
                     {kpi.category}
                   </span>
-                  <div style={{ fontSize: 9, fontWeight: 600, color: C.dim, marginTop: 4 }}>{kpi.label}</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: C.dim, marginTop: 4 }}>{kpi.label}</div>
                 </div>
                 <SVGSparkline data={kpi.spark} color={kpi.accentColor} />
               </div>
@@ -294,7 +282,7 @@ export function FinancialKPICards() {
               <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: 4 }}>
                 <span
                   style={{
-                    fontSize: 20,
+                    fontSize: 22,
                     fontWeight: 800,
                     color: C.text,
                     fontVariantNumeric: "tabular-nums",
@@ -304,7 +292,7 @@ export function FinancialKPICards() {
                 >
                   {kpi.value}
                 </span>
-                <span style={{ fontSize: 8.5, color: C.muted, fontWeight: 500 }}>{kpi.unit}</span>
+                <span style={{ fontSize: 10.5, color: C.muted, fontWeight: 500 }}>{kpi.unit}</span>
               </div>
 
               {/* Change badge */}
@@ -327,14 +315,14 @@ export function FinancialKPICards() {
                   ) : (
                     <Minus size={8} color={changeColor} />
                   )}
-                  <span style={{ fontSize: 8.5, fontWeight: 700, color: changeColor, fontVariantNumeric: "tabular-nums" }}>
+                  <span style={{ fontSize: 10.5, fontWeight: 700, color: changeColor, fontVariantNumeric: "tabular-nums" }}>
                     {kpi.change}
                   </span>
                 </div>
               </div>
 
               {/* Prev */}
-              <div style={{ fontSize: 7.5, color: C.muted, marginTop: 3 }}>{kpi.prev}</div>
+              <div style={{ fontSize: 9.5, color: C.muted, marginTop: 3 }}>{kpi.prev}</div>
             </div>
           );
         })}

@@ -71,7 +71,7 @@ export function LiveTicker() {
       style={{
         height: 32,
         background: "#000117",
-        borderBottom: "1px solid rgba(44, 61, 127,0.32)",
+        borderBottom: "1px solid var(--bt-border-a32)",
         overflow: "hidden",
         display: "flex",
         alignItems: "center",
@@ -102,7 +102,7 @@ export function LiveTicker() {
           height: "100%",
           width: 72,
           background: "#000117",
-          borderRight: "1px solid rgba(44, 61, 127,0.32)",
+          borderRight: "1px solid var(--bt-border-a32)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -123,7 +123,7 @@ export function LiveTicker() {
         />
         <span
           style={{
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 700,
             color: "#10c87a",
             letterSpacing: "0.1em",
@@ -180,14 +180,14 @@ function TickerItem({ item }: { item: TickerItem }) {
         alignItems: "center",
         gap: 6,
         padding: "0 14px",
-        borderRight: "1px solid rgba(44, 61, 127,0.18)",
+        borderRight: "1px solid var(--bt-border-a20)",
         height: 32,
       }}
     >
       {item.category && (
         <span
           style={{
-            fontSize: 8,
+            fontSize: 10,
             fontWeight: 700,
             color: catColor,
             letterSpacing: "0.08em",
@@ -199,7 +199,7 @@ function TickerItem({ item }: { item: TickerItem }) {
       )}
       <span
         style={{
-          fontSize: 11,
+          fontSize: 13,
           fontWeight: 600,
           color: "#c5dff0",
           letterSpacing: "0.01em",
@@ -209,7 +209,7 @@ function TickerItem({ item }: { item: TickerItem }) {
       </span>
       <span
         style={{
-          fontSize: 11,
+          fontSize: 13,
           fontWeight: 700,
           color: "#ddeaf8",
           fontVariantNumeric: "tabular-nums",
@@ -219,7 +219,7 @@ function TickerItem({ item }: { item: TickerItem }) {
       </span>
       <span
         style={{
-          fontSize: 10,
+          fontSize: 12,
           color: changeColor,
           display: "flex",
           alignItems: "center",

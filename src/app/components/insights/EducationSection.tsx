@@ -1,20 +1,7 @@
 import { GraduationCap, BookOpen, Play, ChevronRight, Clock, Award, Lock } from "lucide-react";
 import { useState } from "react";
 import type { ReactNode } from "react";
-
-const C = {
-  surface: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 interface Module {
   id: number;
@@ -40,7 +27,7 @@ const MODULES: Module[] = [
     description: "Découvrez le fonctionnement des principales bourses africaines, les instruments cotés, les règles de marché et les acteurs institutionnels clés.",
     type: "course",
     typeLabel: "MODULE",
-    typeColor: C.accent,
+    typeColor: "#d6b68d",
     duration: "3h 20min",
     level: "Débutant",
     category: "Marchés",
@@ -55,7 +42,7 @@ const MODULES: Module[] = [
     description: "Maîtrisez les techniques d'analyse financière appliquées aux marchés africains : lecture des comptes, calcul de ratios, valorisation DCF et comparables.",
     type: "course",
     typeLabel: "MODULE",
-    typeColor: C.accent,
+    typeColor: "#d6b68d",
     duration: "5h 45min",
     level: "Intermédiaire",
     category: "Analyse",
@@ -71,7 +58,7 @@ const MODULES: Module[] = [
     description: "Explainer complet sur les mécanismes de la BCEAO : instruments, canaux de transmission, impact sur la liquidité bancaire et les taux de marché.",
     type: "explainer",
     typeLabel: "EXPLAINER",
-    typeColor: C.purple,
+    typeColor: "#a78bfa",
     duration: "25 min",
     level: "Intermédiaire",
     category: "Macro",
@@ -84,7 +71,7 @@ const MODULES: Module[] = [
     description: "Référentiel terminologique complet couvrant la finance de marché, la macro-économie, les dettes souveraines, la réglementation bancaire et les changes.",
     type: "glossary",
     typeLabel: "GLOSSAIRE",
-    typeColor: C.gold,
+    typeColor: "#f4b942",
     duration: "Référence",
     level: "Débutant",
     category: "Référence",
@@ -96,7 +83,7 @@ const MODULES: Module[] = [
     description: "Cours avancé sur l'investissement en dette souveraine UEMOA : structure du marché primaire, duration, convexité, spreads et construction de portefeuilles obligataires.",
     type: "course",
     typeLabel: "MODULE",
-    typeColor: C.accent,
+    typeColor: "#d6b68d",
     duration: "4h 10min",
     level: "Avancé",
     category: "Obligations",
@@ -112,7 +99,7 @@ const MODULES: Module[] = [
     description: "Vidéo pédagogique de 8 minutes expliquant le mécanisme de parité du franc CFA, la convertibilité, et les implications pratiques pour les investisseurs.",
     type: "video",
     typeLabel: "VIDÉO ÉDUCATIVE",
-    typeColor: C.orange,
+    typeColor: "#fb923c",
     duration: "8 min",
     level: "Débutant",
     category: "Change",
@@ -122,9 +109,9 @@ const MODULES: Module[] = [
 ];
 
 const LEVEL_COLORS: Record<string, string> = {
-  "Débutant": C.green,
-  "Intermédiaire": C.gold,
-  "Avancé": C.red,
+  "Débutant": "#10c87a",
+  "Intermédiaire": "#f4b942",
+  "Avancé": "#f43860",
 };
 
 const TYPE_ICONS: Record<string, ReactNode> = {
@@ -135,12 +122,13 @@ const TYPE_ICONS: Record<string, ReactNode> = {
 };
 
 function ModuleCard({ module }: { module: Module }) {
+  const C = useThemeColors();
   const levelColor = LEVEL_COLORS[module.level] || C.muted;
 
   return (
     <div
       style={{
-        background: "rgba(0, 1, 23,0.5)",
+        background: "var(--bt-overlay-50)",
         border: `1px solid ${C.border}`,
         borderRadius: 7,
         padding: "12px 13px",
@@ -152,7 +140,7 @@ function ModuleCard({ module }: { module: Module }) {
         position: "relative",
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(214, 182, 141,0.3)";
+        (e.currentTarget as HTMLDivElement).style.borderColor = "var(--bt-accent-a30)";
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLDivElement).style.borderColor = C.border;
@@ -182,7 +170,7 @@ function ModuleCard({ module }: { module: Module }) {
             borderRadius: 3,
             background: module.typeColor + "14",
             border: `1px solid ${module.typeColor}30`,
-            fontSize: 7.5,
+            fontSize: 9.5,
             fontWeight: 700,
             color: module.typeColor,
             letterSpacing: "0.06em",
@@ -197,7 +185,7 @@ function ModuleCard({ module }: { module: Module }) {
             borderRadius: 3,
             background: levelColor + "12",
             border: `1px solid ${levelColor}30`,
-            fontSize: 7.5,
+            fontSize: 9.5,
             fontWeight: 600,
             color: levelColor,
           }}
@@ -211,7 +199,7 @@ function ModuleCard({ module }: { module: Module }) {
               borderRadius: 2,
               background: "rgba(16,200,122,0.12)",
               border: "1px solid rgba(16,200,122,0.3)",
-              fontSize: 7.5,
+              fontSize: 9.5,
               fontWeight: 800,
               color: C.green,
             }}
@@ -229,7 +217,7 @@ function ModuleCard({ module }: { module: Module }) {
               borderRadius: 2,
               background: "rgba(244,185,66,0.1)",
               border: "1px solid rgba(244,185,66,0.25)",
-              fontSize: 7.5,
+              fontSize: 9.5,
               fontWeight: 700,
               color: C.gold,
             }}
@@ -248,7 +236,7 @@ function ModuleCard({ module }: { module: Module }) {
               borderRadius: 2,
               background: "rgba(167,139,250,0.1)",
               border: "1px solid rgba(167,139,250,0.25)",
-              fontSize: 7.5,
+              fontSize: 9.5,
               fontWeight: 700,
               color: C.purple,
             }}
@@ -262,7 +250,7 @@ function ModuleCard({ module }: { module: Module }) {
       {/* Title */}
       <div
         style={{
-          fontSize: 11,
+          fontSize: 13,
           fontWeight: 700,
           color: C.text,
           lineHeight: 1.4,
@@ -275,7 +263,7 @@ function ModuleCard({ module }: { module: Module }) {
       <p
         style={{
           margin: 0,
-          fontSize: 9.5,
+          fontSize: 11.5,
           color: C.dim,
           lineHeight: 1.5,
           display: "-webkit-box",
@@ -291,13 +279,13 @@ function ModuleCard({ module }: { module: Module }) {
       {module.progress !== undefined && module.progress > 0 && (
         <div>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-            <span style={{ fontSize: 8, color: C.muted }}>Progression</span>
-            <span style={{ fontSize: 8, color: C.accent, fontWeight: 600 }}>{module.progress}%</span>
+            <span style={{ fontSize: 10, color: C.muted }}>Progression</span>
+            <span style={{ fontSize: 10, color: C.accent, fontWeight: 600 }}>{module.progress}%</span>
           </div>
           <div
             style={{
               height: 3,
-              background: "rgba(44, 61, 127,0.3)",
+              background: "var(--bt-border-a32)",
               borderRadius: 2,
               overflow: "hidden",
             }}
@@ -316,19 +304,19 @@ function ModuleCard({ module }: { module: Module }) {
 
       {/* Footer */}
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: "auto" }}>
-        <span style={{ display: "flex", alignItems: "center", gap: 3, fontSize: 8.5, color: C.muted }}>
+        <span style={{ display: "flex", alignItems: "center", gap: 3, fontSize: 10.5, color: C.muted }}>
           <Clock size={8} />
           {module.duration}
         </span>
         {module.lessons && (
-          <span style={{ fontSize: 8.5, color: C.muted }}>{module.lessons} leçons</span>
+          <span style={{ fontSize: 10.5, color: C.muted }}>{module.lessons} leçons</span>
         )}
         <span
           style={{
             padding: "1px 5px",
             borderRadius: 2,
-            background: "rgba(44, 61, 127,0.2)",
-            fontSize: 8,
+            background: "var(--bt-border-a20)",
+            fontSize: 10,
             color: C.muted,
           }}
         >
@@ -343,11 +331,11 @@ function ModuleCard({ module }: { module: Module }) {
             padding: "4px 10px",
             borderRadius: 4,
             background: module.progress && module.progress > 0
-              ? "rgba(214, 182, 141,0.12)"
-              : "rgba(214, 182, 141,0.08)",
+              ? "var(--bt-accent-a12)"
+              : "var(--bt-accent-a08)",
             border: "1px solid rgba(214, 182, 141,0.22)",
             color: C.accent,
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 700,
             cursor: "pointer",
           }}
@@ -362,6 +350,7 @@ function ModuleCard({ module }: { module: Module }) {
 }
 
 export function EducationSection() {
+  const C = useThemeColors();
   const [activeCategory, setActiveCategory] = useState("Tous");
   const categories = ["Tous", "Marchés", "Macro", "Obligations", "Analyse", "Change", "Référence"];
 
@@ -382,12 +371,12 @@ export function EducationSection() {
           gap: 8,
           padding: "10px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
         }}
       >
         <GraduationCap size={13} color={C.purple} />
-        <span style={{ fontSize: 11, fontWeight: 700, color: C.text }}>Bibliothèque Éducative</span>
-        <span style={{ fontSize: 9, color: C.muted }}>· Explainers, Modules & Formations Certifiantes</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: C.text }}>Bibliothèque Éducative</span>
+        <span style={{ fontSize: 11, color: C.muted }}>· Explainers, Modules & Formations Certifiantes</span>
         <div style={{ flex: 1 }} />
         {categories.map((cat) => (
           <button
@@ -396,10 +385,10 @@ export function EducationSection() {
             style={{
               padding: "3px 8px",
               borderRadius: 3,
-              border: `1px solid ${activeCategory === cat ? "rgba(167,139,250,0.4)" : "rgba(44, 61, 127,0.22)"}`,
+              border: `1px solid ${activeCategory === cat ? "rgba(167,139,250,0.4)" : "var(--bt-border-a22)"}`,
               background: activeCategory === cat ? "rgba(167,139,250,0.1)" : "transparent",
               color: activeCategory === cat ? C.purple : C.muted,
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: activeCategory === cat ? 700 : 500,
               cursor: "pointer",
             }}
@@ -417,7 +406,7 @@ export function EducationSection() {
             background: "rgba(167,139,250,0.08)",
             border: "1px solid rgba(167,139,250,0.2)",
             color: C.purple,
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 600,
             cursor: "pointer",
           }}
@@ -434,8 +423,8 @@ export function EducationSection() {
           alignItems: "center",
           gap: 20,
           padding: "8px 14px",
-          borderBottom: `1px solid rgba(44, 61, 127,0.16)`,
-          background: "rgba(0, 1, 23,0.2)",
+          borderBottom: `1px solid var(--bt-border-a16)`,
+          background: "var(--bt-overlay-20)",
         }}
       >
         {[
@@ -446,8 +435,8 @@ export function EducationSection() {
           { label: "Certifications délivrées", value: "394", color: C.gold },
         ].map((stat) => (
           <div key={stat.label} style={{ display: "flex", flexDirection: "column", gap: 1 }}>
-            <span style={{ fontSize: 13, fontWeight: 800, color: stat.color }}>{stat.value}</span>
-            <span style={{ fontSize: 8, color: C.muted }}>{stat.label}</span>
+            <span style={{ fontSize: 15, fontWeight: 800, color: stat.color }}>{stat.value}</span>
+            <span style={{ fontSize: 10, color: C.muted }}>{stat.label}</span>
           </div>
         ))}
         <div style={{ flex: 1 }} />
@@ -463,7 +452,7 @@ export function EducationSection() {
           }}
         >
           <Award size={10} color={C.purple} />
-          <span style={{ fontSize: 9, color: C.purple, fontWeight: 600 }}>
+          <span style={{ fontSize: 11, color: C.purple, fontWeight: 600 }}>
             Mon parcours : 35% complété — Module 2/5
           </span>
         </div>

@@ -8,21 +8,7 @@ import {
 import { Globe2, ChevronRight } from "lucide-react";
 
 import africaGeoJSONUrl from "../../../assets/africa.geojson";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  orange: "#fb923c",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 type MetricKey = "growth" | "inflation" | "debt" | "risk";
 type LayerKey = "continent" | "west" | "uemoa";
@@ -104,30 +90,30 @@ const WEST_CODES = new Set(
 );
 
 const RISK_COLORS: Record<string, string> = {
-  stable: C.green,
-  moderate: C.gold,
-  elevated: C.orange,
-  high: C.red,
+  stable: "#10c87a",
+  moderate: "#f4b942",
+  elevated: "#fb923c",
+  high: "#f43860",
 };
 
 function getMetricColor(country: Country, metric: MetricKey): string {
   if (metric === "growth") {
-    if (country.growth >= 6) return C.green;
+    if (country.growth >= 6) return "#10c87a";
     if (country.growth >= 4) return "#86efac";
-    if (country.growth >= 2) return C.gold;
-    return C.red;
+    if (country.growth >= 2) return "#f4b942";
+    return "#f43860";
   }
   if (metric === "inflation") {
-    if (country.inflation <= 3) return C.green;
-    if (country.inflation <= 6) return C.gold;
-    if (country.inflation <= 15) return C.orange;
-    return C.red;
+    if (country.inflation <= 3) return "#10c87a";
+    if (country.inflation <= 6) return "#f4b942";
+    if (country.inflation <= 15) return "#fb923c";
+    return "#f43860";
   }
   if (metric === "debt") {
-    if (country.debtGdp <= 40) return C.green;
-    if (country.debtGdp <= 65) return C.gold;
-    if (country.debtGdp <= 90) return C.orange;
-    return C.red;
+    if (country.debtGdp <= 40) return "#10c87a";
+    if (country.debtGdp <= 65) return "#f4b942";
+    if (country.debtGdp <= 90) return "#fb923c";
+    return "#f43860";
   }
   return RISK_COLORS[country.riskLevel];
 }
@@ -155,6 +141,7 @@ const PROJECTION_CONFIG = {
 };
 
 export function AfricaMapWidget() {
+  const C = useThemeColors();
   const [selected, setSelected] = useState<string>("CIV");
   const [metric, setMetric] = useState<MetricKey>("growth");
   const [layer, setLayer] = useState<LayerKey>("continent");
@@ -230,7 +217,7 @@ export function AfricaMapWidget() {
           justifyContent: "space-between",
           padding: "6px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
           gap: 8,
           flexWrap: "wrap",
@@ -241,7 +228,7 @@ export function AfricaMapWidget() {
           <Globe2 size={11} color={C.accent} />
           <span
             style={{
-              fontSize: 9.5,
+              fontSize: 11.5,
               fontWeight: 700,
               color: C.dim,
               letterSpacing: "0.07em",
@@ -250,7 +237,7 @@ export function AfricaMapWidget() {
           >
             Carte Économique Afrique
           </span>
-          <span style={{ fontSize: 7.5, color: C.muted }}>
+          <span style={{ fontSize: 9.5, color: C.muted }}>
             · FMI · Banque Mondiale · 2025
           </span>
         </div>
@@ -268,7 +255,7 @@ export function AfricaMapWidget() {
                   border: `1px solid ${layer === l.key ? C.gold + "50" : C.border}`,
                   background: layer === l.key ? "rgba(244,185,66,0.12)" : "transparent",
                   color: layer === l.key ? C.gold : C.muted,
-                  fontSize: 8.5,
+                  fontSize: 10.5,
                   fontWeight: layer === l.key ? 700 : 500,
                   cursor: "pointer",
                 }}
@@ -290,9 +277,9 @@ export function AfricaMapWidget() {
                   padding: "2px 8px",
                   borderRadius: 3,
                   border: `1px solid ${metric === m.key ? C.accent + "50" : C.border}`,
-                  background: metric === m.key ? "rgba(214, 182, 141,0.1)" : "transparent",
+                  background: metric === m.key ? "var(--bt-accent-a10)" : "transparent",
                   color: metric === m.key ? C.accent : C.muted,
-                  fontSize: 8.5,
+                  fontSize: 10.5,
                   fontWeight: metric === m.key ? 700 : 500,
                   cursor: "pointer",
                 }}
@@ -312,7 +299,7 @@ export function AfricaMapWidget() {
             flex: 1,
             overflow: "hidden",
             position: "relative",
-            background: "rgba(0, 1, 23,0.55)",
+            background: "var(--bt-overlay-55)",
           }}
         >
           <ComposableMap
@@ -395,20 +382,20 @@ export function AfricaMapWidget() {
                 top: 8,
                 left: 8,
                 padding: "6px 10px",
-                background: "rgba(0, 1, 23, 0.92)",
+                background: "var(--bt-overlay-92)",
                 border: `1px solid ${C.accent}`,
                 borderRadius: 6,
-                fontSize: 10,
+                fontSize: 12,
                 color: C.text,
                 pointerEvents: "none",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
-                <span style={{ fontSize: 12 }}>{COUNTRIES_BY_ISO[hovered].flag}</span>
+                <span style={{ fontSize: 14 }}>{COUNTRIES_BY_ISO[hovered].flag}</span>
                 <span style={{ fontWeight: 700 }}>{COUNTRIES_BY_ISO[hovered].name}</span>
               </div>
-              <div style={{ color: C.dim, fontSize: 9 }}>
+              <div style={{ color: C.dim, fontSize: 11 }}>
                 {metrics.find((m) => m.key === metric)?.label}:{" "}
                 <span style={{ color: getMetricColor(COUNTRIES_BY_ISO[hovered], metric), fontWeight: 700 }}>
                   {getMetricValue(COUNTRIES_BY_ISO[hovered], metric)}
@@ -423,7 +410,7 @@ export function AfricaMapWidget() {
           style={{
             width: 180,
             borderLeft: `1px solid ${C.border}`,
-            background: "rgba(0, 1, 23, 0.4)",
+            background: "var(--bt-overlay-40)",
             display: "flex",
             flexDirection: "column",
             flexShrink: 0,
@@ -433,12 +420,12 @@ export function AfricaMapWidget() {
             <>
               <div style={{ padding: "10px 12px", borderBottom: `1px solid ${C.border}` }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <span style={{ fontSize: 18 }}>{selectedCountry.flag}</span>
+                  <span style={{ fontSize: 20 }}>{selectedCountry.flag}</span>
                   <div>
-                    <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>
                       {selectedCountry.name}
                     </div>
-                    <div style={{ fontSize: 8, color: C.muted, marginTop: 1 }}>
+                    <div style={{ fontSize: 10, color: C.muted, marginTop: 1 }}>
                       {selectedCountry.uemoa && (
                         <span
                           style={{
@@ -447,7 +434,7 @@ export function AfricaMapWidget() {
                             background: "rgba(244,185,66,0.15)",
                             border: "1px solid rgba(244,185,66,0.3)",
                             color: C.gold,
-                            fontSize: 7,
+                            fontSize: 9,
                             fontWeight: 700,
                             letterSpacing: "0.08em",
                             marginRight: 4,
@@ -463,7 +450,7 @@ export function AfricaMapWidget() {
                           background: `${RISK_COLORS[selectedCountry.riskLevel]}20`,
                           border: `1px solid ${RISK_COLORS[selectedCountry.riskLevel]}40`,
                           color: RISK_COLORS[selectedCountry.riskLevel],
-                          fontSize: 7,
+                          fontSize: 9,
                           fontWeight: 700,
                           letterSpacing: "0.08em",
                         }}
@@ -482,7 +469,7 @@ export function AfricaMapWidget() {
               </div>
 
               <div style={{ padding: "8px 12px", borderTop: `1px solid ${C.border}` }}>
-                <div style={{ fontSize: 7.5, color: C.muted, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>
+                <div style={{ fontSize: 9.5, color: C.muted, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>
                   Score Macro Bloomfield
                 </div>
                 <ScoreBar label="Croissance" value={63} color={C.green} />
@@ -496,11 +483,11 @@ export function AfricaMapWidget() {
                 style={{
                   margin: 10,
                   padding: "6px 10px",
-                  background: "rgba(214, 182, 141, 0.1)",
+                  background: "var(--bt-accent-a10)",
                   border: `1px solid ${C.accent}40`,
                   borderRadius: 4,
                   color: C.accent,
-                  fontSize: 9,
+                  fontSize: 11,
                   fontWeight: 700,
                   letterSpacing: "0.04em",
                   textTransform: "uppercase",
@@ -526,9 +513,9 @@ export function AfricaMapWidget() {
           gap: 12,
           padding: "5px 12px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23, 0.3)",
+          background: "var(--bt-overlay-30)",
           flexShrink: 0,
-          fontSize: 8,
+          fontSize: 10,
           color: C.muted,
           flexWrap: "wrap",
         }}
@@ -576,6 +563,7 @@ function DetailRow({
   value: string;
   color: string;
 }) {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -584,11 +572,11 @@ function DetailRow({
         justifyContent: "space-between",
         padding: "4px 6px",
         borderRadius: 3,
-        background: "rgba(44, 61, 127, 0.12)",
+        background: "var(--bt-border-a12)",
       }}
     >
-      <span style={{ fontSize: 9, color: C.dim }}>{label}</span>
-      <span style={{ fontSize: 10.5, fontWeight: 700, color, fontVariantNumeric: "tabular-nums" }}>
+      <span style={{ fontSize: 11, color: C.dim }}>{label}</span>
+      <span style={{ fontSize: 12.5, fontWeight: 700, color, fontVariantNumeric: "tabular-nums" }}>
         {value}
       </span>
     </div>
@@ -604,18 +592,19 @@ function ScoreBar({
   value: number;
   color: string;
 }) {
+  const C = useThemeColors();
   return (
     <div style={{ marginBottom: 4 }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 2 }}>
-        <span style={{ fontSize: 8, color: C.muted }}>{label}</span>
-        <span style={{ fontSize: 8, fontWeight: 700, color, fontVariantNumeric: "tabular-nums" }}>
+        <span style={{ fontSize: 10, color: C.muted }}>{label}</span>
+        <span style={{ fontSize: 10, fontWeight: 700, color, fontVariantNumeric: "tabular-nums" }}>
           {value}
         </span>
       </div>
       <div
         style={{
           height: 3,
-          background: "rgba(44, 61, 127, 0.25)",
+          background: "var(--bt-border-a25)",
           borderRadius: 2,
           overflow: "hidden",
         }}

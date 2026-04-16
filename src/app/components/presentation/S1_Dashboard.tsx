@@ -1,5 +1,5 @@
 import { LayoutDashboard, TrendingUp, TrendingDown, Calendar, Bell, Clock } from "lucide-react";
-import { C, TerminalHeader, DataBadge, SignalDuJour, MiniWidget, Spk, BFDOpportunite } from "./BloomfieldSignature";
+import { C, DataBadge, SignalDuJour, MiniWidget, Spk, BFDOpportunite } from "./BloomfieldSignature";
 import { LiveTicker } from "../terminal/LiveTicker";
 
 const INDICES = [
@@ -58,7 +58,6 @@ function SeverityDot({ color }: { color: string }) {
 export function S1_Dashboard() {
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", overflow: "hidden", background: C.dark }}>
-      <TerminalHeader screenLabel="Tableau de Bord" screenIcon={<LayoutDashboard size={13} />} />
       <LiveTicker />
 
       {/* Main 3-column layout */}
@@ -80,12 +79,12 @@ export function S1_Dashboard() {
           <MiniWidget title="Indices BRVM" topRight={<DataBadge source="BRVM" time="15:47 GMT" live />}>
             <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
               {INDICES.map((idx) => (
-                <div key={idx.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 9px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+                <div key={idx.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 9px", background: "var(--bt-overlay-50)", borderRadius: 5, border: `1px solid ${C.border}` }}>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 9, color: C.dim }}>{idx.name}</div>
+                    <div style={{ fontSize: 11, color: C.dim }}>{idx.name}</div>
                     <div style={{ display: "flex", alignItems: "baseline", gap: 5, marginTop: 1 }}>
-                      <span style={{ fontSize: 15, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>{idx.val}</span>
-                      <span style={{ fontSize: 10, fontWeight: 700, color: idx.up ? C.green : C.red }}>{idx.pct}</span>
+                      <span style={{ fontSize: 17, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>{idx.val}</span>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: idx.up ? C.green : C.red }}>{idx.pct}</span>
                     </div>
                   </div>
                   <Spk data={idx.data} color={idx.up ? C.green : C.red} id={idx.id} />
@@ -93,9 +92,9 @@ export function S1_Dashboard() {
               ))}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 4, marginTop: 2 }}>
                 {[["Cap. Boursière", "7 843 Mds"], ["Volume", "1,28M titres"], ["Val. éch.", "4,82 Mds XOF"]].map(([l, v]) => (
-                  <div key={l} style={{ textAlign: "center", padding: "4px 6px", background: "rgba(0, 1, 23,0.5)", borderRadius: 4, border: `1px solid ${C.border}` }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, color: C.gold }}>{v}</div>
-                    <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>{l}</div>
+                  <div key={l} style={{ textAlign: "center", padding: "4px 6px", background: "var(--bt-overlay-50)", borderRadius: 4, border: `1px solid ${C.border}` }}>
+                    <div style={{ fontSize: 12, fontWeight: 700, color: C.gold }}>{v}</div>
+                    <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1 }}>{l}</div>
                   </div>
                 ))}
               </div>
@@ -106,14 +105,14 @@ export function S1_Dashboard() {
           <MiniWidget title="Principaux Mouvements" topRight={<DataBadge source="BRVM" live />}>
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {MOVERS.map((m) => (
-                <div key={m.t} style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 6px", borderRadius: 4, cursor: "pointer", background: "rgba(0, 1, 23,0.3)" }}>
+                <div key={m.t} style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 6px", borderRadius: 4, cursor: "pointer", background: "var(--bt-overlay-30)" }}>
                   <div style={{ width: 16, height: 16, borderRadius: 3, background: m.up ? "rgba(16,200,122,0.15)" : "rgba(244,56,96,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {m.up ? <TrendingUp size={8} color={C.green} /> : <TrendingDown size={8} color={C.red} />}
                   </div>
-                  <span style={{ flex: 1, fontSize: 10, fontWeight: 700, color: C.text }}>{m.t}</span>
-                  <span style={{ fontSize: 9, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{m.p} XOF</span>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: m.up ? C.green : C.red, minWidth: 46, textAlign: "right" }}>{m.pct}</span>
-                  <span style={{ fontSize: 7.5, color: C.muted, minWidth: 28, textAlign: "right" }}>{m.vol}</span>
+                  <span style={{ flex: 1, fontSize: 12, fontWeight: 700, color: C.text }}>{m.t}</span>
+                  <span style={{ fontSize: 11, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{m.p} XOF</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: m.up ? C.green : C.red, minWidth: 46, textAlign: "right" }}>{m.pct}</span>
+                  <span style={{ fontSize: 9.5, color: C.muted, minWidth: 28, textAlign: "right" }}>{m.vol}</span>
                 </div>
               ))}
             </div>
@@ -126,10 +125,10 @@ export function S1_Dashboard() {
           <MiniWidget title="Instantané Macro · UEMOA" topRight={<DataBadge source="BCEAO · FMI" time="T1 2026" />}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6 }}>
               {MACRO_KPI.map((kpi) => (
-                <div key={kpi.label} style={{ padding: "8px 10px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
-                  <div style={{ fontSize: 8.5, color: C.muted, marginBottom: 3 }}>{kpi.label}</div>
-                  <div style={{ fontSize: 18, fontWeight: 800, color: kpi.color, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>{kpi.val}</div>
-                  <div style={{ fontSize: 8, color: kpi.color, marginTop: 2, opacity: 0.8 }}>{kpi.sub}</div>
+                <div key={kpi.label} style={{ padding: "8px 10px", background: "var(--bt-overlay-50)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+                  <div style={{ fontSize: 10.5, color: C.muted, marginBottom: 3 }}>{kpi.label}</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: kpi.color, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>{kpi.val}</div>
+                  <div style={{ fontSize: 10, color: kpi.color, marginTop: 2, opacity: 0.8 }}>{kpi.sub}</div>
                 </div>
               ))}
             </div>
@@ -140,16 +139,16 @@ export function S1_Dashboard() {
             <div>
               <div style={{ display: "grid", gridTemplateColumns: "80px 1fr 1fr 1fr 60px", gap: 0, padding: "2px 4px", marginBottom: 3, borderBottom: `1px solid ${C.border}` }}>
                 {["Pays", "5 ans", "7 ans", "10 ans", "Spread"].map((h) => (
-                  <div key={h} style={{ fontSize: 7.5, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.05em" }}>{h}</div>
+                  <div key={h} style={{ fontSize: 9.5, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.05em" }}>{h}</div>
                 ))}
               </div>
               {YIELDS.map((y) => (
-                <div key={y.c} style={{ display: "grid", gridTemplateColumns: "80px 1fr 1fr 1fr 60px", gap: 0, padding: "5px 4px", borderBottom: `1px solid rgba(44, 61, 127,0.1)`, alignItems: "center", cursor: "pointer" }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: C.text }}>{y.c}</span>
-                  <span style={{ fontSize: 10, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{y.y5}%</span>
-                  <span style={{ fontSize: 10, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{y.y7}%</span>
-                  <span style={{ fontSize: 10, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{y.y10}%</span>
-                  <span style={{ fontSize: 9, fontWeight: 700, color: y.up ? C.red : C.green }}>{y.sp}</span>
+                <div key={y.c} style={{ display: "grid", gridTemplateColumns: "80px 1fr 1fr 1fr 60px", gap: 0, padding: "5px 4px", borderBottom: `1px solid var(--bt-border-a12)`, alignItems: "center", cursor: "pointer" }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: C.text }}>{y.c}</span>
+                  <span style={{ fontSize: 12, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{y.y5}%</span>
+                  <span style={{ fontSize: 12, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{y.y7}%</span>
+                  <span style={{ fontSize: 12, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{y.y10}%</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: y.up ? C.red : C.green }}>{y.sp}</span>
                 </div>
               ))}
             </div>
@@ -160,10 +159,10 @@ export function S1_Dashboard() {
             <MiniWidget title="Taux de Change" topRight={<DataBadge source="BCT · BCEAO" live />}>
               <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                 {FX.map((f) => (
-                  <div key={f.p} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", background: "rgba(0, 1, 23,0.4)", borderRadius: 4 }}>
-                    <span style={{ flex: 1, fontSize: 9.5, color: C.dim }}>{f.p}</span>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{f.v}</span>
-                    <span style={{ fontSize: 9, fontWeight: 600, color: f.up ? C.green : C.red }}>{f.pct}</span>
+                  <div key={f.p} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", background: "var(--bt-overlay-40)", borderRadius: 4 }}>
+                    <span style={{ flex: 1, fontSize: 11.5, color: C.dim }}>{f.p}</span>
+                    <span style={{ fontSize: 14, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{f.v}</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: f.up ? C.green : C.red }}>{f.pct}</span>
                   </div>
                 ))}
               </div>
@@ -172,10 +171,10 @@ export function S1_Dashboard() {
             <MiniWidget title="Matières Premières" topRight={<DataBadge source="ICE · COMEX" live />}>
               <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                 {COMMO.map((c) => (
-                  <div key={c.name} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", background: "rgba(0, 1, 23,0.4)", borderRadius: 4 }}>
-                    <span style={{ flex: 1, fontSize: 9, color: C.dim }}>{c.name}</span>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{c.val}</span>
-                    <span style={{ fontSize: 9, fontWeight: 600, color: c.up ? C.green : C.red }}>{c.pct}</span>
+                  <div key={c.name} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", background: "var(--bt-overlay-40)", borderRadius: 4 }}>
+                    <span style={{ flex: 1, fontSize: 11, color: C.dim }}>{c.name}</span>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{c.val}</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: c.up ? C.green : C.red }}>{c.pct}</span>
                   </div>
                 ))}
               </div>
@@ -197,16 +196,16 @@ export function S1_Dashboard() {
           <div style={{ padding: "8px 10px", borderBottom: `1px solid ${C.border}` }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 6 }}>
               <Bell size={9} color={C.red} />
-              <span style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Alertes Actives</span>
-              <span style={{ marginLeft: "auto", fontSize: 8, padding: "0 5px", borderRadius: 8, background: C.red + "20", color: C.red, fontWeight: 800 }}>{ALERTS.length}</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Alertes Actives</span>
+              <span style={{ marginLeft: "auto", fontSize: 10, padding: "0 5px", borderRadius: 8, background: C.red + "20", color: C.red, fontWeight: 800 }}>{ALERTS.length}</span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
               {ALERTS.map((a, i) => (
                 <div key={i} style={{ display: "flex", gap: 7, padding: "5px 8px", borderRadius: 4, background: a.color + "0c", border: `1px solid ${a.color}22` }}>
                   <SeverityDot color={a.color} />
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 8.5, color: C.dim, lineHeight: 1.4 }}>{a.msg}</div>
-                    <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1, display: "flex", alignItems: "center", gap: 3 }}>
+                    <div style={{ fontSize: 10.5, color: C.dim, lineHeight: 1.4 }}>{a.msg}</div>
+                    <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1, display: "flex", alignItems: "center", gap: 3 }}>
                       <Clock size={7} />{a.t}
                     </div>
                   </div>
@@ -219,18 +218,18 @@ export function S1_Dashboard() {
           <div style={{ padding: "8px 10px", borderBottom: `1px solid ${C.border}` }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 6 }}>
               <Calendar size={9} color={C.purple} />
-              <span style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Prochains Événements</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Prochains Événements</span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
               {EVENTS.map((ev) => (
-                <div key={ev.d} style={{ display: "flex", gap: 8, padding: "4px 0", borderBottom: `1px solid rgba(44, 61, 127,0.1)` }}>
+                <div key={ev.d} style={{ display: "flex", gap: 8, padding: "4px 0", borderBottom: `1px solid var(--bt-border-a12)` }}>
                   <div style={{ textAlign: "center", minWidth: 28, flexShrink: 0 }}>
-                    <div style={{ fontSize: 13, fontWeight: 800, color: C.text, lineHeight: 1 }}>{ev.d}</div>
-                    <div style={{ fontSize: 7, color: C.muted }}>{ev.day}</div>
+                    <div style={{ fontSize: 15, fontWeight: 800, color: C.text, lineHeight: 1 }}>{ev.d}</div>
+                    <div style={{ fontSize: 9, color: C.muted }}>{ev.day}</div>
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ width: 4, height: 4, borderRadius: "50%", background: ev.color, marginBottom: 2 }} />
-                    <span style={{ fontSize: 8.5, color: C.dim, lineHeight: 1.35 }}>{ev.label}</span>
+                    <span style={{ fontSize: 10.5, color: C.dim, lineHeight: 1.35 }}>{ev.label}</span>
                   </div>
                 </div>
               ))}
@@ -239,17 +238,17 @@ export function S1_Dashboard() {
 
           {/* Flash Insights */}
           <div style={{ padding: "8px 10px" }}>
-            <div style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>Flash Insights BFD</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>Flash Insights BFD</div>
             {[
               { tag: "ANALYSE", title: "Stratégie Obligataire UEMOA T2 2026", src: "Bloomfield Research", color: C.purple },
               { tag: "NOTE", title: "PALM CI — Révision à la hausse suite à rapport de cacao +18%", src: "BFD Equity", color: C.gold },
               { tag: "VIDÉO", title: "Flash Marché BRVM · Session 08 Avr", src: "BFD Web TV", color: C.red },
             ].map((ins, i) => (
-              <div key={i} style={{ display: "flex", gap: 7, padding: "6px 0", borderBottom: `1px solid rgba(44, 61, 127,0.1)`, cursor: "pointer" }}>
-                <span style={{ fontSize: 7, padding: "1px 4px", borderRadius: 2, background: ins.color + "14", border: `1px solid ${ins.color}28`, color: ins.color, fontWeight: 800, alignSelf: "flex-start", marginTop: 1 }}>{ins.tag}</span>
+              <div key={i} style={{ display: "flex", gap: 7, padding: "6px 0", borderBottom: `1px solid var(--bt-border-a12)`, cursor: "pointer" }}>
+                <span style={{ fontSize: 9, padding: "1px 4px", borderRadius: 2, background: ins.color + "14", border: `1px solid ${ins.color}28`, color: ins.color, fontWeight: 800, alignSelf: "flex-start", marginTop: 1 }}>{ins.tag}</span>
                 <div>
-                  <div style={{ fontSize: 8.5, color: C.dim, lineHeight: 1.4 }}>{ins.title}</div>
-                  <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>{ins.src}</div>
+                  <div style={{ fontSize: 10.5, color: C.dim, lineHeight: 1.4 }}>{ins.title}</div>
+                  <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1 }}>{ins.src}</div>
                 </div>
               </div>
             ))}

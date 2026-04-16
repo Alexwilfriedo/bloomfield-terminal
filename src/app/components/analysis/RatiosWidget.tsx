@@ -1,20 +1,7 @@
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer, Tooltip } from "recharts";
 import { WidgetShell } from "../widgets/WidgetShell";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
-
-const C = {
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  purple: "#a78bfa",
-  surface: "#000117",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 interface Ratio {
   label: string;
@@ -66,6 +53,7 @@ const RADAR_DATA = [
 ];
 
 function RatioRow({ r }: { r: Ratio }) {
+  const C = useThemeColors();
   const statusColor = r.status === "good" ? C.green : r.status === "watch" ? C.gold : C.red;
   const trendColor = r.trend === "up" ? C.green : r.trend === "down" ? C.red : C.muted;
   // For some ratios "down" is better (CIR, NPL, Cost of risk)
@@ -82,7 +70,7 @@ function RatioRow({ r }: { r: Ratio }) {
         cursor: "default",
         transition: "background 0.1s",
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.04)")}
+      onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bt-accent-a06)")}
       onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
     >
       {/* Status dot */}
@@ -92,15 +80,15 @@ function RatioRow({ r }: { r: Ratio }) {
 
       {/* Label */}
       <div style={{ minWidth: 110, flexShrink: 0 }}>
-        <div style={{ fontSize: 10, fontWeight: 600, color: C.text }}>{r.label}</div>
-        <div style={{ fontSize: 7.5, color: C.muted, lineHeight: 1.2 }}>{r.description}</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: C.text }}>{r.label}</div>
+        <div style={{ fontSize: 9.5, color: C.muted, lineHeight: 1.2 }}>{r.description}</div>
       </div>
 
       {/* Value */}
       <div
         style={{
           minWidth: 54,
-          fontSize: 12,
+          fontSize: 14,
           fontWeight: 800,
           color: C.text,
           fontVariantNumeric: "tabular-nums",
@@ -128,7 +116,7 @@ function RatioRow({ r }: { r: Ratio }) {
         ) : (
           <Minus size={9} color={C.muted} />
         )}
-        <span style={{ fontSize: 9, fontWeight: 700, color: isInverted ? (r.trend === "down" ? C.green : C.red) : trendColor }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: isInverted ? (r.trend === "down" ? C.green : C.red) : trendColor }}>
           {r.trendVal}
         </span>
       </div>
@@ -136,9 +124,9 @@ function RatioRow({ r }: { r: Ratio }) {
       {/* Benchmark bar */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 2 }}>
-          <span style={{ fontSize: 7.5, color: C.muted }}>{r.benchmark}</span>
+          <span style={{ fontSize: 9.5, color: C.muted }}>{r.benchmark}</span>
         </div>
-        <div style={{ height: 3, background: "rgba(44, 61, 127,0.2)", borderRadius: 2, overflow: "hidden" }}>
+        <div style={{ height: 3, background: "var(--bt-border-a20)", borderRadius: 2, overflow: "hidden" }}>
           <div
             style={{
               height: "100%",
@@ -155,6 +143,7 @@ function RatioRow({ r }: { r: Ratio }) {
 }
 
 function RatioSection({ title, color, ratios }: { title: string; color: string; ratios: Ratio[] }) {
+  const C = useThemeColors();
   return (
     <div style={{ borderBottom: `1px solid ${C.border}` }}>
       <div
@@ -163,12 +152,12 @@ function RatioSection({ title, color, ratios }: { title: string; color: string; 
           alignItems: "center",
           gap: 6,
           padding: "5px 12px",
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           borderBottom: `1px solid ${C.border}`,
         }}
       >
         <div style={{ width: 3, height: 12, borderRadius: 2, background: color }} />
-        <span style={{ fontSize: 9, fontWeight: 700, color, letterSpacing: "0.06em", textTransform: "uppercase" }}>{title}</span>
+        <span style={{ fontSize: 11, fontWeight: 700, color, letterSpacing: "0.06em", textTransform: "uppercase" }}>{title}</span>
       </div>
       {ratios.map((r) => (
         <RatioRow key={r.label} r={r} />
@@ -180,9 +169,9 @@ function RatioSection({ title, color, ratios }: { title: string; color: string; 
 const RadarTooltip = ({ active, payload }: { active?: boolean; payload?: { name: string; value: number }[] }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "6px 10px" }}>
+    <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 6, padding: "6px 10px" }}>
       {payload.map((p) => (
-        <div key={p.name} style={{ fontSize: 9.5, color: C.text }}>
+        <div key={p.name} style={{ fontSize: 11.5, color: C.text }}>
           <span style={{ color: C.dim }}>{p.name}: </span>
           <strong>{p.value}/100</strong>
         </div>
@@ -192,6 +181,7 @@ const RadarTooltip = ({ active, payload }: { active?: boolean; payload?: { name:
 };
 
 export function RatiosWidget() {
+  const C = useThemeColors();
   return (
     <WidgetShell
       title="Ratios Financiers"
@@ -215,7 +205,7 @@ export function RatiosWidget() {
             borderLeft: `1px solid ${C.border}`,
             display: "flex",
             flexDirection: "column",
-            background: "rgba(0, 1, 23,0.2)",
+            background: "var(--bt-overlay-20)",
             flexShrink: 0,
           }}
         >
@@ -224,22 +214,22 @@ export function RatiosWidget() {
             style={{
               padding: "12px 14px",
               borderBottom: `1px solid ${C.border}`,
-              background: "rgba(0, 1, 23,0.3)",
+              background: "var(--bt-overlay-30)",
             }}
           >
-            <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+            <div style={{ fontSize: 10, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
               Score Bloomfield
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
-              <span style={{ fontSize: 32, fontWeight: 900, color: C.green, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>82</span>
-              <span style={{ fontSize: 12, color: C.muted }}>/100</span>
+              <span style={{ fontSize: 34, fontWeight: 900, color: C.green, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>82</span>
+              <span style={{ fontSize: 14, color: C.muted }}>/100</span>
             </div>
-            <div style={{ fontSize: 8.5, color: C.green, fontWeight: 600, marginTop: 3 }}>Solide · Surperformance sectorielle</div>
+            <div style={{ fontSize: 10.5, color: C.green, fontWeight: 600, marginTop: 3 }}>Solide · Surperformance sectorielle</div>
             <div
               style={{
                 marginTop: 8,
                 height: 5,
-                background: "rgba(44, 61, 127,0.3)",
+                background: "var(--bt-border-a32)",
                 borderRadius: 3,
                 overflow: "hidden",
               }}
@@ -254,21 +244,21 @@ export function RatiosWidget() {
               />
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: 2 }}>
-              <span style={{ fontSize: 7, color: C.muted }}>0 — Faible</span>
-              <span style={{ fontSize: 7, color: C.muted }}>100 — Excellent</span>
+              <span style={{ fontSize: 9, color: C.muted }}>0 — Faible</span>
+              <span style={{ fontSize: 9, color: C.muted }}>100 — Excellent</span>
             </div>
           </div>
 
           {/* Radar chart */}
           <div style={{ flex: 1, padding: "8px 6px 6px", minHeight: 0 }}>
-            <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 4, paddingLeft: 6 }}>
+            <div style={{ fontSize: 10, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 4, paddingLeft: 6 }}>
               Profil de Performance
             </div>
             <div style={{ height: 170 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={RADAR_DATA}>
                   <PolarGrid stroke={C.border} />
-                  <PolarAngleAxis dataKey="subject" tick={{ fill: C.muted, fontSize: 8 }} />
+                  <PolarAngleAxis dataKey="subject" tick={{ fill: C.muted, fontSize: 10 }} />
                   <Radar name="SGBCI" dataKey="SGBCI" stroke={C.accent} fill={C.accent} fillOpacity={0.2} strokeWidth={1.5} />
                   <Radar name="Secteur" dataKey="Secteur" stroke={C.muted} fill={C.muted} fillOpacity={0.1} strokeWidth={1} strokeDasharray="3 3" />
                   <Tooltip content={<RadarTooltip />} />
@@ -282,8 +272,8 @@ export function RatiosWidget() {
           </div>
 
           {/* Rating summary */}
-          <div style={{ padding: "10px 14px", borderTop: `1px solid ${C.border}`, background: "rgba(0, 1, 23,0.3)" }}>
-            <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+          <div style={{ padding: "10px 14px", borderTop: `1px solid ${C.border}`, background: "var(--bt-overlay-30)" }}>
+            <div style={{ fontSize: 10, color: C.muted, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
               Notation Bloomfield
             </div>
             {[
@@ -293,10 +283,10 @@ export function RatiosWidget() {
               { cat: "Liquidité", note: "A", color: C.green },
             ].map((n) => (
               <div key={n.cat} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-                <span style={{ fontSize: 9, color: C.dim }}>{n.cat}</span>
+                <span style={{ fontSize: 11, color: C.dim }}>{n.cat}</span>
                 <span
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: 800,
                     color: n.color,
                     background: n.color + "14",
@@ -317,6 +307,7 @@ export function RatiosWidget() {
 }
 
 function Legend({ label, color, dashed }: { label: string; color: string; dashed?: boolean }) {
+  const C = useThemeColors();
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
       <div
@@ -329,7 +320,7 @@ function Legend({ label, color, dashed }: { label: string; color: string; dashed
           borderTop: dashed ? `1px dashed ${color}` : "none",
         }}
       />
-      <span style={{ fontSize: 7.5, color: C.muted }}>{label}</span>
+      <span style={{ fontSize: 9.5, color: C.muted }}>{label}</span>
     </div>
   );
 }

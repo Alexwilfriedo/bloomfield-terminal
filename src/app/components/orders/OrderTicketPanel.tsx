@@ -15,22 +15,7 @@ import {
   Info,
 } from "lucide-react";
 import { useTerminal, type OrderStatus } from "../../context/TerminalContext";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  dark: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  orange: "#fb923c",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const ASSETS = [
   { code: "SONATEL", name: "Sonatel SA", isin: "SN0000000045", market: "BRVM", price: 16800, sector: "Télécom" },
@@ -46,11 +31,11 @@ const ASSETS = [
 const STATUS_STEPS: OrderStatus[] = ["draft", "submitted", "under_review", "approved", "executed"];
 
 const STATUS_CONFIG: Record<OrderStatus, { label: string; color: string; icon: React.ReactNode; bg: string }> = {
-  draft: { label: "Brouillon", color: C.muted, icon: <FileText size={12} />, bg: "rgba(84, 103, 141,0.15)" },
-  submitted: { label: "Soumis", color: C.accent, icon: <Send size={12} />, bg: "rgba(214, 182, 141,0.12)" },
-  under_review: { label: "En cours de validation", color: C.gold, icon: <Clock size={12} />, bg: "rgba(244,185,66,0.12)" },
-  approved: { label: "Approuvé", color: C.green, icon: <CheckCircle2 size={12} />, bg: "rgba(16,200,122,0.12)" },
-  rejected: { label: "Rejeté", color: C.red, icon: <X size={12} />, bg: "rgba(244,56,96,0.12)" },
+  draft: { label: "Brouillon", color: "#54678d", icon: <FileText size={12} />, bg: "rgba(84, 103, 141,0.15)" },
+  submitted: { label: "Soumis", color: "#d6b68d", icon: <Send size={12} />, bg: "var(--bt-accent-a12)" },
+  under_review: { label: "En cours de validation", color: "#f4b942", icon: <Clock size={12} />, bg: "rgba(244,185,66,0.12)" },
+  approved: { label: "Approuvé", color: "#10c87a", icon: <CheckCircle2 size={12} />, bg: "rgba(16,200,122,0.12)" },
+  rejected: { label: "Rejeté", color: "#f43860", icon: <X size={12} />, bg: "rgba(244,56,96,0.12)" },
   executed: { label: "Exécuté", color: "#60a5fa", icon: <TrendingUp size={12} />, bg: "rgba(96,165,250,0.12)" },
 };
 
@@ -65,6 +50,7 @@ function formatXOF(n: number): string {
 }
 
 export function OrderTicketPanel() {
+  const C = useThemeColors();
   const { isOrderPanelOpen, orderDraft, closeOrderPanel, addOrder } = useTerminal();
 
   const defaultAsset = ASSETS.find((a) => a.code === orderDraft?.assetCode) ?? ASSETS[0];
@@ -152,7 +138,7 @@ export function OrderTicketPanel() {
         style={{
           position: "fixed",
           inset: 0,
-          background: "rgba(0, 1, 23,0.6)",
+          background: "var(--bt-overlay-60)",
           zIndex: 200,
           backdropFilter: "blur(1px)",
         }}
@@ -185,17 +171,17 @@ export function OrderTicketPanel() {
             alignItems: "center",
             padding: "12px 16px",
             borderBottom: `1px solid ${C.border}`,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             flexShrink: 0,
             gap: 10,
           }}
         >
           <div style={{ width: 3, height: 16, borderRadius: 2, background: C.gold, flexShrink: 0 }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 11, fontWeight: 800, color: C.text, letterSpacing: "0.04em" }}>
+            <div style={{ fontSize: 13, fontWeight: 800, color: C.text, letterSpacing: "0.04em" }}>
               PRÉPARER UN ORDRE
             </div>
-            <div style={{ fontSize: 8.5, color: C.muted, marginTop: 1 }}>
+            <div style={{ fontSize: 10.5, color: C.muted, marginTop: 1 }}>
               BRVM · UMOA-Titres · Ordre institutionnel contrôlé
             </div>
           </div>
@@ -213,7 +199,7 @@ export function OrderTicketPanel() {
             }}
           >
             <span style={{ color: statusCfg.color }}>{statusCfg.icon}</span>
-            <span style={{ fontSize: 8.5, fontWeight: 700, color: statusCfg.color }}>{statusCfg.label}</span>
+            <span style={{ fontSize: 10.5, fontWeight: 700, color: statusCfg.color }}>{statusCfg.label}</span>
           </div>
 
           <button
@@ -265,30 +251,30 @@ export function OrderTicketPanel() {
                       alignItems: "center",
                       gap: 8,
                       padding: "7px 10px",
-                      background: isSelected ? "rgba(214, 182, 141,0.1)" : "transparent",
+                      background: isSelected ? "var(--bt-accent-a10)" : "transparent",
                       border: "none",
-                      borderBottom: `1px solid rgba(44, 61, 127,0.12)`,
+                      borderBottom: `1px solid var(--bt-border-a12)`,
                       cursor: isActionable ? "pointer" : "default",
                       textAlign: "left",
                     }}
                   >
                     <div style={{ flex: 1 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                        <span style={{ fontSize: 10.5, fontWeight: 700, color: isSelected ? C.accent : C.text }}>
+                        <span style={{ fontSize: 12.5, fontWeight: 700, color: isSelected ? C.accent : C.text }}>
                           {asset.code}
                         </span>
-                        <span style={{ fontSize: 7.5, color: C.muted, padding: "0 4px", background: "rgba(44, 61, 127,0.2)", borderRadius: 2 }}>
+                        <span style={{ fontSize: 9.5, color: C.muted, padding: "0 4px", background: "var(--bt-border-a20)", borderRadius: 2 }}>
                           {asset.market}
                         </span>
-                        <span style={{ fontSize: 7.5, color: C.muted }}>· {asset.sector}</span>
+                        <span style={{ fontSize: 9.5, color: C.muted }}>· {asset.sector}</span>
                       </div>
-                      <div style={{ fontSize: 8.5, color: C.muted, marginTop: 1 }}>{asset.isin} · {asset.name}</div>
+                      <div style={{ fontSize: 10.5, color: C.muted, marginTop: 1 }}>{asset.isin} · {asset.name}</div>
                     </div>
                     <div style={{ textAlign: "right", flexShrink: 0 }}>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                         {asset.price.toLocaleString("fr-FR")}
                       </div>
-                      <div style={{ fontSize: 7.5, color: C.muted }}>XOF</div>
+                      <div style={{ fontSize: 9.5, color: C.muted }}>XOF</div>
                     </div>
                     {isSelected && <ChevronRight size={10} color={C.accent} style={{ flexShrink: 0 }} />}
                   </button>
@@ -310,7 +296,7 @@ export function OrderTicketPanel() {
                     border: `2px solid ${action === a ? (a === "BUY" ? C.green : C.red) + "60" : C.border}`,
                     background: action === a ? (a === "BUY" ? "rgba(16,200,122,0.12)" : "rgba(244,56,96,0.12)") : C.elevated,
                     color: action === a ? (a === "BUY" ? C.green : C.red) : C.muted,
-                    fontSize: 13,
+                    fontSize: 15,
                     fontWeight: 800,
                     cursor: isActionable ? "pointer" : "default",
                     display: "flex",
@@ -341,9 +327,9 @@ export function OrderTicketPanel() {
                       padding: "7px 8px",
                       borderRadius: 5,
                       border: `1px solid ${orderType === t ? C.accent + "50" : C.border}`,
-                      background: orderType === t ? "rgba(214, 182, 141,0.1)" : C.elevated,
+                      background: orderType === t ? "var(--bt-accent-a10)" : C.elevated,
                       color: orderType === t ? C.accent : C.muted,
-                      fontSize: 9,
+                      fontSize: 11,
                       fontWeight: orderType === t ? 700 : 500,
                       cursor: isActionable ? "pointer" : "default",
                     }}
@@ -359,7 +345,7 @@ export function OrderTicketPanel() {
           <Section title="Paramètres d'Exécution">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
               <div>
-                <label style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: 4 }}>
+                <label style={{ fontSize: 10, fontWeight: 700, color: C.muted, letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: 4 }}>
                   Quantité (titres)
                 </label>
                 <input
@@ -370,11 +356,11 @@ export function OrderTicketPanel() {
                   style={{
                     width: "100%",
                     height: 36,
-                    background: "rgba(0, 1, 23,0.6)",
+                    background: "var(--bt-overlay-60)",
                     border: `1px solid ${C.border}`,
                     borderRadius: 5,
                     color: C.text,
-                    fontSize: 13,
+                    fontSize: 15,
                     fontWeight: 700,
                     padding: "0 10px",
                     outline: "none",
@@ -385,7 +371,7 @@ export function OrderTicketPanel() {
                 />
               </div>
               <div>
-                <label style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: 4 }}>
+                <label style={{ fontSize: 10, fontWeight: 700, color: C.muted, letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: 4 }}>
                   {orderType === "MARKET" ? "Cours de référence (XOF)" : "Cours limite (XOF)"}
                 </label>
                 <input
@@ -396,11 +382,11 @@ export function OrderTicketPanel() {
                   style={{
                     width: "100%",
                     height: 36,
-                    background: "rgba(0, 1, 23,0.6)",
+                    background: "var(--bt-overlay-60)",
                     border: `1px solid ${C.border}`,
                     borderRadius: 5,
                     color: C.text,
-                    fontSize: 13,
+                    fontSize: 15,
                     fontWeight: 700,
                     padding: "0 10px",
                     outline: "none",
@@ -423,10 +409,10 @@ export function OrderTicketPanel() {
               }}
             >
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
-                <span style={{ fontSize: 9, color: C.muted }}>Valeur estimée de l'ordre :</span>
+                <span style={{ fontSize: 11, color: C.muted }}>Valeur estimée de l'ordre :</span>
                 <span
                   style={{
-                    fontSize: 18,
+                    fontSize: 20,
                     fontWeight: 800,
                     color: exceedsLimit ? C.red : C.text,
                     fontVariantNumeric: "tabular-nums",
@@ -435,7 +421,7 @@ export function OrderTicketPanel() {
                   {formatXOF(estimatedValue)}
                 </span>
               </div>
-              <div style={{ fontSize: 8, color: C.muted, marginTop: 2 }}>
+              <div style={{ fontSize: 10, color: C.muted, marginTop: 2 }}>
                 {qty.toLocaleString("fr-FR")} titres × {price.toLocaleString("fr-FR")} XOF
               </div>
             </div>
@@ -451,11 +437,11 @@ export function OrderTicketPanel() {
               style={{
                 width: "100%",
                 height: 64,
-                background: "rgba(0, 1, 23,0.6)",
+                background: "var(--bt-overlay-60)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 5,
                 color: C.dim,
-                fontSize: 10,
+                fontSize: 12,
                 padding: "8px 10px",
                 outline: "none",
                 resize: "none",
@@ -479,12 +465,12 @@ export function OrderTicketPanel() {
                 }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
-                  <span style={{ fontSize: 8.5, color: C.dim }}>Limite journalière utilisée</span>
-                  <span style={{ fontSize: 8.5, fontWeight: 700, color: exceedsLimit ? C.red : C.gold, fontVariantNumeric: "tabular-nums" }}>
+                  <span style={{ fontSize: 10.5, color: C.dim }}>Limite journalière utilisée</span>
+                  <span style={{ fontSize: 10.5, fontWeight: 700, color: exceedsLimit ? C.red : C.gold, fontVariantNumeric: "tabular-nums" }}>
                     {formatXOF(newDailyUsed)} / {formatXOF(DAILY_LIMIT)}
                   </span>
                 </div>
-                <div style={{ height: 5, background: "rgba(44, 61, 127,0.2)", borderRadius: 3, overflow: "hidden" }}>
+                <div style={{ height: 5, background: "var(--bt-border-a20)", borderRadius: 3, overflow: "hidden" }}>
                   <div
                     style={{
                       height: "100%",
@@ -495,7 +481,7 @@ export function OrderTicketPanel() {
                     }}
                   />
                 </div>
-                <div style={{ fontSize: 7.5, color: C.muted, marginTop: 3 }}>
+                <div style={{ fontSize: 9.5, color: C.muted, marginTop: 3 }}>
                   Restant : {formatXOF(Math.max(0, dailyRemaining - estimatedValue))}
                 </div>
               </div>
@@ -532,8 +518,8 @@ export function OrderTicketPanel() {
                 >
                   <AlertTriangle size={12} color={C.gold} />
                   <div>
-                    <div style={{ fontSize: 9, fontWeight: 700, color: C.gold }}>Validation contrôleur requise</div>
-                    <div style={{ fontSize: 8, color: C.muted }}>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: C.gold }}>Validation contrôleur requise</div>
+                    <div style={{ fontSize: 10, color: C.muted }}>
                       Seuil : {formatXOF(APPROVAL_THRESHOLD)} · Contrôleur : Diallo Mamadou
                     </div>
                   </div>
@@ -544,12 +530,12 @@ export function OrderTicketPanel() {
               <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 10px", background: C.elevated, border: `1px solid ${C.border}`, borderRadius: 5 }}>
                 <User size={10} color={C.muted} />
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 8.5, color: C.dim }}>Contrôleur désigné</div>
-                  <div style={{ fontSize: 9, fontWeight: 700, color: C.text }}>Diallo Mamadou · Desk Trading BRVM</div>
+                  <div style={{ fontSize: 10.5, color: C.dim }}>Contrôleur désigné</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>Diallo Mamadou · Desk Trading BRVM</div>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
                   <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.green }} />
-                  <span style={{ fontSize: 7.5, color: C.green }}>Disponible</span>
+                  <span style={{ fontSize: 9.5, color: C.green }}>Disponible</span>
                 </div>
               </div>
             </div>
@@ -568,7 +554,7 @@ export function OrderTicketPanel() {
           style={{
             padding: "12px 16px",
             borderTop: `1px solid ${C.border}`,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             flexShrink: 0,
           }}
         >
@@ -582,7 +568,7 @@ export function OrderTicketPanel() {
                   border: `1px solid ${C.border}`,
                   background: "transparent",
                   color: C.dim,
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: 600,
                   cursor: "pointer",
                 }}
@@ -599,10 +585,10 @@ export function OrderTicketPanel() {
                   border: "none",
                   background:
                     exceedsLimit || qty <= 0 || price <= 0
-                      ? "rgba(44, 61, 127,0.2)"
+                      ? "var(--bt-border-a20)"
                       : `linear-gradient(90deg, ${action === "BUY" ? "#10c87a" : C.red} 0%, ${action === "BUY" ? "#0aa560" : "#c42050"} 100%)`,
                   color: exceedsLimit || qty <= 0 || price <= 0 ? C.muted : "#fff",
-                  fontSize: 11,
+                  fontSize: 13,
                   fontWeight: 800,
                   cursor: exceedsLimit || qty <= 0 || price <= 0 ? "not-allowed" : "pointer",
                   letterSpacing: "0.04em",
@@ -636,7 +622,7 @@ export function OrderTicketPanel() {
                   border: `1px solid ${C.border}`,
                   background: "transparent",
                   color: C.accent,
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: 700,
                   cursor: "pointer",
                 }}
@@ -650,9 +636,9 @@ export function OrderTicketPanel() {
                   padding: "9px 16px",
                   borderRadius: 6,
                   border: "none",
-                  background: "rgba(214, 182, 141,0.12)",
+                  background: "var(--bt-accent-a12)",
                   color: C.accent,
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: 700,
                   cursor: "pointer",
                 }}
@@ -663,7 +649,7 @@ export function OrderTicketPanel() {
           )}
 
           <div style={{ textAlign: "center", marginTop: 8 }}>
-            <span style={{ fontSize: 7.5, color: C.muted }}>
+            <span style={{ fontSize: 9.5, color: C.muted }}>
               <Lock size={8} style={{ display: "inline", verticalAlign: "middle" }} />{" "}
               Ordre soumis au circuit de validation Bloomfield · Confidentiel
             </span>
@@ -675,11 +661,12 @@ export function OrderTicketPanel() {
 }
 
 function Section({ title, icon, children }: { title: string; icon?: React.ReactNode; children: React.ReactNode }) {
+  const C = useThemeColors();
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 7 }}>
         {icon && <span style={{ color: C.accent }}>{icon}</span>}
-        <span style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+        <span style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>
           {title}
         </span>
       </div>
@@ -689,6 +676,7 @@ function Section({ title, icon, children }: { title: string; icon?: React.ReactN
 }
 
 function ComplianceRow({ ok, label, detail }: { ok: boolean; label: string; detail: string }) {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -696,19 +684,20 @@ function ComplianceRow({ ok, label, detail }: { ok: boolean; label: string; deta
         alignItems: "center",
         gap: 8,
         padding: "5px 8px",
-        background: "rgba(0, 1, 23,0.4)",
+        background: "var(--bt-overlay-40)",
         border: `1px solid ${C.border}`,
         borderRadius: 4,
       }}
     >
       {ok ? <CheckCircle2 size={11} color={C.green} /> : <AlertTriangle size={11} color={C.red} />}
-      <span style={{ fontSize: 9, color: ok ? C.dim : C.red, flex: 1 }}>{label}</span>
-      <span style={{ fontSize: 8.5, color: ok ? C.green : C.red, fontWeight: 600 }}>{detail}</span>
+      <span style={{ fontSize: 11, color: ok ? C.dim : C.red, flex: 1 }}>{label}</span>
+      <span style={{ fontSize: 10.5, color: ok ? C.green : C.red, fontWeight: 600 }}>{detail}</span>
     </div>
   );
 }
 
 function StatusTimeline({ status, orderId }: { status: OrderStatus; orderId: string }) {
+  const C = useThemeColors();
   const steps = [
     { key: "draft", label: "Brouillon" },
     { key: "submitted", label: "Soumis" },
@@ -723,7 +712,7 @@ function StatusTimeline({ status, orderId }: { status: OrderStatus; orderId: str
     <div style={{ background: C.elevated, border: `1px solid ${C.border}`, borderRadius: 6, padding: "10px 12px" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 10 }}>
         <Info size={10} color={C.muted} />
-        <span style={{ fontSize: 8, color: C.muted }}>Référence : {orderId}</span>
+        <span style={{ fontSize: 10, color: C.muted }}>Référence : {orderId}</span>
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>
         {steps.map((step, i) => {
@@ -738,13 +727,13 @@ function StatusTimeline({ status, orderId }: { status: OrderStatus; orderId: str
                     width: active ? 14 : 10,
                     height: active ? 14 : 10,
                     borderRadius: "50%",
-                    background: done ? C.accent : "rgba(44, 61, 127,0.3)",
+                    background: done ? C.accent : "var(--bt-border-a32)",
                     border: active ? `2px solid ${C.accent}40` : "none",
                     boxShadow: active ? `0 0 8px ${C.accent}60` : "none",
                     transition: "all 0.3s",
                   }}
                 />
-                <span style={{ fontSize: 7, color, whiteSpace: "nowrap", fontWeight: active ? 700 : 400 }}>
+                <span style={{ fontSize: 9, color, whiteSpace: "nowrap", fontWeight: active ? 700 : 400 }}>
                   {step.label}
                 </span>
               </div>
@@ -753,7 +742,7 @@ function StatusTimeline({ status, orderId }: { status: OrderStatus; orderId: str
                   style={{
                     flex: 1,
                     height: 1.5,
-                    background: i < currentIdx ? C.accent : "rgba(44, 61, 127,0.2)",
+                    background: i < currentIdx ? C.accent : "var(--bt-border-a20)",
                     margin: "0 3px",
                     marginBottom: 12,
                     transition: "background 0.3s",
@@ -767,8 +756,8 @@ function StatusTimeline({ status, orderId }: { status: OrderStatus; orderId: str
 
       {status === "under_review" && (
         <div style={{ marginTop: 8, padding: "6px 8px", background: "rgba(244,185,66,0.08)", border: "1px solid rgba(244,185,66,0.2)", borderRadius: 4 }}>
-          <div style={{ fontSize: 8.5, color: C.gold, fontWeight: 700 }}>⏳ En cours de validation par Diallo Mamadou</div>
-          <div style={{ fontSize: 8, color: C.muted }}>Délai estimé : 15–30 min · Heure limite : 16:00 GMT</div>
+          <div style={{ fontSize: 10.5, color: C.gold, fontWeight: 700 }}>⏳ En cours de validation par Diallo Mamadou</div>
+          <div style={{ fontSize: 10, color: C.muted }}>Délai estimé : 15–30 min · Heure limite : 16:00 GMT</div>
         </div>
       )}
     </div>

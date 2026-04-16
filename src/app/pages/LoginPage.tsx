@@ -4,26 +4,21 @@ import { Lock, User, AlertCircle, ArrowRight } from "lucide-react";
 
 import logoUrl from "../../assets/logo-bloomfield-login.png";
 import { useAuth } from "../auth/AuthContext";
+import { useThemeColors } from "../hooks/useThemeColors";
 
-const C = {
+/** Keys not present in useThemeColors — kept inline */
+const LOGIN_COLORS = {
   bg: "#000117",
-  surface: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127, 0.55)",
-  borderSoft: "rgba(44, 61, 127, 0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
+  borderSoft: "var(--bt-border-a32)",
   danger: "#f43860",
-  gold: "#f4b942",
-  green: "#10c87a",
-};
+} as const;
 
 interface LocationState {
   from?: { pathname?: string };
 }
 
 export function LoginPage() {
+  const C = useThemeColors();
   const navigate = useNavigate();
   const location = useLocation();
   const { login, isAuthenticated } = useAuth();
@@ -64,7 +59,7 @@ export function LoginPage() {
       style={{
         width: "100vw",
         height: "100vh",
-        background: C.bg,
+        background: LOGIN_COLORS.bg,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -80,9 +75,9 @@ export function LoginPage() {
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(circle at 50% 40%, rgba(214, 182, 141, 0.08) 0%, transparent 55%), " +
-            "radial-gradient(circle at 80% 80%, rgba(44, 61, 127, 0.25) 0%, transparent 45%), " +
-            "radial-gradient(circle at 20% 85%, rgba(214, 182, 141, 0.04) 0%, transparent 40%)",
+            "radial-gradient(circle at 50% 40%, var(--bt-accent-a08) 0%, transparent 55%), " +
+            "radial-gradient(circle at 80% 80%, var(--bt-border-a25) 0%, transparent 45%), " +
+            "radial-gradient(circle at 20% 85%, var(--bt-accent-a06) 0%, transparent 40%)",
           pointerEvents: "none",
         }}
       />
@@ -110,12 +105,12 @@ export function LoginPage() {
           width: 420,
           maxWidth: "calc(100vw - 48px)",
           background:
-            "linear-gradient(180deg, rgba(0, 1, 23, 0.92) 0%, rgba(0, 1, 23, 0.98) 100%)",
+            "linear-gradient(180deg, var(--bt-overlay-92) 0%, var(--bt-overlay-98) 100%)",
           border: `1px solid ${C.border}`,
           borderRadius: 12,
           padding: "36px 36px 28px",
           boxShadow:
-            "0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(214, 182, 141, 0.05), inset 0 1px 0 rgba(214, 182, 141, 0.08)",
+            "0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(214, 182, 141, 0.05), inset 0 1px 0 var(--bt-accent-a08)",
           backdropFilter: "blur(14px)",
         }}
       >
@@ -158,7 +153,7 @@ export function LoginPage() {
         <div
           style={{
             textAlign: "center",
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 600,
             color: C.muted,
             letterSpacing: "0.25em",
@@ -171,7 +166,7 @@ export function LoginPage() {
 
         {/* Subheading */}
         <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <div style={{ fontSize: 11, color: C.dim }}>
+          <div style={{ fontSize: 13, color: C.dim }}>
             Identifiez-vous pour accéder à votre cockpit analyste
           </div>
         </div>
@@ -212,8 +207,8 @@ export function LoginPage() {
                   background: "rgba(244, 56, 96, 0.08)",
                   border: `1px solid rgba(244, 56, 96, 0.35)`,
                   borderRadius: 5,
-                  fontSize: 10.5,
-                  color: C.danger,
+                  fontSize: 12.5,
+                  color: LOGIN_COLORS.danger,
                   fontWeight: 600,
                 }}
               >
@@ -234,8 +229,8 @@ export function LoginPage() {
               borderRadius: 6,
               border: "none",
               background: `linear-gradient(180deg, ${C.accent} 0%, #b6966f 100%)`,
-              color: C.bg,
-              fontSize: 12,
+              color: LOGIN_COLORS.bg,
+              fontSize: 14,
               fontWeight: 800,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
@@ -269,11 +264,11 @@ export function LoginPage() {
           style={{
             marginTop: 22,
             paddingTop: 16,
-            borderTop: `1px solid ${C.borderSoft}`,
+            borderTop: `1px solid ${LOGIN_COLORS.borderSoft}`,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            fontSize: 9,
+            fontSize: 11,
             color: C.muted,
             letterSpacing: "0.04em",
           }}
@@ -302,7 +297,7 @@ export function LoginPage() {
           left: 0,
           right: 0,
           textAlign: "center",
-          fontSize: 9,
+          fontSize: 11,
           color: C.muted,
           letterSpacing: "0.12em",
           textTransform: "uppercase",
@@ -333,13 +328,14 @@ function InputField({
   placeholder?: string;
   autoFocus?: boolean;
 }) {
+  const C = useThemeColors();
   const [focused, setFocused] = useState(false);
 
   return (
     <div>
       <div
         style={{
-          fontSize: 8.5,
+          fontSize: 10.5,
           fontWeight: 700,
           color: C.muted,
           letterSpacing: "0.14em",
@@ -355,14 +351,14 @@ function InputField({
           display: "flex",
           alignItems: "center",
           height: 42,
-          background: "rgba(0, 1, 23, 0.7)",
+          background: "var(--bt-overlay-70)",
           border: `1px solid ${focused ? C.accent : C.border}`,
           borderRadius: 6,
           paddingLeft: 12,
           paddingRight: 12,
           boxShadow: focused
-            ? "0 0 0 3px rgba(214, 182, 141, 0.08), inset 0 1px 0 rgba(214, 182, 141, 0.08)"
-            : "inset 0 1px 0 rgba(44, 61, 127, 0.2)",
+            ? "0 0 0 3px var(--bt-accent-a08), inset 0 1px 0 var(--bt-accent-a08)"
+            : "inset 0 1px 0 var(--bt-border-a20)",
           transition: "all 0.15s ease",
         }}
       >
@@ -392,7 +388,7 @@ function InputField({
             border: "none",
             outline: "none",
             color: C.text,
-            fontSize: 13,
+            fontSize: 15,
             fontWeight: 500,
             letterSpacing: "0.01em",
           }}

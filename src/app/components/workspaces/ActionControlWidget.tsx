@@ -13,74 +13,60 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { useTerminal } from "../../context/TerminalContext";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  orange: "#fb923c",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  dark: "#000117",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const DECISION_SIGNALS = [
   {
     type: "signal",
     icon: <Zap size={9} />,
-    color: C.gold,
+    color: "#f4b942",
     label: "Signal du Jour",
     title: "PALM CI — Momentum HAUSSIER",
     detail: "RSI 72 · Volume +38% · Cacao +42% YTD",
     criticite: "HAUTE",
-    critColor: C.gold,
+    critColor: "#f4b942",
   },
   {
     type: "opportunite",
     icon: <Target size={9} />,
-    color: C.green,
+    color: "#10c87a",
     label: "Opportunité",
     title: "SGBCI — Décote 18% vs pairs",
     detail: "P/BV 0.92x · Objectif +27.3%",
     criticite: "FORTE",
-    critColor: C.green,
+    critColor: "#10c87a",
   },
   {
     type: "vigilance",
     icon: <AlertTriangle size={9} />,
-    color: C.orange,
+    color: "#fb923c",
     label: "Zone de Vigilance",
     title: "SAPH CI — Pression marges",
     detail: "RSI 29 · Coûts +18% · Révision -23.7%",
     criticite: "MODÉRÉE",
-    critColor: C.orange,
+    critColor: "#fb923c",
   },
   {
     type: "recommandation",
     icon: <Shield size={9} />,
-    color: C.accent,
+    color: "#d6b68d",
     label: "Recommandation",
     title: "OAT UEMOA — Fenêtre d'entrée",
     detail: "Rendements 6.8–7.2% · Prochaine émission 15 Mai",
     criticite: "INFO",
-    critColor: C.accent,
+    critColor: "#d6b68d",
   },
 ];
 
 const COMPLIANCE_STATUS = [
-  { label: "Limite journalière", status: "OK", detail: "17.5% utilisé", color: C.green },
-  { label: "Contrôleur disponible", status: "OK", detail: "Diallo Mamadou", color: C.green },
-  { label: "Validation en attente", status: "1 ordre", detail: "PALM CI", color: C.gold },
-  { label: "Mandats actifs", status: "3", detail: "BRVM Equity · Souverain · Mixte", color: C.accent },
+  { label: "Limite journalière", status: "OK", detail: "17.5% utilisé", color: "#10c87a" },
+  { label: "Contrôleur disponible", status: "OK", detail: "Diallo Mamadou", color: "#10c87a" },
+  { label: "Validation en attente", status: "1 ordre", detail: "PALM CI", color: "#f4b942" },
+  { label: "Mandats actifs", status: "3", detail: "BRVM Equity · Souverain · Mixte", color: "#d6b68d" },
 ];
 
 export function ActionControlWidget() {
+  const C = useThemeColors();
   const { openOrderPanel, openAIPanel } = useTerminal();
 
   return (
@@ -112,7 +98,7 @@ export function ActionControlWidget() {
           gap: 6,
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
@@ -120,7 +106,7 @@ export function ActionControlWidget() {
         <Zap size={11} color={C.gold} />
         <span
           style={{
-            fontSize: 9.5,
+            fontSize: 11.5,
             fontWeight: 700,
             color: C.dim,
             letterSpacing: "0.07em",
@@ -136,7 +122,7 @@ export function ActionControlWidget() {
         <div>
           <div
             style={{
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 700,
               color: C.muted,
               letterSpacing: "0.08em",
@@ -153,8 +139,8 @@ export function ActionControlWidget() {
                 label: "Passer un Ordre",
                 sublabel: "BRVM · UMOA-Titres",
                 color: C.accent,
-                bg: "rgba(214, 182, 141,0.1)",
-                border: `1px solid rgba(214, 182, 141,0.25)`,
+                bg: "var(--bt-accent-a10)",
+                border: `1px solid var(--bt-accent-a25)`,
                 onClick: () => openOrderPanel(),
               },
               {
@@ -212,10 +198,10 @@ export function ActionControlWidget() {
               >
                 <span style={{ color: action.color }}>{action.icon}</span>
                 <div>
-                  <div style={{ fontSize: 9.5, fontWeight: 700, color: C.text }}>
+                  <div style={{ fontSize: 11.5, fontWeight: 700, color: C.text }}>
                     {action.label}
                   </div>
-                  <div style={{ fontSize: 7.5, color: C.muted }}>{action.sublabel}</div>
+                  <div style={{ fontSize: 9.5, color: C.muted }}>{action.sublabel}</div>
                 </div>
               </button>
             ))}
@@ -226,7 +212,7 @@ export function ActionControlWidget() {
         <div>
           <div
             style={{
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 700,
               color: C.muted,
               letterSpacing: "0.08em",
@@ -271,7 +257,7 @@ export function ActionControlWidget() {
                   <span style={{ color: sig.color }}>{sig.icon}</span>
                   <span
                     style={{
-                      fontSize: 6.5,
+                      fontSize: 8.5,
                       fontWeight: 700,
                       color: sig.critColor,
                       background: `${sig.critColor}14`,
@@ -286,7 +272,7 @@ export function ActionControlWidget() {
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div
                     style={{
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       fontWeight: 700,
                       color: sig.color,
                       letterSpacing: "0.05em",
@@ -297,11 +283,11 @@ export function ActionControlWidget() {
                     {sig.label}
                   </div>
                   <div
-                    style={{ fontSize: 9, fontWeight: 700, color: C.text, marginBottom: 2 }}
+                    style={{ fontSize: 11, fontWeight: 700, color: C.text, marginBottom: 2 }}
                   >
                     {sig.title}
                   </div>
-                  <div style={{ fontSize: 7.5, color: C.muted }}>{sig.detail}</div>
+                  <div style={{ fontSize: 9.5, color: C.muted }}>{sig.detail}</div>
                 </div>
               </div>
             ))}
@@ -312,7 +298,7 @@ export function ActionControlWidget() {
         <div>
           <div
             style={{
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 700,
               color: C.muted,
               letterSpacing: "0.08em",
@@ -340,16 +326,16 @@ export function ActionControlWidget() {
                   padding: "6px 10px",
                   borderBottom:
                     i < COMPLIANCE_STATUS.length - 1
-                      ? `1px solid rgba(44, 61, 127,0.15)`
+                      ? `1px solid var(--bt-border-a16)`
                       : "none",
                 }}
               >
                 <CheckCircle2 size={10} color={item.color} />
-                <span style={{ fontSize: 9, color: C.dim, flex: 1 }}>{item.label}</span>
+                <span style={{ fontSize: 11, color: C.dim, flex: 1 }}>{item.label}</span>
                 <div style={{ textAlign: "right" }}>
                   <div
                     style={{
-                      fontSize: 9,
+                      fontSize: 11,
                       fontWeight: 700,
                       color: item.color,
                       fontVariantNumeric: "tabular-nums",
@@ -357,7 +343,7 @@ export function ActionControlWidget() {
                   >
                     {item.status}
                   </div>
-                  <div style={{ fontSize: 7.5, color: C.muted }}>{item.detail}</div>
+                  <div style={{ fontSize: 9.5, color: C.muted }}>{item.detail}</div>
                 </div>
               </div>
             ))}
@@ -369,7 +355,7 @@ export function ActionControlWidget() {
           style={{
             padding: "8px 10px",
             background: "rgba(214, 182, 141,0.05)",
-            border: "1px solid rgba(214, 182, 141,0.2)",
+            border: "1px solid var(--bt-accent-a20)",
             borderRadius: 5,
           }}
         >
@@ -384,7 +370,7 @@ export function ActionControlWidget() {
             <Globe2 size={10} color={C.accent} />
             <span
               style={{
-                fontSize: 8,
+                fontSize: 10,
                 fontWeight: 700,
                 color: C.accent,
                 letterSpacing: "0.06em",
@@ -405,8 +391,8 @@ export function ActionControlWidget() {
                 style={{ display: "flex", alignItems: "center", gap: 5 }}
               >
                 {item.icon}
-                <span style={{ fontSize: 8, color: C.muted, minWidth: 90 }}>{item.label}</span>
-                <span style={{ fontSize: 8.5, color: C.dim, fontWeight: 600 }}>
+                <span style={{ fontSize: 10, color: C.muted, minWidth: 90 }}>{item.label}</span>
+                <span style={{ fontSize: 10.5, color: C.dim, fontWeight: 600 }}>
                   {item.value}
                 </span>
               </div>

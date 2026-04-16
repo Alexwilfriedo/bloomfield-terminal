@@ -13,22 +13,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { useTerminal, type OrderStatus } from "../../context/TerminalContext";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  dark: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  orange: "#fb923c",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const DAILY_LIMIT = 50_000_000;
 const DAILY_USED = 8_749_000;
@@ -40,15 +25,16 @@ function formatXOF(n: number): string {
 }
 
 const STATUS_CONFIG: Record<OrderStatus, { label: string; color: string; icon: React.ReactNode; bg: string }> = {
-  draft: { label: "Brouillon", color: C.muted, icon: <FileText size={9} />, bg: "rgba(84, 103, 141,0.15)" },
-  submitted: { label: "Soumis", color: C.accent, icon: <Send size={9} />, bg: "rgba(214, 182, 141,0.12)" },
-  under_review: { label: "En validation", color: C.gold, icon: <Clock size={9} />, bg: "rgba(244,185,66,0.12)" },
-  approved: { label: "Approuvé", color: C.green, icon: <CheckCircle2 size={9} />, bg: "rgba(16,200,122,0.12)" },
-  rejected: { label: "Rejeté", color: C.red, icon: <X size={9} />, bg: "rgba(244,56,96,0.12)" },
+  draft: { label: "Brouillon", color: "#54678d", icon: <FileText size={9} />, bg: "rgba(84, 103, 141,0.15)" },
+  submitted: { label: "Soumis", color: "#d6b68d", icon: <Send size={9} />, bg: "var(--bt-accent-a12)" },
+  under_review: { label: "En validation", color: "#f4b942", icon: <Clock size={9} />, bg: "rgba(244,185,66,0.12)" },
+  approved: { label: "Approuvé", color: "#10c87a", icon: <CheckCircle2 size={9} />, bg: "rgba(16,200,122,0.12)" },
+  rejected: { label: "Rejeté", color: "#f43860", icon: <X size={9} />, bg: "rgba(244,56,96,0.12)" },
   executed: { label: "Exécuté", color: "#60a5fa", icon: <TrendingUp size={9} />, bg: "rgba(96,165,250,0.12)" },
 };
 
 export function OrdersTrackingWidget() {
+  const C = useThemeColors();
   const { orders, openOrderPanel } = useTerminal();
   const [filter, setFilter] = useState<"all" | OrderStatus>("all");
 
@@ -94,7 +80,7 @@ export function OrdersTrackingWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
@@ -103,7 +89,7 @@ export function OrdersTrackingWidget() {
           <ClipboardList size={11} color={C.accent} />
           <span
             style={{
-              fontSize: 9.5,
+              fontSize: 11.5,
               fontWeight: 700,
               color: C.dim,
               letterSpacing: "0.07em",
@@ -115,7 +101,7 @@ export function OrdersTrackingWidget() {
           {activeOrders.length > 0 && (
             <span
               style={{
-                fontSize: 8,
+                fontSize: 10,
                 fontWeight: 700,
                 color: C.dark,
                 background: C.gold,
@@ -136,9 +122,9 @@ export function OrdersTrackingWidget() {
             padding: "3px 8px",
             borderRadius: 4,
             border: `1px solid ${C.accent}40`,
-            background: "rgba(214, 182, 141,0.1)",
+            background: "var(--bt-accent-a10)",
             color: C.accent,
-            fontSize: 8.5,
+            fontSize: 10.5,
             fontWeight: 700,
             cursor: "pointer",
           }}
@@ -168,12 +154,12 @@ export function OrdersTrackingWidget() {
             style={{
               padding: "5px 8px",
               textAlign: "center",
-              borderRight: i < 3 ? `1px solid rgba(44, 61, 127,0.2)` : "none",
+              borderRight: i < 3 ? `1px solid var(--bt-border-a20)` : "none",
             }}
           >
             <div
               style={{
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: 800,
                 color: stat.color,
                 fontVariantNumeric: "tabular-nums",
@@ -181,7 +167,7 @@ export function OrdersTrackingWidget() {
             >
               {stat.value}
             </div>
-            <div style={{ fontSize: 7.5, color: C.muted }}>{stat.label}</div>
+            <div style={{ fontSize: 9.5, color: C.muted }}>{stat.label}</div>
           </div>
         ))}
       </div>
@@ -192,18 +178,18 @@ export function OrdersTrackingWidget() {
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
           flexShrink: 0,
-          background: "rgba(0, 1, 23,0.25)",
+          background: "var(--bt-overlay-25)",
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
             <Shield size={9} color={C.muted} />
-            <span style={{ fontSize: 8, color: C.dim }}>Limite journalière</span>
+            <span style={{ fontSize: 10, color: C.dim }}>Limite journalière</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <span
               style={{
-                fontSize: 8.5,
+                fontSize: 10.5,
                 fontWeight: 700,
                 color: dailyPct > 80 ? C.red : C.gold,
                 fontVariantNumeric: "tabular-nums",
@@ -211,13 +197,13 @@ export function OrdersTrackingWidget() {
             >
               {formatXOF(DAILY_USED)} utilisés
             </span>
-            <span style={{ fontSize: 7.5, color: C.muted }}>/ {formatXOF(DAILY_LIMIT)}</span>
+            <span style={{ fontSize: 9.5, color: C.muted }}>/ {formatXOF(DAILY_LIMIT)}</span>
           </div>
         </div>
         <div
           style={{
             height: 5,
-            background: "rgba(44, 61, 127,0.2)",
+            background: "var(--bt-border-a20)",
             borderRadius: 3,
             overflow: "hidden",
           }}
@@ -240,12 +226,12 @@ export function OrdersTrackingWidget() {
             marginTop: 3,
           }}
         >
-          <span style={{ fontSize: 7.5, color: C.muted }}>
+          <span style={{ fontSize: 9.5, color: C.muted }}>
             {formatXOF(DAILY_LIMIT - DAILY_USED)} disponibles
           </span>
           <span
             style={{
-              fontSize: 7.5,
+              fontSize: 9.5,
               color: C.muted,
             }}
           >
@@ -286,7 +272,7 @@ export function OrdersTrackingWidget() {
                 border: `1px solid ${isActive ? fColor + "50" : C.border}`,
                 background: isActive ? fColor + "14" : "transparent",
                 color: isActive ? fColor : C.muted,
-                fontSize: 8,
+                fontSize: 10,
                 fontWeight: isActive ? 700 : 500,
                 cursor: "pointer",
                 whiteSpace: "nowrap",
@@ -308,7 +294,7 @@ export function OrdersTrackingWidget() {
             border: `1px solid ${C.border}`,
             background: "transparent",
             color: C.muted,
-            fontSize: 8,
+            fontSize: 10,
             cursor: "pointer",
           }}
         >
@@ -330,7 +316,7 @@ export function OrdersTrackingWidget() {
             }}
           >
             <ClipboardList size={24} color={C.muted} />
-            <span style={{ fontSize: 9.5, color: C.muted }}>Aucun ordre dans cette catégorie</span>
+            <span style={{ fontSize: 11.5, color: C.muted }}>Aucun ordre dans cette catégorie</span>
           </div>
         ) : (
           filtered.map((order, i) => {
@@ -340,12 +326,12 @@ export function OrdersTrackingWidget() {
                 key={order.id}
                 style={{
                   padding: "8px 12px",
-                  borderBottom: i < filtered.length - 1 ? `1px solid rgba(44, 61, 127,0.12)` : "none",
+                  borderBottom: i < filtered.length - 1 ? `1px solid var(--bt-border-a12)` : "none",
                   cursor: "pointer",
                   transition: "background 0.1s",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "rgba(214, 182, 141,0.04)")
+                  (e.currentTarget.style.background = "var(--bt-accent-a06)")
                 }
                 onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
               >
@@ -359,7 +345,7 @@ export function OrdersTrackingWidget() {
                   }}
                 >
                   <span
-                    style={{ fontSize: 8, color: C.muted, fontVariantNumeric: "tabular-nums" }}
+                    style={{ fontSize: 10, color: C.muted, fontVariantNumeric: "tabular-nums" }}
                   >
                     {order.id}
                   </span>
@@ -375,14 +361,14 @@ export function OrdersTrackingWidget() {
                     }}
                   >
                     <span style={{ color: cfg.color }}>{cfg.icon}</span>
-                    <span style={{ fontSize: 7.5, fontWeight: 700, color: cfg.color }}>
+                    <span style={{ fontSize: 9.5, fontWeight: 700, color: cfg.color }}>
                       {cfg.label}
                     </span>
                   </div>
                   <div style={{ flex: 1 }} />
                   <span
                     style={{
-                      fontSize: 8.5,
+                      fontSize: 10.5,
                       fontWeight: 800,
                       color:
                         order.action === "BUY" ? C.green : C.red,
@@ -409,34 +395,34 @@ export function OrdersTrackingWidget() {
                     marginBottom: 3,
                   }}
                 >
-                  <span style={{ fontSize: 11, fontWeight: 700, color: C.text }}>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: C.text }}>
                     {order.assetCode}
                   </span>
                   <span
                     style={{
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       color: C.muted,
-                      background: "rgba(44, 61, 127,0.2)",
+                      background: "var(--bt-border-a20)",
                       borderRadius: 2,
                       padding: "0 4px",
                     }}
                   >
                     {order.market}
                   </span>
-                  <span style={{ fontSize: 7.5, color: C.muted }}>· {order.assetName}</span>
+                  <span style={{ fontSize: 9.5, color: C.muted }}>· {order.assetName}</span>
                 </div>
 
                 {/* Row 3: Qty × Price = Value */}
                 <div
                   style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3 }}
                 >
-                  <span style={{ fontSize: 8.5, color: C.muted }}>
+                  <span style={{ fontSize: 10.5, color: C.muted }}>
                     {order.quantity.toLocaleString("fr-FR")} titres
                   </span>
-                  <span style={{ fontSize: 8, color: C.muted }}>×</span>
+                  <span style={{ fontSize: 10, color: C.muted }}>×</span>
                   <span
                     style={{
-                      fontSize: 8.5,
+                      fontSize: 10.5,
                       fontWeight: 600,
                       color: C.dim,
                       fontVariantNumeric: "tabular-nums",
@@ -444,10 +430,10 @@ export function OrdersTrackingWidget() {
                   >
                     {order.price.toLocaleString("fr-FR")} XOF
                   </span>
-                  <span style={{ fontSize: 8, color: C.muted }}>=</span>
+                  <span style={{ fontSize: 10, color: C.muted }}>=</span>
                   <span
                     style={{
-                      fontSize: 10,
+                      fontSize: 12,
                       fontWeight: 700,
                       color: C.text,
                       fontVariantNumeric: "tabular-nums",
@@ -458,7 +444,7 @@ export function OrdersTrackingWidget() {
                   <div style={{ flex: 1 }} />
                   <span
                     style={{
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       color: C.muted,
                     }}
                   >
@@ -479,11 +465,11 @@ export function OrdersTrackingWidget() {
                       <AlertTriangle size={8} color={C.gold} />
                     )}
                     <span
-                      style={{ fontSize: 8, color: C.muted, fontStyle: "italic", flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                      style={{ fontSize: 10, color: C.muted, fontStyle: "italic", flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
                     >
                       {order.notes}
                     </span>
-                    <span style={{ fontSize: 7.5, color: C.muted, flexShrink: 0 }}>
+                    <span style={{ fontSize: 9.5, color: C.muted, flexShrink: 0 }}>
                       {order.updatedAt}
                     </span>
                   </div>
@@ -499,7 +485,7 @@ export function OrdersTrackingWidget() {
         style={{
           padding: "5px 12px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.3)",
+          background: "var(--bt-overlay-30)",
           display: "flex",
           alignItems: "center",
           gap: 6,
@@ -507,11 +493,11 @@ export function OrdersTrackingWidget() {
         }}
       >
         <Shield size={9} color={C.muted} />
-        <span style={{ fontSize: 7.5, color: C.muted }}>
+        <span style={{ fontSize: 9.5, color: C.muted }}>
           Circuit de validation Bloomfield · Contrôleur : Diallo Mamadou · Confidentiel
         </span>
         <div style={{ flex: 1 }} />
-        <span style={{ fontSize: 7.5, color: C.muted }}>
+        <span style={{ fontSize: 9.5, color: C.muted }}>
           {orders.length} ordre{orders.length > 1 ? "s" : ""} total
         </span>
       </div>

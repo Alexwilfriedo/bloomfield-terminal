@@ -11,26 +11,21 @@ import {
   Star,
   SlidersHorizontal,
   LogOut,
+  Sun,
+  Moon,
 } from "lucide-react";
 import logoUrl from "../../../assets/logo-bloomfield-terminal.png";
 import { useAuth } from "../../auth/AuthContext";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-};
+import { useBloomfieldTheme } from "../../context/ThemeContext";
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 export function TopBar() {
+  const C = useThemeColors();
   const [searchValue, setSearchValue] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const { user, logout } = useAuth();
+  const { theme, toggleTheme, isDark } = useBloomfieldTheme();
   const navigate = useNavigate();
 
   // Close the user menu on outside click
@@ -86,11 +81,13 @@ export function TopBar() {
         <img
           src={logoUrl}
           alt="Bloomfield Terminal"
+          onClick={() => navigate("/")}
           style={{
             height: 28,
             width: "auto",
             display: "block",
             objectFit: "contain",
+            cursor: "pointer",
           }}
           draggable={false}
         />
@@ -121,13 +118,13 @@ export function TopBar() {
           style={{
             width: "100%",
             height: 32,
-            background: "rgba(0, 1, 23,0.7)",
+            background: "var(--bt-overlay-70)",
             border: `1px solid ${C.border}`,
             borderRadius: 6,
             paddingLeft: 32,
             paddingRight: 90,
             color: C.text,
-            fontSize: 12,
+            fontSize: 14,
             outline: "none",
             fontWeight: 400,
           }}
@@ -143,9 +140,9 @@ export function TopBar() {
         >
           <span
             style={{
-              fontSize: 9,
+              fontSize: 11,
               color: C.muted,
-              background: "rgba(44, 61, 127,0.25)",
+              background: "var(--bt-border-a25)",
               border: `1px solid ${C.border}`,
               borderRadius: 4,
               padding: "1px 5px",
@@ -165,11 +162,11 @@ export function TopBar() {
           alignItems: "center",
           gap: 5,
           padding: "4px 10px",
-          background: "rgba(214, 182, 141,0.08)",
-          border: `1px solid rgba(214, 182, 141,0.25)`,
+          background: "var(--bt-accent-a08)",
+          border: `1px solid var(--bt-accent-a25)`,
           borderRadius: 6,
           color: C.accent,
-          fontSize: 11,
+          fontSize: 13,
           fontWeight: 600,
           cursor: "pointer",
           letterSpacing: "0.02em",
@@ -202,18 +199,39 @@ export function TopBar() {
             boxShadow: "0 0 6px #10c87a",
           }}
         />
-        <span style={{ fontSize: 10, color: "#10c87a", fontWeight: 600, letterSpacing: "0.08em" }}>
+        <span style={{ fontSize: 12, color: "#10c87a", fontWeight: 600, letterSpacing: "0.08em" }}>
           LIVE
         </span>
       </div>
 
       {/* Date */}
-      <div style={{ fontSize: 11, color: C.dim, fontWeight: 500 }}>
+      <div style={{ fontSize: 13, color: C.dim, fontWeight: 500 }}>
         Mer 08 Avr 2026
       </div>
 
       {/* Divider */}
       <div style={{ width: 1, height: 28, background: C.border, flexShrink: 0 }} />
+
+      {/* Theme toggle */}
+      <button
+        onClick={toggleTheme}
+        title={isDark ? "Mode clair" : "Mode sombre"}
+        style={{
+          width: 32,
+          height: 32,
+          borderRadius: 6,
+          background: isDark ? "rgba(244,185,66,0.08)" : "var(--bt-border-a08)",
+          border: `1px solid ${isDark ? "rgba(244,185,66,0.22)" : "var(--bt-border-a20)"}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          color: isDark ? C.gold : "#4a6480",
+          transition: "all 0.2s",
+        }}
+      >
+        {isDark ? <Sun size={14} /> : <Moon size={14} />}
+      </button>
 
       {/* Alerts */}
       <button
@@ -222,7 +240,7 @@ export function TopBar() {
           width: 32,
           height: 32,
           borderRadius: 6,
-          background: "rgba(0, 1, 23,0.5)",
+          background: "var(--bt-overlay-50)",
           border: `1px solid ${C.border}`,
           display: "flex",
           alignItems: "center",
@@ -241,7 +259,7 @@ export function TopBar() {
             height: 7,
             borderRadius: "50%",
             background: C.gold,
-            border: "1.5px solid #000117",
+            border: `1.5px solid ${C.surface}`,
           }}
         />
       </button>
@@ -252,7 +270,7 @@ export function TopBar() {
           width: 32,
           height: 32,
           borderRadius: 6,
-          background: "rgba(0, 1, 23,0.5)",
+          background: "var(--bt-overlay-50)",
           border: `1px solid ${C.border}`,
           display: "flex",
           alignItems: "center",
@@ -275,8 +293,8 @@ export function TopBar() {
             gap: 8,
             padding: "4px 8px",
             borderRadius: 6,
-            background: menuOpen ? "rgba(214, 182, 141, 0.08)" : "rgba(0, 1, 23,0.5)",
-            border: `1px solid ${menuOpen ? "rgba(214, 182, 141, 0.35)" : C.border}`,
+            background: menuOpen ? "var(--bt-accent-a08)" : "var(--bt-overlay-50)",
+            border: `1px solid ${menuOpen ? "var(--bt-accent-a35)" : C.border}`,
             cursor: "pointer",
             transition: "background 0.15s, border-color 0.15s",
           }}
@@ -290,7 +308,7 @@ export function TopBar() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: 700,
               color: "#000117",
             }}
@@ -298,10 +316,10 @@ export function TopBar() {
             {initials}
           </div>
           <div style={{ textAlign: "left" }}>
-            <div style={{ fontSize: 11, color: C.text, fontWeight: 600, lineHeight: 1 }}>
+            <div style={{ fontSize: 13, color: C.text, fontWeight: 600, lineHeight: 1 }}>
               {displayName}
             </div>
-            <div style={{ fontSize: 9, color: C.dim, lineHeight: 1, marginTop: 2 }}>
+            <div style={{ fontSize: 11, color: C.dim, lineHeight: 1, marginTop: 2 }}>
               {displayRole}
             </div>
           </div>
@@ -323,20 +341,20 @@ export function TopBar() {
               top: "calc(100% + 6px)",
               right: 0,
               minWidth: 200,
-              background: "rgba(0, 1, 23, 0.98)",
+              background: "var(--bt-overlay-98)",
               border: `1px solid ${C.border}`,
               borderRadius: 6,
-              boxShadow: "0 12px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(214, 182, 141, 0.06)",
+              boxShadow: "0 12px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 var(--bt-accent-a06)",
               zIndex: 100,
               overflow: "hidden",
               backdropFilter: "blur(8px)",
             }}
           >
             <div style={{ padding: "10px 12px", borderBottom: `1px solid ${C.border}` }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>
                 {displayName}
               </div>
-              <div style={{ fontSize: 9, color: C.dim, marginTop: 2 }}>
+              <div style={{ fontSize: 11, color: C.dim, marginTop: 2 }}>
                 {displayRole}
                 {user?.username ? ` · @${user.username}` : ""}
               </div>
@@ -353,7 +371,7 @@ export function TopBar() {
                 background: "transparent",
                 border: "none",
                 color: "#f43860",
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: 600,
                 cursor: "pointer",
                 letterSpacing: "0.02em",
@@ -388,11 +406,11 @@ function TopAction({
         alignItems: "center",
         gap: 4,
         padding: "4px 9px",
-        background: accent ? "rgba(214, 182, 141,0.1)" : "rgba(0, 1, 23,0.5)",
-        border: `1px solid ${accent ? "rgba(214, 182, 141,0.3)" : "rgba(44, 61, 127,0.32)"}`,
+        background: accent ? "var(--bt-accent-a10)" : "var(--bt-overlay-50)",
+        border: `1px solid ${accent ? "var(--bt-accent-a30)" : "var(--bt-border-a32)"}`,
         borderRadius: 6,
         color: accent ? "#d6b68d" : "#6b96b8",
-        fontSize: 11,
+        fontSize: 13,
         fontWeight: 600,
         cursor: "pointer",
         letterSpacing: "0.01em",

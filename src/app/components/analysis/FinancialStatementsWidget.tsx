@@ -11,21 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { WidgetShell } from "../widgets/WidgetShell";
-
-const C = {
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  purple: "#a78bfa",
-  surface: "#000117",
-  dark: "#000117",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const YEARS = ["FY2020", "FY2021", "FY2022", "FY2023", "FY2024E"];
 
@@ -84,13 +70,13 @@ const CustomTooltip = ({ active, payload, label }: {
 }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{ background: "#000117", border: `1px solid ${C.border}`, borderRadius: 6, padding: "8px 12px" }}>
-      <div style={{ fontSize: 10, fontWeight: 700, color: C.dim, marginBottom: 6 }}>{label}</div>
+    <div style={{ background: "#000117", border: `1px solid var(--bt-border-a32)`, borderRadius: 6, padding: "8px 12px" }}>
+      <div style={{ fontSize: 12, fontWeight: 700, color: "#6b96b8", marginBottom: 6 }}>{label}</div>
       {payload.map((p) => (
         <div key={p.name} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3 }}>
           <div style={{ width: 8, height: 8, borderRadius: 2, background: p.color }} />
-          <span style={{ fontSize: 9.5, color: C.dim }}>{p.name}</span>
-          <span style={{ fontSize: 9.5, fontWeight: 700, color: C.text, marginLeft: "auto" }}>{p.value.toFixed(1)} Mds</span>
+          <span style={{ fontSize: 11.5, color: "#6b96b8" }}>{p.name}</span>
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: "#ddeaf8", marginLeft: "auto" }}>{p.value.toFixed(1)} Mds</span>
         </div>
       ))}
     </div>
@@ -98,6 +84,7 @@ const CustomTooltip = ({ active, payload, label }: {
 };
 
 export function FinancialStatementsWidget() {
+  const C = useThemeColors();
   const [subTab, setSubTab] = useState<SubTab>("Compte de Résultat");
 
   const rows =
@@ -121,7 +108,7 @@ export function FinancialStatementsWidget() {
           alignItems: "center",
           gap: 0,
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.3)",
+          background: "var(--bt-overlay-30)",
           padding: "0 12px",
           flexShrink: 0,
         }}
@@ -132,7 +119,7 @@ export function FinancialStatementsWidget() {
             onClick={() => setSubTab(t)}
             style={{
               padding: "7px 14px",
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: subTab === t ? 700 : 500,
               color: subTab === t ? C.accent : C.muted,
               background: "transparent",
@@ -148,7 +135,7 @@ export function FinancialStatementsWidget() {
           </button>
         ))}
         <div style={{ flex: 1 }} />
-        <span style={{ fontSize: 8, color: C.muted, fontStyle: "italic" }}>En millions XOF sauf indication contraire</span>
+        <span style={{ fontSize: 10, color: C.muted, fontStyle: "italic" }}>En millions XOF sauf indication contraire</span>
       </div>
 
       <div style={{ display: "flex", flex: 1, overflow: "hidden", minHeight: 0 }}>
@@ -158,24 +145,24 @@ export function FinancialStatementsWidget() {
             style={{
               width: "100%",
               borderCollapse: "collapse",
-              fontSize: 10.5,
+              fontSize: 12.5,
             }}
           >
             <thead>
-              <tr style={{ background: "rgba(0, 1, 23,0.5)" }}>
+              <tr style={{ background: "var(--bt-overlay-50)" }}>
                 <th
                   style={{
                     padding: "8px 14px",
                     textAlign: "left",
                     color: C.muted,
-                    fontSize: 9,
+                    fontSize: 11,
                     fontWeight: 700,
                     letterSpacing: "0.06em",
                     textTransform: "uppercase",
                     borderBottom: `1px solid ${C.border}`,
                     position: "sticky",
                     left: 0,
-                    background: "#000117",
+                    background: C.surface,
                     minWidth: 240,
                     zIndex: 2,
                   }}
@@ -189,7 +176,7 @@ export function FinancialStatementsWidget() {
                       padding: "8px 12px",
                       textAlign: "right",
                       color: y === "FY2024E" ? C.gold : C.muted,
-                      fontSize: 9,
+                      fontSize: 11,
                       fontWeight: 700,
                       letterSpacing: "0.04em",
                       borderBottom: `1px solid ${C.border}`,
@@ -198,7 +185,7 @@ export function FinancialStatementsWidget() {
                   >
                     {y}
                     {y === "FY2024E" && (
-                      <span style={{ fontSize: 7, marginLeft: 3, color: C.gold, opacity: 0.7 }}>EST.</span>
+                      <span style={{ fontSize: 9, marginLeft: 3, color: C.gold, opacity: 0.7 }}>EST.</span>
                     )}
                   </th>
                 ))}
@@ -207,7 +194,7 @@ export function FinancialStatementsWidget() {
                     padding: "8px 12px",
                     textAlign: "right",
                     color: C.green,
-                    fontSize: 9,
+                    fontSize: 11,
                     fontWeight: 700,
                     letterSpacing: "0.04em",
                     borderBottom: `1px solid ${C.border}`,
@@ -224,16 +211,16 @@ export function FinancialStatementsWidget() {
                   <tr
                     key={i}
                     style={{
-                      background: row.isKey ? "rgba(214, 182, 141,0.04)" : i % 2 === 0 ? "rgba(0, 1, 23,0.2)" : "transparent",
+                      background: row.isKey ? "var(--bt-accent-a06)" : i % 2 === 0 ? "var(--bt-overlay-20)" : "transparent",
                       borderBottom: `1px solid ${C.border}20`,
                       cursor: "default",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.07)")}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bt-accent-a08)")}
                     onMouseLeave={(e) =>
                       (e.currentTarget.style.background = row.isKey
-                        ? "rgba(214, 182, 141,0.04)"
+                        ? "var(--bt-accent-a06)"
                         : i % 2 === 0
-                        ? "rgba(0, 1, 23,0.2)"
+                        ? "var(--bt-overlay-20)"
                         : "transparent")
                     }
                   >
@@ -242,7 +229,7 @@ export function FinancialStatementsWidget() {
                         padding: "7px 14px",
                         color: row.isKey ? C.text : C.dim,
                         fontWeight: row.isKey ? 700 : 400,
-                        fontSize: 10,
+                        fontSize: 12,
                         position: "sticky",
                         left: 0,
                         background: "inherit",
@@ -274,7 +261,7 @@ export function FinancialStatementsWidget() {
                             padding: "7px 12px",
                             textAlign: "right",
                             fontVariantNumeric: "tabular-nums",
-                            fontSize: 10,
+                            fontSize: 12,
                             fontWeight: row.isKey ? 700 : 400,
                             color: isEst ? C.gold : isNeg ? C.red : C.dim,
                             whiteSpace: "nowrap",
@@ -288,7 +275,7 @@ export function FinancialStatementsWidget() {
                       style={{
                         padding: "7px 12px",
                         textAlign: "right",
-                        fontSize: 9.5,
+                        fontSize: 11.5,
                         fontWeight: 700,
                         color: parseFloat(row.growth) > 0 ? C.green : C.red,
                         whiteSpace: "nowrap",
@@ -313,18 +300,18 @@ export function FinancialStatementsWidget() {
             flexDirection: "column",
             gap: 6,
             flexShrink: 0,
-            background: "rgba(0, 1, 23,0.2)",
+            background: "var(--bt-overlay-20)",
           }}
         >
-          <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase" }}>
             Évolution — Mds XOF
           </div>
           <div style={{ flex: 1, minHeight: 0 }}>
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={CHART_DATA} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
-                <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 8 }} tickLine={false} axisLine={{ stroke: C.border }} />
-                <YAxis tick={{ fill: C.muted, fontSize: 8 }} tickLine={false} axisLine={false} />
+                <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 10 }} tickLine={false} axisLine={{ stroke: C.border }} />
+                <YAxis tick={{ fill: C.muted, fontSize: 10 }} tickLine={false} axisLine={false} />
                 <Tooltip content={<CustomTooltip />} />
                 <Bar dataKey="PNB" fill={C.accent} fillOpacity={0.7} radius={[2, 2, 0, 0]} name="PNB" />
                 <Line dataKey="Résultat Net" stroke={C.gold} strokeWidth={2} dot={{ fill: C.gold, r: 3 }} type="monotone" name="Résultat Net" />

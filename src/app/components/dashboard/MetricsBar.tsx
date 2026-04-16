@@ -1,16 +1,5 @@
 import { TrendingUp, TrendingDown, Activity } from "lucide-react";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  surface: "rgba(0, 1, 23,0.5)",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const metrics = [
   {
@@ -20,7 +9,7 @@ const metrics = [
     pct: "+0.73%",
     up: true,
     sub: "Indice principal",
-    color: C.accent,
+    color: "#d6b68d",
   },
   {
     label: "Capitalisation BRVM",
@@ -29,7 +18,7 @@ const metrics = [
     pct: "+1.61%",
     up: true,
     sub: "Mds FCFA",
-    color: C.gold,
+    color: "#f4b942",
   },
   {
     label: "Volume séance",
@@ -38,7 +27,7 @@ const metrics = [
     pct: "+32.2%",
     up: true,
     sub: "Titres échangés",
-    color: C.green,
+    color: "#10c87a",
   },
   {
     label: "Taux BCEAO",
@@ -61,6 +50,7 @@ const metrics = [
 ];
 
 export function MetricsBar() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -69,7 +59,7 @@ export function MetricsBar() {
         padding: "10px 16px",
         borderBottom: `1px solid ${C.border}`,
         flexShrink: 0,
-        background: "rgba(0, 1, 23,0.5)",
+        background: "var(--bt-overlay-50)",
       }}
     >
       {metrics.map((m, i) => (
@@ -101,13 +91,13 @@ export function MetricsBar() {
             }}
           />
 
-          <div style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 3 }}>
+          <div style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 3 }}>
             {m.label}
           </div>
           <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
             <span
               style={{
-                fontSize: 18,
+                fontSize: 20,
                 fontWeight: 800,
                 color: C.text,
                 fontVariantNumeric: "tabular-nums",
@@ -126,7 +116,7 @@ export function MetricsBar() {
                     display: "flex",
                     alignItems: "center",
                     gap: 2,
-                    fontSize: 11,
+                    fontSize: 13,
                     fontWeight: 700,
                     color: m.up ? C.green : C.red,
                   }}
@@ -134,18 +124,18 @@ export function MetricsBar() {
                   {m.up ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
                   {m.pct}
                 </span>
-                <span style={{ fontSize: 10, color: C.dim, fontVariantNumeric: "tabular-nums" }}>
+                <span style={{ fontSize: 12, color: C.dim, fontVariantNumeric: "tabular-nums" }}>
                   ({m.change})
                 </span>
               </>
             ) : (
-              <span style={{ display: "flex", alignItems: "center", gap: 2, fontSize: 11, fontWeight: 600, color: "#a78bfa" }}>
+              <span style={{ display: "flex", alignItems: "center", gap: 2, fontSize: 13, fontWeight: 600, color: "#a78bfa" }}>
                 <Activity size={11} />
                 {m.pct}
               </span>
             )}
           </div>
-          <div style={{ fontSize: 8, color: C.muted, marginTop: 2 }}>{m.sub}</div>
+          <div style={{ fontSize: 10, color: C.muted, marginTop: 2 }}>{m.sub}</div>
         </div>
       ))}
     </div>

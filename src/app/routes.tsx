@@ -18,7 +18,7 @@ function PageFallback({ label }: { label: string }) {
         justifyContent: "center",
         height: "100%",
         color: "#6b96b8",
-        fontSize: 13,
+        fontSize: 15,
       }}
     >
       {label}
@@ -37,13 +37,13 @@ function PageError({ label, error }: { label: string; error?: unknown }) {
         justifyContent: "center",
         height: "100%",
         color: "#f43860",
-        fontSize: 12,
+        fontSize: 14,
         gap: 6,
       }}
     >
       <div style={{ fontWeight: 700 }}>{label} — Erreur de chargement</div>
       {msg && (
-        <div style={{ color: "#6b96b8", fontSize: 10, maxWidth: 480, textAlign: "center" }}>
+        <div style={{ color: "#6b96b8", fontSize: 12, maxWidth: 480, textAlign: "center" }}>
           {msg}
         </div>
       )}

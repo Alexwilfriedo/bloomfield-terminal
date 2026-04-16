@@ -6,17 +6,7 @@ import {
   Tooltip,
 } from "recharts";
 import { TrendingUp, TrendingDown, Activity } from "lucide-react";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const sparkData = [
   [282.1, 281.8, 283.0, 282.5, 283.8, 283.2, 284.1, 284.12],
@@ -34,7 +24,7 @@ const indices = [
     pct: "+0.73%",
     up: true,
     data: sparkData[0],
-    color: C.accent,
+    color: "#d6b68d",
   },
   {
     name: "BRVM 10",
@@ -43,7 +33,7 @@ const indices = [
     pct: "+0.45%",
     up: true,
     data: sparkData[1],
-    color: C.green,
+    color: "#10c87a",
   },
   {
     name: "BRVM Prestige",
@@ -52,7 +42,7 @@ const indices = [
     pct: "-0.22%",
     up: false,
     data: sparkData[2],
-    color: C.red,
+    color: "#f43860",
   },
 ];
 
@@ -64,6 +54,7 @@ const marketStats = [
 ];
 
 export function BRVMWidget() {
+  const C = useThemeColors();
   const compositeIdx = indices[0];
   return (
     <WidgetShell
@@ -78,9 +69,9 @@ export function BRVMWidget() {
         <div
           style={{
             padding: "10px 12px",
-            background: "linear-gradient(135deg, rgba(214, 182, 141,0.1) 0%, rgba(214, 182, 141,0.04) 100%)",
+            background: "linear-gradient(135deg, var(--bt-accent-a10) 0%, var(--bt-accent-a06) 100%)",
             borderRadius: 7,
-            border: `1px solid rgba(214, 182, 141,0.3)`,
+            border: `1px solid var(--bt-accent-a30)`,
             position: "relative",
             overflow: "hidden",
           }}
@@ -101,7 +92,7 @@ export function BRVMWidget() {
             <div style={{ flex: 1 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 3 }}>
                 <Activity size={10} color={C.accent} />
-                <span style={{ fontSize: 8.5, fontWeight: 700, color: C.accent, letterSpacing: "0.07em", textTransform: "uppercase" }}>
+                <span style={{ fontSize: 10.5, fontWeight: 700, color: C.accent, letterSpacing: "0.07em", textTransform: "uppercase" }}>
                   BRVM Composite
                 </span>
                 <span
@@ -110,7 +101,7 @@ export function BRVMWidget() {
                     borderRadius: 2,
                     background: "rgba(16,200,122,0.12)",
                     border: "1px solid rgba(16,200,122,0.25)",
-                    fontSize: 7.5,
+                    fontSize: 9.5,
                     fontWeight: 700,
                     color: C.green,
                   }}
@@ -121,7 +112,7 @@ export function BRVMWidget() {
               <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
                 <span
                   style={{
-                    fontSize: 26,
+                    fontSize: 28,
                     fontWeight: 800,
                     color: C.text,
                     fontVariantNumeric: "tabular-nums",
@@ -135,7 +126,7 @@ export function BRVMWidget() {
                   <TrendingUp size={13} color={C.green} />
                   <span
                     style={{
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: 700,
                       color: C.green,
                       fontVariantNumeric: "tabular-nums",
@@ -143,12 +134,12 @@ export function BRVMWidget() {
                   >
                     {compositeIdx.pct}
                   </span>
-                  <span style={{ fontSize: 11, color: C.green, opacity: 0.8 }}>
+                  <span style={{ fontSize: 13, color: C.green, opacity: 0.8 }}>
                     ({compositeIdx.change})
                   </span>
                 </div>
               </div>
-              <div style={{ fontSize: 8, color: C.muted, marginTop: 3 }}>
+              <div style={{ fontSize: 10, color: C.muted, marginTop: 3 }}>
                 Session 08 Avr 2026 · Clôture 15:30 GMT · BRVM Abidjan
               </div>
             </div>
@@ -174,10 +165,10 @@ export function BRVMWidget() {
                   />
                   <Tooltip
                     contentStyle={{
-                      background: "#000117",
+                      background: C.surface,
                       border: `1px solid ${C.border}`,
                       borderRadius: 4,
-                      fontSize: 10,
+                      fontSize: 12,
                       color: C.text,
                     }}
                     formatter={(v: number) => [v.toFixed(2)]}
@@ -199,20 +190,20 @@ export function BRVMWidget() {
               alignItems: "center",
               gap: 8,
               padding: "6px 10px",
-              background: "rgba(0, 1, 23,0.45)",
+              background: "var(--bt-overlay-45)",
               borderRadius: 6,
               border: `1px solid ${C.border}`,
             }}
           >
             {/* Name + values */}
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 9.5, color: C.dim, fontWeight: 500, letterSpacing: "0.02em" }}>
+              <div style={{ fontSize: 11.5, color: C.dim, fontWeight: 500, letterSpacing: "0.02em" }}>
                 {idx.name}
               </div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginTop: 1 }}>
                 <span
                   style={{
-                    fontSize: 15,
+                    fontSize: 17,
                     fontWeight: 700,
                     color: C.text,
                     fontVariantNumeric: "tabular-nums",
@@ -223,7 +214,7 @@ export function BRVMWidget() {
                 </span>
                 <span
                   style={{
-                    fontSize: 11,
+                    fontSize: 13,
                     fontWeight: 600,
                     color: idx.up ? C.green : C.red,
                     fontVariantNumeric: "tabular-nums",
@@ -233,7 +224,7 @@ export function BRVMWidget() {
                 </span>
                 <span
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                     color: idx.up ? C.green : C.red,
                     opacity: 0.8,
                   }}
@@ -287,7 +278,7 @@ export function BRVMWidget() {
             <div
               key={s.label}
               style={{
-                background: "rgba(0, 1, 23,0.45)",
+                background: "var(--bt-overlay-45)",
                 border: `1px solid ${C.border}`,
                 borderRadius: 5,
                 padding: "5px 8px",
@@ -296,7 +287,7 @@ export function BRVMWidget() {
             >
               <div
                 style={{
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: 700,
                   color: C.gold,
                   fontVariantNumeric: "tabular-nums",
@@ -305,10 +296,10 @@ export function BRVMWidget() {
               >
                 {s.value}
               </div>
-              <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1, fontWeight: 500, letterSpacing: "0.02em" }}>
+              <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1, fontWeight: 500, letterSpacing: "0.02em" }}>
                 {s.unit}
               </div>
-              <div style={{ fontSize: 7.5, color: C.muted, opacity: 0.75 }}>
+              <div style={{ fontSize: 9.5, color: C.muted, opacity: 0.75 }}>
                 {s.label}
               </div>
             </div>

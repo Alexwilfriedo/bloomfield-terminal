@@ -8,18 +8,7 @@ import {
   Tooltip,
   Cell,
 } from "recharts";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const comparisonData = [
   { indicator: "Croissance PIB", civ: 6.5, sen: 7.2, unit: "%" },
@@ -36,6 +25,7 @@ const barData = [
 ];
 
 export function ComparisonWidget() {
+  const C = useThemeColors();
   return (
     <WidgetShell
       title="Comparaison Rapide"
@@ -69,7 +59,7 @@ export function ComparisonWidget() {
             gap: 3,
           }}
         >
-          <div style={{ fontSize: 8, color: C.muted, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 10, color: C.muted, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>
             vs
           </div>
         </div>
@@ -98,7 +88,7 @@ export function ComparisonWidget() {
             <div key={row.indicator}>
               <div
                 style={{
-                  fontSize: 9,
+                  fontSize: 11,
                   color: C.muted,
                   fontWeight: 600,
                   letterSpacing: "0.03em",
@@ -114,7 +104,7 @@ export function ComparisonWidget() {
                     style={{
                       height: 8,
                       width: `${(row.civ / maxVal) * 100}%`,
-                      background: civWins ? C.accent : "rgba(214, 182, 141,0.3)",
+                      background: civWins ? C.accent : "var(--bt-accent-a30)",
                       borderRadius: "3px 0 0 3px",
                       transition: "width 0.3s",
                     }}
@@ -133,7 +123,7 @@ export function ComparisonWidget() {
                 >
                   <span
                     style={{
-                      fontSize: 11,
+                      fontSize: 13,
                       fontWeight: 700,
                       color: civWins ? C.accent : C.dim,
                       minWidth: 32,
@@ -143,10 +133,10 @@ export function ComparisonWidget() {
                   >
                     {row.civ}{row.unit}
                   </span>
-                  <span style={{ fontSize: 8, color: C.muted }}>|</span>
+                  <span style={{ fontSize: 10, color: C.muted }}>|</span>
                   <span
                     style={{
-                      fontSize: 11,
+                      fontSize: 13,
                       fontWeight: 700,
                       color: !civWins ? C.gold : C.dim,
                       minWidth: 32,
@@ -179,7 +169,7 @@ export function ComparisonWidget() {
       <div
         style={{
           marginTop: 10,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           border: `1px solid ${C.border}`,
           borderRadius: 6,
           padding: "6px 6px 4px",
@@ -190,18 +180,18 @@ export function ComparisonWidget() {
           <BarChart data={barData} margin={{ top: 0, bottom: 0, left: -20, right: 0 }} barSize={8}>
             <XAxis
               dataKey="name"
-              tick={{ fontSize: 7, fill: C.muted, textAnchor: "middle" }}
+              tick={{ fontSize: 9, fill: C.muted, textAnchor: "middle" }}
               axisLine={false}
               tickLine={false}
               interval={0}
             />
-            <YAxis tick={{ fontSize: 7, fill: C.muted }} axisLine={false} tickLine={false} />
+            <YAxis tick={{ fontSize: 9, fill: C.muted }} axisLine={false} tickLine={false} />
             <Tooltip
               contentStyle={{
-                background: "#000117",
+                background: C.surface,
                 border: `1px solid ${C.border}`,
                 borderRadius: 4,
-                fontSize: 10,
+                fontSize: 12,
                 color: C.text,
               }}
             />
@@ -248,21 +238,22 @@ function CountryCard({
         textAlign: right ? "right" : "left",
       }}
     >
-      <div style={{ fontSize: 9, color: color, fontWeight: 700, letterSpacing: "0.04em" }}>{code}</div>
-      <div style={{ fontSize: 10, color: "#ddeaf8", fontWeight: 600, marginTop: 1 }}>{name}</div>
-      <div style={{ fontSize: 11, color, fontWeight: 700, fontVariantNumeric: "tabular-nums", marginTop: 3 }}>
+      <div style={{ fontSize: 11, color: color, fontWeight: 700, letterSpacing: "0.04em" }}>{code}</div>
+      <div style={{ fontSize: 12, color: "#ddeaf8", fontWeight: 600, marginTop: 1 }}>{name}</div>
+      <div style={{ fontSize: 13, color, fontWeight: 700, fontVariantNumeric: "tabular-nums", marginTop: 3 }}>
         {growth}
       </div>
-      <div style={{ fontSize: 8, color: "#6b96b8" }}>PIB: {gdp} · Note: {rating}</div>
+      <div style={{ fontSize: 10, color: "#6b96b8" }}>PIB: {gdp} · Note: {rating}</div>
     </div>
   );
 }
 
 function LegendItem({ color, label }: { color: string; label: string }) {
+  const C = useThemeColors();
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
       <div style={{ width: 8, height: 8, borderRadius: 2, background: color }} />
-      <span style={{ fontSize: 9, color: C.muted }}>{label}</span>
+      <span style={{ fontSize: 11, color: C.muted }}>{label}</span>
     </div>
   );
 }

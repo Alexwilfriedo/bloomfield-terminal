@@ -57,6 +57,197 @@
   --bt-surface-card: #000117;
   --bt-surface-elevated: #000117;
   --bt-border: rgba(44, 61, 127, 0.32);
+
+  /* Semi-transparent surface overlays (dark mode = navy, light = blue-gray) */
+  --bt-overlay-10: rgba(0, 1, 23, 0.1);
+  --bt-overlay-12: rgba(0, 1, 23, 0.12);
+  --bt-overlay-15: rgba(0, 1, 23, 0.15);
+  --bt-overlay-20: rgba(0, 1, 23, 0.2);
+  --bt-overlay-25: rgba(0, 1, 23, 0.25);
+  --bt-overlay-30: rgba(0, 1, 23, 0.3);
+  --bt-overlay-35: rgba(0, 1, 23, 0.35);
+  --bt-overlay-40: rgba(0, 1, 23, 0.4);
+  --bt-overlay-45: rgba(0, 1, 23, 0.45);
+  --bt-overlay-50: rgba(0, 1, 23, 0.5);
+  --bt-overlay-55: rgba(0, 1, 23, 0.55);
+  --bt-overlay-60: rgba(0, 1, 23, 0.6);
+  --bt-overlay-65: rgba(0, 1, 23, 0.65);
+  --bt-overlay-70: rgba(0, 1, 23, 0.7);
+  --bt-overlay-80: rgba(0, 1, 23, 0.8);
+  --bt-overlay-85: rgba(0, 1, 23, 0.85);
+  --bt-overlay-88: rgba(0, 1, 23, 0.88);
+  --bt-overlay-90: rgba(0, 1, 23, 0.9);
+  --bt-overlay-92: rgba(0, 1, 23, 0.92);
+  --bt-overlay-95: rgba(0, 1, 23, 0.95);
+  --bt-overlay-98: rgba(0, 1, 23, 0.98);
+
+  /* Border/accent alpha variants */
+  --bt-border-a08: rgba(44, 61, 127, 0.08);
+  --bt-border-a12: rgba(44, 61, 127, 0.12);
+  --bt-border-a16: rgba(44, 61, 127, 0.16);
+  --bt-border-a20: rgba(44, 61, 127, 0.2);
+  --bt-border-a22: rgba(44, 61, 127, 0.22);
+  --bt-border-a25: rgba(44, 61, 127, 0.25);
+  --bt-border-a32: rgba(44, 61, 127, 0.32);
+  --bt-border-a40: rgba(44, 61, 127, 0.4);
+  --bt-accent-a06: rgba(214, 182, 141, 0.06);
+  --bt-accent-a08: rgba(214, 182, 141, 0.08);
+  --bt-accent-a10: rgba(214, 182, 141, 0.1);
+  --bt-accent-a12: rgba(214, 182, 141, 0.12);
+  --bt-accent-a15: rgba(214, 182, 141, 0.15);
+  --bt-accent-a18: rgba(214, 182, 141, 0.18);
+  --bt-accent-a20: rgba(214, 182, 141, 0.2);
+  --bt-accent-a25: rgba(214, 182, 141, 0.25);
+  --bt-accent-a30: rgba(214, 182, 141, 0.3);
+  --bt-accent-a35: rgba(214, 182, 141, 0.35);
+  --bt-accent-a45: rgba(214, 182, 141, 0.45);
+  --bt-accent-a55: rgba(214, 182, 141, 0.55);
+}
+
+/* ============================================================
+   BLOOMFIELD TERMINAL — Light Theme Override
+   Applied via data-bt-theme="light" on <html>
+   ============================================================ */
+
+[data-bt-theme="light"] {
+  /* Canvas & surfaces */
+  --brand-tertiary: #f0f2f7;
+  --surface-bg: #f5f6fa;
+  --surface-secondary-bg: #ebedf4;
+  --surface-dark: #e4e7f0;
+  --surface-hover: rgba(44, 61, 127, 0.06);
+  --bg-faint: rgba(44, 61, 127, 0.04);
+  --bg-subtle: rgba(44, 61, 127, 0.08);
+  --bg-hover: rgba(44, 61, 127, 0.06);
+  --input-bg: #ffffff;
+  --modal-scrim: rgba(15, 22, 41, 0.45);
+
+  /* Brand accent — stays warm */
+  --brand-primary: #b8935e;
+  --brand-hover: #a6833f;
+  --brand-dark: #8e7040;
+  --brand-secondary: rgba(184, 147, 94, 0.14);
+  --brand-muted: rgba(184, 147, 94, 0.08);
+
+  /* Text hierarchy */
+  --text-primary: #0f1629;
+  --text-secondary: #4a6480;
+  --text-tertiary: #7d8ba0;
+
+  /* Borders */
+  --border-primary: rgba(44, 61, 127, 0.15);
+  --border-secondary: rgba(44, 61, 127, 0.10);
+  --border-selected: #b8935e;
+
+  /* On-brand text */
+  --on-brand: #ffffff;
+  --on-reverse: #f5f6fa;
+
+  /* Status — slightly deeper for contrast on light bg */
+  --success: #0aaf6a;
+  --warning: #d9a030;
+  --danger: #d92e50;
+
+  /* Bloomfield custom tokens */
+  --bt-gold: #d9a030;
+  --bt-green: #0aaf6a;
+  --bt-red: #d92e50;
+  --bt-accent: #b8935e;
+  --bt-surface-card: #ffffff;
+  --bt-surface-elevated: #ffffff;
+  --bt-border: rgba(44, 61, 127, 0.15);
+
+  /* Semi-transparent surface overlays (light mode = soft blue-gray) */
+  --bt-overlay-10: rgba(44, 61, 127, 0.03);
+  --bt-overlay-12: rgba(44, 61, 127, 0.04);
+  --bt-overlay-15: rgba(44, 61, 127, 0.04);
+  --bt-overlay-20: rgba(44, 61, 127, 0.05);
+  --bt-overlay-25: rgba(44, 61, 127, 0.06);
+  --bt-overlay-30: rgba(44, 61, 127, 0.06);
+  --bt-overlay-35: rgba(44, 61, 127, 0.07);
+  --bt-overlay-40: rgba(44, 61, 127, 0.07);
+  --bt-overlay-45: rgba(44, 61, 127, 0.08);
+  --bt-overlay-50: rgba(44, 61, 127, 0.08);
+  --bt-overlay-55: rgba(44, 61, 127, 0.09);
+  --bt-overlay-60: rgba(44, 61, 127, 0.10);
+  --bt-overlay-65: rgba(44, 61, 127, 0.10);
+  --bt-overlay-70: rgba(44, 61, 127, 0.12);
+  --bt-overlay-80: rgba(44, 61, 127, 0.14);
+  --bt-overlay-85: rgba(230, 233, 242, 0.85);
+  --bt-overlay-88: rgba(230, 233, 242, 0.88);
+  --bt-overlay-90: rgba(230, 233, 242, 0.90);
+  --bt-overlay-92: rgba(240, 242, 247, 0.92);
+  --bt-overlay-95: rgba(240, 242, 247, 0.95);
+  --bt-overlay-98: rgba(245, 246, 250, 0.98);
+
+  /* Border/accent alpha variants — lighter for light mode */
+  --bt-border-a08: rgba(44, 61, 127, 0.05);
+  --bt-border-a12: rgba(44, 61, 127, 0.08);
+  --bt-border-a16: rgba(44, 61, 127, 0.10);
+  --bt-border-a20: rgba(44, 61, 127, 0.12);
+  --bt-border-a22: rgba(44, 61, 127, 0.13);
+  --bt-border-a25: rgba(44, 61, 127, 0.15);
+  --bt-border-a32: rgba(44, 61, 127, 0.18);
+  --bt-border-a40: rgba(44, 61, 127, 0.22);
+  --bt-accent-a06: rgba(184, 147, 94, 0.06);
+  --bt-accent-a08: rgba(184, 147, 94, 0.08);
+  --bt-accent-a10: rgba(184, 147, 94, 0.10);
+  --bt-accent-a12: rgba(184, 147, 94, 0.12);
+  --bt-accent-a15: rgba(184, 147, 94, 0.15);
+  --bt-accent-a18: rgba(184, 147, 94, 0.18);
+  --bt-accent-a20: rgba(184, 147, 94, 0.20);
+  --bt-accent-a25: rgba(184, 147, 94, 0.25);
+  --bt-accent-a30: rgba(184, 147, 94, 0.30);
+  --bt-accent-a35: rgba(184, 147, 94, 0.35);
+  --bt-accent-a45: rgba(184, 147, 94, 0.45);
+  --bt-accent-a55: rgba(184, 147, 94, 0.55);
+}
+
+/* Scrollbar light overrides */
+[data-bt-theme="light"] * {
+  scrollbar-color: rgba(44, 61, 127, 0.25) transparent;
+}
+
+[data-bt-theme="light"] *::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(
+    180deg,
+    rgba(44, 61, 127, 0.18) 0%,
+    rgba(44, 61, 127, 0.30) 50%,
+    rgba(44, 61, 127, 0.18) 100%
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(44, 61, 127, 0.12),
+    0 0 4px rgba(44, 61, 127, 0.10);
+}
+
+[data-bt-theme="light"] *::-webkit-scrollbar-thumb:hover {
+  background-image: linear-gradient(
+    180deg,
+    rgba(44, 61, 127, 0.40) 0%,
+    rgba(44, 61, 127, 0.50) 50%,
+    rgba(44, 61, 127, 0.40) 100%
+  );
+}
+
+/* react-grid-layout light overrides */
+[data-bt-theme="light"] .react-grid-item > .react-resizable-handle.react-resizable-handle-se {
+  background:
+    linear-gradient(135deg,
+      transparent 0%, transparent 55%,
+      #b8935e 55%, #b8935e 65%,
+      transparent 65%, transparent 75%,
+      #b8935e 75%, #b8935e 85%,
+      transparent 85%);
+}
+
+[data-bt-theme="light"] .react-grid-item > .react-resizable-handle.react-resizable-handle-s,
+[data-bt-theme="light"] .react-grid-item > .react-resizable-handle.react-resizable-handle-e {
+  background: #b8935e;
+}
+
+[data-bt-theme="light"] .react-grid-item.react-grid-placeholder {
+  background: rgba(184, 147, 94, 0.14) !important;
+  border: 1px dashed #b8935e !important;
 }
 
 /* ============================================================

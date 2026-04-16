@@ -1,12 +1,13 @@
 import { Outlet, useNavigate, useLocation } from "react-router";
-import { TopBar } from "../components/terminal/TopBar";
 import { Sidebar } from "../components/terminal/Sidebar";
 import { OrderTicketPanel } from "../components/orders/OrderTicketPanel";
 import { AIPanelAssistant } from "../components/ai/AIPanelAssistant";
+import { useBloomfieldTheme } from "../context/ThemeContext";
 
 export function Root() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isDark } = useBloomfieldTheme();
 
   const isActive = (path: string) => {
     if (path === "/") return location.pathname === "/";
@@ -21,14 +22,12 @@ export function Root() {
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
-        background: "#000117",
+        background: isDark ? "#000117" : "#f5f6fa",
         fontFamily: "'Inter', 'SF Pro Text', system-ui, -apple-system, sans-serif",
+        transition: "background 0.3s ease",
       }}
     >
-      {/* Main terminal topbar — spans full width, logo at the leftmost edge */}
-      <TopBar />
-
-      {/* Body — sidebar (vertical nav) + page content */}
+      {/* Body — sidebar (vertical nav) + page content (each page renders its own TopBar) */}
       <div
         style={{
           flex: 1,

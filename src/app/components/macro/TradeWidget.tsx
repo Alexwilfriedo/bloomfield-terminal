@@ -12,39 +12,25 @@ import {
   CartesianGrid,
 } from "recharts";
 import { TrendingDown, TrendingUp, AlertTriangle, ShieldCheck } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const EXPORTS_DATA = [
   { name: "Cacao & prod.", value: 4840, pct: 38.4, color: "#a67c52" },
-  { name: "Pétrole brut", value: 2580, pct: 20.5, color: C.orange },
-  { name: "Or & métaux", value: 1620, pct: 12.9, color: C.gold },
+  { name: "Pétrole brut", value: 2580, pct: 20.5, color: "#fb923c" },
+  { name: "Or & métaux", value: 1620, pct: 12.9, color: "#f4b942" },
   { name: "Caoutchouc", value: 980, pct: 7.8, color: "#34d399" },
   { name: "Bois & sciages", value: 720, pct: 5.7, color: "#6ee7b7" },
   { name: "Coton", value: 580, pct: 4.6, color: "#93c5fd" },
-  { name: "Autres", value: 1260, pct: 10.1, color: C.muted },
+  { name: "Autres", value: 1260, pct: 10.1, color: "#54678d" },
 ];
 
 const IMPORTS_DATA = [
-  { name: "Produits pétroliers", value: 2950, pct: 25.8, color: C.orange },
-  { name: "Équipements", value: 2240, pct: 19.6, color: C.accent },
+  { name: "Produits pétroliers", value: 2950, pct: 25.8, color: "#fb923c" },
+  { name: "Équipements", value: 2240, pct: 19.6, color: "#d6b68d" },
   { name: "Alimentation", value: 1890, pct: 16.5, color: "#34d399" },
-  { name: "Produits chimiques", value: 1420, pct: 12.4, color: C.purple },
+  { name: "Produits chimiques", value: 1420, pct: 12.4, color: "#a78bfa" },
   { name: "Véhicules", value: 980, pct: 8.6, color: "#60a5fa" },
-  { name: "Autres", value: 1960, pct: 17.1, color: C.muted },
+  { name: "Autres", value: 1960, pct: 17.1, color: "#54678d" },
 ];
 
 const TRADE_BALANCE = [
@@ -56,25 +42,26 @@ const TRADE_BALANCE = [
 ];
 
 const VULNERABILITY = [
-  { label: "Concentration exports", score: 72, level: "ÉLEVÉ", color: C.red },
-  { label: "Dépendance cacao", score: 38, level: "MODÉRÉ", color: C.gold },
-  { label: "Couverture imports", score: 85, level: "FAIBLE", color: C.green },
-  { label: "Vulnérabilité pétrolière", score: 58, level: "MODÉRÉ", color: C.gold },
+  { label: "Concentration exports", score: 72, level: "ÉLEVÉ", color: "#f43860" },
+  { label: "Dépendance cacao", score: 38, level: "MODÉRÉ", color: "#f4b942" },
+  { label: "Couverture imports", score: 85, level: "FAIBLE", color: "#10c87a" },
+  { label: "Vulnérabilité pétrolière", score: 58, level: "MODÉRÉ", color: "#f4b942" },
 ];
 
 const TABS = ["Balance", "Exports", "Imports", "Vulnérabilité"] as const;
 type Tab = (typeof TABS)[number];
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+function CustomTooltip({ active, payload, label }: any) {
+  const C = useThemeColors();
   if (!active || !payload?.length) return null;
   return (
     <div
       style={{
-        background: "#000117",
+        background: C.surface,
         border: `1px solid ${C.border}`,
         borderRadius: 5,
         padding: "6px 10px",
-        fontSize: 10,
+        fontSize: 12,
         color: C.text,
       }}
     >
@@ -86,9 +73,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       ))}
     </div>
   );
-};
+}
 
 export function TradeWidget() {
+  const C = useThemeColors();
   const [tab, setTab] = useState<Tab>("Exports");
 
   return (
@@ -111,17 +99,17 @@ export function TradeWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
           <div style={{ width: 3, height: 14, borderRadius: 2, background: C.orange }} />
-          <span style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
             Commerce Extérieur & Matières Premières
           </span>
         </div>
-        <span style={{ fontSize: 8, color: C.muted }}>CIV · 2023</span>
+        <span style={{ fontSize: 10, color: C.muted }}>CIV · 2023</span>
       </div>
 
       {/* Tabs */}
@@ -129,7 +117,7 @@ export function TradeWidget() {
         style={{
           display: "flex",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.2)",
+          background: "var(--bt-overlay-20)",
           flexShrink: 0,
         }}
       >
@@ -144,7 +132,7 @@ export function TradeWidget() {
               border: "none",
               borderBottom: tab === t ? `2px solid ${C.accent}` : "2px solid transparent",
               color: tab === t ? C.accent : C.muted,
-              fontSize: 9.5,
+              fontSize: 11.5,
               fontWeight: tab === t ? 700 : 500,
               cursor: "pointer",
               letterSpacing: "0.04em",
@@ -168,7 +156,7 @@ export function TradeWidget() {
             </div>
             {/* Balance chart */}
             <div>
-              <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
                 Évolution Balance Commerciale (% PIB)
               </div>
               <div style={{ height: 90 }}>
@@ -180,9 +168,9 @@ export function TradeWidget() {
                         <stop offset="100%" stopColor={C.red} stopOpacity={0.02} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="2 4" stroke="rgba(44, 61, 127,0.2)" vertical={false} />
-                    <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 8 }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: C.muted, fontSize: 8 }} axisLine={false} tickLine={false} />
+                    <CartesianGrid strokeDasharray="2 4" stroke="var(--bt-border-a20)" vertical={false} />
+                    <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 10 }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: C.muted, fontSize: 10 }} axisLine={false} tickLine={false} />
                     <Tooltip content={<CustomTooltip />} />
                     <Area key="area-balance" dataKey="balance" name="Balance" stroke={C.red} fill="url(#balGrad)" strokeWidth={2} dot={false} />
                   </AreaChart>
@@ -192,10 +180,10 @@ export function TradeWidget() {
             {/* Coverage rate */}
             <div style={{ background: C.elevated, borderRadius: 5, border: `1px solid ${C.border}`, padding: "8px 10px" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <span style={{ fontSize: 8.5, color: C.muted }}>Taux de couverture imports/exports</span>
-                <span style={{ fontSize: 13, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>84.6%</span>
+                <span style={{ fontSize: 10.5, color: C.muted }}>Taux de couverture imports/exports</span>
+                <span style={{ fontSize: 15, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>84.6%</span>
               </div>
-              <div style={{ height: 5, background: "rgba(44, 61, 127,0.2)", borderRadius: 3, marginTop: 6, position: "relative" }}>
+              <div style={{ height: 5, background: "var(--bt-border-a20)", borderRadius: 3, marginTop: 6, position: "relative" }}>
                 <div style={{ position: "absolute", left: 0, top: 0, width: "84.6%", height: "100%", background: `linear-gradient(90deg, ${C.green} 0%, ${C.gold} 100%)`, borderRadius: 3 }} />
               </div>
             </div>
@@ -216,7 +204,7 @@ export function TradeWidget() {
                     <YAxis
                       type="category"
                       dataKey="name"
-                      tick={{ fill: C.muted, fontSize: 8 }}
+                      tick={{ fill: C.muted, fontSize: 10 }}
                       axisLine={false}
                       tickLine={false}
                       width={90}
@@ -236,8 +224,8 @@ export function TradeWidget() {
               {(tab === "Exports" ? EXPORTS_DATA : IMPORTS_DATA).map((d, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 4 }}>
                   <div style={{ width: 7, height: 7, borderRadius: 2, background: d.color, flexShrink: 0 }} />
-                  <span style={{ fontSize: 8, color: C.muted }}>{d.name}</span>
-                  <span style={{ fontSize: 8, fontWeight: 600, color: C.dim }}>{d.pct}%</span>
+                  <span style={{ fontSize: 10, color: C.muted }}>{d.name}</span>
+                  <span style={{ fontSize: 10, fontWeight: 600, color: C.dim }}>{d.pct}%</span>
                 </div>
               ))}
             </div>
@@ -259,12 +247,12 @@ export function TradeWidget() {
                 <TrendingDown size={12} color={C.orange} />
               )}
               <div>
-                <span style={{ fontSize: 9, fontWeight: 600, color: C.text }}>
+                <span style={{ fontSize: 11, fontWeight: 600, color: C.text }}>
                   {tab === "Exports"
                     ? "Forte dépendance au cacao : 38.4% des exports"
                     : "Facture pétrolière : 25.8% des imports en 2023"}
                 </span>
-                <div style={{ fontSize: 8, color: C.muted, marginTop: 1 }}>
+                <div style={{ fontSize: 10, color: C.muted, marginTop: 1 }}>
                   {tab === "Exports"
                     ? "Risque de volatilité élevé — corrélation cours internationaux"
                     : "Vulnérabilité aux chocs pétroliers — couverture partielle"}
@@ -276,7 +264,7 @@ export function TradeWidget() {
 
         {tab === "Vulnérabilité" && (
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 2 }}>
+            <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 2 }}>
               Analyse de Vulnérabilité Externe
             </div>
             {VULNERABILITY.map((v) => (
@@ -290,10 +278,10 @@ export function TradeWidget() {
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 5 }}>
-                  <span style={{ fontSize: 9, color: C.dim }}>{v.label}</span>
+                  <span style={{ fontSize: 11, color: C.dim }}>{v.label}</span>
                   <span
                     style={{
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       fontWeight: 700,
                       color: v.color,
                       background: v.color + "14",
@@ -307,7 +295,7 @@ export function TradeWidget() {
                   </span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ flex: 1, height: 5, background: "rgba(44, 61, 127,0.2)", borderRadius: 3 }}>
+                  <div style={{ flex: 1, height: 5, background: "var(--bt-border-a20)", borderRadius: 3 }}>
                     <div
                       style={{
                         width: `${v.score}%`,
@@ -318,7 +306,7 @@ export function TradeWidget() {
                       }}
                     />
                   </div>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: v.color, fontVariantNumeric: "tabular-nums", minWidth: 28 }}>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: v.color, fontVariantNumeric: "tabular-nums", minWidth: 28 }}>
                     {v.score}
                   </span>
                 </div>
@@ -340,8 +328,8 @@ export function TradeWidget() {
             >
               <ShieldCheck size={14} color={C.green} />
               <div>
-                <div style={{ fontSize: 9, fontWeight: 600, color: C.green }}>Résilience externe : Modérée</div>
-                <div style={{ fontSize: 8, color: C.muted, marginTop: 1 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: C.green }}>Résilience externe : Modérée</div>
+                <div style={{ fontSize: 10, color: C.muted, marginTop: 1 }}>
                   Réserves BCEAO 4.2 mois d'imports · Couverture partielle
                 </div>
               </div>
@@ -366,6 +354,7 @@ function StatCard({
   change: string;
   up: boolean;
 }) {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -375,18 +364,18 @@ function StatCard({
         padding: "7px 9px",
       }}
     >
-      <div style={{ fontSize: 8, color: C.muted, marginBottom: 3 }}>{label}</div>
-      <div style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+      <div style={{ fontSize: 10, color: C.muted, marginBottom: 3 }}>{label}</div>
+      <div style={{ fontSize: 15, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
         {value}
       </div>
-      <div style={{ fontSize: 7.5, color: C.muted }}>{unit}</div>
+      <div style={{ fontSize: 9.5, color: C.muted }}>{unit}</div>
       <div
         style={{
           display: "flex",
           alignItems: "center",
           gap: 3,
           marginTop: 3,
-          fontSize: 9,
+          fontSize: 11,
           fontWeight: 600,
           color: up ? C.green : C.red,
         }}

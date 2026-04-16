@@ -1,16 +1,10 @@
 import { RotateCcw } from "lucide-react";
 import { MetricsBar } from "./MetricsBar";
 import { DashboardGrid, resetDashboardLayout } from "./DashboardGrid";
-
-const C = {
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 export function Dashboard() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -18,7 +12,7 @@ export function Dashboard() {
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
-        background: "#000117",
+        background: C.surface,
         minWidth: 0,
       }}
     >
@@ -37,7 +31,7 @@ export function Dashboard() {
         <div>
           <div
             style={{
-              fontSize: 14,
+              fontSize: 16,
               fontWeight: 700,
               color: C.text,
               letterSpacing: "0.01em",
@@ -45,7 +39,7 @@ export function Dashboard() {
           >
             Tableau de Bord · Cockpit Principal
           </div>
-          <div style={{ fontSize: 10, color: C.muted, marginTop: 1 }}>
+          <div style={{ fontSize: 12, color: C.muted, marginTop: 1 }}>
             Marchés BRVM · UEMOA · Afrique — Session du Mercredi 08 Avril 2026
           </div>
         </div>
@@ -66,11 +60,11 @@ export function Dashboard() {
               alignItems: "center",
               gap: 5,
               padding: "4px 8px",
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: 700,
               letterSpacing: "0.05em",
               color: C.dim,
-              background: "rgba(214, 182, 141,0.06)",
+              background: "var(--bt-accent-a06)",
               border: `1px solid ${C.border}`,
               borderRadius: 4,
               cursor: "pointer",
@@ -134,7 +128,7 @@ function SessionTag({
       />
       <span
         style={{
-          fontSize: 9,
+          fontSize: 11,
           fontWeight: 700,
           color: isOpen ? "#10c87a" : "#54678d",
           letterSpacing: "0.05em",

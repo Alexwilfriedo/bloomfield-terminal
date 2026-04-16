@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { useState } from "react";
 import {
   Search,
@@ -7,19 +8,12 @@ import {
   GitCompare,
   ScanLine,
   RefreshCw,
+  Sun,
+  Moon,
 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-};
+import logoUrl from "../../../assets/logo-bloomfield-terminal.png";
+import { useThemeColors } from "../../hooks/useThemeColors";
+import { useBloomfieldTheme } from "../../context/ThemeContext";
 
 const ASSET_FILTERS = [
   { key: "all", label: "Tous" },
@@ -46,6 +40,9 @@ const SESSION_STATUS = [
 ];
 
 export function MarketsTopBar() {
+  const C = useThemeColors();
+  const navigate = useNavigate();
+  const { toggleTheme, isDark } = useBloomfieldTheme();
   const [search, setSearch] = useState("");
   const [activeAsset, setActiveAsset] = useState("all");
   const [activeMarket, setActiveMarket] = useState("brvm");
@@ -72,56 +69,8 @@ export function MarketsTopBar() {
         }}
       >
         {/* Brand */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            flexShrink: 0,
-          }}
-        >
-          <div
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 6,
-              background: "linear-gradient(135deg, #d6b68d 0%, #d6b68d 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-          >
-            <span style={{ color: "#fff", fontSize: 11, fontWeight: 700 }}>
-              BT
-            </span>
-          </div>
-          <div>
-            <div
-              style={{
-                color: C.text,
-                fontSize: 12,
-                fontWeight: 700,
-                lineHeight: 1,
-                letterSpacing: "0.01em",
-              }}
-            >
-              BLOOMFIELD
-            </div>
-            <div
-              style={{
-                color: C.accent,
-                fontSize: 8,
-                fontWeight: 600,
-                lineHeight: 1,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                marginTop: 1,
-              }}
-            >
-              TERMINAL
-            </div>
-          </div>
+        <div style={{ display: "flex", alignItems: "center", minWidth: 160, flexShrink: 0 }}>
+          <img src={logoUrl} alt="Bloomfield Terminal" onClick={() => navigate("/")} style={{ height: 28, width: "auto", display: "block", objectFit: "contain", cursor: "pointer" }} draggable={false} />
         </div>
 
         {/* Page label */}
@@ -138,7 +87,7 @@ export function MarketsTopBar() {
           <div>
             <div
               style={{
-                fontSize: 13,
+                fontSize: 15,
                 fontWeight: 700,
                 color: C.text,
                 letterSpacing: "0.06em",
@@ -150,7 +99,7 @@ export function MarketsTopBar() {
             </div>
             <div
               style={{
-                fontSize: 8,
+                fontSize: 10,
                 color: C.muted,
                 marginTop: 1,
                 letterSpacing: "0.03em",
@@ -198,13 +147,13 @@ export function MarketsTopBar() {
             style={{
               width: "100%",
               height: 32,
-              background: "rgba(0, 1, 23,0.7)",
+              background: "var(--bt-overlay-70)",
               border: `1px solid ${C.border}`,
               borderRadius: 6,
               paddingLeft: 32,
               paddingRight: 50,
               color: C.text,
-              fontSize: 12,
+              fontSize: 14,
               outline: "none",
             }}
           />
@@ -212,9 +161,9 @@ export function MarketsTopBar() {
             style={{
               position: "absolute",
               right: 8,
-              fontSize: 9,
+              fontSize: 11,
               color: C.muted,
-              background: "rgba(44, 61, 127,0.25)",
+              background: "var(--bt-border-a25)",
               border: `1px solid ${C.border}`,
               borderRadius: 4,
               padding: "1px 5px",
@@ -243,7 +192,7 @@ export function MarketsTopBar() {
           />
           <span
             style={{
-              fontSize: 9,
+              fontSize: 11,
               color: "#10c87a",
               fontWeight: 700,
               letterSpacing: "0.08em",
@@ -252,7 +201,7 @@ export function MarketsTopBar() {
             LIVE
           </span>
         </div>
-        <div style={{ fontSize: 10, color: C.dim, fontWeight: 500 }}>
+        <div style={{ fontSize: 12, color: C.dim, fontWeight: 500 }}>
           Mer 08 Avr 2026
         </div>
 
@@ -285,10 +234,10 @@ export function MarketsTopBar() {
                 border: "none",
                 background:
                   activeTf === tf
-                    ? "rgba(214, 182, 141,0.15)"
+                    ? "var(--bt-accent-a15)"
                     : "transparent",
                 color: activeTf === tf ? C.accent : C.muted,
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: activeTf === tf ? 700 : 500,
                 cursor: "pointer",
                 letterSpacing: "0.03em",
@@ -342,6 +291,22 @@ export function MarketsTopBar() {
             flexShrink: 0,
           }}
         />
+        {/* Theme toggle */}
+        <button
+          onClick={toggleTheme}
+          title={isDark ? "Mode clair" : "Mode sombre"}
+          style={{
+            width: 32, height: 32, borderRadius: 6,
+            background: isDark ? "rgba(244,185,66,0.08)" : "rgba(44,61,127,0.08)",
+            border: `1px solid ${isDark ? "rgba(244,185,66,0.22)" : "rgba(44,61,127,0.18)"}`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "pointer", color: isDark ? C.gold : "#4a6480",
+            transition: "all 0.2s", flexShrink: 0,
+          }}
+        >
+          {isDark ? <Sun size={14} /> : <Moon size={14} />}
+        </button>
+
 
         {/* Alerts */}
         <button
@@ -350,7 +315,7 @@ export function MarketsTopBar() {
             width: 32,
             height: 32,
             borderRadius: 6,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             border: `1px solid ${C.border}`,
             display: "flex",
             alignItems: "center",
@@ -370,11 +335,11 @@ export function MarketsTopBar() {
               height: 14,
               borderRadius: 7,
               background: C.gold,
-              border: "1.5px solid #000117",
+              border: `1.5px solid ${C.surface}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 700,
               color: "#000117",
             }}
@@ -391,7 +356,7 @@ export function MarketsTopBar() {
             gap: 7,
             padding: "4px 8px",
             borderRadius: 6,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             border: `1px solid ${C.border}`,
             cursor: "pointer",
             flexShrink: 0,
@@ -407,7 +372,7 @@ export function MarketsTopBar() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: 700,
               color: "#fff",
             }}
@@ -417,7 +382,7 @@ export function MarketsTopBar() {
           <div style={{ textAlign: "left" }}>
             <div
               style={{
-                fontSize: 10,
+                fontSize: 12,
                 color: C.text,
                 fontWeight: 600,
                 lineHeight: 1,
@@ -426,7 +391,7 @@ export function MarketsTopBar() {
               Adjoua Koné
             </div>
             <div
-              style={{ fontSize: 8, color: C.dim, lineHeight: 1, marginTop: 2 }}
+              style={{ fontSize: 10, color: C.dim, lineHeight: 1, marginTop: 2 }}
             >
               Analyste Senior
             </div>
@@ -443,13 +408,13 @@ export function MarketsTopBar() {
           alignItems: "center",
           padding: "0 16px",
           gap: 6,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
         }}
       >
         {/* Market scope label */}
         <span
           style={{
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 700,
             color: C.muted,
             letterSpacing: "0.07em",
@@ -484,7 +449,7 @@ export function MarketsTopBar() {
         {/* Asset class label */}
         <span
           style={{
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 700,
             color: C.muted,
             letterSpacing: "0.07em",
@@ -533,11 +498,11 @@ function ActionBtn({
         alignItems: "center",
         gap: 4,
         padding: label ? "4px 9px" : "4px 7px",
-        background: accent ? "rgba(214, 182, 141,0.1)" : "rgba(0, 1, 23,0.5)",
-        border: `1px solid ${accent ? "rgba(214, 182, 141,0.3)" : "rgba(44, 61, 127,0.32)"}`,
+        background: accent ? "var(--bt-accent-a10)" : "var(--bt-overlay-50)",
+        border: `1px solid ${accent ? "var(--bt-accent-a30)" : "var(--bt-border-a32)"}`,
         borderRadius: 5,
         color: accent ? "#d6b68d" : "#6b96b8",
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: 600,
         cursor: "pointer",
         letterSpacing: "0.02em",
@@ -566,10 +531,10 @@ function FilterPill({
       style={{
         padding: "3px 9px",
         borderRadius: 4,
-        border: `1px solid ${active ? color + "40" : "rgba(44, 61, 127,0.22)"}`,
+        border: `1px solid ${active ? color + "40" : "var(--bt-border-a22)"}`,
         background: active ? color + "14" : "transparent",
         color: active ? color : "#6b96b8",
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: active ? 700 : 500,
         cursor: "pointer",
         letterSpacing: "0.02em",
@@ -601,8 +566,8 @@ function SessionDot({
         gap: 4,
         padding: "2px 7px",
         borderRadius: 4,
-        background: open ? "rgba(16,200,122,0.07)" : "rgba(44, 61, 127,0.08)",
-        border: `1px solid ${open ? "rgba(16,200,122,0.18)" : "rgba(44, 61, 127,0.18)"}`,
+        background: open ? "rgba(16,200,122,0.07)" : "var(--bt-border-a08)",
+        border: `1px solid ${open ? "rgba(16,200,122,0.18)" : "var(--bt-border-a20)"}`,
         flexShrink: 0,
       }}
     >
@@ -617,7 +582,7 @@ function SessionDot({
       />
       <span
         style={{
-          fontSize: 9,
+          fontSize: 11,
           fontWeight: 700,
           color: open ? "#10c87a" : "#54678d",
           letterSpacing: "0.04em",
@@ -625,7 +590,7 @@ function SessionDot({
       >
         {label}
       </span>
-      <span style={{ fontSize: 8, color: "#54678d" }}>{hours}</span>
+      <span style={{ fontSize: 10, color: "#54678d" }}>{hours}</span>
     </div>
   );
 }

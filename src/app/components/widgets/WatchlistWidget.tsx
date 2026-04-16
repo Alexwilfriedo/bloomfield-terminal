@@ -1,16 +1,6 @@
 import { WidgetShell } from "./WidgetShell";
 import { Star, TrendingUp, TrendingDown, Plus } from "lucide-react";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const watchlist = [
   { ticker: "SONATEL", name: "Sonatel SA / SN", price: "16 800", pct: "+5.21%", up: true, sector: "Télécom" },
@@ -24,6 +14,7 @@ const watchlist = [
 ];
 
 export function WatchlistWidget() {
+  const C = useThemeColors();
   return (
     <WidgetShell
       title="Watchlist"
@@ -39,9 +30,9 @@ export function WatchlistWidget() {
             padding: "2px 7px",
             borderRadius: 4,
             border: `1px solid ${C.border}`,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             color: C.dim,
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 600,
             cursor: "pointer",
             letterSpacing: "0.03em",
@@ -64,7 +55,7 @@ export function WatchlistWidget() {
         }}
       >
         {["Titre", "Cours", "Var."].map((h) => (
-          <div key={h} style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+          <div key={h} style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>
             {h}
           </div>
         ))}
@@ -82,12 +73,12 @@ export function WatchlistWidget() {
               borderRadius: 5,
               cursor: "pointer",
               transition: "background 0.1s",
-              background: i % 2 === 0 ? "rgba(0, 1, 23,0.12)" : "transparent",
+              background: i % 2 === 0 ? "var(--bt-overlay-12)" : "transparent",
               alignItems: "center",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.06)")}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bt-accent-a06)")}
             onMouseLeave={(e) =>
-              (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 1, 23,0.12)" : "transparent")
+              (e.currentTarget.style.background = i % 2 === 0 ? "var(--bt-overlay-12)" : "transparent")
             }
           >
             {/* Ticker + name */}
@@ -99,8 +90,8 @@ export function WatchlistWidget() {
                 style={{ flexShrink: 0 }}
               />
               <div style={{ minWidth: 0 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>{item.ticker}</div>
-                <div style={{ fontSize: 8, color: C.muted, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{item.ticker}</div>
+                <div style={{ fontSize: 10, color: C.muted, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                   {item.name}
                 </div>
               </div>
@@ -108,7 +99,7 @@ export function WatchlistWidget() {
             </div>
 
             {/* Price */}
-            <div style={{ fontSize: 11, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
               {item.price}
             </div>
 
@@ -118,7 +109,7 @@ export function WatchlistWidget() {
                 display: "flex",
                 alignItems: "center",
                 gap: 2,
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: 700,
                 color: item.up ? C.green : C.red,
               }}
@@ -135,7 +126,7 @@ export function WatchlistWidget() {
         style={{
           marginTop: 8,
           padding: "6px 8px",
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           borderRadius: 5,
           border: `1px solid ${C.border}`,
           display: "flex",
@@ -144,29 +135,29 @@ export function WatchlistWidget() {
         }}
       >
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: C.green }}>
+          <div style={{ fontSize: 15, fontWeight: 700, color: C.green }}>
             {watchlist.filter((w) => w.up).length}
           </div>
-          <div style={{ fontSize: 8, color: C.muted }}>Hausses</div>
+          <div style={{ fontSize: 10, color: C.muted }}>Hausses</div>
         </div>
         <div style={{ width: 1, height: 28, background: C.border }} />
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: C.red }}>
+          <div style={{ fontSize: 15, fontWeight: 700, color: C.red }}>
             {watchlist.filter((w) => !w.up).length}
           </div>
-          <div style={{ fontSize: 8, color: C.muted }}>Baisses</div>
+          <div style={{ fontSize: 10, color: C.muted }}>Baisses</div>
         </div>
         <div style={{ width: 1, height: 28, background: C.border }} />
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>
+          <div style={{ fontSize: 15, fontWeight: 700, color: C.text }}>
             {watchlist.length}
           </div>
-          <div style={{ fontSize: 8, color: C.muted }}>Valeurs</div>
+          <div style={{ fontSize: 10, color: C.muted }}>Valeurs</div>
         </div>
         <div style={{ width: 1, height: 28, background: C.border }} />
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: C.gold }}>+2.34%</div>
-          <div style={{ fontSize: 8, color: C.muted }}>Perf. moy.</div>
+          <div style={{ fontSize: 15, fontWeight: 700, color: C.gold }}>+2.34%</div>
+          <div style={{ fontSize: 10, color: C.muted }}>Perf. moy.</div>
         </div>
       </div>
     </WidgetShell>
@@ -174,14 +165,15 @@ export function WatchlistWidget() {
 }
 
 function SectorBadge({ label }: { label: string }) {
+  const C = useThemeColors();
   return (
     <span
       style={{
-        fontSize: 7,
+        fontSize: 9,
         fontWeight: 600,
         color: C.muted,
-        background: "rgba(44, 61, 127,0.2)",
-        border: `1px solid rgba(44, 61, 127,0.3)`,
+        background: "var(--bt-border-a20)",
+        border: `1px solid var(--bt-border-a32)`,
         borderRadius: 3,
         padding: "1px 4px",
         letterSpacing: "0.02em",

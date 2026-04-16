@@ -47,7 +47,7 @@ export function Sidebar({ onNavigate, isActive }: SidebarProps) {
           width: "100%",
           height: "100%",
           background:
-            "linear-gradient(180deg, rgba(214, 182, 141,0.04) 0%, transparent 30%)",
+            "linear-gradient(180deg, var(--bt-accent-a06) 0%, transparent 30%)",
           pointerEvents: "none",
           zIndex: 0,
         }}
@@ -92,7 +92,7 @@ export function Sidebar({ onNavigate, isActive }: SidebarProps) {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 8,
+                  fontSize: 10,
                   fontWeight: 800,
                   color: "#000117",
                   pointerEvents: "none",

@@ -1,18 +1,5 @@
 import { TrendingUp, CheckCircle2, Star, ExternalLink, Building2, Globe2 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const COMPANY = {
   name: "Société Générale de Banques en Côte d'Ivoire",
@@ -49,6 +36,7 @@ const HIGHLIGHTS = [
 ];
 
 export function CompanySnapshotCard() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -73,7 +61,7 @@ export function CompanySnapshotCard() {
             justifyContent: "space-between",
             minWidth: 240,
             flexShrink: 0,
-            background: "rgba(0, 1, 23,0.3)",
+            background: "var(--bt-overlay-30)",
           }}
         >
           <div>
@@ -85,11 +73,11 @@ export function CompanySnapshotCard() {
                   height: 44,
                   borderRadius: 10,
                   background: "linear-gradient(135deg, #1a4a7a 0%, #000117 100%)",
-                  border: `1px solid rgba(214, 182, 141,0.25)`,
+                  border: `1px solid var(--bt-accent-a25)`,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 15,
+                  fontSize: 17,
                   fontWeight: 800,
                   color: C.accent,
                   letterSpacing: "-0.5px",
@@ -100,12 +88,12 @@ export function CompanySnapshotCard() {
               </div>
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                  <span style={{ fontSize: 16, fontWeight: 800, color: C.text, letterSpacing: "-0.3px" }}>
+                  <span style={{ fontSize: 18, fontWeight: 800, color: C.text, letterSpacing: "-0.3px" }}>
                     {COMPANY.shortName}
                   </span>
                   <Star size={11} color={C.gold} fill={C.gold} />
                 </div>
-                <div style={{ fontSize: 9.5, color: C.dim, marginTop: 1 }}>
+                <div style={{ fontSize: 11.5, color: C.dim, marginTop: 1 }}>
                   {COMPANY.name}
                 </div>
               </div>
@@ -121,11 +109,11 @@ export function CompanySnapshotCard() {
           <div style={{ marginTop: 10 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 3 }}>
               <Building2 size={9} color={C.muted} />
-              <span style={{ fontSize: 8.5, color: C.muted }}>{COMPANY.sector}</span>
+              <span style={{ fontSize: 10.5, color: C.muted }}>{COMPANY.sector}</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
               <Globe2 size={9} color={C.muted} />
-              <span style={{ fontSize: 8.5, color: C.muted }}>{COMPANY.flag} {COMPANY.country}</span>
+              <span style={{ fontSize: 10.5, color: C.muted }}>{COMPANY.flag} {COMPANY.country}</span>
             </div>
           </div>
         </div>
@@ -150,7 +138,7 @@ export function CompanySnapshotCard() {
                 key={h.label}
                 style={{
                   flex: 1,
-                  background: "rgba(0, 1, 23,0.4)",
+                  background: "var(--bt-overlay-40)",
                   border: `1px solid ${C.border}`,
                   borderRadius: 6,
                   padding: "6px 10px",
@@ -159,18 +147,18 @@ export function CompanySnapshotCard() {
                   gap: 3,
                 }}
               >
-                <span style={{ fontSize: 8, color: C.muted, fontWeight: 600, letterSpacing: "0.03em", textTransform: "uppercase" }}>
+                <span style={{ fontSize: 10, color: C.muted, fontWeight: 600, letterSpacing: "0.03em", textTransform: "uppercase" }}>
                   {h.label}
                 </span>
-                <span style={{ fontSize: 13, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>
+                <span style={{ fontSize: 15, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>
                   {h.value}
                 </span>
                 <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
                   <TrendingUp size={9} color={h.up ? C.green : C.red} />
-                  <span style={{ fontSize: 8.5, fontWeight: 700, color: h.up ? C.green : C.red }}>
+                  <span style={{ fontSize: 10.5, fontWeight: 700, color: h.up ? C.green : C.red }}>
                     {h.change}
                   </span>
-                  <span style={{ fontSize: 7.5, color: C.muted }}>vs. FY2022</span>
+                  <span style={{ fontSize: 9.5, color: C.muted }}>vs. FY2022</span>
                 </div>
               </div>
             ))}
@@ -186,7 +174,7 @@ export function CompanySnapshotCard() {
             display: "flex",
             flexDirection: "column",
             gap: 10,
-            background: "rgba(0, 1, 23,0.2)",
+            background: "var(--bt-overlay-20)",
             flexShrink: 0,
           }}
         >
@@ -204,8 +192,8 @@ export function CompanySnapshotCard() {
           >
             <CheckCircle2 size={12} color={C.green} />
             <div>
-              <div style={{ fontSize: 9.5, fontWeight: 700, color: C.green }}>Publié · Conforme</div>
-              <div style={{ fontSize: 7.5, color: C.muted }}>BRVM — Règlement CREPMF</div>
+              <div style={{ fontSize: 11.5, fontWeight: 700, color: C.green }}>Publié · Conforme</div>
+              <div style={{ fontSize: 9.5, color: C.muted }}>BRVM — Règlement CREPMF</div>
             </div>
           </div>
 
@@ -223,11 +211,11 @@ export function CompanySnapshotCard() {
               justifyContent: "center",
               gap: 4,
               padding: "5px 10px",
-              background: "rgba(214, 182, 141,0.08)",
+              background: "var(--bt-accent-a08)",
               border: "1px solid rgba(214, 182, 141,0.22)",
               borderRadius: 5,
               color: C.accent,
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: 600,
               cursor: "pointer",
               marginTop: "auto",
@@ -246,7 +234,7 @@ function Tag({ children, color }: { children: React.ReactNode; color: string }) 
   return (
     <span
       style={{
-        fontSize: 8,
+        fontSize: 10,
         fontWeight: 700,
         color,
         background: color + "14",
@@ -263,26 +251,28 @@ function Tag({ children, color }: { children: React.ReactNode; color: string }) 
 }
 
 function MetricCell({ label, value, sub, subColor }: { label: string; value: string; sub?: string; subColor?: string }) {
+  const C = useThemeColors();
   return (
     <div>
-      <div style={{ fontSize: 8, color: C.muted, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 3 }}>
+      <div style={{ fontSize: 10, color: C.muted, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 3 }}>
         {label}
       </div>
-      <div style={{ fontSize: 13, fontWeight: 800, color: C.text, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
+      <div style={{ fontSize: 15, fontWeight: 800, color: C.text, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
         {value}
       </div>
       {sub && (
-        <div style={{ fontSize: 8, color: subColor ?? C.muted, marginTop: 2 }}>{sub}</div>
+        <div style={{ fontSize: 10, color: subColor ?? C.muted, marginTop: 2 }}>{sub}</div>
       )}
     </div>
   );
 }
 
 function InfoRow({ label, value }: { label: string; value: string }) {
+  const C = useThemeColors();
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-      <span style={{ fontSize: 8.5, color: C.muted }}>{label}</span>
-      <span style={{ fontSize: 8.5, fontWeight: 600, color: C.dim }}>{value}</span>
+      <span style={{ fontSize: 10.5, color: C.muted }}>{label}</span>
+      <span style={{ fontSize: 10.5, fontWeight: 600, color: C.dim }}>{value}</span>
     </div>
   );
 }

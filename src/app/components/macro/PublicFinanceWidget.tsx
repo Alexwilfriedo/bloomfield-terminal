@@ -9,20 +9,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import { Calendar, TrendingUp, TrendingDown } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const DEBT_DATA = [
   { year: "2019", debt: 44.2, deficit: -3.0 },
@@ -79,11 +66,11 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     <div
       style={{
         background: "#000117",
-        border: `1px solid ${C.border}`,
+        border: `1px solid var(--bt-border-a32)`,
         borderRadius: 5,
         padding: "6px 10px",
-        fontSize: 10,
-        color: C.text,
+        fontSize: 12,
+        color: "#ddeaf8",
       }}
     >
       <div style={{ fontWeight: 700, marginBottom: 3 }}>{label}</div>
@@ -97,6 +84,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function PublicFinanceWidget() {
+  const C = useThemeColors();
   const debtPct = (57.8 / 100) * 100;
 
   return (
@@ -119,7 +107,7 @@ export function PublicFinanceWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
@@ -127,7 +115,7 @@ export function PublicFinanceWidget() {
           <div style={{ width: 3, height: 14, borderRadius: 2, background: C.gold }} />
           <span
             style={{
-              fontSize: 9.5,
+              fontSize: 11.5,
               fontWeight: 700,
               color: C.dim,
               letterSpacing: "0.07em",
@@ -137,7 +125,7 @@ export function PublicFinanceWidget() {
             Finances Publiques & Dette Souveraine
           </span>
         </div>
-        <span style={{ fontSize: 8, color: C.muted }}>CIV · 2023</span>
+        <span style={{ fontSize: 10, color: C.muted }}>CIV · 2023</span>
       </div>
 
       {/* Body */}
@@ -154,7 +142,7 @@ export function PublicFinanceWidget() {
               padding: "10px 12px",
             }}
           >
-            <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+            <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
               Dette / PIB
             </div>
             {/* Progress bar with zones */}
@@ -162,7 +150,7 @@ export function PublicFinanceWidget() {
               <div
                 style={{
                   height: 8,
-                  background: "rgba(44, 61, 127,0.2)",
+                  background: "var(--bt-border-a20)",
                   borderRadius: 4,
                   overflow: "visible",
                   position: "relative",
@@ -199,14 +187,14 @@ export function PublicFinanceWidget() {
                 />
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
-                <span style={{ fontSize: 7.5, color: C.muted }}>0%</span>
-                <span style={{ fontSize: 7.5, color: C.gold }}>Seuil UEMOA 70%</span>
-                <span style={{ fontSize: 7.5, color: C.muted }}>100%</span>
+                <span style={{ fontSize: 9.5, color: C.muted }}>0%</span>
+                <span style={{ fontSize: 9.5, color: C.gold }}>Seuil UEMOA 70%</span>
+                <span style={{ fontSize: 9.5, color: C.muted }}>100%</span>
               </div>
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 5 }}>
-              <span style={{ fontSize: 26, fontWeight: 800, color: C.gold, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>57.8</span>
-              <span style={{ fontSize: 10, color: C.muted }}>%</span>
+              <span style={{ fontSize: 28, fontWeight: 800, color: C.gold, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>57.8</span>
+              <span style={{ fontSize: 12, color: C.muted }}>%</span>
               <div
                 style={{
                   display: "flex",
@@ -220,10 +208,10 @@ export function PublicFinanceWidget() {
                 }}
               >
                 <TrendingUp size={8} color={C.red} />
-                <span style={{ fontSize: 9, fontWeight: 700, color: C.red }}>+2.1pp</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: C.red }}>+2.1pp</span>
               </div>
             </div>
-            <div style={{ fontSize: 8, color: C.muted, marginTop: 3 }}>vs 55.7% en 2022</div>
+            <div style={{ fontSize: 10, color: C.muted, marginTop: 3 }}>vs 55.7% en 2022</div>
           </div>
 
           {/* Deficit */}
@@ -236,13 +224,13 @@ export function PublicFinanceWidget() {
               padding: "10px 12px",
             }}
           >
-            <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+            <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
               Déficit Fiscal / PIB
             </div>
             {/* Visual gauge arcs-style */}
             <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: 6 }}>
-              <span style={{ fontSize: 26, fontWeight: 800, color: C.red, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>−4.2</span>
-              <span style={{ fontSize: 10, color: C.muted }}>%</span>
+              <span style={{ fontSize: 28, fontWeight: 800, color: C.red, fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>−4.2</span>
+              <span style={{ fontSize: 12, color: C.muted }}>%</span>
               <div
                 style={{
                   display: "flex",
@@ -256,13 +244,13 @@ export function PublicFinanceWidget() {
                 }}
               >
                 <TrendingDown size={8} color={C.green} />
-                <span style={{ fontSize: 9, fontWeight: 700, color: C.green }}>+0.3pp</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: C.green }}>+0.3pp</span>
               </div>
             </div>
-            <div style={{ fontSize: 8, color: C.muted }}>Cible UEMOA : −3.0% · Écart : 1.2pp</div>
+            <div style={{ fontSize: 10, color: C.muted }}>Cible UEMOA : −3.0% · Écart : 1.2pp</div>
             {/* Mini bar */}
             <div style={{ marginTop: 8 }}>
-              <div style={{ height: 4, background: "rgba(44, 61, 127,0.2)", borderRadius: 2, position: "relative" }}>
+              <div style={{ height: 4, background: "var(--bt-border-a20)", borderRadius: 2, position: "relative" }}>
                 <div
                   style={{
                     position: "absolute",
@@ -287,9 +275,9 @@ export function PublicFinanceWidget() {
                 />
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: 3 }}>
-                <span style={{ fontSize: 7, color: C.muted }}>0%</span>
-                <span style={{ fontSize: 7, color: C.green }}>Cible 3%</span>
-                <span style={{ fontSize: 7, color: C.muted }}>6%</span>
+                <span style={{ fontSize: 9, color: C.muted }}>0%</span>
+                <span style={{ fontSize: 9, color: C.green }}>Cible 3%</span>
+                <span style={{ fontSize: 9, color: C.muted }}>6%</span>
               </div>
             </div>
           </div>
@@ -297,15 +285,15 @@ export function PublicFinanceWidget() {
 
         {/* Debt trajectory chart */}
         <div>
-          <div style={{ fontSize: 8.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+          <div style={{ fontSize: 10.5, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
             Trajectoire de la Dette (% PIB)
           </div>
           <div style={{ height: 70 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={DEBT_DATA} margin={{ top: 2, right: 4, bottom: 0, left: -24 }}>
-                <CartesianGrid strokeDasharray="2 4" stroke="rgba(44, 61, 127,0.2)" vertical={false} />
-                <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 8 }} axisLine={false} tickLine={false} />
-                <YAxis domain={[40, 65]} tick={{ fill: C.muted, fontSize: 8 }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="2 4" stroke="var(--bt-border-a20)" vertical={false} />
+                <XAxis dataKey="year" tick={{ fill: C.muted, fontSize: 10 }} axisLine={false} tickLine={false} />
+                <YAxis domain={[40, 65]} tick={{ fill: C.muted, fontSize: 10 }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} />
                 <ReferenceLine y={70} stroke={C.red} strokeDasharray="4 3" strokeOpacity={0.5} />
                 <Bar dataKey="debt" name="Dette/PIB" fill={C.gold} radius={[2, 2, 0, 0]} opacity={0.7} maxBarSize={18} />
@@ -326,14 +314,14 @@ export function PublicFinanceWidget() {
                 padding: "6px 9px",
               }}
             >
-              <div style={{ fontSize: 8, color: C.muted, marginBottom: 3 }}>{m.label}</div>
+              <div style={{ fontSize: 10, color: C.muted, marginBottom: 3 }}>{m.label}</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+                <span style={{ fontSize: 15, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                   {m.value}
                 </span>
                 <span
                   style={{
-                    fontSize: 8.5,
+                    fontSize: 10.5,
                     fontWeight: 600,
                     color: m.good ? C.green : C.red,
                     fontVariantNumeric: "tabular-nums",
@@ -342,7 +330,7 @@ export function PublicFinanceWidget() {
                   {m.change}
                 </span>
               </div>
-              <div style={{ fontSize: 7.5, color: C.muted, marginTop: 2 }}>{m.threshold}</div>
+              <div style={{ fontSize: 9.5, color: C.muted, marginTop: 2 }}>{m.threshold}</div>
             </div>
           ))}
         </div>
@@ -360,7 +348,7 @@ export function PublicFinanceWidget() {
             <Calendar size={10} color={C.accent} />
             <span
               style={{
-                fontSize: 8.5,
+                fontSize: 10.5,
                 fontWeight: 700,
                 color: C.muted,
                 letterSpacing: "0.06em",
@@ -390,14 +378,14 @@ export function PublicFinanceWidget() {
                     textAlign: "center",
                     padding: "2px 4px",
                     borderRadius: 4,
-                    background: "rgba(214, 182, 141,0.1)",
-                    border: `1px solid rgba(214, 182, 141,0.2)`,
+                    background: "var(--bt-accent-a10)",
+                    border: `1px solid var(--bt-accent-a20)`,
                   }}
                 >
-                  <span style={{ fontSize: 8, fontWeight: 700, color: C.accent, display: "block" }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: C.accent, display: "block" }}>
                     {ev.date.split(" ")[0]}
                   </span>
-                  <span style={{ fontSize: 7, color: C.muted, display: "block" }}>
+                  <span style={{ fontSize: 9, color: C.muted, display: "block" }}>
                     {ev.date.split(" ")[1]}
                   </span>
                 </div>
@@ -405,7 +393,7 @@ export function PublicFinanceWidget() {
                   <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
                     <span
                       style={{
-                        fontSize: 7.5,
+                        fontSize: 9.5,
                         fontWeight: 700,
                         color: C.gold,
                         background: "rgba(244,185,66,0.12)",
@@ -417,19 +405,19 @@ export function PublicFinanceWidget() {
                     >
                       {ev.type}
                     </span>
-                    <span style={{ fontSize: 9, fontWeight: 600, color: C.text }}>{ev.label}</span>
-                    <span style={{ fontSize: 10 }}>{ev.country.split(" ")[0]}</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: C.text }}>{ev.label}</span>
+                    <span style={{ fontSize: 12 }}>{ev.country.split(" ")[0]}</span>
                   </div>
-                  <div style={{ fontSize: 8, color: C.muted, marginTop: 1 }}>
+                  <div style={{ fontSize: 10, color: C.muted, marginTop: 1 }}>
                     {ev.country.split(" ")[1]} · Montant : {ev.amount} FCFA · Durée : {ev.maturity}
                   </div>
                 </div>
                 <div
                   style={{
-                    fontSize: 8,
+                    fontSize: 10,
                     fontWeight: 600,
                     color: C.dim,
-                    background: "rgba(44, 61, 127,0.2)",
+                    background: "var(--bt-border-a20)",
                     borderRadius: 3,
                     padding: "2px 6px",
                     whiteSpace: "nowrap",

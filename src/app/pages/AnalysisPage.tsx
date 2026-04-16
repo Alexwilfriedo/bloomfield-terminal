@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnalysisTopBar } from "../components/analysis/AnalysisTopBar";
 import { AnalysisRightPanel } from "../components/analysis/AnalysisRightPanel";
 import { CompanySnapshotCard } from "../components/analysis/CompanySnapshotCard";
 import { FinancialKPICards } from "../components/analysis/FinancialKPICards";
@@ -10,6 +11,7 @@ import { OverviewCharts } from "../components/analysis/OverviewCharts";
 import { ReportSummaryWidget } from "../components/analysis/ReportSummaryWidget";
 import { LiveTicker } from "../components/terminal/LiveTicker";
 import { useTerminal } from "../context/TerminalContext";
+import { useThemeColors } from "../hooks/useThemeColors";
 import {
   LayoutDashboard,
   FileBarChart2,
@@ -23,20 +25,6 @@ import {
   AlertTriangle,
   Target,
 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  dark: "#000117",
-  purple: "#a78bfa",
-};
 
 const TABS = [
   { id: "overview", label: "Vue d'ensemble", icon: LayoutDashboard },
@@ -52,6 +40,7 @@ type TabId = (typeof TABS)[number]["id"];
 export function AnalysisPage() {
   const [activeTab, setActiveTab] = useState<TabId>("overview");
   const { openOrderPanel, openAIPanel } = useTerminal();
+  const C = useThemeColors();
 
   return (
     <div
@@ -63,6 +52,9 @@ export function AnalysisPage() {
         background: C.dark,
       }}
     >
+      {/* Module top bar with filters */}
+      <AnalysisTopBar />
+
       {/* Live ticker */}
       <LiveTicker />
 
@@ -103,7 +95,7 @@ export function AnalysisPage() {
                     border: "none",
                     borderBottom: `2px solid ${isActive ? activeColor : "transparent"}`,
                     color: isActive ? activeColor : C.muted,
-                    fontSize: 10.5,
+                    fontSize: 12.5,
                     fontWeight: isActive ? 700 : 500,
                     cursor: "pointer",
                     letterSpacing: "0.02em",
@@ -127,7 +119,7 @@ export function AnalysisPage() {
                   {isReport && (
                     <span
                       style={{
-                        fontSize: 7,
+                        fontSize: 9,
                         fontWeight: 800,
                         color: "#000117",
                         background: C.gold,
@@ -158,7 +150,7 @@ export function AnalysisPage() {
                 border: "1px solid rgba(167,139,250,0.3)",
                 background: "rgba(167,139,250,0.08)",
                 color: C.purple,
-                fontSize: 9,
+                fontSize: 11,
                 fontWeight: 700,
                 cursor: "pointer",
                 marginRight: 6,
@@ -181,7 +173,7 @@ export function AnalysisPage() {
                 border: "none",
                 background: `linear-gradient(90deg, ${C.green} 0%, #0aa560 100%)`,
                 color: "#fff",
-                fontSize: 9,
+                fontSize: 11,
                 fontWeight: 800,
                 cursor: "pointer",
                 marginRight: 8,
@@ -205,8 +197,8 @@ export function AnalysisPage() {
                 border: "1px solid rgba(244,185,66,0.2)",
               }}
             >
-              <span style={{ fontSize: 9, fontWeight: 700, color: C.gold }}>SGBCI</span>
-              <span style={{ fontSize: 7.5, color: C.muted }}>· FY2023 · BRVM</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.gold }}>SGBCI</span>
+              <span style={{ fontSize: 9.5, color: C.muted }}>· FY2023 · BRVM</span>
               <div style={{ width: 5, height: 5, borderRadius: "50%", background: C.gold, opacity: 0.8, marginLeft: 2 }} />
             </div>
           </div>
@@ -281,6 +273,7 @@ export function AnalysisPage() {
 /* ─── Investment Interpretation Panel ─────────────────────────────────────── */
 function InvestmentInterpretationPanel() {
   const { openOrderPanel, openAIPanel } = useTerminal();
+  const C = useThemeColors();
 
   return (
     <div
@@ -301,7 +294,7 @@ function InvestmentInterpretationPanel() {
           gap: 8,
           padding: "7px 14px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
         }}
       >
         <span
@@ -310,7 +303,7 @@ function InvestmentInterpretationPanel() {
             borderRadius: 3,
             background: "rgba(16,200,122,0.15)",
             border: "1px solid rgba(16,200,122,0.3)",
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 800,
             color: "#10c87a",
             letterSpacing: "0.08em",
@@ -324,7 +317,7 @@ function InvestmentInterpretationPanel() {
             borderRadius: 3,
             background: "rgba(244,185,66,0.1)",
             border: "1px solid rgba(244,185,66,0.3)",
-            fontSize: 9,
+            fontSize: 11,
             fontWeight: 700,
             color: C.gold,
             letterSpacing: "0.06em",
@@ -332,12 +325,12 @@ function InvestmentInterpretationPanel() {
         >
           OBJECTIF : 17 500 XOF
         </span>
-        <span style={{ fontSize: 9, color: "#10c87a", fontWeight: 700 }}>Potentiel +27,3%</span>
+        <span style={{ fontSize: 11, color: "#10c87a", fontWeight: 700 }}>Potentiel +27,3%</span>
         <div style={{ width: 1, height: 14, background: C.border }} />
-        <span style={{ fontSize: 8.5, fontWeight: 700, color: C.dim, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+        <span style={{ fontSize: 10.5, fontWeight: 700, color: C.dim, letterSpacing: "0.05em", textTransform: "uppercase" }}>
           Interprétation Décisionnelle
         </span>
-        <span style={{ fontSize: 7.5, color: C.muted }}>· Bloomfield Intelligence · 08 Avr 2026</span>
+        <span style={{ fontSize: 9.5, color: C.muted }}>· Bloomfield Intelligence · 08 Avr 2026</span>
 
         <div style={{ flex: 1 }} />
 
@@ -353,7 +346,7 @@ function InvestmentInterpretationPanel() {
             border: "1px solid rgba(167,139,250,0.3)",
             background: "rgba(167,139,250,0.08)",
             color: "#a78bfa",
-            fontSize: 8.5,
+            fontSize: 10.5,
             fontWeight: 700,
             cursor: "pointer",
           }}
@@ -372,7 +365,7 @@ function InvestmentInterpretationPanel() {
             border: "none",
             background: `linear-gradient(90deg, ${C.green} 0%, #0aa560 100%)`,
             color: "#fff",
-            fontSize: 8.5,
+            fontSize: 10.5,
             fontWeight: 800,
             cursor: "pointer",
             letterSpacing: "0.03em",
@@ -394,10 +387,10 @@ function InvestmentInterpretationPanel() {
       >
         {/* Thesis */}
         <div>
-          <div style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
             Thèse d'Investissement
           </div>
-          <p style={{ margin: 0, fontSize: 9.5, color: C.dim, lineHeight: 1.5 }}>
+          <p style={{ margin: 0, fontSize: 11.5, color: C.dim, lineHeight: 1.5 }}>
             SGBCI affiche une dynamique de résultats en accélération portée par la hausse des marges d'intérêt dans un contexte de taux BCEAO accommodant, et une amélioration structurelle du coût du risque. Le titre se traite avec une décote significative de 18% par rapport à ses pairs régionaux.
           </p>
           {/* Impact attendu */}
@@ -405,12 +398,12 @@ function InvestmentInterpretationPanel() {
             style={{
               marginTop: 8,
               padding: "6px 8px",
-              background: "rgba(214, 182, 141,0.06)",
-              border: "1px solid rgba(214, 182, 141,0.18)",
+              background: "var(--bt-accent-a06)",
+              border: "1px solid var(--bt-accent-a18)",
               borderRadius: 4,
             }}
           >
-            <div style={{ fontSize: 7.5, fontWeight: 700, color: C.accent, letterSpacing: "0.05em", marginBottom: 3 }}>
+            <div style={{ fontSize: 9.5, fontWeight: 700, color: C.accent, letterSpacing: "0.05em", marginBottom: 3 }}>
               IMPACT ATTENDU
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -420,8 +413,8 @@ function InvestmentInterpretationPanel() {
                 { label: "Pays", val: "🇨🇮 Côte d'Ivoire · Zone UEMOA" },
               ].map((item) => (
                 <div key={item.label} style={{ display: "flex", gap: 6 }}>
-                  <span style={{ fontSize: 7.5, color: C.muted, minWidth: 80 }}>{item.label}</span>
-                  <span style={{ fontSize: 7.5, color: C.dim }}>{item.val}</span>
+                  <span style={{ fontSize: 9.5, color: C.muted, minWidth: 80 }}>{item.label}</span>
+                  <span style={{ fontSize: 9.5, color: C.dim }}>{item.val}</span>
                 </div>
               ))}
             </div>
@@ -430,7 +423,7 @@ function InvestmentInterpretationPanel() {
 
         {/* Key signals */}
         <div>
-          <div style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
             Signaux Clés
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -447,7 +440,7 @@ function InvestmentInterpretationPanel() {
                   alignItems: "center",
                   gap: 5,
                   padding: "4px 7px",
-                  background: "rgba(0, 1, 23,0.4)",
+                  background: "var(--bt-overlay-40)",
                   border: `1px solid ${C.border}`,
                   borderRadius: 4,
                 }}
@@ -461,11 +454,11 @@ function InvestmentInterpretationPanel() {
                     flexShrink: 0,
                   }}
                 />
-                <span style={{ fontSize: 8.5, color: C.muted, flex: 1 }}>{sig.label}</span>
-                <span style={{ fontSize: 10, fontWeight: 700, color: sig.status === "green" ? "#10c87a" : C.gold, fontVariantNumeric: "tabular-nums" }}>
+                <span style={{ fontSize: 10.5, color: C.muted, flex: 1 }}>{sig.label}</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: sig.status === "green" ? "#10c87a" : C.gold, fontVariantNumeric: "tabular-nums" }}>
                   {sig.value}
                 </span>
-                <span style={{ fontSize: 7.5, color: C.muted }}>{sig.note}</span>
+                <span style={{ fontSize: 9.5, color: C.muted }}>{sig.note}</span>
               </div>
             ))}
           </div>
@@ -473,7 +466,7 @@ function InvestmentInterpretationPanel() {
 
         {/* Decision matrix */}
         <div>
-          <div style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
             Matrice Décision
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
@@ -486,10 +479,10 @@ function InvestmentInterpretationPanel() {
             ].map((item) => (
               <div key={item.label}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 2 }}>
-                  <span style={{ fontSize: 8, color: C.muted }}>{item.label}</span>
-                  <span style={{ fontSize: 8, fontWeight: 700, color: C.gold }}>{item.score}/{item.max}</span>
+                  <span style={{ fontSize: 10, color: C.muted }}>{item.label}</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: C.gold }}>{item.score}/{item.max}</span>
                 </div>
-                <div style={{ height: 4, background: "rgba(44, 61, 127,0.2)", borderRadius: 2, overflow: "hidden" }}>
+                <div style={{ height: 4, background: "var(--bt-border-a20)", borderRadius: 2, overflow: "hidden" }}>
                   <div
                     style={{
                       height: "100%",
@@ -509,7 +502,7 @@ function InvestmentInterpretationPanel() {
               borderRadius: 4,
               background: "rgba(16,200,122,0.08)",
               border: "1px solid rgba(16,200,122,0.2)",
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: 700,
               color: "#10c87a",
               textAlign: "center",

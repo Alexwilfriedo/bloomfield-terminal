@@ -6,20 +6,7 @@ import {
   Activity,
   ChevronDown,
 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 type Period = "1S" | "1M" | "3M" | "6M" | "1A";
 
@@ -84,6 +71,7 @@ function CandlestickChart({
   height: number;
   accentColor: string;
 }) {
+  const C = useThemeColors();
   if (!data.length) return null;
 
   const marginTop = 10;
@@ -143,7 +131,7 @@ function CandlestickChart({
         return (
           <g key={`ytick-${i}`}>
             <line x1={marginLeft} x2={marginLeft + innerW} y1={y} y2={y}
-              stroke="rgba(44, 61, 127,0.15)" strokeWidth="0.5" strokeDasharray="3,3" />
+              stroke="var(--bt-border-a16)" strokeWidth="0.5" strokeDasharray="3,3" />
             <text x={marginLeft - 5} y={y + 4} textAnchor="end"
               fill={C.muted} fontSize="8" fontFamily="'Inter', monospace">
               {v.toFixed(1)}
@@ -307,6 +295,7 @@ function CandlestickChart({
 }
 
 export function CandlestickWidget() {
+  const C = useThemeColors();
   const [period, setPeriod] = useState<Period>("3M");
   const [secIdx, setSecIdx] = useState(0);
 
@@ -338,7 +327,7 @@ export function CandlestickWidget() {
           alignItems: "center",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
           gap: 8,
         }}
@@ -353,12 +342,12 @@ export function CandlestickWidget() {
               display: "flex",
               alignItems: "center",
               gap: 4,
-              background: "rgba(0, 1, 23,0.5)",
+              background: "var(--bt-overlay-50)",
               border: `1px solid ${C.border}`,
               borderRadius: 4,
               padding: "3px 8px",
               color: C.text,
-              fontSize: 10.5,
+              fontSize: 12.5,
               fontWeight: 700,
               cursor: "pointer",
             }}
@@ -368,11 +357,11 @@ export function CandlestickWidget() {
           </button>
         </div>
 
-        <span style={{ fontSize: 9, color: C.muted }}>{sec.name}</span>
+        <span style={{ fontSize: 11, color: C.muted }}>{sec.name}</span>
 
         {/* Price + change */}
         <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginLeft: 8 }}>
-          <span style={{ fontSize: 16, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+          <span style={{ fontSize: 18, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>
             {lastClose.toFixed(2)}
           </span>
           <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
@@ -381,7 +370,7 @@ export function CandlestickWidget() {
             ) : (
               <TrendingDown size={12} color={C.red} />
             )}
-            <span style={{ fontSize: 12, fontWeight: 700, color: overallChange >= 0 ? C.green : C.red, fontVariantNumeric: "tabular-nums" }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: overallChange >= 0 ? C.green : C.red, fontVariantNumeric: "tabular-nums" }}>
               {overallChange >= 0 ? "+" : ""}{overallChange.toFixed(2)}%
             </span>
           </div>
@@ -396,8 +385,8 @@ export function CandlestickWidget() {
             { label: "C", value: lastCandle.close.toFixed(2), color: C.text },
           ].map((item) => (
             <div key={item.label} style={{ display: "flex", gap: 3, alignItems: "baseline" }}>
-              <span style={{ fontSize: 8, color: C.muted, fontWeight: 700 }}>{item.label}</span>
-              <span style={{ fontSize: 10, fontWeight: 700, color: item.color, fontVariantNumeric: "tabular-nums" }}>{item.value}</span>
+              <span style={{ fontSize: 10, color: C.muted, fontWeight: 700 }}>{item.label}</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: item.color, fontVariantNumeric: "tabular-nums" }}>{item.value}</span>
             </div>
           ))}
         </div>
@@ -408,11 +397,11 @@ export function CandlestickWidget() {
         <div style={{ display: "flex", gap: 8, alignItems: "center", borderRight: `1px solid ${C.border}`, paddingRight: 10 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <div style={{ width: 16, height: 1.5, background: sec.color }} />
-            <span style={{ fontSize: 8, color: C.muted }}>MM20</span>
+            <span style={{ fontSize: 10, color: C.muted }}>MM20</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <div style={{ width: 16, height: 1.5, background: C.orange, borderTop: "1px dashed" }} />
-            <span style={{ fontSize: 8, color: C.muted }}>MM50</span>
+            <span style={{ fontSize: 10, color: C.muted }}>MM50</span>
           </div>
         </div>
 
@@ -428,7 +417,7 @@ export function CandlestickWidget() {
                 border: `1px solid ${period === p ? sec.color + "50" : C.border}`,
                 background: period === p ? sec.color + "15" : "transparent",
                 color: period === p ? sec.color : C.muted,
-                fontSize: 9.5,
+                fontSize: 11.5,
                 fontWeight: period === p ? 700 : 500,
                 cursor: "pointer",
               }}
@@ -438,7 +427,7 @@ export function CandlestickWidget() {
           ))}
         </div>
 
-        <span style={{ fontSize: 8, color: C.muted, borderLeft: `1px solid ${C.border}`, paddingLeft: 8 }}>
+        <span style={{ fontSize: 10, color: C.muted, borderLeft: `1px solid ${C.border}`, paddingLeft: 8 }}>
           BRVM · Cours XOF
         </span>
       </div>
@@ -458,12 +447,12 @@ export function CandlestickWidget() {
           gap: 5,
           padding: "5px 12px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.3)",
+          background: "var(--bt-overlay-30)",
           flexShrink: 0,
           overflowX: "auto",
         }}
       >
-        <span style={{ fontSize: 8, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", flexShrink: 0 }}>
+        <span style={{ fontSize: 10, fontWeight: 700, color: C.muted, letterSpacing: "0.06em", textTransform: "uppercase", flexShrink: 0 }}>
           TITRE
         </span>
         {SECURITIES.map((s, i) => (
@@ -476,7 +465,7 @@ export function CandlestickWidget() {
               border: `1px solid ${secIdx === i ? s.color + "50" : C.border}`,
               background: secIdx === i ? s.color + "14" : "transparent",
               color: secIdx === i ? s.color : C.muted,
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: secIdx === i ? 700 : 500,
               cursor: "pointer",
               flexShrink: 0,
@@ -488,9 +477,9 @@ export function CandlestickWidget() {
         <div style={{ flex: 1 }} />
         <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
           <BarChart2 size={9} color={C.muted} />
-          <span style={{ fontSize: 8, color: C.muted }}>Vol. {(lastCandle.volume / 1000).toFixed(0)}K titres</span>
+          <span style={{ fontSize: 10, color: C.muted }}>Vol. {(lastCandle.volume / 1000).toFixed(0)}K titres</span>
         </div>
-        <span style={{ fontSize: 7.5, color: C.muted }}>· Session 08 Avr 2026 · 15h30 GMT · Clôture</span>
+        <span style={{ fontSize: 9.5, color: C.muted }}>· Session 08 Avr 2026 · 15h30 GMT · Clôture</span>
       </div>
     </div>
   );
@@ -522,6 +511,7 @@ function ChartContainer({ data, accentColor }: { data: OHLCData[]; accentColor: 
 }
 
 function CandlestickChartInline({ data, accentColor }: { data: OHLCData[]; accentColor: string }) {
+  const C = useThemeColors();
   const width = 860;
   const height = 200;
   const marginTop = 8;
@@ -574,7 +564,7 @@ function CandlestickChartInline({ data, accentColor }: { data: OHLCData[]; accen
         return (
           <g key={`yt${i}`}>
             <line x1={marginLeft} x2={marginLeft + innerW} y1={y} y2={y}
-              stroke="rgba(44, 61, 127,0.12)" strokeWidth="0.5" strokeDasharray="3,3" />
+              stroke="var(--bt-border-a12)" strokeWidth="0.5" strokeDasharray="3,3" />
             <text x={marginLeft - 4} y={y + 3} textAnchor="end"
               fill={C.muted} fontSize="7.5" fontFamily="monospace">{v.toFixed(1)}</text>
           </g>

@@ -1,17 +1,7 @@
 import { useState } from "react";
 import { WidgetShell } from "./WidgetShell";
 import { TrendingUp, TrendingDown } from "lucide-react";
-
-const C = {
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  surface: "rgba(0, 1, 23,0.45)",
-  accent: "#d6b68d",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const gainers = [
   { ticker: "PALM CI", name: "PALMCI", price: "7 295", pct: "+7.35%", vol: "12 580" },
@@ -30,6 +20,7 @@ const losers = [
 ];
 
 export function TopMoversWidget() {
+  const C = useThemeColors();
   const [tab, setTab] = useState<"gainers" | "losers">("gainers");
 
   const data = tab === "gainers" ? gainers : losers;
@@ -70,7 +61,7 @@ export function TopMoversWidget() {
         }}
       >
         {["Titre", "Cours", "Var.", "Vol."].map((h) => (
-          <div key={h} style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+          <div key={h} style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>
             {h}
           </div>
         ))}
@@ -87,23 +78,23 @@ export function TopMoversWidget() {
             borderRadius: 5,
             cursor: "pointer",
             transition: "background 0.1s",
-            background: i % 2 === 0 ? "rgba(0, 1, 23,0.15)" : "transparent",
+            background: i % 2 === 0 ? "var(--bt-overlay-15)" : "transparent",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.06)")}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bt-accent-a06)")}
           onMouseLeave={(e) =>
-            (e.currentTarget.style.background = i % 2 === 0 ? "rgba(0, 1, 23,0.15)" : "transparent")
+            (e.currentTarget.style.background = i % 2 === 0 ? "var(--bt-overlay-15)" : "transparent")
           }
         >
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: C.text }}>{row.ticker}</div>
-            <div style={{ fontSize: 9, color: C.muted, marginTop: 1 }}>{row.name}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{row.ticker}</div>
+            <div style={{ fontSize: 11, color: C.muted, marginTop: 1 }}>{row.name}</div>
           </div>
-          <div style={{ fontSize: 11, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
             {row.price}
           </div>
           <div
             style={{
-              fontSize: 11,
+              fontSize: 13,
               fontWeight: 700,
               color: tab === "gainers" ? C.green : C.red,
               fontVariantNumeric: "tabular-nums",
@@ -111,7 +102,7 @@ export function TopMoversWidget() {
           >
             {row.pct}
           </div>
-          <div style={{ fontSize: 10, color: C.dim, fontVariantNumeric: "tabular-nums" }}>
+          <div style={{ fontSize: 12, color: C.dim, fontVariantNumeric: "tabular-nums" }}>
             {row.vol}
           </div>
         </div>
@@ -165,10 +156,10 @@ function TabBtn({
         gap: 4,
         padding: "4px 10px",
         borderRadius: 5,
-        border: `1px solid ${active ? color + "40" : "rgba(44, 61, 127,0.32)"}`,
+        border: `1px solid ${active ? color + "40" : "var(--bt-border-a32)"}`,
         background: active ? color + "15" : "transparent",
         color: active ? color : "#6b96b8",
-        fontSize: 11,
+        fontSize: 13,
         fontWeight: 600,
         cursor: "pointer",
         letterSpacing: "0.02em",

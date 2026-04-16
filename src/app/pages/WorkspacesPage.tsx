@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import type { Layout } from "react-grid-layout";
 
+import { WorkspacesTopBar } from "../components/workspaces/WorkspacesTopBar";
 import { WorkspaceRightPanel } from "../components/workspaces/WorkspaceRightPanel";
 import { MarketMonitorWidget } from "../components/workspaces/MarketMonitorWidget";
 import { MacroWatchWidget } from "../components/workspaces/MacroWatchWidget";
@@ -16,22 +17,7 @@ import { WatchlistWidget } from "../components/widgets/WatchlistWidget";
 import { LiveTicker } from "../components/terminal/LiveTicker";
 import { WidgetGrid } from "../components/shared/WidgetGrid";
 import { TrendingUp, TrendingDown, Target, Zap, BarChart2 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  orange: "#fb923c",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  dark: "#000117",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../hooks/useThemeColors";
 
 const WORKSPACES_STORAGE_KEY = "bloomfield.workspaces.layout.v1";
 
@@ -78,6 +64,7 @@ const WORKSPACES_WIDGETS: Record<string, { element: ReactNode; title: string }> 
 };
 
 export function WorkspacesPage() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -88,6 +75,7 @@ export function WorkspacesPage() {
         background: C.dark,
       }}
     >
+      <WorkspacesTopBar />
       <LiveTicker />
 
       <div style={{ flex: 1, display: "flex", overflow: "hidden", minHeight: 0 }}>
@@ -121,12 +109,12 @@ const SIGNALS = [
     ticker: "SONATEL",
     name: "Sonatel SA",
     rec: "ACHAT",
-    recColor: C.green,
+    recColor: "#10c87a",
     target: "19 500",
     current: "16 800",
     upside: "+16.1%",
     signal: "HAUSSIER",
-    signalColor: C.green,
+    signalColor: "#10c87a",
     catalyst: "Résultats FY2025 supra-consensus",
     rsi: 65,
     flag: "🇸🇳",
@@ -136,12 +124,12 @@ const SIGNALS = [
     ticker: "PALM CI",
     name: "Palmci CI",
     rec: "ACHAT",
-    recColor: C.green,
+    recColor: "#10c87a",
     target: "9 200",
     current: "7 295",
     upside: "+26.1%",
     signal: "MOMENTUM",
-    signalColor: C.accent,
+    signalColor: "#d6b68d",
     catalyst: "Boom cours cacao +42% YTD",
     rsi: 72,
     flag: "🇨🇮",
@@ -151,12 +139,12 @@ const SIGNALS = [
     ticker: "SGBCI",
     name: "SocGen CI",
     rec: "ACHAT",
-    recColor: C.green,
+    recColor: "#10c87a",
     target: "17 500",
     current: "13 750",
     upside: "+27.3%",
     signal: "ACHAT FORT",
-    signalColor: C.gold,
+    signalColor: "#f4b942",
     catalyst: "P/BV décote 18% vs pairs",
     rsi: 48,
     flag: "🇨🇮",
@@ -166,12 +154,12 @@ const SIGNALS = [
     ticker: "SAPH CI",
     name: "SAPH CI",
     rec: "VENDRE",
-    recColor: C.red,
+    recColor: "#f43860",
     target: "3 200",
     current: "4 195",
     upside: "-23.7%",
     signal: "BAISSIER",
-    signalColor: C.red,
+    signalColor: "#f43860",
     catalyst: "Coût de production élevé, marges compressées",
     rsi: 29,
     flag: "🇨🇮",
@@ -181,12 +169,12 @@ const SIGNALS = [
     ticker: "ETI",
     name: "Ecobank Transnat.",
     rec: "CONSERVER",
-    recColor: C.gold,
+    recColor: "#f4b942",
     target: "19.50",
     current: "18.50",
     upside: "+5.4%",
     signal: "NEUTRE",
-    signalColor: C.muted,
+    signalColor: "#54678d",
     catalyst: "Résultats mitigés selon géographie",
     rsi: 58,
     flag: "🌍",
@@ -195,13 +183,14 @@ const SIGNALS = [
 ];
 
 const PORTFOLIO_STATS = [
-  { label: "Signaux ACHAT", value: "3", color: C.green },
-  { label: "Signaux VENTE", value: "1", color: C.red },
-  { label: "Upside moyen", value: "+18.4%", color: C.accent },
-  { label: "Score Confiance", value: "4.1/5", color: C.gold },
+  { label: "Signaux ACHAT", value: "3", color: "#10c87a" },
+  { label: "Signaux VENTE", value: "1", color: "#f43860" },
+  { label: "Upside moyen", value: "+18.4%", color: "#d6b68d" },
+  { label: "Score Confiance", value: "4.1/5", color: "#f4b942" },
 ];
 
 function PortfolioSignalsWidget() {
+  const C = useThemeColors();
   const [activeFilter, setActiveFilter] = useState<string>("Tous");
   const filters = ["Tous", "ACHAT", "VENDRE", "CONSERVER"];
 
@@ -231,21 +220,21 @@ function PortfolioSignalsWidget() {
           justifyContent: "space-between",
           padding: "7px 12px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <div style={{ width: 3, height: 14, borderRadius: 2, background: C.gold }} />
           <Target size={11} color={C.gold} />
-          <span style={{ fontSize: 9.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: C.dim, letterSpacing: "0.07em", textTransform: "uppercase" }}>
             Signaux Décisionnels
           </span>
-          <span style={{ fontSize: 7.5, color: C.muted }}>· Coverage BRVM</span>
+          <span style={{ fontSize: 9.5, color: C.muted }}>· Coverage BRVM</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
           <Zap size={9} color={C.gold} />
-          <span style={{ fontSize: 8, color: C.gold, fontWeight: 700 }}>{SIGNALS.length} titres</span>
+          <span style={{ fontSize: 10, color: C.gold, fontWeight: 700 }}>{SIGNALS.length} titres</span>
         </div>
       </div>
 
@@ -263,13 +252,13 @@ function PortfolioSignalsWidget() {
             style={{
               padding: "6px 10px",
               textAlign: "center",
-              borderRight: i < 3 ? `1px solid rgba(44, 61, 127,0.2)` : "none",
+              borderRight: i < 3 ? `1px solid var(--bt-border-a20)` : "none",
             }}
           >
-            <div style={{ fontSize: 13, fontWeight: 800, color: stat.color, fontVariantNumeric: "tabular-nums" }}>
+            <div style={{ fontSize: 15, fontWeight: 800, color: stat.color, fontVariantNumeric: "tabular-nums" }}>
               {stat.value}
             </div>
-            <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>{stat.label}</div>
+            <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1 }}>{stat.label}</div>
           </div>
         ))}
       </div>
@@ -296,7 +285,7 @@ function PortfolioSignalsWidget() {
                 border: `1px solid ${isActive ? fColor + "50" : C.border}`,
                 background: isActive ? fColor + "14" : "transparent",
                 color: isActive ? fColor : C.muted,
-                fontSize: 8.5,
+                fontSize: 10.5,
                 fontWeight: isActive ? 700 : 500,
                 cursor: "pointer",
               }}
@@ -313,21 +302,21 @@ function PortfolioSignalsWidget() {
             key={sig.ticker}
             style={{
               padding: "8px 10px",
-              borderBottom: i < filtered.length - 1 ? `1px solid rgba(44, 61, 127,0.12)` : "none",
+              borderBottom: i < filtered.length - 1 ? `1px solid var(--bt-border-a12)` : "none",
               cursor: "pointer",
               transition: "background 0.1s",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.04)")}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--bt-accent-a06)")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-              <span style={{ fontSize: 13 }}>{sig.flag}</span>
+              <span style={{ fontSize: 15 }}>{sig.flag}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: C.text }}>{sig.ticker}</span>
-                  <span style={{ fontSize: 7.5, color: C.muted }}>{sig.sector}</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{sig.ticker}</span>
+                  <span style={{ fontSize: 9.5, color: C.muted }}>{sig.sector}</span>
                 </div>
-                <span style={{ fontSize: 8, color: C.muted }}>{sig.name}</span>
+                <span style={{ fontSize: 10, color: C.muted }}>{sig.name}</span>
               </div>
 
               <span
@@ -336,7 +325,7 @@ function PortfolioSignalsWidget() {
                   borderRadius: 3,
                   background: sig.recColor + "18",
                   border: `1px solid ${sig.recColor}30`,
-                  fontSize: 8,
+                  fontSize: 10,
                   fontWeight: 800,
                   color: sig.recColor,
                   letterSpacing: "0.06em",
@@ -347,7 +336,7 @@ function PortfolioSignalsWidget() {
 
               <span
                 style={{
-                  fontSize: 8.5,
+                  fontSize: 10.5,
                   fontWeight: 700,
                   color: sig.signalColor,
                 }}
@@ -358,12 +347,12 @@ function PortfolioSignalsWidget() {
 
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{ display: "flex", gap: 6, alignItems: "baseline", flex: 1 }}>
-                <span style={{ fontSize: 8, color: C.muted }}>Cours:</span>
-                <span style={{ fontSize: 10.5, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+                <span style={{ fontSize: 10, color: C.muted }}>Cours:</span>
+                <span style={{ fontSize: 12.5, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                   {sig.current}
                 </span>
-                <span style={{ fontSize: 8, color: C.muted }}>Obj:</span>
-                <span style={{ fontSize: 10.5, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>
+                <span style={{ fontSize: 10, color: C.muted }}>Obj:</span>
+                <span style={{ fontSize: 12.5, fontWeight: 700, color: C.gold, fontVariantNumeric: "tabular-nums" }}>
                   {sig.target} XOF
                 </span>
               </div>
@@ -375,7 +364,7 @@ function PortfolioSignalsWidget() {
                 )}
                 <span
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: 700,
                     color: sig.upside.startsWith("+") ? C.green : C.red,
                     fontVariantNumeric: "tabular-nums",
@@ -388,11 +377,11 @@ function PortfolioSignalsWidget() {
 
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginTop: 3 }}>
               <Zap size={8} color={C.muted} />
-              <span style={{ fontSize: 8, color: C.dim, fontStyle: "italic" }}>{sig.catalyst}</span>
+              <span style={{ fontSize: 10, color: C.dim, fontStyle: "italic" }}>{sig.catalyst}</span>
               <div style={{ flex: 1 }} />
               <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                <span style={{ fontSize: 7.5, color: C.muted }}>RSI</span>
-                <div style={{ width: 32, height: 3, background: "rgba(44, 61, 127,0.2)", borderRadius: 2, overflow: "hidden" }}>
+                <span style={{ fontSize: 9.5, color: C.muted }}>RSI</span>
+                <div style={{ width: 32, height: 3, background: "var(--bt-border-a20)", borderRadius: 2, overflow: "hidden" }}>
                   <div
                     style={{
                       height: "100%",
@@ -402,7 +391,7 @@ function PortfolioSignalsWidget() {
                     }}
                   />
                 </div>
-                <span style={{ fontSize: 7.5, fontWeight: 700, color: sig.rsi >= 70 ? C.red : sig.rsi <= 30 ? C.green : C.gold }}>
+                <span style={{ fontSize: 9.5, fontWeight: 700, color: sig.rsi >= 70 ? C.red : sig.rsi <= 30 ? C.green : C.gold }}>
                   {sig.rsi}
                 </span>
               </div>
@@ -415,7 +404,7 @@ function PortfolioSignalsWidget() {
         style={{
           padding: "5px 10px",
           borderTop: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.3)",
+          background: "var(--bt-overlay-30)",
           display: "flex",
           alignItems: "center",
           gap: 6,
@@ -423,7 +412,7 @@ function PortfolioSignalsWidget() {
         }}
       >
         <BarChart2 size={9} color={C.muted} />
-        <span style={{ fontSize: 7.5, color: C.muted }}>
+        <span style={{ fontSize: 9.5, color: C.muted }}>
           Bloomfield Intelligence Research · Coverage BRVM · Mis à jour 08 Avr 2026
         </span>
       </div>

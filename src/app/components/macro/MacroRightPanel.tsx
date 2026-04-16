@@ -11,28 +11,14 @@ import {
   Clock,
   FileText,
 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  elevated: "#000117",
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-  orange: "#fb923c",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const SOVEREIGN_EVENTS = [
   {
     date: "14 Avr",
     daysLeft: 6,
     type: "ÉMISSION",
-    typeColor: C.accent,
+    typeColor: "#d6b68d",
     flag: "🇨🇮",
     country: "CIV",
     label: "Bon UMOA-Titres 91j",
@@ -43,7 +29,7 @@ const SOVEREIGN_EVENTS = [
     date: "18 Avr",
     daysLeft: 10,
     type: "NOTATION",
-    typeColor: C.gold,
+    typeColor: "#f4b942",
     flag: "🇸🇳",
     country: "SEN",
     label: "Révision notation Moody's",
@@ -54,7 +40,7 @@ const SOVEREIGN_EVENTS = [
     date: "22 Avr",
     daysLeft: 14,
     type: "ÉMISSION",
-    typeColor: C.accent,
+    typeColor: "#d6b68d",
     flag: "🇸🇳",
     country: "SEN",
     label: "OAT 5 ans Sénégal",
@@ -65,7 +51,7 @@ const SOVEREIGN_EVENTS = [
     date: "28 Avr",
     daysLeft: 20,
     type: "RAPPORT",
-    typeColor: C.purple,
+    typeColor: "#a78bfa",
     flag: "🌍",
     country: "UEMOA",
     label: "Bulletin BCEAO T1 2024",
@@ -76,7 +62,7 @@ const SOVEREIGN_EVENTS = [
     date: "30 Avr",
     daysLeft: 22,
     type: "SUKUK",
-    typeColor: C.orange,
+    typeColor: "#fb923c",
     flag: "🇨🇮",
     country: "CIV",
     label: "Sukuk Souverain 7 ans",
@@ -142,37 +128,37 @@ const PUBLICATIONS = [
   {
     id: 1,
     source: "BCEAO",
-    sourceColor: C.accent,
+    sourceColor: "#d6b68d",
     flag: "🌍",
     title: "Note de Conjoncture Économique UEMOA — T4 2023",
     type: "Bulletin",
     date: "Mar 2024",
     tag: "OFFICIEL",
-    tagColor: C.accent,
+    tagColor: "#d6b68d",
     featured: true,
   },
   {
     id: 2,
     source: "FMI",
-    sourceColor: C.purple,
+    sourceColor: "#a78bfa",
     flag: "🇨🇮",
     title: "Article IV — Côte d'Ivoire 2024 : Consultations & Recommandations",
     type: "Rapport",
     date: "Fév 2024",
     tag: "FMI",
-    tagColor: C.purple,
+    tagColor: "#a78bfa",
     featured: true,
   },
   {
     id: 3,
     source: "Bloomfield",
-    sourceColor: C.gold,
+    sourceColor: "#f4b942",
     flag: "🇸🇳",
     title: "UEMOA Debt Outlook 2024 : Risques & Opportunités de financement",
     type: "Research",
     date: "Avr 2024",
     tag: "RESEARCH",
-    tagColor: C.gold,
+    tagColor: "#f4b942",
     featured: false,
   },
   {
@@ -190,37 +176,37 @@ const PUBLICATIONS = [
   {
     id: 5,
     source: "UMOA-Titres",
-    sourceColor: C.accent,
+    sourceColor: "#d6b68d",
     flag: "🌍",
     title: "Rapport Mensuel Marché des Titres UMOA — Mars 2024",
     type: "Bulletin",
     date: "Mar 2024",
     tag: "OFFICIEL",
-    tagColor: C.accent,
+    tagColor: "#d6b68d",
     featured: false,
   },
   {
     id: 6,
     source: "INS-CI",
-    sourceColor: C.green,
+    sourceColor: "#10c87a",
     flag: "🇨🇮",
     title: "Note de conjoncture CIV — PIB T3 2024 : +6.3%",
     type: "Note",
     date: "Nov 2023",
     tag: "INS",
-    tagColor: C.green,
+    tagColor: "#10c87a",
     featured: false,
   },
   {
     id: 7,
     source: "Bloomfield",
-    sourceColor: C.gold,
+    sourceColor: "#f4b942",
     flag: "🇧🇫",
     title: "Burkina Faso : Risque politique & impact sur financement souverain",
     type: "Analyse",
     date: "Jan 2024",
     tag: "RESEARCH",
-    tagColor: C.gold,
+    tagColor: "#f4b942",
     featured: false,
   },
 ];
@@ -238,6 +224,7 @@ function SectionHeader({
   badge?: number;
   sub?: string;
 }) {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -245,33 +232,34 @@ function SectionHeader({
         alignItems: "center",
         justifyContent: "space-between",
         padding: "6px 10px 5px",
-        background: "rgba(0, 1, 23,0.3)",
+        background: "var(--bt-overlay-30)",
         borderBottom: `1px solid ${C.border}`,
         flexShrink: 0,
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
         {icon}
-        <span style={{ fontSize: 9, fontWeight: 700, color: C.dim, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: C.dim, letterSpacing: "0.06em", textTransform: "uppercase" }}>
           {title}
         </span>
         {count !== undefined && (
-          <span style={{ fontSize: 8, color: C.muted, background: "rgba(44, 61, 127,0.2)", borderRadius: 8, padding: "0 5px" }}>
+          <span style={{ fontSize: 10, color: C.muted, background: "var(--bt-border-a20)", borderRadius: 8, padding: "0 5px" }}>
             {count}
           </span>
         )}
         {badge !== undefined && badge > 0 && (
-          <span style={{ fontSize: 8, fontWeight: 700, color: "#000117", background: C.gold, borderRadius: 8, padding: "0 5px" }}>
+          <span style={{ fontSize: 10, fontWeight: 700, color: "#000117", background: C.gold, borderRadius: 8, padding: "0 5px" }}>
             {badge}
           </span>
         )}
-        {sub && <span style={{ fontSize: 8, color: C.muted }}>{sub}</span>}
+        {sub && <span style={{ fontSize: 10, color: C.muted }}>{sub}</span>}
       </div>
     </div>
   );
 }
 
 export function MacroRightPanel() {
+  const C = useThemeColors();
   const [collapsed, setCollapsed] = useState(false);
 
   if (collapsed) {
@@ -331,11 +319,11 @@ export function MacroRightPanel() {
           justifyContent: "space-between",
           padding: "6px 10px",
           borderBottom: `1px solid ${C.border}`,
-          background: "rgba(0, 1, 23,0.4)",
+          background: "var(--bt-overlay-40)",
           flexShrink: 0,
         }}
       >
-        <span style={{ fontSize: 9, fontWeight: 700, color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: C.muted, letterSpacing: "0.08em", textTransform: "uppercase" }}>
           Panneau Souverain
         </span>
         <button
@@ -387,15 +375,15 @@ export function MacroRightPanel() {
                   textAlign: "center",
                   padding: "3px 3px",
                   borderRadius: 4,
-                  background: "rgba(214, 182, 141,0.08)",
-                  border: "1px solid rgba(214, 182, 141,0.18)",
+                  background: "var(--bt-accent-a08)",
+                  border: "1px solid var(--bt-accent-a18)",
                   flexShrink: 0,
                 }}
               >
-                <div style={{ fontSize: 10, fontWeight: 700, color: C.accent, lineHeight: 1 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: C.accent, lineHeight: 1 }}>
                   {ev.date.split(" ")[0]}
                 </div>
-                <div style={{ fontSize: 7, color: C.muted, lineHeight: 1 }}>
+                <div style={{ fontSize: 9, color: C.muted, lineHeight: 1 }}>
                   {ev.date.split(" ")[1]}
                 </div>
               </div>
@@ -405,7 +393,7 @@ export function MacroRightPanel() {
                 <div style={{ display: "flex", alignItems: "center", gap: 4, flexWrap: "wrap" }}>
                   <span
                     style={{
-                      fontSize: 7.5,
+                      fontSize: 9.5,
                       fontWeight: 700,
                       color: ev.typeColor,
                       background: ev.typeColor + "14",
@@ -418,13 +406,13 @@ export function MacroRightPanel() {
                   >
                     {ev.type}
                   </span>
-                  <span style={{ fontSize: 10 }}>{ev.flag}</span>
-                  <span style={{ fontSize: 8.5, fontWeight: 600, color: C.text, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  <span style={{ fontSize: 12 }}>{ev.flag}</span>
+                  <span style={{ fontSize: 10.5, fontWeight: 600, color: C.text, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                     {ev.label}
                   </span>
                 </div>
                 {ev.amount && (
-                  <div style={{ fontSize: 8, color: C.muted, marginTop: 1 }}>
+                  <div style={{ fontSize: 10, color: C.muted, marginTop: 1 }}>
                     Montant : {ev.amount}
                   </div>
                 )}
@@ -433,10 +421,10 @@ export function MacroRightPanel() {
               {/* Days left */}
               <div
                 style={{
-                  fontSize: 8,
+                  fontSize: 10,
                   fontWeight: 600,
                   color: ev.daysLeft <= 7 ? C.gold : C.muted,
-                  background: ev.daysLeft <= 7 ? "rgba(244,185,66,0.1)" : "rgba(44, 61, 127,0.15)",
+                  background: ev.daysLeft <= 7 ? "rgba(244,185,66,0.1)" : "var(--bt-border-a16)",
                   borderRadius: 3,
                   padding: "2px 5px",
                   whiteSpace: "nowrap",
@@ -474,7 +462,7 @@ export function MacroRightPanel() {
               onMouseEnter={(e) =>
                 (e.currentTarget.style.background = alert.triggered
                   ? "rgba(244,185,66,0.08)"
-                  : "rgba(214, 182, 141,0.04)")
+                  : "var(--bt-accent-a06)")
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.background = alert.triggered
@@ -489,14 +477,14 @@ export function MacroRightPanel() {
               )}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 5, flexWrap: "wrap" }}>
-                  <span style={{ fontSize: 10 }}>{alert.flag}</span>
-                  <span style={{ fontSize: 9.5, fontWeight: 700, color: alert.triggered ? C.gold : C.text }}>
+                  <span style={{ fontSize: 12 }}>{alert.flag}</span>
+                  <span style={{ fontSize: 11.5, fontWeight: 700, color: alert.triggered ? C.gold : C.text }}>
                     {alert.country} · {alert.indicator}
                   </span>
                   {alert.triggered && (
                     <span
                       style={{
-                        fontSize: 7,
+                        fontSize: 9,
                         fontWeight: 700,
                         color: C.gold,
                         background: "rgba(244,185,66,0.15)",
@@ -511,19 +499,19 @@ export function MacroRightPanel() {
                   )}
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 1 }}>
-                  <span style={{ fontSize: 8.5, fontWeight: 600, color: C.dim }}>
+                  <span style={{ fontSize: 10.5, fontWeight: 600, color: C.dim }}>
                     {alert.condition}
                   </span>
-                  <span style={{ fontSize: 8, color: C.muted }}>·</span>
-                  <span style={{ fontSize: 8.5, color: C.text, fontVariantNumeric: "tabular-nums" }}>
+                  <span style={{ fontSize: 10, color: C.muted }}>·</span>
+                  <span style={{ fontSize: 10.5, color: C.text, fontVariantNumeric: "tabular-nums" }}>
                     Actuel : {alert.current}
                   </span>
                 </div>
-                <div style={{ fontSize: 7.5, color: C.muted, marginTop: 1 }}>{alert.detail}</div>
+                <div style={{ fontSize: 9.5, color: C.muted, marginTop: 1 }}>{alert.detail}</div>
                 {alert.ago && (
                   <div style={{ display: "flex", alignItems: "center", gap: 3, marginTop: 1 }}>
                     <Clock size={8} color={C.gold} />
-                    <span style={{ fontSize: 7.5, color: C.gold }}>{alert.ago}</span>
+                    <span style={{ fontSize: 9.5, color: C.gold }}>{alert.ago}</span>
                   </div>
                 )}
               </div>
@@ -584,10 +572,10 @@ export function MacroRightPanel() {
                     flexShrink: 0,
                   }}
                 >
-                  <span style={{ fontSize: 12 }}>{pub.flag}</span>
+                  <span style={{ fontSize: 14 }}>{pub.flag}</span>
                   <span
                     style={{
-                      fontSize: 7,
+                      fontSize: 9,
                       fontWeight: 700,
                       color: pub.sourceColor,
                       background: pub.sourceColor + "14",
@@ -606,7 +594,7 @@ export function MacroRightPanel() {
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div
                     style={{
-                      fontSize: 9.5,
+                      fontSize: 11.5,
                       color: i < 2 ? C.text : "#a8c8e0",
                       fontWeight: i < 2 ? 600 : 400,
                       lineHeight: 1.4,
@@ -616,11 +604,11 @@ export function MacroRightPanel() {
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 5, marginTop: 3 }}>
                     <FileText size={8} color={C.muted} />
-                    <span style={{ fontSize: 8, color: C.muted }}>{pub.type}</span>
-                    <span style={{ fontSize: 8, color: C.muted }}>·</span>
-                    <span style={{ fontSize: 8, color: C.muted }}>{pub.source}</span>
-                    <span style={{ fontSize: 8, color: C.muted }}>·</span>
-                    <span style={{ fontSize: 8, color: C.muted }}>{pub.date}</span>
+                    <span style={{ fontSize: 10, color: C.muted }}>{pub.type}</span>
+                    <span style={{ fontSize: 10, color: C.muted }}>·</span>
+                    <span style={{ fontSize: 10, color: C.muted }}>{pub.source}</span>
+                    <span style={{ fontSize: 10, color: C.muted }}>·</span>
+                    <span style={{ fontSize: 10, color: C.muted }}>{pub.date}</span>
                   </div>
                 </div>
 

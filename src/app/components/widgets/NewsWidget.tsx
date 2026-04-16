@@ -1,16 +1,6 @@
 import { WidgetShell } from "./WidgetShell";
 import { ExternalLink, Tag } from "lucide-react";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 interface NewsItem {
   id: number;
@@ -26,7 +16,7 @@ const news: NewsItem[] = [
   {
     id: 1,
     tag: "BCEAO",
-    tagColor: C.accent,
+    tagColor: "#d6b68d",
     headline: "BCEAO maintient son taux directeur à 3,50% — Décision du Comité de Politique Monétaire (CPM)",
     source: "BCEAO / Bloomfield",
     time: "il y a 15 min",
@@ -35,7 +25,7 @@ const news: NewsItem[] = [
   {
     id: 2,
     tag: "DETTES SVRN",
-    tagColor: C.gold,
+    tagColor: "#f4b942",
     headline: "Côte d'Ivoire : émission obligataire de 200 Mds FCFA sur le marché régional UEMOA — sursouscrit x2.4",
     source: "UMOA-Titres",
     time: "il y a 1 h",
@@ -44,7 +34,7 @@ const news: NewsItem[] = [
   {
     id: 3,
     tag: "RÉSULTATS",
-    tagColor: C.green,
+    tagColor: "#10c87a",
     headline: "SONATEL publie ses résultats S1 2024 : bénéfice net en hausse de 8,3% à 183 Mds FCFA",
     source: "SONATEL IR",
     time: "il y a 2 h",
@@ -61,7 +51,7 @@ const news: NewsItem[] = [
   {
     id: 5,
     tag: "BRVM",
-    tagColor: C.accent,
+    tagColor: "#d6b68d",
     headline: "BRVM : capitalisation boursière record à 7 843 Mds FCFA — nouveau sommet historique",
     source: "BRVM / Bloomfield",
     time: "il y a 4 h",
@@ -85,6 +75,7 @@ const news: NewsItem[] = [
 ];
 
 export function NewsWidget() {
+  const C = useThemeColors();
   return (
     <WidgetShell
       title="Flash Info & Actualités"
@@ -100,14 +91,14 @@ export function NewsWidget() {
             style={{
               padding: "8px 12px",
               borderBottom: `1px solid ${C.border}20`,
-              background: i === 0 ? "rgba(214, 182, 141,0.04)" : "transparent",
+              background: i === 0 ? "var(--bt-accent-a06)" : "transparent",
               cursor: "pointer",
               transition: "background 0.1s",
               position: "relative",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(214, 182, 141,0.05)")}
             onMouseLeave={(e) =>
-              (e.currentTarget.style.background = i === 0 ? "rgba(214, 182, 141,0.04)" : "transparent")
+              (e.currentTarget.style.background = i === 0 ? "var(--bt-accent-a06)" : "transparent")
             }
           >
             {/* Priority stripe */}
@@ -129,7 +120,7 @@ export function NewsWidget() {
               {/* Tag */}
               <span
                 style={{
-                  fontSize: 8,
+                  fontSize: 10,
                   fontWeight: 700,
                   color: item.tagColor,
                   background: item.tagColor + "15",
@@ -149,7 +140,7 @@ export function NewsWidget() {
               <div style={{ flex: 1 }}>
                 <div
                   style={{
-                    fontSize: 11,
+                    fontSize: 13,
                     color: i === 0 ? C.text : "#b0cce2",
                     fontWeight: i === 0 ? 600 : 500,
                     lineHeight: 1.45,
@@ -165,9 +156,9 @@ export function NewsWidget() {
                     marginTop: 3,
                   }}
                 >
-                  <span style={{ fontSize: 9, color: C.muted }}>{item.source}</span>
-                  <span style={{ fontSize: 9, color: C.muted }}>·</span>
-                  <span style={{ fontSize: 9, color: C.muted }}>{item.time}</span>
+                  <span style={{ fontSize: 11, color: C.muted }}>{item.source}</span>
+                  <span style={{ fontSize: 11, color: C.muted }}>·</span>
+                  <span style={{ fontSize: 11, color: C.muted }}>{item.time}</span>
                 </div>
               </div>
 

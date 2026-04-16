@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { useState } from "react";
 import type { ReactNode } from "react";
 import {
@@ -9,19 +10,12 @@ import {
   Globe2,
   RefreshCw,
   BookOpen,
+  Sun,
+  Moon,
 } from "lucide-react";
-
-const C = {
-  surface: "#000117",
-  accent: "#d6b68d",
-  border: "rgba(44, 61, 127,0.32)",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  purple: "#a78bfa",
-};
+import logoUrl from "../../../assets/logo-bloomfield-terminal.png";
+import { useThemeColors } from "../../hooks/useThemeColors";
+import { useBloomfieldTheme } from "../../context/ThemeContext";
 
 const COUNTRIES = [
   { code: "CIV", flag: "🇨🇮" },
@@ -52,16 +46,17 @@ function FilterPill({
   color: string;
   prefix?: string;
 }) {
+  const C = useThemeColors();
   return (
     <button
       onClick={onClick}
       style={{
         padding: "3px 8px",
         borderRadius: 4,
-        border: `1px solid ${active ? color + "50" : "rgba(44, 61, 127,0.22)"}`,
+        border: `1px solid ${active ? color + "50" : "var(--bt-border-a22)"}`,
         background: active ? color + "14" : "transparent",
         color: active ? color : C.muted,
-        fontSize: 9.5,
+        fontSize: 11.5,
         fontWeight: active ? 700 : 500,
         cursor: "pointer",
         letterSpacing: "0.02em",
@@ -72,7 +67,7 @@ function FilterPill({
         transition: "all 0.1s",
       }}
     >
-      {prefix && <span style={{ fontSize: 11 }}>{prefix}</span>}
+      {prefix && <span style={{ fontSize: 13 }}>{prefix}</span>}
       {label}
     </button>
   );
@@ -87,6 +82,7 @@ function ActionBtn({
   label?: string;
   accent?: boolean;
 }) {
+  const C = useThemeColors();
   return (
     <button
       style={{
@@ -94,11 +90,11 @@ function ActionBtn({
         alignItems: "center",
         gap: 4,
         padding: label ? "4px 9px" : "4px 7px",
-        background: accent ? "rgba(214, 182, 141,0.1)" : "rgba(0, 1, 23,0.5)",
-        border: `1px solid ${accent ? "rgba(214, 182, 141,0.3)" : "rgba(44, 61, 127,0.32)"}`,
+        background: accent ? "var(--bt-accent-a10)" : "var(--bt-overlay-50)",
+        border: `1px solid ${accent ? "var(--bt-accent-a30)" : "var(--bt-border-a32)"}`,
         borderRadius: 5,
         color: accent ? C.accent : C.dim,
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: 600,
         cursor: "pointer",
         letterSpacing: "0.02em",
@@ -111,6 +107,7 @@ function ActionBtn({
 }
 
 function Divider() {
+  const C = useThemeColors();
   return (
     <div
       style={{
@@ -125,6 +122,9 @@ function Divider() {
 }
 
 export function MacroTopBar() {
+  const C = useThemeColors();
+  const navigate = useNavigate();
+  const { toggleTheme, isDark } = useBloomfieldTheme();
   const [search, setSearch] = useState("");
   const [activeCountry, setActiveCountry] = useState("CIV");
   const [activeTheme, setActiveTheme] = useState("Tous");
@@ -153,28 +153,8 @@ export function MacroTopBar() {
         }}
       >
         {/* Brand */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
-          <div
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 6,
-              background: "linear-gradient(135deg, #d6b68d 0%, #d6b68d 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <span style={{ color: "#fff", fontSize: 11, fontWeight: 700 }}>BT</span>
-          </div>
-          <div>
-            <div style={{ color: C.text, fontSize: 12, fontWeight: 700, lineHeight: 1, letterSpacing: "0.01em" }}>
-              BLOOMFIELD
-            </div>
-            <div style={{ color: C.accent, fontSize: 8, fontWeight: 600, lineHeight: 1, letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 1 }}>
-              TERMINAL
-            </div>
-          </div>
+        <div style={{ display: "flex", alignItems: "center", minWidth: 160, flexShrink: 0 }}>
+          <img src={logoUrl} alt="Bloomfield Terminal" onClick={() => navigate("/")} style={{ height: 28, width: "auto", display: "block", objectFit: "contain", cursor: "pointer" }} draggable={false} />
         </div>
 
         {/* Page label */}
@@ -190,10 +170,10 @@ export function MacroTopBar() {
         >
           <Globe2 size={14} color={C.purple} />
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: C.text, letterSpacing: "0.06em", textTransform: "uppercase", lineHeight: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: C.text, letterSpacing: "0.06em", textTransform: "uppercase", lineHeight: 1 }}>
               MACRO
             </div>
-            <div style={{ fontSize: 8, color: C.muted, marginTop: 1, letterSpacing: "0.03em" }}>
+            <div style={{ fontSize: 10, color: C.muted, marginTop: 1, letterSpacing: "0.03em" }}>
               Intelligence Macroéconomique
             </div>
           </div>
@@ -210,14 +190,14 @@ export function MacroTopBar() {
             gap: 5,
             padding: "3px 10px",
             borderRadius: 5,
-            background: "rgba(214, 182, 141,0.06)",
-            border: `1px solid rgba(214, 182, 141,0.15)`,
+            background: "var(--bt-accent-a06)",
+            border: `1px solid var(--bt-accent-a15)`,
             flexShrink: 0,
           }}
         >
-          <span style={{ fontSize: 11 }}>🇨🇮</span>
-          <span style={{ fontSize: 10, fontWeight: 700, color: C.accent }}>Côte d'Ivoire</span>
-          <span style={{ fontSize: 8, color: C.muted }}>· UEMOA · 2024</span>
+          <span style={{ fontSize: 13 }}>🇨🇮</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: C.accent }}>Côte d'Ivoire</span>
+          <span style={{ fontSize: 10, color: C.muted }}>· UEMOA · 2024</span>
         </div>
 
         {/* Smart Search */}
@@ -231,13 +211,13 @@ export function MacroTopBar() {
             style={{
               width: "100%",
               height: 32,
-              background: "rgba(0, 1, 23,0.7)",
+              background: "var(--bt-overlay-70)",
               border: `1px solid ${C.border}`,
               borderRadius: 6,
               paddingLeft: 32,
               paddingRight: 50,
               color: C.text,
-              fontSize: 12,
+              fontSize: 14,
               outline: "none",
             }}
           />
@@ -245,9 +225,9 @@ export function MacroTopBar() {
             style={{
               position: "absolute",
               right: 8,
-              fontSize: 9,
+              fontSize: 11,
               color: C.muted,
-              background: "rgba(44, 61, 127,0.25)",
+              background: "var(--bt-border-a25)",
               border: `1px solid ${C.border}`,
               borderRadius: 4,
               padding: "1px 5px",
@@ -264,9 +244,9 @@ export function MacroTopBar() {
         {/* Live + date */}
         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.green, boxShadow: `0 0 6px ${C.green}` }} />
-          <span style={{ fontSize: 9, color: C.green, fontWeight: 700, letterSpacing: "0.08em" }}>LIVE</span>
+          <span style={{ fontSize: 11, color: C.green, fontWeight: 700, letterSpacing: "0.08em" }}>LIVE</span>
         </div>
-        <div style={{ fontSize: 10, color: C.dim, fontWeight: 500 }}>Mer 08 Avr 2026</div>
+        <div style={{ fontSize: 12, color: C.dim, fontWeight: 500 }}>Mer 08 Avr 2026</div>
 
         <div style={{ width: 1, height: 28, background: C.border, flexShrink: 0 }} />
 
@@ -287,7 +267,7 @@ export function MacroTopBar() {
             width: 32,
             height: 32,
             borderRadius: 6,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             border: `1px solid ${C.border}`,
             display: "flex",
             alignItems: "center",
@@ -307,11 +287,11 @@ export function MacroTopBar() {
               height: 14,
               borderRadius: 7,
               background: C.gold,
-              border: "1.5px solid #000117",
+              border: `1.5px solid ${C.surface}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: 700,
               color: "#000117",
             }}
@@ -328,7 +308,7 @@ export function MacroTopBar() {
             gap: 7,
             padding: "4px 8px",
             borderRadius: 6,
-            background: "rgba(0, 1, 23,0.5)",
+            background: "var(--bt-overlay-50)",
             border: `1px solid ${C.border}`,
             cursor: "pointer",
             flexShrink: 0,
@@ -343,7 +323,7 @@ export function MacroTopBar() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: 700,
               color: "#fff",
             }}
@@ -351,8 +331,8 @@ export function MacroTopBar() {
             AK
           </div>
           <div style={{ textAlign: "left" }}>
-            <div style={{ fontSize: 10, color: C.text, fontWeight: 600, lineHeight: 1 }}>Adjoua Koné</div>
-            <div style={{ fontSize: 8, color: C.muted, lineHeight: 1, marginTop: 2 }}>Économiste Senior</div>
+            <div style={{ fontSize: 12, color: C.text, fontWeight: 600, lineHeight: 1 }}>Adjoua Koné</div>
+            <div style={{ fontSize: 10, color: C.muted, lineHeight: 1, marginTop: 2 }}>Économiste Senior</div>
           </div>
           <ChevronDown size={11} color={C.muted} />
         </button>
@@ -366,7 +346,7 @@ export function MacroTopBar() {
           alignItems: "center",
           padding: "0 16px",
           gap: 5,
-          background: "rgba(0, 1, 23,0.5)",
+          background: "var(--bt-overlay-50)",
           overflowX: "auto",
         }}
       >
@@ -436,10 +416,11 @@ export function MacroTopBar() {
 }
 
 function Label({ children }: { children: ReactNode }) {
+  const C = useThemeColors();
   return (
     <span
       style={{
-        fontSize: 8.5,
+        fontSize: 10.5,
         fontWeight: 700,
         color: C.muted,
         letterSpacing: "0.08em",

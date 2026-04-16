@@ -2,18 +2,7 @@ import { useState } from "react";
 import { WidgetShell } from "./WidgetShell";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer, Tooltip } from "recharts";
-
-const C = {
-  accent: "#d6b68d",
-  gold: "#f4b942",
-  green: "#10c87a",
-  red: "#f43860",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  muted: "#54678d",
-  border: "rgba(44, 61, 127,0.32)",
-  purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const countries = [
   {
@@ -82,6 +71,7 @@ const countries = [
 ];
 
 export function MacroWidget() {
+  const C = useThemeColors();
   const [selectedId, setSelectedId] = useState("civ");
   const country = countries.find((c) => c.id === selectedId)!;
 
@@ -105,7 +95,7 @@ export function MacroWidget() {
               border: `1px solid ${selectedId === c.id ? C.purple + "60" : C.border}`,
               background: selectedId === c.id ? C.purple + "15" : "transparent",
               color: selectedId === c.id ? C.purple : C.dim,
-              fontSize: 10,
+              fontSize: 12,
               fontWeight: 600,
               cursor: "pointer",
               letterSpacing: "0.01em",
@@ -165,16 +155,16 @@ export function MacroWidget() {
             alignItems: "center",
           }}
         >
-          <div style={{ fontSize: 9, color: C.muted, fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 2 }}>
+          <div style={{ fontSize: 11, color: C.muted, fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 2 }}>
             Profil Macro
           </div>
           <div style={{ width: 130, height: 110 }}>
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={country.radarData} cx="50%" cy="50%">
-                <PolarGrid stroke="rgba(44, 61, 127,0.3)" />
+                <PolarGrid stroke="var(--bt-border-a32)" />
                 <PolarAngleAxis
                   dataKey="axis"
-                  tick={{ fontSize: 7, fill: C.muted }}
+                  tick={{ fontSize: 9, fill: C.muted }}
                 />
                 <Radar
                   key={`radar-${selectedId}`}
@@ -186,10 +176,10 @@ export function MacroWidget() {
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "#000117",
+                    background: C.surface,
                     border: `1px solid ${C.border}`,
                     borderRadius: 4,
-                    fontSize: 10,
+                    fontSize: 12,
                     color: C.text,
                   }}
                 />
@@ -204,19 +194,19 @@ export function MacroWidget() {
               alignItems: "center",
               gap: 6,
               padding: "5px 10px",
-              background: "rgba(0, 1, 23,0.5)",
+              background: "var(--bt-overlay-50)",
               border: `1px solid ${C.border}`,
               borderRadius: 6,
               marginTop: 4,
             }}
           >
             <div>
-              <div style={{ fontSize: 8, color: C.muted, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+              <div style={{ fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.06em" }}>
                 Notation S&P
               </div>
               <div
                 style={{
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: 800,
                   color: country.rating.startsWith("CCC") ? C.red : C.gold,
                   letterSpacing: "-0.02em",
@@ -253,7 +243,7 @@ function MacroKPI({
     text: "#ddeaf8",
     dim: "#6b96b8",
     muted: "#54678d",
-    border: "rgba(44, 61, 127,0.32)",
+    border: "var(--bt-border-a32)",
   };
 
   return (
@@ -263,16 +253,16 @@ function MacroKPI({
         alignItems: "center",
         justifyContent: "space-between",
         padding: "4px 8px",
-        background: "rgba(0, 1, 23,0.4)",
+        background: "var(--bt-overlay-40)",
         borderRadius: 5,
         border: `1px solid ${C2.border}`,
       }}
     >
-      <span style={{ fontSize: 10, color: C2.dim, fontWeight: 500 }}>{label}</span>
+      <span style={{ fontSize: 12, color: C2.dim, fontWeight: 500 }}>{label}</span>
       <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
         <span
           style={{
-            fontSize: 12,
+            fontSize: 14,
             fontWeight: 700,
             color: warning ? C2.gold : C2.text,
             fontVariantNumeric: "tabular-nums",
@@ -283,7 +273,7 @@ function MacroKPI({
         {change && (
           <span
             style={{
-              fontSize: 10,
+              fontSize: 12,
               color: up ? C2.green : C2.red,
               display: "flex",
               alignItems: "center",

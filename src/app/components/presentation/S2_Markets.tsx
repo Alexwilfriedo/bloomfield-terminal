@@ -1,5 +1,5 @@
 import { TrendingUp, TrendingDown, BarChart2, Star, Bell } from "lucide-react";
-import { C, TerminalHeader, DataBadge, MiniWidget, Spk, BFDRating, BFDZoneVigilance } from "./BloomfieldSignature";
+import { C, DataBadge, MiniWidget, Spk, BFDRating, BFDZoneVigilance } from "./BloomfieldSignature";
 import { LiveTicker } from "../terminal/LiveTicker";
 
 const INDICES = [
@@ -79,7 +79,6 @@ const ratingColor = (r: string) => r === "ACHAT" ? C.green : r === "VENDRE" ? C.
 export function S2_Markets() {
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", overflow: "hidden", background: C.dark }}>
-      <TerminalHeader screenLabel="Marchés" screenIcon={<TrendingUp size={13} />} screenColor={C.green} badge="LIVE BRVM" />
       <LiveTicker />
       <div style={{ flex: 1, display: "flex", overflow: "hidden", minHeight: 0 }}>
 
@@ -89,14 +88,14 @@ export function S2_Markets() {
           <MiniWidget title="Indices BRVM · Intrajournalier" topRight={<DataBadge source="BRVM" time="15:47 GMT" live />}>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {INDICES.map((idx) => (
-                <div key={idx.id} style={{ padding: "7px 9px", background: "rgba(0, 1, 23,0.5)", borderRadius: 5, border: `1px solid ${C.border}` }}>
+                <div key={idx.id} style={{ padding: "7px 9px", background: "var(--bt-overlay-50)", borderRadius: 5, border: `1px solid ${C.border}` }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 5 }}>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 9, color: C.muted }}>{idx.name}</div>
+                      <div style={{ fontSize: 11, color: C.muted }}>{idx.name}</div>
                       <div style={{ display: "flex", alignItems: "baseline", gap: 5, marginTop: 1 }}>
-                        <span style={{ fontSize: 15, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>{idx.val}</span>
-                        <span style={{ fontSize: 10, fontWeight: 700, color: idx.up ? C.green : C.red }}>{idx.pct}</span>
-                        <span style={{ fontSize: 9, color: idx.up ? C.green : C.red, opacity: 0.7 }}>({idx.chg})</span>
+                        <span style={{ fontSize: 17, fontWeight: 800, color: C.text, fontVariantNumeric: "tabular-nums" }}>{idx.val}</span>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: idx.up ? C.green : C.red }}>{idx.pct}</span>
+                        <span style={{ fontSize: 11, color: idx.up ? C.green : C.red, opacity: 0.7 }}>({idx.chg})</span>
                       </div>
                     </div>
                     <Spk data={idx.data} color={idx.color} id={`mkt-${idx.id}`} w={60} h={24} />
@@ -115,8 +114,8 @@ export function S2_Markets() {
                 const bg = h.up ? `rgba(16,200,122,${0.07 + intensity * 0.2})` : `rgba(244,56,96,${0.07 + intensity * 0.2})`;
                 return (
                   <div key={h.name} style={{ padding: "6px 7px", borderRadius: 5, background: bg, border: `1px solid ${h.up ? C.green : C.red}22`, cursor: "pointer" }}>
-                    <div style={{ fontSize: 8.5, color: C.dim, marginBottom: 2 }}>{h.name}</div>
-                    <div style={{ fontSize: 12, fontWeight: 800, color: h.up ? C.green : C.red, fontVariantNumeric: "tabular-nums" }}>{h.val}</div>
+                    <div style={{ fontSize: 10.5, color: C.dim, marginBottom: 2 }}>{h.name}</div>
+                    <div style={{ fontSize: 14, fontWeight: 800, color: h.up ? C.green : C.red, fontVariantNumeric: "tabular-nums" }}>{h.val}</div>
                   </div>
                 );
               })}
@@ -133,9 +132,9 @@ export function S2_Markets() {
                 {GAINERS.map((g) => (
                   <div key={g.t} style={{ display: "flex", alignItems: "center", gap: 6, padding: "3px 5px", borderRadius: 3, cursor: "pointer" }}>
                     <TrendingUp size={8} color={C.green} />
-                    <span style={{ flex: 1, fontSize: 9.5, fontWeight: 700, color: C.text }}>{g.t}</span>
-                    <span style={{ fontSize: 8.5, color: C.dim }}>{g.p}</span>
-                    <span style={{ fontSize: 9.5, fontWeight: 700, color: C.green, minWidth: 44, textAlign: "right" }}>{g.pct}</span>
+                    <span style={{ flex: 1, fontSize: 11.5, fontWeight: 700, color: C.text }}>{g.t}</span>
+                    <span style={{ fontSize: 10.5, color: C.dim }}>{g.p}</span>
+                    <span style={{ fontSize: 11.5, fontWeight: 700, color: C.green, minWidth: 44, textAlign: "right" }}>{g.pct}</span>
                   </div>
                 ))}
               </div>
@@ -145,9 +144,9 @@ export function S2_Markets() {
                 {LOSERS.map((l) => (
                   <div key={l.t} style={{ display: "flex", alignItems: "center", gap: 6, padding: "3px 5px", borderRadius: 3, cursor: "pointer" }}>
                     <TrendingDown size={8} color={C.red} />
-                    <span style={{ flex: 1, fontSize: 9.5, fontWeight: 700, color: C.text }}>{l.t}</span>
-                    <span style={{ fontSize: 8.5, color: C.dim }}>{l.p}</span>
-                    <span style={{ fontSize: 9.5, fontWeight: 700, color: C.red, minWidth: 44, textAlign: "right" }}>{l.pct}</span>
+                    <span style={{ flex: 1, fontSize: 11.5, fontWeight: 700, color: C.text }}>{l.t}</span>
+                    <span style={{ fontSize: 10.5, color: C.dim }}>{l.p}</span>
+                    <span style={{ fontSize: 11.5, fontWeight: 700, color: C.red, minWidth: 44, textAlign: "right" }}>{l.pct}</span>
                   </div>
                 ))}
               </div>
@@ -159,16 +158,16 @@ export function S2_Markets() {
             <div>
               <div style={{ display: "grid", gridTemplateColumns: "85px 1fr 1fr 1fr 60px", padding: "2px 4px", marginBottom: 3, borderBottom: `1px solid ${C.border}` }}>
                 {["Émetteur", "7 ans", "10 ans", "Spread", "Var."].map((h) => (
-                  <div key={h} style={{ fontSize: 7.5, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.05em" }}>{h}</div>
+                  <div key={h} style={{ fontSize: 9.5, fontWeight: 700, color: C.muted, textTransform: "uppercase", letterSpacing: "0.05em" }}>{h}</div>
                 ))}
               </div>
               {BONDS.map((b) => (
-                <div key={b.c} style={{ display: "grid", gridTemplateColumns: "85px 1fr 1fr 1fr 60px", padding: "5px 4px", borderBottom: `1px solid rgba(44, 61, 127,0.1)`, alignItems: "center", cursor: "pointer" }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: C.text }}>{b.c}</span>
-                  <span style={{ fontSize: 10, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{b.y7}</span>
-                  <span style={{ fontSize: 10, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{b.y10}</span>
-                  <span style={{ fontSize: 9.5, fontWeight: 600, color: C.red }}>{b.sp}</span>
-                  <span style={{ fontSize: 9, fontWeight: 600, color: b.up ? C.red : C.green }}>{b.chg}</span>
+                <div key={b.c} style={{ display: "grid", gridTemplateColumns: "85px 1fr 1fr 1fr 60px", padding: "5px 4px", borderBottom: `1px solid var(--bt-border-a12)`, alignItems: "center", cursor: "pointer" }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: C.text }}>{b.c}</span>
+                  <span style={{ fontSize: 12, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{b.y7}</span>
+                  <span style={{ fontSize: 12, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{b.y10}</span>
+                  <span style={{ fontSize: 11.5, fontWeight: 600, color: C.red }}>{b.sp}</span>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: b.up ? C.red : C.green }}>{b.chg}</span>
                 </div>
               ))}
             </div>
@@ -192,42 +191,42 @@ export function S2_Markets() {
           <div style={{ padding: "8px 10px", borderBottom: `1px solid ${C.border}` }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 6 }}>
               <Star size={9} color={C.gold} />
-              <span style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Watchlist</span>
-              <span style={{ marginLeft: "auto", fontSize: 8.5, color: C.accent, cursor: "pointer" }}>Modifier</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Watchlist</span>
+              <span style={{ marginLeft: "auto", fontSize: 10.5, color: C.accent, cursor: "pointer" }}>Modifier</span>
             </div>
             {WATCHLIST.map((w) => (
-              <div key={w.t} style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 0", borderBottom: `1px solid rgba(44, 61, 127,0.1)` }}>
+              <div key={w.t} style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 0", borderBottom: `1px solid var(--bt-border-a12)` }}>
                 <Star size={8} color={C.gold} fill={C.gold} />
-                <span style={{ flex: 1, fontSize: 9.5, fontWeight: 700, color: C.text }}>{w.t}</span>
-                <span style={{ fontSize: 9, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{w.p}</span>
-                <span style={{ fontSize: 9, fontWeight: 700, color: w.up ? C.green : C.red, minWidth: 40, textAlign: "right" }}>{w.pct}</span>
-                <span style={{ fontSize: 7, padding: "1px 4px", borderRadius: 2, background: ratingColor(w.bfd) + "15", color: ratingColor(w.bfd), fontWeight: 800 }}>{w.bfd}</span>
+                <span style={{ flex: 1, fontSize: 11.5, fontWeight: 700, color: C.text }}>{w.t}</span>
+                <span style={{ fontSize: 11, color: C.dim, fontVariantNumeric: "tabular-nums" }}>{w.p}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: w.up ? C.green : C.red, minWidth: 40, textAlign: "right" }}>{w.pct}</span>
+                <span style={{ fontSize: 9, padding: "1px 4px", borderRadius: 2, background: ratingColor(w.bfd) + "15", color: ratingColor(w.bfd), fontWeight: 800 }}>{w.bfd}</span>
               </div>
             ))}
           </div>
 
           {/* FX */}
           <div style={{ padding: "8px 10px", borderBottom: `1px solid ${C.border}` }}>
-            <div style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 5 }}>Taux de Change</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 5 }}>Taux de Change</div>
             {FX2.map((f) => (
-              <div key={f.p} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 0", borderBottom: `1px solid rgba(44, 61, 127,0.1)` }}>
-                <span style={{ flex: 1, fontSize: 9, color: C.dim }}>{f.p}</span>
-                <span style={{ fontSize: 11, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{f.v}</span>
-                <span style={{ fontSize: 8.5, fontWeight: 600, color: f.up ? C.green : C.red }}>{f.pct}</span>
+              <div key={f.p} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 0", borderBottom: `1px solid var(--bt-border-a12)` }}>
+                <span style={{ flex: 1, fontSize: 11, color: C.dim }}>{f.p}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{f.v}</span>
+                <span style={{ fontSize: 10.5, fontWeight: 600, color: f.up ? C.green : C.red }}>{f.pct}</span>
               </div>
             ))}
           </div>
 
           {/* Commodités */}
           <div style={{ padding: "8px 10px" }}>
-            <div style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 5 }}>Matières Premières</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 5 }}>Matières Premières</div>
             {COMMO2.map((c) => (
-              <div key={c.n} style={{ display: "flex", alignItems: "center", gap: 6, padding: "5px 0", borderBottom: `1px solid rgba(44, 61, 127,0.1)` }}>
+              <div key={c.n} style={{ display: "flex", alignItems: "center", gap: 6, padding: "5px 0", borderBottom: `1px solid var(--bt-border-a12)` }}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 9, color: C.dim }}>{c.n}</div>
+                  <div style={{ fontSize: 11, color: C.dim }}>{c.n}</div>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginTop: 1 }}>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{c.v}</span>
-                    <span style={{ fontSize: 8.5, fontWeight: 600, color: c.up ? C.green : C.red }}>{c.pct}</span>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: C.text, fontVariantNumeric: "tabular-nums" }}>{c.v}</span>
+                    <span style={{ fontSize: 10.5, fontWeight: 600, color: c.up ? C.green : C.red }}>{c.pct}</span>
                   </div>
                 </div>
                 <Spk data={c.data} color={c.up ? C.green : C.red} id={`c2-${c.n}`} w={50} h={22} />
@@ -236,19 +235,19 @@ export function S2_Markets() {
           </div>
 
           {/* Alertes marché */}
-          <div style={{ padding: "8px 10px", background: "rgba(0, 1, 23,0.5)", borderTop: `1px solid ${C.border}` }}>
+          <div style={{ padding: "8px 10px", background: "var(--bt-overlay-50)", borderTop: `1px solid ${C.border}` }}>
             <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 5 }}>
               <Bell size={9} color={C.red} />
-              <span style={{ fontSize: 9, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Alertes Marché</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.dim, textTransform: "uppercase", letterSpacing: "0.06em" }}>Alertes Marché</span>
             </div>
             {[
               { msg: "PALM CI — Volume 3× moyenne 30J", color: C.gold },
               { msg: "SONATEL — Nouveau sommet 52 semaines", color: C.green },
               { msg: "SOLIBRA — Signal vendeur RSI > 70", color: C.red },
             ].map((a, i) => (
-              <div key={i} style={{ display: "flex", gap: 6, padding: "4px 0", borderBottom: `1px solid rgba(44, 61, 127,0.1)` }}>
+              <div key={i} style={{ display: "flex", gap: 6, padding: "4px 0", borderBottom: `1px solid var(--bt-border-a12)` }}>
                 <div style={{ width: 4, height: 4, borderRadius: "50%", background: a.color, marginTop: 4, flexShrink: 0 }} />
-                <span style={{ fontSize: 8.5, color: C.dim, lineHeight: 1.4 }}>{a.msg}</span>
+                <span style={{ fontSize: 10.5, color: C.dim, lineHeight: 1.4 }}>{a.msg}</span>
               </div>
             ))}
           </div>

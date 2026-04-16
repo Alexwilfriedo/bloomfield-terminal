@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Maximize2, X } from "lucide-react";
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 /**
  * Lightweight zoom wrapper for Insights sections that are NOT managed
@@ -9,19 +10,13 @@ import { Maximize2, X } from "lucide-react";
  * WidgetGrid's ZoomOverlay so the UX stays consistent across pages.
  */
 
-const C = {
-  accent: "#d6b68d",
-  text: "#ddeaf8",
-  dim: "#6b96b8",
-  border: "rgba(44, 61, 127, 0.55)",
-};
-
 interface ZoomableSectionProps {
   title: string;
   children: ReactNode;
 }
 
 export function ZoomableSection({ title, children }: ZoomableSectionProps) {
+  const C = useThemeColors();
   const [zoomed, setZoomed] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -53,7 +48,7 @@ export function ZoomableSection({ title, children }: ZoomableSectionProps) {
             width: 30,
             height: 30,
             borderRadius: 6,
-            background: "rgba(0, 1, 23, 0.85)",
+            background: "var(--bt-overlay-85)",
             border: `1px solid ${C.border}`,
             color: C.accent,
             display: "flex",
@@ -67,10 +62,10 @@ export function ZoomableSection({ title, children }: ZoomableSectionProps) {
             boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(214, 182, 141, 0.18)";
+            e.currentTarget.style.background = "var(--bt-accent-a18)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(0, 1, 23, 0.85)";
+            e.currentTarget.style.background = "var(--bt-overlay-85)";
           }}
         >
           <Maximize2 size={14} strokeWidth={2} />
@@ -87,7 +82,7 @@ export function ZoomableSection({ title, children }: ZoomableSectionProps) {
             position: "fixed",
             inset: 0,
             zIndex: 9999,
-            background: "rgba(0, 1, 23, 0.92)",
+            background: "var(--bt-overlay-92)",
             backdropFilter: "blur(6px)",
             padding: 24,
             display: "flex",
@@ -105,7 +100,7 @@ export function ZoomableSection({ title, children }: ZoomableSectionProps) {
           >
             <div
               style={{
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: 700,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
@@ -123,11 +118,11 @@ export function ZoomableSection({ title, children }: ZoomableSectionProps) {
                 alignItems: "center",
                 gap: 6,
                 padding: "5px 10px",
-                background: "rgba(214, 182, 141, 0.1)",
+                background: "var(--bt-accent-a10)",
                 border: `1px solid ${C.accent}`,
                 borderRadius: 4,
                 color: C.accent,
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: 700,
                 letterSpacing: "0.06em",
                 textTransform: "uppercase",

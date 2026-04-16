@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ArrowRightLeft } from "lucide-react";
 import { WidgetShell } from "../widgets/WidgetShell";
-
-const C = {
-  accent: "#d6b68d", gold: "#f4b942", green: "#10c87a",
-  red: "#f43860", text: "#ddeaf8", dim: "#6b96b8",
-  muted: "#54678d", border: "rgba(44, 61, 127,0.32)", purple: "#a78bfa",
-};
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 type CompareMode = "countries" | "sectors" | "companies";
 
@@ -59,6 +54,7 @@ const COMPARE_DATA: Record<CompareMode, { cols: [string, string]; metrics: Array
 };
 
 export function QuickCompareWidget() {
+  const C = useThemeColors();
   const [mode, setMode] = useState<CompareMode>("countries");
   const { cols, metrics } = COMPARE_DATA[mode];
 
@@ -73,16 +69,16 @@ export function QuickCompareWidget() {
           {MODES.map((m) => (
             <button key={m.id} onClick={() => setMode(m.id)}
               style={{
-                padding: "3px 10px", borderRadius: 4, border: `1px solid ${mode === m.id ? C.purple + "50" : "rgba(44, 61, 127,0.22)"}`,
+                padding: "3px 10px", borderRadius: 4, border: `1px solid ${mode === m.id ? C.purple + "50" : "var(--bt-border-a22)"}`,
                 background: mode === m.id ? "rgba(167,139,250,0.12)" : "transparent",
                 color: mode === m.id ? C.purple : C.muted,
-                fontSize: 9, fontWeight: mode === m.id ? 700 : 500, cursor: "pointer",
+                fontSize: 11, fontWeight: mode === m.id ? 700 : 500, cursor: "pointer",
               }}>
               {m.label}
             </button>
           ))}
           <div style={{ flex: 1 }} />
-          <button style={{ display: "flex", alignItems: "center", gap: 3, padding: "3px 8px", borderRadius: 4, border: `1px solid ${C.border}`, background: "rgba(0, 1, 23,0.5)", color: C.dim, fontSize: 8.5, fontWeight: 600, cursor: "pointer" }}>
+          <button style={{ display: "flex", alignItems: "center", gap: 3, padding: "3px 8px", borderRadius: 4, border: `1px solid ${C.border}`, background: "var(--bt-overlay-50)", color: C.dim, fontSize: 10.5, fontWeight: 600, cursor: "pointer" }}>
             <ChevronDown size={9} />Changer
           </button>
         </div>
@@ -91,8 +87,8 @@ export function QuickCompareWidget() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 90px 90px", gap: 0, padding: "0 4px" }}>
           <div />
           {cols.map((col, i) => (
-            <div key={`col-${i}`} style={{ textAlign: "center", padding: "5px 4px", background: i === 0 ? "rgba(214, 182, 141,0.08)" : "rgba(244,185,66,0.08)", borderRadius: i === 0 ? "4px 4px 0 0" : "4px 4px 0 0", border: `1px solid ${i === 0 ? "rgba(214, 182, 141,0.2)" : "rgba(244,185,66,0.2)"}`, borderBottom: "none" }}>
-              <div style={{ fontSize: 9, fontWeight: 700, color: i === 0 ? C.accent : C.gold }}>{col}</div>
+            <div key={`col-${i}`} style={{ textAlign: "center", padding: "5px 4px", background: i === 0 ? "var(--bt-accent-a08)" : "rgba(244,185,66,0.08)", borderRadius: i === 0 ? "4px 4px 0 0" : "4px 4px 0 0", border: `1px solid ${i === 0 ? "var(--bt-accent-a20)" : "rgba(244,185,66,0.2)"}`, borderBottom: "none" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: i === 0 ? C.accent : C.gold }}>{col}</div>
             </div>
           ))}
         </div>
@@ -100,28 +96,28 @@ export function QuickCompareWidget() {
         {/* Metrics rows */}
         <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
           {metrics.map((m, i) => (
-            <div key={`metric-${i}`} style={{ display: "grid", gridTemplateColumns: "1fr 90px 90px", gap: 0, borderBottom: `1px solid rgba(44, 61, 127,0.12)`, alignItems: "center" }}>
-              <div style={{ fontSize: 9, color: C.muted, padding: "4px 4px" }}>{m.label}</div>
+            <div key={`metric-${i}`} style={{ display: "grid", gridTemplateColumns: "1fr 90px 90px", gap: 0, borderBottom: `1px solid var(--bt-border-a12)`, alignItems: "center" }}>
+              <div style={{ fontSize: 11, color: C.muted, padding: "4px 4px" }}>{m.label}</div>
               <div style={{ textAlign: "center", padding: "4px 4px", background: m.winner === "a" ? "rgba(16,200,122,0.06)" : "transparent" }}>
-                <span style={{ fontSize: 10, fontWeight: m.winner === "a" ? 700 : 400, color: m.winner === "a" ? C.green : C.dim, fontVariantNumeric: "tabular-nums" }}>{m.a}</span>
-                {m.winner === "a" && <span style={{ marginLeft: 3, fontSize: 8, color: C.green }}>✓</span>}
+                <span style={{ fontSize: 12, fontWeight: m.winner === "a" ? 700 : 400, color: m.winner === "a" ? C.green : C.dim, fontVariantNumeric: "tabular-nums" }}>{m.a}</span>
+                {m.winner === "a" && <span style={{ marginLeft: 3, fontSize: 10, color: C.green }}>✓</span>}
               </div>
               <div style={{ textAlign: "center", padding: "4px 4px", background: m.winner === "b" ? "rgba(16,200,122,0.06)" : "transparent" }}>
-                <span style={{ fontSize: 10, fontWeight: m.winner === "b" ? 700 : 400, color: m.winner === "b" ? C.green : C.dim, fontVariantNumeric: "tabular-nums" }}>{m.b}</span>
-                {m.winner === "b" && <span style={{ marginLeft: 3, fontSize: 8, color: C.green }}>✓</span>}
+                <span style={{ fontSize: 12, fontWeight: m.winner === "b" ? 700 : 400, color: m.winner === "b" ? C.green : C.dim, fontVariantNumeric: "tabular-nums" }}>{m.b}</span>
+                {m.winner === "b" && <span style={{ marginLeft: 3, fontSize: 10, color: C.green }}>✓</span>}
               </div>
             </div>
           ))}
         </div>
 
         {/* Score bar */}
-        <div style={{ display: "flex", gap: 6, padding: "5px 8px", background: "rgba(0, 1, 23,0.4)", borderRadius: 5, border: `1px solid ${C.border}`, alignItems: "center" }}>
-          <span style={{ fontSize: 9, fontWeight: 700, color: C.accent }}>{cols[0].split(" ")[0]}</span>
-          <span style={{ fontSize: 11, fontWeight: 800, color: aWins > bWins ? C.green : C.dim }}>{aWins}</span>
+        <div style={{ display: "flex", gap: 6, padding: "5px 8px", background: "var(--bt-overlay-40)", borderRadius: 5, border: `1px solid ${C.border}`, alignItems: "center" }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: C.accent }}>{cols[0].split(" ")[0]}</span>
+          <span style={{ fontSize: 13, fontWeight: 800, color: aWins > bWins ? C.green : C.dim }}>{aWins}</span>
           <ArrowRightLeft size={9} color={C.muted} style={{ margin: "0 2px" }} />
-          <span style={{ fontSize: 11, fontWeight: 800, color: bWins > aWins ? C.green : C.dim }}>{bWins}</span>
-          <span style={{ fontSize: 9, fontWeight: 700, color: C.gold }}>{cols[1].split(" ")[0]}</span>
-          <span style={{ marginLeft: "auto", fontSize: 8, color: C.muted }}>{metrics.filter((m) => m.winner === "tie").length} ex-aequo</span>
+          <span style={{ fontSize: 13, fontWeight: 800, color: bWins > aWins ? C.green : C.dim }}>{bWins}</span>
+          <span style={{ fontSize: 11, fontWeight: 700, color: C.gold }}>{cols[1].split(" ")[0]}</span>
+          <span style={{ marginLeft: "auto", fontSize: 10, color: C.muted }}>{metrics.filter((m) => m.winner === "tie").length} ex-aequo</span>
         </div>
       </div>
     </WidgetShell>
