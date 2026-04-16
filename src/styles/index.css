@@ -410,3 +410,13 @@
   width: 0;
   height: 0;
 }
+
+/* ============================================================
+   Sidebar tooltips — appear to the right on hover/focus
+   ============================================================ */
+.bt-sidebar-tooltip-wrap:hover > .bt-sidebar-tooltip,
+.bt-sidebar-tooltip-wrap:focus-within > .bt-sidebar-tooltip {
+  opacity: 1 !important;
+  transform: translate(0, -50%) !important;
+  transition-delay: 0.15s;
+}
