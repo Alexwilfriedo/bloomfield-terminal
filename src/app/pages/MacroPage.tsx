@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import type { Layout } from "react-grid-layout";
 
 import { LiveTicker } from "../components/terminal/LiveTicker";
-import { MacroTopBar } from "../components/macro/MacroTopBar";
 import { MacroRightPanel } from "../components/macro/MacroRightPanel";
 import { MacroKPIWidget } from "../components/macro/MacroKPIWidget";
 import { PublicFinanceWidget } from "../components/macro/PublicFinanceWidget";
@@ -53,8 +52,7 @@ export function MacroPage() {
         overflow: "hidden",
       }}
     >
-      <MacroTopBar />
-      <LiveTicker />
+<LiveTicker />
 
       <div
         style={{

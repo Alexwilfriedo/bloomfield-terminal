@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import type { Layout } from "react-grid-layout";
 
 import { LiveTicker } from "../components/terminal/LiveTicker";
-import { MarketsTopBar } from "../components/markets/MarketsTopBar";
 import { RightPanel } from "../components/markets/RightPanel";
 import { MarketScannerWidget } from "../components/markets/MarketScannerWidget";
 import { CandlestickWidget } from "../components/markets/CandlestickWidget";
@@ -213,8 +212,7 @@ export function MarketsPage() {
         overflow: "hidden",
       }}
     >
-      <MarketsTopBar />
-      <LiveTicker />
+<LiveTicker />
       <MarketsActionBar />
 
       {/* Content row: main grid + right panel */}

@@ -241,7 +241,7 @@ export function SentimentWidget() {
         {/* Left: Sentiment Gauge */}
         <div
           style={{
-            width: 160,
+            width: 190,
             borderRight: `1px solid ${C.border}`,
             padding: "10px 12px",
             display: "flex",
@@ -275,7 +275,7 @@ export function SentimentWidget() {
           {/* BRVM Market Status */}
           <div
             style={{
-              marginTop: "auto",
+              marginTop: 8,
               padding: "6px 8px",
               background: "rgba(16,200,122,0.06)",
               border: "1px solid rgba(16,200,122,0.18)",
@@ -284,7 +284,7 @@ export function SentimentWidget() {
           >
             <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
               <CheckCircle size={10} color={C.green} />
-              <span style={{ fontSize: 11, fontWeight: 700, color: C.green, letterSpacing: "0.04em" }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: C.green, letterSpacing: "0.04em", whiteSpace: "nowrap" }}>
                 MARCHÉ OUVERT
               </span>
             </div>

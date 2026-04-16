@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AnalysisTopBar } from "../components/analysis/AnalysisTopBar";
 import { AnalysisRightPanel } from "../components/analysis/AnalysisRightPanel";
 import { CompanySnapshotCard } from "../components/analysis/CompanySnapshotCard";
 import { FinancialKPICards } from "../components/analysis/FinancialKPICards";
@@ -52,10 +51,7 @@ export function AnalysisPage() {
         background: C.dark,
       }}
     >
-      {/* Module top bar with filters */}
-      <AnalysisTopBar />
-
-      {/* Live ticker */}
+{/* Live ticker */}
       <LiveTicker />
 
       {/* Content row */}

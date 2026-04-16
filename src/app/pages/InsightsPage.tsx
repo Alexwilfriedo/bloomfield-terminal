@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { InsightsTopBar } from "../components/insights/InsightsTopBar";
 import { InsightsRightPanel } from "../components/insights/InsightsRightPanel";
 import { HeroEditorialBanner } from "../components/insights/HeroEditorialBanner";
 import { FlashNewsFeed } from "../components/insights/FlashNewsFeed";
@@ -44,10 +43,7 @@ export function InsightsPage() {
         background: C.dark,
       }}
     >
-      {/* Module top bar with filters */}
-      <InsightsTopBar />
-
-      {/* Live ticker */}
+{/* Live ticker */}
       <LiveTicker />
 
       {/* Content row */}

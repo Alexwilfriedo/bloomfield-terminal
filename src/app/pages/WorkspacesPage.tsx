@@ -1,7 +1,6 @@
 import { useState, type ReactNode } from "react";
 import type { Layout } from "react-grid-layout";
 
-import { WorkspacesTopBar } from "../components/workspaces/WorkspacesTopBar";
 import { WorkspaceRightPanel } from "../components/workspaces/WorkspaceRightPanel";
 import { MarketMonitorWidget } from "../components/workspaces/MarketMonitorWidget";
 import { MacroWatchWidget } from "../components/workspaces/MacroWatchWidget";
@@ -75,8 +74,7 @@ export function WorkspacesPage() {
         background: C.dark,
       }}
     >
-      <WorkspacesTopBar />
-      <LiveTicker />
+<LiveTicker />
 
       <div style={{ flex: 1, display: "flex", overflow: "hidden", minHeight: 0 }}>
         <div

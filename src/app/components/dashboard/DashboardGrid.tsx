@@ -36,8 +36,8 @@ const LG_LAYOUT: Layout[] = [
   { i: "sovereign",   x: 0,  y: 15, w: 8, h: 7, minW: 5, minH: 4 },
   { i: "watchlist",   x: 8,  y: 15, w: 4, h: 7, minW: 3, minH: 4 },
 
-  { i: "sentiment",   x: 0,  y: 22, w: 4, h: 7, minW: 3, minH: 4 },
-  { i: "news",        x: 4,  y: 22, w: 8, h: 7, minW: 5, minH: 4 },
+  { i: "sentiment",   x: 0,  y: 22, w: 6, h: 9, minW: 5, minH: 7 },
+  { i: "news",        x: 6,  y: 22, w: 6, h: 9, minW: 4, minH: 4 },
 ];
 
 const WIDGETS: Record<string, { element: ReactNode; title: string }> = {
