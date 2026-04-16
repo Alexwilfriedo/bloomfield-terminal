@@ -301,32 +301,15 @@ export function SovereignYieldsWidget() {
 }
 
 function CountryFlag({ iso }: { iso: string }) {
-  const colors: Record<string, [string, string]> = {
-    CI: ["#f77f00", "#009A44"],
-    SN: ["#00853F", "#FDEF42"],
-    BJ: ["#008751", "#FCD116"],
-    TG: ["#006A4E", "#FFCE00"],
-    BF: ["#EF2B2D", "#009A00"],
-    ML: ["#14B53A", "#FCD116"],
-    NE: ["#E05206", "#0DB02B"],
+  const flags: Record<string, string> = {
+    CI: "🇨🇮",
+    SN: "🇸🇳",
+    BJ: "🇧🇯",
+    TG: "🇹🇬",
+    BF: "🇧🇫",
+    ML: "🇲🇱",
+    NE: "🇳🇪",
+    GW: "🇬🇼",
   };
-  const [c1, c2] = colors[iso] ?? ["#6b96b8", "#54678d"];
-
-  return (
-    <div
-      style={{
-        width: 20,
-        height: 14,
-        borderRadius: 2,
-        overflow: "hidden",
-        display: "flex",
-        flexShrink: 0,
-        border: "1px solid rgba(255,255,255,0.1)",
-      }}
-    >
-      <div style={{ flex: 1, background: c1 }} />
-      <div style={{ flex: 1, background: "#fff" }} />
-      <div style={{ flex: 1, background: c2 }} />
-    </div>
-  );
+  return <span style={{ fontSize: 18, lineHeight: 1 }}>{flags[iso] ?? "🏳️"}</span>;
 }
