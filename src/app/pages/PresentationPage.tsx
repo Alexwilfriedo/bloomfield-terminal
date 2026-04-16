@@ -1,8 +1,10 @@
 import { useState, Suspense, lazy, startTransition } from "react";
 import { useNavigate } from "react-router";
 import { LayoutDashboard, TrendingUp, Globe2, BarChart3, Lightbulb, LayoutGrid, ChevronLeft, ChevronRight, Lock } from "lucide-react";
-import logoUrl from "../../assets/logo-bloomfield-terminal.png";
+import logoDarkUrl from "../../assets/logo-bloomfield-terminal.png";
+import logoLightUrl from "../../assets/logo-bloomfield-terminal-light.png";
 import { useThemeColors } from "../hooks/useThemeColors";
+import { useBloomfieldTheme } from "../context/ThemeContext";
 
 /* Lazy-load screen components for perf */
 const S1 = lazy(() => import("../components/presentation/S1_Dashboard").then((m) => ({ default: m.S1_Dashboard })));
@@ -32,6 +34,7 @@ function ScreenFallback({ label }: { label: string }) {
 
 export function PresentationPage() {
   const C = useThemeColors();
+  const { isDark } = useBloomfieldTheme();
   const navigate = useNavigate();
   const [activeId, setActiveId] = useState(1);
   const activeIdx = SCREENS.findIndex((s) => s.id === activeId);
@@ -47,7 +50,7 @@ export function PresentationPage() {
       <div style={{ height: 40, flexShrink: 0, background: C.surface, borderBottom: `1px solid ${C.border}`, display: "flex", alignItems: "center", padding: "0 12px", gap: 0 }}>
         {/* BFD Brand */}
         <div style={{ display: "flex", alignItems: "center", gap: 8, paddingRight: 12, borderRight: `1px solid ${C.border}`, flexShrink: 0 }}>
-          <img src={logoUrl} alt="Bloomfield Terminal" onClick={() => navigate("/")} style={{ height: 22, width: "auto", display: "block", objectFit: "contain", cursor: "pointer" }} draggable={false} />
+          <img src={isDark ? logoDarkUrl : logoLightUrl} alt="Bloomfield Terminal" onClick={() => navigate("/")} style={{ height: 22, width: "auto", display: "block", objectFit: "contain", cursor: "pointer" }} draggable={false} />
           <div>
             <span style={{ fontSize: 10, color: C.muted }}>Présentation Produit · v3.0</span>
           </div>

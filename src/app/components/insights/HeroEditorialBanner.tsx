@@ -133,11 +133,11 @@ export function HeroEditorialBanner() {
           zIndex: 2,
           display: "flex",
           padding: "16px 20px",
-          gap: 20,
+          gap: 50,
         }}
       >
         {/* Editorial content */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8, maxWidth: 580 }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
           {/* Tags row */}
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <span
@@ -198,7 +198,6 @@ export function HeroEditorialBanner() {
               color: C.text,
               lineHeight: 1.25,
               letterSpacing: "-0.01em",
-              maxWidth: 560,
             }}
           >
             BCEAO : Maintien du taux directeur à 3,5% — Décryptage des implications pour les marchés obligataires UEMOA et la trajectoire de croissance 2026
@@ -211,7 +210,6 @@ export function HeroEditorialBanner() {
               fontSize: 13,
               color: C.dim,
               lineHeight: 1.55,
-              maxWidth: 520,
             }}
           >
             Le Comité de Politique Monétaire de la BCEAO a maintenu son taux directeur inchangé lors de sa réunion du 27 mars 2026, signalant une pause dans le cycle d'ajustement. Notre équipe décrypte les conséquences sur les rendements obligataires souverains, la liquidité bancaire et les perspectives d'investissement UEMOA.
@@ -293,8 +291,8 @@ export function HeroEditorialBanner() {
           </div>
         </div>
 
-        {/* Right: Market Impact Panel — ENHANCED */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 6, minWidth: 210 }}>
+        {/* Right: Market Impact Panel — Grid layout matching PDF */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, minWidth: 300, maxWidth: 360 }}>
           <div
             style={{
               fontSize: 10,
@@ -302,63 +300,59 @@ export function HeroEditorialBanner() {
               color: C.muted,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
-              marginBottom: 2,
             }}
           >
             IMPACT MARCHÉS BLOOMFIELD
           </div>
 
-          {/* Impact items */}
-          {MARKET_IMPACTS.map((imp) => {
-            const dirColor = imp.direction === "up" ? C.green : imp.direction === "down" ? C.red : C.gold;
-            return (
-              <div
-                key={imp.label}
-                style={{
-                  padding: "7px 9px",
-                  borderRadius: 5,
-                  background: "var(--bt-overlay-60)",
-                  border: `1px solid ${C.border}`,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 3,
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span
-                    style={{
-                      fontSize: 9.5,
-                      fontWeight: 700,
-                      color: dirColor,
-                      background: dirColor + "14",
-                      border: `1px solid ${dirColor}28`,
-                      borderRadius: 2,
-                      padding: "0 4px",
-                      letterSpacing: "0.04em",
-                    }}
-                  >
-                    {imp.type}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 10.5,
-                      fontWeight: 700,
-                      color: dirColor,
-                      fontVariantNumeric: "tabular-nums",
-                    }}
-                  >
-                    {imp.change}
-                  </span>
+          {/* 2-column grid of impact cards */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+            {MARKET_IMPACTS.map((imp, i) => {
+              const dirColor = imp.direction === "up" ? C.green : imp.direction === "down" ? C.red : C.gold;
+              const isLast = i === MARKET_IMPACTS.length - 1 && MARKET_IMPACTS.length % 2 !== 0;
+              return (
+                <div
+                  key={imp.label}
+                  style={{
+                    padding: "8px 10px",
+                    borderRadius: 5,
+                    background: "var(--bt-overlay-50)",
+                    border: `1px solid ${C.border}`,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 4,
+                    gridColumn: isLast ? "1 / -1" : undefined,
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <span
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: dirColor,
+                        background: dirColor + "14",
+                        border: `1px solid ${dirColor}28`,
+                        borderRadius: 3,
+                        padding: "1px 6px",
+                        letterSpacing: "0.04em",
+                      }}
+                    >
+                      {imp.type}
+                    </span>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: dirColor, fontVariantNumeric: "tabular-nums" }}>
+                      {imp.change}
+                    </span>
+                  </div>
+                  <span style={{ fontSize: 11, color: C.dim, fontWeight: 600 }}>{imp.label}</span>
                 </div>
-                <span style={{ fontSize: 10.5, color: C.dim, fontWeight: 600 }}>{imp.label}</span>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
 
           {/* Bloomfield intel badge */}
           <div
             style={{
-              padding: "6px 9px",
+              padding: "7px 10px",
               borderRadius: 5,
               background: "rgba(244,185,66,0.08)",
               border: "1px solid rgba(244,185,66,0.2)",
@@ -366,11 +360,10 @@ export function HeroEditorialBanner() {
               alignItems: "center",
               gap: 5,
               cursor: "pointer",
-              marginTop: 2,
             }}
           >
-            <Tag size={9} color={C.gold} />
-            <span style={{ fontSize: 10.5, color: C.gold, fontWeight: 600 }}>Intelligence Propriétaire Bloomfield</span>
+            <Tag size={10} color={C.gold} />
+            <span style={{ fontSize: 11, color: C.gold, fontWeight: 600 }}>Intelligence Propriétaire Bloomfield</span>
           </div>
         </div>
       </div>

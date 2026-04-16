@@ -14,7 +14,8 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-import logoUrl from "../../../assets/logo-bloomfield-terminal.png";
+import logoDarkUrl from "../../../assets/logo-bloomfield-terminal.png";
+import logoLightUrl from "../../../assets/logo-bloomfield-terminal-light.png";
 import { useAuth } from "../../auth/AuthContext";
 import { useBloomfieldTheme } from "../../context/ThemeContext";
 import { useThemeColors } from "../../hooks/useThemeColors";
@@ -79,7 +80,7 @@ export function TopBar() {
         }}
       >
         <img
-          src={logoUrl}
+          src={isDark ? logoDarkUrl : logoLightUrl}
           alt="Bloomfield Terminal"
           onClick={() => navigate("/")}
           style={{
@@ -184,6 +185,9 @@ export function TopBar() {
         <TopAction icon={<Download size={13} />} label="Export" />
         <TopAction icon={<RefreshCw size={13} />} label="Sync" />
       </div>
+
+      {/* Spacer — push right section to edge */}
+      <div style={{ flex: 1 }} />
 
       {/* Divider */}
       <div style={{ width: 1, height: 28, background: C.border, flexShrink: 0 }} />

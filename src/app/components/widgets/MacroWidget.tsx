@@ -6,67 +6,52 @@ import { useThemeColors } from "../../hooks/useThemeColors";
 
 const countries = [
   {
-    id: "civ",
-    name: "Côte d'Ivoire",
-    iso: "CI",
-    gdp: "70.4",
-    gdpGrowth: "+6.5%",
-    inflation: "4.2%",
-    debt: "56.8%",
-    currentAccount: "-4.2%",
-    reserves: "9.8 Mds",
-    rating: "B+",
-    pop: "27.5M",
-    budgetDef: "-4.5%",
-    radarData: [
-      { axis: "Croissance", val: 82 },
-      { axis: "Stabilité", val: 68 },
-      { axis: "Compétitivité", val: 61 },
-      { axis: "Dette", val: 58 },
-      { axis: "Réserves", val: 74 },
-    ],
+    id: "civ", name: "Côte d'Ivoire", flag: "🇨🇮", iso: "CI",
+    gdp: "70.4", gdpGrowth: "+6.5%", inflation: "4.2%", debt: "56.8%",
+    currentAccount: "-4.2%", reserves: "9.8 Mds", rating: "B+", pop: "27.5M", budgetDef: "-4.5%",
+    radarData: [{ axis: "Croissance", val: 82 }, { axis: "Stabilité", val: 68 }, { axis: "Compétitivité", val: 61 }, { axis: "Dette", val: 58 }, { axis: "Réserves", val: 74 }],
   },
   {
-    id: "sen",
-    name: "Sénégal",
-    iso: "SN",
-    gdp: "27.8",
-    gdpGrowth: "+7.2%",
-    inflation: "3.8%",
-    debt: "72.4%",
-    currentAccount: "-6.8%",
-    reserves: "5.2 Mds",
-    rating: "B+",
-    pop: "17.2M",
-    budgetDef: "-6.1%",
-    radarData: [
-      { axis: "Croissance", val: 88 },
-      { axis: "Stabilité", val: 72 },
-      { axis: "Compétitivité", val: 55 },
-      { axis: "Dette", val: 42 },
-      { axis: "Réserves", val: 58 },
-    ],
+    id: "sen", name: "Sénégal", flag: "🇸🇳", iso: "SN",
+    gdp: "27.8", gdpGrowth: "+7.2%", inflation: "3.8%", debt: "72.4%",
+    currentAccount: "-6.8%", reserves: "5.2 Mds", rating: "B+", pop: "17.2M", budgetDef: "-6.1%",
+    radarData: [{ axis: "Croissance", val: 88 }, { axis: "Stabilité", val: 72 }, { axis: "Compétitivité", val: 55 }, { axis: "Dette", val: 42 }, { axis: "Réserves", val: 58 }],
   },
   {
-    id: "gha",
-    name: "Ghana",
-    iso: "GH",
-    gdp: "76.4",
-    gdpGrowth: "+3.1%",
-    inflation: "22.4%",
-    debt: "92.7%",
-    currentAccount: "-2.1%",
-    reserves: "4.8 Mds",
-    rating: "CCC+",
-    pop: "33.5M",
-    budgetDef: "-3.8%",
-    radarData: [
-      { axis: "Croissance", val: 45 },
-      { axis: "Stabilité", val: 30 },
-      { axis: "Compétitivité", val: 48 },
-      { axis: "Dette", val: 18 },
-      { axis: "Réserves", val: 42 },
-    ],
+    id: "mli", name: "Mali", flag: "🇲🇱", iso: "ML",
+    gdp: "19.3", gdpGrowth: "+4.8%", inflation: "3.2%", debt: "52.1%",
+    currentAccount: "-4.8%", reserves: "2.8 Mds", rating: "CCC+", pop: "22.4M", budgetDef: "-4.9%",
+    radarData: [{ axis: "Croissance", val: 62 }, { axis: "Stabilité", val: 48 }, { axis: "Compétitivité", val: 38 }, { axis: "Dette", val: 55 }, { axis: "Réserves", val: 35 }],
+  },
+  {
+    id: "bfa", name: "Burkina Faso", flag: "🇧🇫", iso: "BF",
+    gdp: "19.7", gdpGrowth: "+3.6%", inflation: "4.9%", debt: "48.3%",
+    currentAccount: "-5.4%", reserves: "1.9 Mds", rating: "CCC+", pop: "22.7M", budgetDef: "-7.2%",
+    radarData: [{ axis: "Croissance", val: 50 }, { axis: "Stabilité", val: 38 }, { axis: "Compétitivité", val: 32 }, { axis: "Dette", val: 60 }, { axis: "Réserves", val: 28 }],
+  },
+  {
+    id: "ner", name: "Niger", flag: "🇳🇪", iso: "NE",
+    gdp: "16.6", gdpGrowth: "+6.0%", inflation: "3.7%", debt: "44.7%",
+    currentAccount: "-12.8%", reserves: "2.0 Mds", rating: "B-", pop: "26.2M", budgetDef: "-5.8%",
+    radarData: [{ axis: "Croissance", val: 72 }, { axis: "Stabilité", val: 52 }, { axis: "Compétitivité", val: 28 }, { axis: "Dette", val: 65 }, { axis: "Réserves", val: 30 }],
+  },
+  {
+    id: "tgo", name: "Togo", flag: "🇹🇬", iso: "TG",
+    gdp: "8.9", gdpGrowth: "+5.3%", inflation: "4.5%", debt: "68.9%",
+    currentAccount: "-3.2%", reserves: "1.4 Mds", rating: "B", pop: "8.8M", budgetDef: "-3.5%",
+    radarData: [{ axis: "Croissance", val: 70 }, { axis: "Stabilité", val: 58 }, { axis: "Compétitivité", val: 45 }, { axis: "Dette", val: 38 }, { axis: "Réserves", val: 32 }],
+  },
+  {
+    id: "ben", name: "Bénin", flag: "🇧🇯", iso: "BJ",
+    gdp: "17.4", gdpGrowth: "+6.2%", inflation: "2.8%", debt: "48.5%",
+    currentAccount: "-2.8%", reserves: "2.1 Mds", rating: "B+", pop: "13.4M", budgetDef: "-3.1%",
+    radarData: [{ axis: "Croissance", val: 80 }, { axis: "Stabilité", val: 75 }, { axis: "Compétitivité", val: 52 }, { axis: "Dette", val: 60 }, { axis: "Réserves", val: 40 }],
+  },
+  {
+    id: "gnb", name: "Guinée-Bissau", flag: "🇬🇼", iso: "GW",
+    gdp: "1.6", gdpGrowth: "+3.8%", inflation: "5.1%", debt: "78.4%",
+    currentAccount: "-3.5%", reserves: "0.4 Mds", rating: "N/A", pop: "2.1M", budgetDef: "-5.2%",
+    radarData: [{ axis: "Croissance", val: 42 }, { axis: "Stabilité", val: 35 }, { axis: "Compétitivité", val: 22 }, { axis: "Dette", val: 28 }, { axis: "Réserves", val: 18 }],
   },
 ];
 
@@ -82,15 +67,22 @@ export function MacroWidget() {
       lastUpdate="FMI/Banque Mondiale 2024"
       accentColor={C.purple}
     >
-      {/* Country selector */}
-      <div style={{ display: "flex", gap: 5, marginBottom: 8 }}>
+      {/* Country selector — horizontal scroll */}
+      <div
+        style={{
+          display: "flex",
+          gap: 5,
+          marginBottom: 8,
+          overflowX: "auto",
+          paddingBottom: 2,
+        }}
+      >
         {countries.map((c) => (
           <button
             key={c.id}
             onClick={() => setSelectedId(c.id)}
             style={{
-              flex: 1,
-              padding: "4px 6px",
+              padding: "4px 10px",
               borderRadius: 5,
               border: `1px solid ${selectedId === c.id ? C.purple + "60" : C.border}`,
               background: selectedId === c.id ? C.purple + "15" : "transparent",
@@ -99,8 +91,14 @@ export function MacroWidget() {
               fontWeight: 600,
               cursor: "pointer",
               letterSpacing: "0.01em",
+              whiteSpace: "nowrap",
+              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
             }}
           >
+            <span style={{ fontSize: 14 }}>{c.flag}</span>
             {c.name}
           </button>
         ))}
@@ -236,15 +234,7 @@ function MacroKPI({
   up?: boolean;
   warning?: boolean;
 }) {
-  const C2 = {
-    green: "#10c87a",
-    red: "#f43860",
-    gold: "#f4b942",
-    text: "#ddeaf8",
-    dim: "#6b96b8",
-    muted: "#54678d",
-    border: "var(--bt-border-a32)",
-  };
+  const C2 = useThemeColors();
 
   return (
     <div

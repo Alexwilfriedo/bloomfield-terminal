@@ -11,7 +11,8 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-import logoUrl from "../../../assets/logo-bloomfield-terminal.png";
+import logoDarkUrl from "../../../assets/logo-bloomfield-terminal.png";
+import logoLightUrl from "../../../assets/logo-bloomfield-terminal-light.png";
 import { useThemeColors } from "../../hooks/useThemeColors";
 import { useBloomfieldTheme } from "../../context/ThemeContext";
 
@@ -70,7 +71,7 @@ export function MarketsTopBar() {
       >
         {/* Brand */}
         <div style={{ display: "flex", alignItems: "center", minWidth: 160, flexShrink: 0 }}>
-          <img src={logoUrl} alt="Bloomfield Terminal" onClick={() => navigate("/")} style={{ height: 28, width: "auto", display: "block", objectFit: "contain", cursor: "pointer" }} draggable={false} />
+          <img src={isDark ? logoDarkUrl : logoLightUrl} alt="Bloomfield Terminal" onClick={() => navigate("/")} style={{ height: 28, width: "auto", display: "block", objectFit: "contain", cursor: "pointer" }} draggable={false} />
         </div>
 
         {/* Page label */}

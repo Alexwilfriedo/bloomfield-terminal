@@ -69,7 +69,7 @@ export function MacroPage() {
             overflow: "auto",
             padding: "10px 10px 16px 12px",
             display: "flex",
-            background: "#000117",
+            background: "var(--bt-surface-card, #000117)",
           }}
         >
           <WidgetGrid

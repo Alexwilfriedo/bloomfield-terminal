@@ -70,7 +70,7 @@ export function LiveTicker() {
     <div
       style={{
         height: 32,
-        background: "#000117",
+        background: "var(--bt-surface-card, #000117)",
         borderBottom: "1px solid var(--bt-border-a32)",
         overflow: "hidden",
         display: "flex",
@@ -101,7 +101,7 @@ export function LiveTicker() {
           top: 0,
           height: "100%",
           width: 72,
-          background: "#000117",
+          background: "var(--bt-surface-card, #000117)",
           borderRight: "1px solid var(--bt-border-a32)",
           display: "flex",
           alignItems: "center",
